@@ -1,0 +1,59 @@
+---
+// A small, fixed "bow-tie" map: evidence on the left, the focus in the middle, chapters on the right.
+// Faint cross-links show where a neighboring chapter relies on the same record. Layout is computed
+// here at build time, so the diagram is legible without JavaScript and never reflows.
+import {articleBySlug,evidenceById,neighbors,citing,shortName,envKey,environments,sections,url} from '../lib/content';
+import {glyphPaths} from '../lib/evidence-cards';
+const {focus,width=320,from=''}=Astro.props as {focus:{kind:'chapter',slug:string}|{kind:'evidence',id:string},width?:number,from?:string};
+const ev=(id:string)=>{const e=evidenceById(id)!;return {kind:'evidence',key:e.id,label:e.id,title:e.title,meta:e.environment,env:envKey(e.environment),href:url(`evidence/${e.id}/`)+(from?`?from=${from}`:'')};};
+const ch=(a:any)=>({kind:'chapter',key:a.slug,label:shortName(a),title:a.title,meta:`${a.section} · Chapter ${String(a.order).padStart(2,'0')}`,domain:a.section,href:url(`articles/${a.slug}/`)});
+let center:any,left:any[],right:any[],cross:[string,string][]=[];
+if(focus.kind==='chapter'){
+ const a=articleBySlug(focus.slug)!;center=ch(a);
+ // Evidence in order of first mention, so the map reads top-to-bottom like the chapter.
+ const mentioned=[...a.raw.matchAll(/\/ios\/evidence\/(E\d+)\//g)].map(m=>m[1]);
+ left=[...new Set([...mentioned,...a.evidence])].filter(id=>a.evidence.includes(id)).map(ev);
+ right=neighbors(a.slug).map(ch);
+ for(const l of left)for(const r of right)if(articleBySlug(r.key)!.evidence.includes(l.key))cross.push([l.key,r.key]);
+}else{
+ const e=evidenceById(focus.id)!;center=ev(e.id);center.href=url(`evidence/${e.id}/`);
+ const chapters=citing(e.id);right=chapters.map(ch);
+ const counts=new Map<string,number>();for(const a of chapters)for(const id of a.evidence)if(id!==e.id)counts.set(id,(counts.get(id)||0)+1);
+ left=[...counts].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,8).map(([id])=>ev(id)).sort((a,b)=>a.key.localeCompare(b.key));
+ for(const l of left)for(const a of chapters)if(a.evidence.includes(l.key))cross.push([l.key,a.slug]);
+}
+const W=width,leftX=40,rightX=W-116,cx=Math.round((leftX+rightX)/2),top=36,rowL=30,rowR=40;
+const contentH=Math.max(left.length*rowL,right.length*rowR,96),cy=top+contentH/2,H=Math.ceil(top+contentH+14);
+const place=(list:any[],x:number,row:number)=>list.forEach((n,i)=>{n.x=x;n.y=Math.round(cy-(list.length-1)*row/2+i*row);});
+place(left,leftX,rowL);place(right,rightX,rowR);center.x=cx;center.y=Math.round(cy);
+const wrap=(t:string)=>{if(t.length<=13||!t.includes(' '))return [t];const words=t.split(' '),out=[''];for(const w of words){const line=out[out.length-1];if(line&&(line+' '+w).length>13)out.push(w);else out[out.length-1]=line?line+' '+w:w;}return out.slice(0,2);};
+const byKey=new Map([...left,...right,center].map(n=>[n.key,n]));
+const curve=(a:any,b:any,pad=9)=>{const dir=b.x>a.x?1:-1,x1=a.x+dir*pad,x2=b.x-dir*pad,k=Math.abs(x2-x1)*.5;return `M${x1} ${a.y}C${x1+dir*k} ${a.y} ${x2-dir*k} ${b.y} ${x2} ${b.y}`;};
+const envsPresent=environments.filter(env=>[...left,center].some(n=>n.kind==='evidence'&&n.meta===env));
+const domainsPresent=sections.filter(s=>[...right,center].some(n=>n.domain===s));
+const heading=focus.kind==='chapter'?'Chapter neighborhood':'Where this record is used';
+const leftHead=focus.kind==='chapter'?'EVIDENCE CITED':'CITED ALONGSIDE';const rightHead=focus.kind==='chapter'?'CONNECTED CHAPTERS':'EXPLAINED IN';
+---
+<div class="neighborhood" data-neighborhood data-focus={center.key} data-focus-kind={focus.kind}>
+ <svg class="nb-svg" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="group" aria-label={`${heading}: ${left.length} evidence records and ${right.length} chapters`}>
+  <text class="nb-col" x="2" y="14">{leftHead}</text><text class="nb-col" x={rightX-8} y="14">{rightHead}</text>
+  <g class="nb-edges" aria-hidden="true">
+   {cross.map(([a,b])=><path class="nb-edge is-cross" data-a={a} data-b={b} d={curve(byKey.get(a),byKey.get(b))}/>)}
+   {left.map(n=><path class="nb-edge to-evidence" data-env={n.env} data-a={n.key} data-b={center.key} d={curve(center,n,center.kind==='chapter'?12:9)}/>)}
+   {right.map(n=><path class="nb-edge to-chapter" data-domain={n.domain} data-a={center.key} data-b={n.key} d={curve(center,n,12)}/>)}
+  </g>
+  {left.map(n=><a class="nb-node is-evidence" href={n.href} data-key={n.key} data-env={n.env} data-title={n.title} data-meta={n.meta} aria-label={`${n.key}: ${n.title}. ${n.meta}.`}><circle class="nb-hit" cx={n.x-10} cy={n.y} r="16"/><g transform={`translate(${n.x-7} ${n.y-7}) scale(1.1667)`}><path class="nb-glyph" fill-rule="evenodd" d={glyphPaths[n.env]}/></g><text x={n.x-13} y={n.y+4} text-anchor="end">{n.label}</text></a>)}
+  {right.map(n=><a class="nb-node is-chapter" href={n.href} data-key={n.key} data-domain={n.domain} data-title={n.title} data-meta={n.meta} aria-label={`${n.title}. ${n.meta}.`}><circle class="nb-hit" cx={n.x+30} cy={n.y} r="20"/><circle class="nb-dot" cx={n.x} cy={n.y} r="5.5"/><text x={n.x+11} y={n.y+(wrap(n.label).length>1?-2.5:4)}>{wrap(n.label).map((line,i)=><tspan x={n.x+11} dy={i?13:0}>{line}</tspan>)}</text></a>)}
+  <a class="nb-node nb-center" href={center.href} data-key={center.key} data-env={center.env} data-domain={center.domain} data-title={center.title} data-meta={center.meta} aria-current="page" aria-label={`${center.title}. You are here.`}>
+   <circle class="nb-halo" cx={center.x} cy={center.y} r="22"/><circle class="nb-pulse" cx={center.x} cy={center.y} r="15"/>
+   {center.kind==='chapter'?<circle class="nb-dot" cx={center.x} cy={center.y} r="10"/>:<g transform={`translate(${center.x-10} ${center.y-10}) scale(1.6667)`}><path class="nb-glyph" fill-rule="evenodd" d={glyphPaths[center.env]}/></g>}
+   <text x={center.x} y={center.y+30} text-anchor="middle">{wrap(center.label).map((line,i)=><tspan x={center.x} dy={i?14:0}>{line}</tspan>)}</text>
+  </a>
+ </svg>
+ <div class="nb-tip" role="tooltip" hidden></div>
+ <div class="nb-legend">
+  {domainsPresent.length>0&&<p><span class="nb-legend-label">Chapters</span>{domainsPresent.map(s=><span class="nb-key" data-domain={s}><i class="nb-key-dot"/>{s}</span>)}</p>}
+  {envsPresent.length>0&&<p><span class="nb-legend-label">Evidence</span>{envsPresent.map(env=><span class="nb-key" data-env={envKey(env)}><svg class="env-glyph" viewBox="0 0 12 12" aria-hidden="true"><path fill-rule="evenodd" d={glyphPaths[envKey(env)]}/></svg>{env}</span>)}</p>}
+  {cross.length>0&&<p class="nb-cross-key"><i/>{focus.kind==='chapter'?'A connected chapter cites the same record':'The chapter that cites each record'}</p>}
+ </div>
+</div>

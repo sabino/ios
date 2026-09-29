@@ -1,0 +1,11 @@
+---
+// All 24 chapters as one segmented line, colored by domain. The current chapter is raised; chapters
+// this reader has opened are filled by the client script (stored only in this browser).
+import {articles,url} from '../lib/content';
+const {current='',label=true}=Astro.props as {current?:string,label?:boolean};
+const index=articles.findIndex(a=>a.slug===current);
+---
+<nav class="journey" aria-label="All chapters in reading order" data-journey data-current={current}>
+ {label&&<p class="journey-status"><span class="mono">{index>=0?`CHAPTER ${String(index+1).padStart(2,'0')} OF ${articles.length}`:`${articles.length} CHAPTERS`}</span><span class="journey-read mono" data-journey-read></span></p>}
+ <ol>{articles.map(a=><li data-domain={a.section}><a href={url(`articles/${a.slug}/`)} data-slug={a.slug} aria-current={a.slug===current?'page':undefined} aria-label={`Chapter ${a.order}: ${a.title} (${a.section})`} title={`${String(a.order).padStart(2,'0')} · ${a.title}`}></a></li>)}</ol>
+</nav>
