@@ -708,8 +708,6 @@ strong{font-weight:650}
 @media(max-width:600px){#force-graph a text{font-size:18px}.graph-controls span{max-width:20ch}}
 html:not([data-enhanced]) .prose pre code{white-space:pre-wrap}
 /* Domain colors identify groups without replacing readable concept labels. */
-[data-domain="Foundations"]{--domain:#6b5b92}[data-domain="Machine"]{--domain:#2445c5}[data-domain="Storage"]{--domain:#197567}[data-domain="Graphics"]{--domain:#945178}[data-domain="Interaction"]{--domain:#9b542d}[data-domain="Method"]{--domain:#536b81}
-:root[data-theme="dark"] [data-domain="Foundations"]{--domain:#bdace3}:root[data-theme="dark"] [data-domain="Machine"]{--domain:#9db7ff}:root[data-theme="dark"] [data-domain="Storage"]{--domain:#7bcdbb}:root[data-theme="dark"] [data-domain="Graphics"]{--domain:#e4a0cb}:root[data-theme="dark"] [data-domain="Interaction"]{--domain:#e8b28b}:root[data-theme="dark"] [data-domain="Method"]{--domain:#a1bed8}
 #force-graph a circle{stroke:var(--domain);fill:var(--surface)}#force-graph a.selected circle,#force-graph a:hover circle,#force-graph a:focus circle{fill:var(--domain);stroke:var(--domain)}
 #force-graph a .hit-target,#force-graph a.selected .hit-target{fill:transparent;stroke:none}
 .graph-domains{display:flex;flex-wrap:wrap;gap:8px 18px;padding:10px 22px;font-size:11px;color:var(--muted)}.graph-domains span{display:flex;align-items:center;gap:7px}.graph-domains i{display:block;width:7px;height:7px;border-radius:50%;background:var(--domain)}

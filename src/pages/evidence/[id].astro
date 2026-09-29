@@ -1,34 +1,45 @@
 ---
 import Base from '../../layouts/Base.astro';
 import EvidenceExhibit from '../../components/EvidenceExhibit.astro';
-import {evidence,articles,publication,url} from '../../lib/content';
+import Neighborhood from '../../components/Neighborhood.astro';
+import {evidence,articles,publication,url,envKey,environmentNotes} from '../../lib/content';
+import {glyph} from '../../lib/evidence-cards';
 export function getStaticPaths(){return evidence.map(record=>({params:{id:record.id},props:{record}}))}
 const {record}=Astro.props;
 const backlinks=articles.filter(a=>a.evidence.includes(record.id));
 const position=evidence.findIndex(e=>e.id===record.id);
 const prev=evidence[position-1],next=evidence[position+1];
+const env=envKey(record.environment);const pad=(n:number)=>String(n).padStart(2,'0');
+const returns=Object.fromEntries(backlinks.map(a=>[a.slug,{title:a.title,label:`Chapter ${pad(a.order)}`,href:url(`articles/${a.slug}/`)}]));
 ---
 <Base title={`${record.id}: ${record.title}`} description={record.observation}>
-  <div class="article-topline"><a href={url('evidence/')}>← Evidence ledger</a><span>{record.id} / {record.exhibits.length} EXHIBITS</span></div>
-  <header class="record-heading"><div class="evidence-label"><i class="line"/>{record.environment}</div><h1>{record.title}</h1><p>{record.observation}</p><div class="record-actions"><a class="button primary" href="#exhibits">Inspect the evidence ↓</a><a href={url(`evidence/data/${record.id}.json`)} download>Download record · JSON ↗</a></div></header>
+  <div class="article-topline record-topline" data-env={env}><a href={url('evidence/')}>← Evidence ledger</a><a class="return-link" href={url('library/')} data-return hidden><span aria-hidden="true">←</span><span data-return-label></span></a><span>{record.id} / {record.exhibits.length} EXHIBITS</span></div>
+  <header class="record-heading"><div class="evidence-label" data-env={env}><span class="env-chip"><Fragment set:html={glyph(record.environment)}/>{record.environment}</span><span class="env-note">{environmentNotes[record.environment]}</span></div><h1>{record.title}</h1><p>{record.observation}</p><div class="record-actions"><a class="button primary" href="#exhibits">Inspect the evidence ↓</a><a href={url(`evidence/data/${record.id}.json`)} download>Download record · JSON ↗</a></div></header>
   <div class="record-layout">
     <aside class="record-sidebar">
       <nav aria-label="On this evidence page" class="record-nav"><p class="mono">IN THIS RECORD</p>{record.exhibits.map((x,i)=><a href={'#'+x.id}><span>{String(i+1).padStart(2,'0')}</span>{x.title}</a>)}<a href="#limits">Limits of the result</a><a href="#sources">Source excerpts</a></nav>
       <dl class="record-facts"><dt>Environment</dt><dd>{record.environment}</dd><dt>Method</dt><dd>{record.method}</dd><dt>Editorial review</dt><dd>{record.reviewedOn}</dd><dt>Research snapshot</dt><dd><code>{publication.sourceRevision.slice(0,7)}</code></dd><dt>Available here</dt><dd>Selected capture data, excerpts and provenance</dd></dl>
     </aside>
     <div class="record-body">
+      <section class="record-context" aria-labelledby="context-heading"><div class="record-context-text"><span class="section-number">IN CONTEXT</span><h2 id="context-heading">Where this record is used</h2><p>{backlinks.length===1?'One chapter relies on this record.':`${backlinks.length} chapters rely on this record.`} Records on the left are cited alongside it; dashed lines show which chapter cites each one.</p><a class="text-link" href="#explanations">Read the explanations ↓</a></div><Neighborhood focus={{kind:'evidence',id:record.id}} width={380}/></section>
       <section id="exhibits" aria-label="Captured evidence">{record.exhibits.map((x,i)=><EvidenceExhibit exhibit={x} excerpts={record.excerpts} index={i}/>)}</section>
       <section class="record-limit" id="limits"><span class="section-number">THE BOUNDARY OF THE CLAIM</span><h2>What the result leaves open</h2><p>{record.limits}</p><p class="record-scope-note">Addresses and object pointers belong to the named build and capture. Physical addresses, virtual addresses, register offsets and inferred values are labeled in the exhibits. A captured diagnostic value is not a complete reproduction procedure.</p></section>
       <section class="record-source-section" id="sources"><h2>Inspect the source excerpts</h2><p>These selected values and passages are public. Each excerpt identifies its source file and exact field or line range. Full private notebooks and complete run artifacts remain outside this edition; their hashes identify the reviewed versions.</p>{record.excerpts.map(x=><details class="source-excerpt" id={`source-${x.id}`}><summary><span class="source-type">{x.format==='json'?'JSON fields':'Text excerpt'}</span><strong>{x.document}</strong><span class="source-expand">Read excerpt +</span></summary><div class="source-excerpt-body"><p class="source-locator"><strong>Locator</strong> {x.locator}</p><p>{x.note}</p><pre tabindex="0" aria-label={`Source excerpt from ${x.document}`}><code>{x.content}</code></pre><a class="text-link" href={url(`evidence/excerpts/${record.id}-${x.id}.txt`)} download>Download this excerpt ↓</a><details class="source-digest"><summary>SHA-256 of the full source file</summary><code>{x.sha256}</code></details></div></details>)}</section>
       <details class="record-provenance full-provenance"><summary>All supporting document identities</summary>{record.records.map(r=><div><h3>{r.document}</h3><code class="long-hash">{r.sha256}</code><p>{r.access}</p></div>)}<a class="text-link" href={url('sources/#provenance')}>Publication and provenance policy →</a></details>
-      <section class="related"><h2>Read the explanation</h2><div>{backlinks.map(a=><a href={url('articles/'+a.slug+'/')}><span>{a.section}</span><strong>{a.title}</strong><span>→</span></a>)}</div></section>
+      <section class="related" id="explanations"><h2>Read the explanation</h2><div>{backlinks.map(a=><a data-domain={a.section} href={url('articles/'+a.slug+'/')}><span><i class="domain-dot" aria-hidden="true"/> {a.section}</span><strong>{a.title}</strong><span>→</span></a>)}</div></section>
       <nav class="chapter-pagination" aria-label="Evidence records">{prev?<a href={url(`evidence/${prev.id}/`)}><small>← {prev.id}</small><strong>{prev.title}</strong></a>:<span/>}{next&&<a href={url(`evidence/${next.id}/`)}><small>{next.id} →</small><strong>{next.title}</strong></a>}</nav>
     </div>
   </div>
+  <script type="application/json" id="return-data" set:html={JSON.stringify(returns).replace(/</g,'\\u003c')}/>
   <script>
+    // Arriving from a chapter card: offer the way back. History keeps the reader's place when it can.
+    {const from=new URLSearchParams(location.search).get('from'),data=JSON.parse(document.getElementById('return-data')?.textContent||'{}'),link=document.querySelector<HTMLAnchorElement>('[data-return]');
+     if(from&&data[from]&&link){link.href=data[from].href;link.querySelector('[data-return-label]')!.textContent=`Back to ${data[from].label} · ${data[from].title}`;link.hidden=false;
+      link.addEventListener('click',e=>{try{if(document.referrer&&new URL(document.referrer).pathname===data[from].href&&history.length>1){e.preventDefault();history.back();}}catch{}});}}
     function revealSource(){const target=document.getElementById(location.hash.slice(1));if(target instanceof HTMLDetailsElement){target.open=true;target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}}
     document.querySelectorAll<HTMLAnchorElement>('[data-source-link]').forEach(link=>link.addEventListener('click',()=>{const target=document.getElementById(link.hash.slice(1));if(target instanceof HTMLDetailsElement)target.open=true;}));
     window.addEventListener('hashchange',revealSource);revealSource();
     document.querySelectorAll<HTMLButtonElement>('[data-copy-exhibit]').forEach(button=>button.addEventListener('click',async()=>{const text=document.getElementById('text-'+button.dataset.copyExhibit)?.textContent||'';try{await navigator.clipboard.writeText(text);button.textContent='Copied';}catch{button.textContent='Select text below to copy';}setTimeout(()=>button.textContent='Copy text',2400);}));
   </script>
+  <script src="../../lib/neighborhood.ts"></script>
 </Base>

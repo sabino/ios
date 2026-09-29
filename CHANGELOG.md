@@ -1,5 +1,14 @@
 # Editions
 
+## 2026-09-29 — Connected reading (presentation only)
+
+- Each evidence reference in a chapter now has an inline card after its paragraph. A card expands in place to show captured exhibits and the stated limit, and it zooms into the full record, which offers a way back to the chapter.
+- Every chapter ends with one clear next step: an "Up next" card, the 24-chapter journey track and the open question. The references follow in a separate appendix.
+- Added a chapter map that stays beside the text: cited evidence, connected chapters and the evidence they share. It follows the card being read, and it opens as a sheet on small screens. Evidence pages show where each record is used.
+- Chapter domains and evidence environments now have separate, validated color palettes. Environments also have distinct glyph shapes, so color is never the only cue.
+- Concept-graph motion now settles smoothly, the camera animates, and selected or focused nodes are kept in view.
+- No research content, record or conclusion changed.
+
 ## 1.1.0 — 2026-09-29
 
 - Expanded all 28 evidence records into 57 concrete exhibits and 42 inspectable source excerpts, with downloads and provenance.

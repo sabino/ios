@@ -1,3 +1,16 @@
+# Connected reading publication review
+
+Reviewed: 2026-09-29. Presentation and navigation update; research snapshot unchanged.
+
+- Inline evidence cards show existing exhibits and claim limits. Chapter maps open the corresponding card, and full records provide a return link to the chapter.
+- Chapter neighborhoods, mobile map sheets, local reading progress and next-chapter links connect the existing material without adding research claims.
+- Six unit checks pass. The production build produces 64 pages and passes content, link and asset checks.
+- The full browser review passes across 22 sampled desktop, mobile and theme states, with no JavaScript errors or sampled axe WCAG A/AA violations.
+- `scripts/connections-check.mjs` exercises map-to-exhibit expansion, keyboard exhibit tabs, return navigation, the mobile sheet, Escape and responsive accessibility. It uses `ATLAS_CDP` for a dedicated QA browser and optionally `ATLAS_URL` for a deployed site.
+- The graph motion review covers animated zoom, dragging, release momentum, reset, reduced motion and keyboard selection in `scripts/graph-check.mjs`.
+
+---
+
 # Edition 1.1 publication review
 
 Reviewed: 2026-09-29. Research snapshot unchanged from edition 1.0.
