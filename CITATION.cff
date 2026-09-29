@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite the edition and individual evidence record when referring to a finding."
+title: "iPhone OS Research Atlas"
+type: software
+authors:
+  - name: "iPhone OS Research Atlas contributors"
+version: "1.0.0"
+date-released: "2026-09-29"
+url: "https://sabino.pro/ios/"
+repository-code: "https://github.com/sabino/ios"
+license: MIT
+abstract: >-
+  An independent reference guide preserving original editorial accounts of
+  iPhone OS 1.1.4 research, with environment-specific evidence summaries,
+  limitations, public architectural references and a connected concept map.
+  Private experimental artifacts are not distributed and independent public
+  reproduction is not claimed.

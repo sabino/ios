@@ -1,0 +1,22 @@
+---
+import {url} from '../lib/content';
+const rows=[
+ {label:'Original userspace',slug:'orientation',states:['Interactive UI','Setup + events','Setup + events']},
+ {label:'XNU / service contracts',slug:'iokit-discovery',states:['Original board','Native adapters','Native adapters']},
+ {label:'Memory + interrupts',slug:'mmu-and-caches',states:['ARMv6 model','A53 contract','A53 execution']},
+ {label:'Board + peripherals',slug:'three-machines',states:['S5L8900 model','Selected A64 I/O','Physical A64']},
+];
+---
+<figure class="system-plate">
+<div class="plate-title"><span>PLATE 01</span><span>ONE SOFTWARE FAMILY. THREE SUBSTRATES.</span></div>
+<svg class="plate-svg" viewBox="0 0 640 422" role="group" aria-labelledby="plate-name plate-desc">
+<title id="plate-name">Three execution environments for iPhone OS research</title><desc id="plate-desc">The iPod model establishes interactive reference behavior. The partial PinePhone model and the physical phone establish separate native-adapter results. Each row links to the corresponding research chapter.</desc>
+<defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ffffff" stroke-opacity=".035"/></pattern></defs>
+<rect x="0" y="0" width="640" height="422" fill="url(#grid)"/>
+<g class="plate-columns"><text x="94" y="38">01 / REFERENCE</text><text x="282" y="38">02 / CONTRACT</text><text x="470" y="38">03 / HARDWARE</text><text class="col-sub" x="94" y="59">iPod · QEMU</text><text class="col-sub" x="282" y="59">PinePhone · QEMU</text><text class="col-sub" x="470" y="59">PinePhone · A64</text></g>
+{rows.map((row,i)=><a href={url('articles/'+row.slug+'/')} aria-label={`Read about ${row.label}`}><g class="plate-row"><text class="row-number" x="20" y={104+i*77}>{String(i+1).padStart(2,'0')}</text><text class="row-label" x="67" y={92+i*77}>{row.label}</text>{row.states.map((state,j)=><g><rect class:list={['plate-cell',{physical:j===2}]} x={67+j*188} y={103+i*77} width="171" height="43" rx="2"/><text class="cell-text" x={81+j*188} y={129+i*77}>{state}</text>{i<3&&<path d={`M${153+j*188} ${146+i*77}v24`} stroke={j===2?'#779cff':'#617081'} stroke-width="1" stroke-dasharray={j<2?'3 4':undefined}/>}</g>)}</g></a>)}
+<path d="M28 373v18h18M594 391h18v-18" fill="none" stroke="#75869a"/><text class="plate-foot" x="66" y="390">SHARED QUESTIONS ≠ SHARED VALIDATION</text><circle cx="575" cy="386" r="3" fill="#779cff"/>
+</svg>
+<div class="plate-mobile">{['iPod · QEMU','PinePhone · QEMU','PinePhone · A64'].map((name,j)=><section class:list={{physical:j===2}}><h3>{['01 / REFERENCE','02 / CONTRACT','03 / HARDWARE'][j]}<strong>{name}</strong></h3>{rows.map(row=><a href={url('articles/'+row.slug+'/')}><span>{row.label}</span><strong>{row.states[j]}</strong></a>)}</section>)}</div>
+<figcaption><span><i class="line dashed"></i> Model observation</span><span><i class="line"></i> Physical observation</span><a href={url('articles/three-machines/')}>Read the distinction ↗</a></figcaption>
+</figure>

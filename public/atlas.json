@@ -1,0 +1,1615 @@
+{
+  "schemaVersion": 1,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.0",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports. Curated evidence summaries are public; raw firmware, images, logs and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "articles": [
+    {
+      "slug": "orientation",
+      "title": "What, exactly, are we preserving?",
+      "description": "A precise identity for the software, the experiment, and the claims this atlas can support.",
+      "section": "Foundations",
+      "order": 1,
+      "evidence": [
+        "E01",
+        "E27",
+        "E28"
+      ],
+      "sources": [
+        "S01",
+        "S02",
+        "S03"
+      ],
+      "related": [
+        "three-machines",
+        "source-archaeology",
+        "preservation-method"
+      ],
+      "updated": "2026-09-29",
+      "body": "## A system is more than a version label\n\nThis atlas examines **iPhone OS 1.1.4, build 4A102**, through a preservation project that studies the original software in emulation and adapts its kernel to a different physical board. The name “iPhone OS” describes the historical software family. It does not mean that every experiment ran an iPhone product profile, or that the native target provides telephony.\n\nThe working reference is the first-generation iPod touch, N45AP. The native target is the original Allwinner A64 PinePhone. The iPhone M68AP remains a distinct comparison target. In the inspected 4A102 archives, the iPhone and iPod kernelcache members are byte-identical, while their primary root images, board trees and bootloaders differ. That is a useful experimental control: common kernel behavior can be compared without assuming common peripheral or userspace behavior. [E01](/ios/evidence/E01/)\n\nThe target kernel identifies itself as a 933-era XNU ARM build. The exact matching public ARM source was not found in the inspected Apple releases. This work therefore includes observations of the original binary, original compatibility components, and carefully bounded experiments. It is not a claim that the entire kernel has been recovered as source. [E27](/ios/evidence/E27/)\n\n## Three kinds of preservation\n\n**Artifact preservation** establishes which software was examined. Build metadata, complete hashes and immutable inputs guard against accidentally comparing different systems. A hash establishes byte identity. It does not establish authenticity, authorization, or correct execution.\n\n**Behavioral preservation** asks whether the original components still behave coherently. Does a storage completion report the correct count? Does a short button tap produce both edges? Does the original client receive memory with the permissions it expects? These questions remain meaningful even when the physical board changes.\n\n**Knowledge preservation** retains the chain of reasoning: the observation, the hypothesis, the control, the result and the limit. An abandoned explanation can be valuable. The discovery that a framebuffer probe was ineffective prevents someone else from treating its zero-filled output as proof of a renderer failure.\n\nThis publication focuses on the third kind while describing evidence for the second. It distributes original prose, diagrams, structured summaries and the website. The experimental software artifacts and native-port implementation are outside its contents.\n\n## The accepted frontier\n\nAt the publication snapshot, the physical phone has executed original userspace, presented the original client's setup graphic, accepted physical button events through the guest HID path, and returned to recovery through a clean reboot path. Controlled power and filesystem experiments also passed their stated checks. These achievements support further interaction work.\n\nThey do not establish a generally usable phone. Physical touch, a complete home-screen interaction, reliable application coverage, audio output, networking, telephony, comprehensive CPU compatibility and power-loss durability remain separate questions. The emulator reference already reaches interactive SpringBoard, but that result belongs to its own environment. [E28](/ios/evidence/E28/)\n\n## How to read this atlas\n\nBegin with the three-machine distinction, then follow either the boot path, the pixel path, or the evidence-method tour. Each article links to numbered evidence records. Those records are curated reports from the private research corpus; they expose the method, environment, conclusion, limits and hashes of the supporting documents. They do not pretend that a public reader can reproduce the full firmware experiment using this website alone.\n\nRead “observed” as a statement about the recorded experiment. Read “inferred” as an explanation that still needs discriminating evidence. Read “open” as an intentionally preserved boundary. Those distinctions are part of the research result."
+    },
+    {
+      "slug": "three-machines",
+      "title": "Three machines, three kinds of evidence",
+      "description": "The iPod reference, the PinePhone contract model, and the physical phone answer different questions.",
+      "section": "Foundations",
+      "order": 2,
+      "evidence": [
+        "E03",
+        "E17",
+        "E20",
+        "E28"
+      ],
+      "sources": [
+        "S01",
+        "S14",
+        "S15"
+      ],
+      "related": [
+        "orientation",
+        "emulator-fidelity",
+        "boot-handoff"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Keep the substrates separate\n\nThe project uses three execution environments. Their shared software makes comparisons productive; their different hardware contracts make careless comparisons misleading.\n\n| Environment | What executes | What a successful experiment establishes |\n| --- | --- | --- |\n| Original iPod reference | Legacy Apple software on the N45AP/S5L8900 software model | Behavior under that Apple-device model |\n| PinePhone QEMU contract | Adapted XNU and original userspace on selected modeled A64 interfaces | Behavior under an explicit, partial native-board contract |\n| Physical PinePhone | Board firmware, native bootstrap, adapted XNU and original userspace | The measured behavior on the tested handset and bundle |\n\nThe original reference reaches interactive SpringBoard. The partial native model is a debugging instrument. The phone is the physical acceptance target. Moving a result between these rows requires a new experiment, not a stronger adjective. [E28](/ios/evidence/E28/)\n\n## Native execution and emulation are different architectures\n\nIn the reference route, a software emulator supplies the old board interfaces expected by the guest. In the native route, original XNU executes in AArch32 on the A64's Cortex-A53, with adaptations for CPU and platform differences. Native providers connect selected original service interfaces to the new board.\n\nNeither route makes every executing byte identical to an original retail boot. The reference enters at a declared boot stage and uses prepared storage. The native route replaces the board startup path and adapts kernel/platform behavior. Preservation documentation should name those differences explicitly.\n\nThe presence of higher exception levels in a firmware handoff does not, by itself, make the native route a virtual Apple machine. Conversely, running the same instruction set does not make the board compatible. Interrupt controllers, timers, memory attributes, storage and display all carry separate semantics.\n\n## Why the partial model is useful\n\nAn emulator can make a narrow contract inspectable. A synthetic card can be deliberately corrupted. A display copy can be stopped before and after submission. A page-table walk can be compared against the memory backing. Negative controls can establish that a checker rejects a plausible but wrong result.\n\nThose advantages do not make the model a full PinePhone. In particular, a device model that responds immediately cannot certify a physical settling delay. Guest RAM accesses do not reproduce every cache-coherency issue. A model can also accidentally supply memory at an address that real hardware does not back. See the emulator-fidelity chapter for examples.\n\n## Compare one boundary at a time\n\nThe early unchanged-kernel entry experiment is a useful example. It established entry and arm_init on the A53 model, then recorded a CPU-specific fault. It was successful as an entry diagnostic while remaining unsuccessful as a boot. [E03](/ios/evidence/E03/)\n\nThe later display experiment had a different acceptance boundary: the original framebuffer client supplied a source image; the presentation service copied it into the active panel scanout; the physical operator saw the expected graphic. That closes a physical presentation question without closing touch or home-screen usability. [E17](/ios/evidence/E17/)\n\nButton work subsequently closed another boundary: physical taps produced guest HID edges and visible wake/blank transitions. It did not inherit touch success from the reference emulator. [E20](/ios/evidence/E20/)\n\nThe general method is to preserve the environment as part of every claim's identity. A reliable notebook should let a reader answer “which machine?” before asking “did it work?”"
+    },
+    {
+      "slug": "boot-handoff",
+      "title": "The bootloader hands over a state, not a file",
+      "description": "Registers, memory ownership and runtime metadata define the boundary at kernel entry.",
+      "section": "Machine",
+      "order": 3,
+      "evidence": [
+        "E02",
+        "E03",
+        "E05"
+      ],
+      "sources": [
+        "S07",
+        "S08",
+        "S15"
+      ],
+      "related": [
+        "device-tree",
+        "mmu-and-caches",
+        "three-machines"
+      ],
+      "updated": "2026-09-29",
+      "body": "## A declared entry point is incomplete\n\nA Mach-O entry command names where execution begins. It does not describe a complete machine state. The inspected kernel's entry metadata contains zero values for registers that its first instructions immediately depend on. In particular, the bootstrap reads through its incoming boot-argument pointer and performs privileged operations. Treating the file's zero register values as a runnable handoff would confuse metadata with runtime state. [E03](/ios/evidence/E03/)\n\nThe research first inspected that entry statically, then captured the working iPod reference immediately before its kernel's first instruction. The live observation confirmed roles for the virtual base, physical base, memory span and initial translation-table area. The capture also supplied execution state and control-register context.\n\nThis pairing matters. Static analysis explains how values are used; a live capture establishes what a real loader supplied in one successful reference run. Neither alone proves that all possible bootloader configurations use an identical structure.\n\n## Preserve ownership across the transition\n\nThe kernel starts allocating and clearing memory before its ordinary services exist. Its initial tables, bootstrap stack, loaded segments, boot arguments and device tree must remain mutually consistent. A relocation can preserve every kernel byte while breaking the handoff through an overlapping tree or an incorrect physical-to-virtual relationship.\n\nA useful abstract inventory is:\n\n| Region | Owner at handoff | Preservation requirement |\n| --- | --- | --- |\n| Kernel segments | Loader, then XNU | Correct placement and declared extent |\n| Boot arguments and tree | Loader, then early platform code | Valid pointers and complete lifetimes |\n| Initial translation tables | Bootstrap | Reserved space for observed writes |\n| Panel scanout | Display initializer, then presentation service | Excluded from allocators until ownership transfers |\n| Firmware/runtime reservations | Platform firmware | No accidental reuse by XNU or adapters |\n\nThe publication omits a flashable layout. These are ownership obligations, not a universal address recipe.\n\n## Entering the next function is a narrow result\n\nWith captured reference state and relocated metadata, the unchanged kernel entered its bootstrap and reached arm_init on the partial PinePhone QEMU machine. It then encountered an ARM1176-specific peripheral remap register absent from the A53 model. An exception during the original exception path followed. The first fault, not the later secondary abort, defined the immediate compatibility question. [E03](/ios/evidence/E03/)\n\nThis experiment illustrates why a diagnostic should state both its success and its stopping point. “The entry contract is sufficient to reach arm_init” is useful. “The OS boots” would discard the measured failure.\n\n## Physical handoff adds a second memory consumer\n\nOn the real phone, a display initializer had already configured the panel before XNU took control. The scanout buffer had to survive memory initialization and cache transitions. Physical progress markers later established return from a mapping routine after an A53 range-clean adaptation. That result belongs to the memory-transition boundary and does not retroactively prove every earlier boot stage. [E05](/ios/evidence/E05/)\n\nThe transferable lesson is to capture and validate the complete handoff contract: state, ownership, lifetime and provenance. A correct entry address is only one field in that contract."
+    },
+    {
+      "slug": "device-tree",
+      "title": "The device tree is a live contract",
+      "description": "Archived bytes describe less than the tree that iBoot actually gives XNU.",
+      "section": "Machine",
+      "order": 4,
+      "evidence": [
+        "E01",
+        "E02",
+        "E07",
+        "E09",
+        "E19"
+      ],
+      "sources": [
+        "S11",
+        "S15"
+      ],
+      "related": [
+        "boot-handoff",
+        "iokit-discovery",
+        "time-and-interrupts"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The archive was missing runtime values\n\nThe archived N45AP tree contained zero CPU clock properties. The captured tree at the working iBoot-to-XNU handoff contained a 6 MHz timebase, 24 MHz fixed clock, 412 MHz CPU clock and 103 MHz bus clock. The node count remained 73. Repeated captures differed in their overall hashes while agreeing on these clocks. [E02](/ios/evidence/E02/)\n\nThe implication is stronger than “fill in the zeros.” The archive is an input to a bootloader transformation. The final tree can contain runtime information, and a kernel experiment that skips the bootloader must account for that transformation explicitly.\n\nThe inspected M68AP archive also had zero clocks, but no equivalent M68AP live handoff was established in that experiment. Copying the N45 values into an M68 or PinePhone declaration would create an assumption, not a measurement.\n\n## Two tree formats, two consumers\n\nThe native diagnostic uses an Apple-format tree for XNU and a separate flattened board tree for the platform/model. Similar terminology does not imply identical formats or ownership. One describes interfaces to original Apple platform code; the other describes the native board environment.\n\nThe Apple-format reader also encountered duplicate property names. Converting such a structure into an ordinary dictionary can silently destroy information. A faithful inventory retains order and duplication, and a request for a unique value should fail when the input is ambiguous.\n\n## A property can cause a driver to run\n\nA device-tree declaration is not passive documentation. It participates in matching, service publication, function lookup and dependency discovery. An advertised legacy sensor registered far enough to draw HID startup into a transaction on unsupported hardware. Omitting that unavailable sensor changed the service graph and allowed readiness signaling to complete. [E19](/ios/evidence/E19/)\n\nThe reverse effect is equally important. Removing old flash devices also removed the normal demand for a prelinked storage family. A replacement block provider could exist without its expected driver ever matching until the family was initialized. [E09](/ios/evidence/E09/)\n\nThese results suggest two checks for a tree edit: what hardware behavior does the declaration promise, and what software dependency did that declaration previously trigger? Deleting an unsupported node can be correct while still requiring a deliberate replacement for an incidental dependency.\n\n## Clock properties change behavior\n\nA stale timebase declaration later made a nominal one-second physical delay last about three seconds. A matched tree-only correction brought the observed delay close to one second. That is a direct example of descriptive metadata entering scheduler and timeout calculations. [E07](/ios/evidence/E07/)\n\nA preservation record should therefore identify the exact tree used by each experiment alongside its kernel and module identities. “Same firmware version” is insufficient when two trees advertise different devices or different units of time.\n\n## Limits of a live tree\n\nEven a live tree is not an electrical measurement. It may omit a board subrevision, use a shared compatible string, or reflect firmware policy rather than fitted hardware. The tree supplies an important contract and a valuable hypothesis source. Register observations, board documentation and controlled physical tests establish which parts of that contract hold on the actual device."
+    },
+    {
+      "slug": "cpu-compatibility",
+      "title": "ARM compatibility has several layers",
+      "description": "Shared instruction names do not settle privileged state, atomics or exception behavior.",
+      "section": "Machine",
+      "order": 5,
+      "evidence": [
+        "E03",
+        "E06"
+      ],
+      "sources": [
+        "S06",
+        "S07",
+        "S08"
+      ],
+      "related": [
+        "mmu-and-caches",
+        "boot-handoff",
+        "observability"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Start with the code that actually executes\n\nThe target kernel is ARMv6-era software. The native board uses Cortex-A53 with AArch32 execution. Ordinary application instructions are only one part of that overlap. Kernel bootstrap, system-control operations, cache maintenance, exception entry and synchronization depend on architectural details beyond the label “ARM.”\n\nThe earliest bounded entry experiment reached an ARM1176-specific peripheral remap access and recorded an undefined-instruction exception on the A53 model. The same operation also appeared in a reset path. A one-site intervention that exposed the next boot frontier would therefore not establish a complete replacement for the original behavior. [E03](/ios/evidence/E03/)\n\nThe methodological point is to inventory exercised semantics. A successful compiler target or a small supervisor test cannot prove that every instruction and control state used by the original kernel is compatible.\n\n## Undefined instructions are evidence, not instructions to ignore\n\nThe physical userspace experiments later recorded obsolete ARM SWP instructions in original code. Those instructions exchange memory and a register value. Advancing the program counter without performing the exchange would let execution continue with different program semantics.\n\nThe experimental compatibility component recognizes the instruction class and preserves the original exception fallback when it cannot handle a case. The observed resident-address exchanges allowed later startup progress. That is useful empirical evidence, but it leaves a substantial correctness boundary. [E06](/ios/evidence/E06/)\n\nThe recorded backend was not validated for complete atomicity, copy-on-write, read-only mappings, unmapped pages or multiprocessor execution. “The observed application advanced” and “the architecture is implemented correctly” are different propositions.\n\n## Why the difficult cases matter\n\nA memory exchange has several obligations at once: it must obey permissions, interact correctly with faults, avoid exposing a partial update, and return the prior value in the expected register. Copy-on-write adds another question: did the operation update the calling task's private page or a shared backing page? Concurrency asks whether another observer can interleave a conflicting update.\n\nA test that uses one resident writable word on one active CPU exercises a useful path but leaves these obligations largely untouched. Preservation must keep that scope attached to the result. A general decoder does not automatically confer general memory semantics on its backend.\n\n## Separate decoding, execution and integration\n\nA clear validation plan distinguishes three layers. First, synthetic cases establish decoding, conditions and register outcomes. Second, architecture-level tests establish memory and exception behavior. Third, an original-client workload establishes that the compatibility component is integrated into the intended runtime path.\n\nFailure in one layer should not be hidden by success in another. Conversely, a limitation should be stated precisely enough that future work can address it without discarding the useful measurements already made.\n\nThe Linux arm64 legacy-instruction documentation provides an independent example of explicitly classifying obsolete and deprecated instructions. It is a reference for the nature of the problem, not evidence that the native XNU implementation inherits Linux's correctness. The port's actual obligations remain tied to its own mappings, fault paths and tested workload."
+    },
+    {
+      "slug": "mmu-and-caches",
+      "title": "A valid address is not a valid access",
+      "description": "Translation, permissions, memory attributes and cache visibility form one continuous contract.",
+      "section": "Machine",
+      "order": 6,
+      "evidence": [
+        "E04",
+        "E05",
+        "E15",
+        "E17"
+      ],
+      "sources": [
+        "S07",
+        "S08"
+      ],
+      "related": [
+        "cpu-compatibility",
+        "surface-memory",
+        "presentation"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Follow the translation all the way down\n\nAn early diagnostic fault occurred at a virtual address whose descriptors led into backed RAM. That initially tempting observation did not explain the fault. On the A53, the active access-flag interpretation treated a bit in the legacy page-table entry differently. A matched control retained the descriptors and corrected their interpretation; the commpage read then succeeded. [E04](/ios/evidence/E04/)\n\nThe bounded run continued for 40.12 seconds without the measured synchronous fault. It did not prove complete virtual-memory correctness, full boot, or equivalent physical behavior. Its value is the causal isolation: changing one interpretation changed the result while the mapped memory remained the same.\n\nA useful fault record therefore includes more than the virtual address. It needs the active translation context, relevant descriptors, fault class, access direction, privilege, expected physical target and confirmation that the target is actually backed.\n\n## Memory attributes affect devices\n\nA framebuffer is ordinary memory to some CPU code and an asynchronously consumed buffer to the display engine. The CPU may finish writing while the device still sees old data. Visibility depends on the mapping and coherency contract; reaching a synchronization instruction does not magically validate an incorrectly described region.\n\nThe physical panel trial used a Device mapping for the active scanout and ordered presentation writes. The initializer cleaned its earlier framebuffer contents before the handoff. That design made cache visibility a stated part of the experiment instead of assuming that a QEMU copy test covered it. [E17](/ios/evidence/E17/)\n\nLikewise, the physical VM progress probe showed that a native A53 range-clean adaptation permitted return from an original mapping routine. The result concerns that measured transition. It does not establish every cache operation or every later device interaction. [E05](/ios/evidence/E05/)\n\n## Keep three memory questions separate\n\n| Question | Typical misleading shortcut | Required evidence |\n| --- | --- | --- |\n| Is the region backed? | “The address looks like RAM.” | Confirmed allocation and bounds |\n| Can this client access it? | “The kernel can read it.” | Correct task mapping and permissions |\n| Can the consumer see the update? | “The copy returned.” | Valid coherency and ordering contract |\n\nGraphics research encountered all three. A legacy graphics pool pointed into an unbacked physical region. A later surface mapping lacked the expected user-write permissions. The default source then aliased the live scanout, so presenting another surface destroyed the original source. These were distinct failures with different controls. [E15](/ios/evidence/E15/)\n\n## Ownership is part of correctness\n\nThe panel buffer, source surfaces, graphics pool, bootstrap tables and ordinary allocator need separate ownership rules. An overlap checker can reject impossible layouts before execution; it cannot establish that a live DMA engine has stopped using a region. Releasing or reusing memory requires knowledge of the consumer's lifetime.\n\nThis is why the atlas follows a pixel through allocation, task mapping, client writes, descriptor access, presentation and device scanout. Each step can be individually plausible while the complete route is broken. Preserving the boundaries makes later failures diagnosable."
+    },
+    {
+      "slug": "time-and-interrupts",
+      "title": "Time must agree with interrupt delivery",
+      "description": "Counter frequency, callback lifetime and scheduler progress cannot be validated independently.",
+      "section": "Machine",
+      "order": 7,
+      "evidence": [
+        "E07",
+        "E08",
+        "E24"
+      ],
+      "sources": [
+        "S07",
+        "S11"
+      ],
+      "related": [
+        "device-tree",
+        "async-storage",
+        "power"
+      ],
+      "updated": "2026-09-29",
+      "body": "## A counter is a unit system\n\nThe physical PinePhone counter runs at 24 MHz in the recorded experiment. An earlier emulator-derived tree advertised 62.5 MHz. With that declaration, an unchanged nominal one-second delay was observed as roughly 3.015 seconds over UART. Correcting only the declaration produced roughly 1.010 seconds. The kernel, timer and storage identities remained fixed. [E07](/ios/evidence/E07/)\n\nThe result is important for more than boot speed. Time conversion feeds timeout budgets, scheduling and service startup. If the unit is wrong, an apparently conservative wait may last much longer than intended, and elapsed-time comparisons between environments lose their meaning.\n\nThe measured intervals are serial arrival times at the host. They include observation overhead and do not establish exact counter quality. The Allwinner counter erratum is a separate concern: a correct declared frequency does not establish that every individual read is reliable.\n\n## A working callback can stop being the active callback\n\nThe native time path uses architectural timer facilities and the A64 interrupt controller. The original kernel still performs later CPU and interrupt registration. One direct-handoff experiment installed a native timer callback successfully, then a later original registration replaced it with a legacy handler that expected another interrupt identity.\n\nThe combined callback control preserved the relevant routes and returned from 51 observed timer interrupts while retaining earlier console and commpage evidence. That is a lifecycle result: initialization order and later registration matter as much as the initial function pointer. [E08](/ios/evidence/E08/)\n\nA useful trace records both installation and use. “The initializer ran” does not show that the callback remained selected when the interrupt arrived.\n\n## Idle is an interrupt test too\n\nA spinning idle loop can conceal a missing wake condition. Code repeatedly revisits a condition even when no event properly wakes it. A real low-power wait removes that accidental polling. A regression after enabling a wait instruction therefore needs evidence about entry, exit, deadlines and pending work before it can be assigned to the instruction itself.\n\nGuest-side idle and wait counters, cumulative residency and low-rate heartbeats are more informative than host CPU utilization alone. Host utilization also depends on emulation, logging, the host scheduler and which startup phase was measured.\n\nThis is a conceptual distinction, not a claim of complete suspend/resume. The recorded native work retains limited keep-awake policies and incomplete platform power behavior. An idle CPU, a dimmed screen and a suspended board are different states.\n\n## Progress needs more than a single log line\n\nTwo physical runs reached corresponding late userspace milestones even though only one printed BOOT_TIME. The missing message was therefore insufficient to classify that run as a stall. A logging-route race is plausible but was not directly established. [E24](/ios/evidence/E24/)\n\nThe stronger progress record combines increasing timer/idle counters, service attachment, process state, storage health and a controlled response. Each measures a different part of the system. A heartbeat proves that its callback runs; it does not prove that SpringBoard is responsive. A framebuffer response proves more about that client, but still says little about disk durability.\n\nKeeping those measurements separate makes the timer and interrupt layer a testable foundation for higher-level claims."
+    },
+    {
+      "slug": "iokit-discovery",
+      "title": "A driver is a relationship, not just an object",
+      "description": "Class registration, service matching and platform dependencies govern whether useful work can begin.",
+      "section": "Storage",
+      "order": 8,
+      "evidence": [
+        "E09",
+        "E12",
+        "E19",
+        "E22"
+      ],
+      "sources": [
+        "S05",
+        "S04"
+      ],
+      "related": [
+        "storage-abi",
+        "hid-dependencies",
+        "audio"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Publication is only one step\n\nThe native storage research encountered a provider that existed but did not attract the expected generic driver. The eventual explanation was not a missing sector operation. Removing legacy flash nodes had also removed the normal demand for the prelinked IOStorageFamily. Its class registration and matching machinery had not been initialized at the time of the replacement provider's publication. [E09](/ios/evidence/E09/)\n\nOnce the original family was available, the concrete native provider could participate in the expected match and publish media. This preserves an important property of the approach: the original storage family, partition layer and filesystem remain responsible for their own work, while the native boundary supplies board operations.\n\n## Class identity and lifetime have meaning\n\nAn object's method table is not the whole object model. Metaclass identity, construction, inheritance, registry attachment, initialization and destruction all constrain whether a provider is valid. A copied table that happens to answer one call would not establish a correctly integrated driver.\n\nThe experiment registered a named concrete class through the original machinery and checked its superclass. This is stronger evidence than merely returning success from a guessed entry point. It still does not establish production-quality teardown, repeated startup or concurrent lifetime behavior.\n\nThe right acceptance boundary is an original client performing a real operation through the service. For storage, that meant descriptor transfer, completion and media discovery. For display, it later meant original-client surface submission. For audio, enumeration and mapping had to be distinguished from playback.\n\n## Missing hardware can create a software wait\n\nA tree node may promise a platform function that never becomes available on the new board. In one graphics investigation, startup waited on an old panel-enable provider. Other services waited on a legacy power-function dependency. More rendering commands could not resolve a service lookup that had not returned.\n\nLikewise, an advertised legacy light sensor registered without first proving a working transaction, then blocked the HID readiness path. Declaring that sensor absent allowed the original initialization to continue. This was a faithful absence statement, not a successful sensor implementation. [E19](/ios/evidence/E19/)\n\nThese examples make the registry and dependency graph central research objects. The graph explains why an apparently unrelated peripheral can prevent a higher-level service from reaching its event loop.\n\n## Success at one layer does not imply the next\n\nThe original HFS mount returned successfully before the root vnode was installed and before launchd started. A later platform handshake was still pending. The filesystem and the startup barrier were separate states. [E12](/ios/evidence/E12/)\n\nAn audio publication experiment similarly let the original client enumerate and map an output and allowed mediaserverd to advance. It did not produce sound. [E22](/ios/evidence/E22/)\n\nThe practical lesson is to name the observed edge in the service graph: constructed, registered, matched, opened, mapped, submitted, completed or visibly consumed. “The driver works” hides those boundaries and makes later evidence difficult to compare."
+    },
+    {
+      "slug": "storage-abi",
+      "title": "A correct sector with the wrong completion is still wrong",
+      "description": "The legacy callback boundary exposes a concrete difference between toolchain conventions.",
+      "section": "Storage",
+      "order": 9,
+      "evidence": [
+        "E10",
+        "E09",
+        "E11"
+      ],
+      "sources": [
+        "S05"
+      ],
+      "related": [
+        "iokit-discovery",
+        "async-storage",
+        "hfs-integrity"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The data path includes the callback\n\nA block operation has at least two externally visible results: the bytes transferred and the completion reported to its caller. Checking only the sector contents misses errors in status, byte count, callback context or register preservation. The original 4A102 storage family supplied a particularly clear example. [E10](/ios/evidence/E10/)\n\nThe measured legacy completion convention carries a 64-bit completed-byte count across a register/stack boundary. The contemporary bare-metal EABI comparison places that argument differently. A conventional C declaration compiled for the new environment can therefore look correct while delivering the wrong words to the original receiver.\n\nThe finding is specific to the inspected boundary. It is not a complete reconstruction of the Darwin C++ ABI and should not be generalized to every framework or kernel callback.\n\n## Static evidence needed an executable control\n\nThe project examined the exact-build call sites and compared compiler behavior, then used original synthetic ARM and Thumb receivers. The test deliberately used nonzero high and low count words. That choice matters: a zero high word can conceal an argument-placement mistake in short transfers.\n\nThe receivers checked argument values and the surrounding calling convention. A deliberate register-clobber case tested restoration. A null-action case tested the absence of a callback. Most importantly, an ordinary-EABI negative control produced the wrong count as expected. [E10](/ios/evidence/E10/)\n\nA positive test says that one implementation agrees with its expected output. A discriminating negative control shows that the test would catch the actual class of mistake under investigation. It strengthens the claim substantially.\n\n## Preserve the boundary, avoid overclaiming the type\n\nDisassembler symbols and decompiler signatures are navigation aids. They can suggest a prototype, but the emitted call sequence determines how that binary uses registers and stack words. Nearby public source versions can corroborate intent while differing in overloads or structure layout.\n\nThe atlas records the semantic mismatch rather than distributing firmware-specific bindings. The scientific result is that the legacy interface needed an explicit convention bridge and that its assumptions were tested independently of the original filesystem.\n\n## Integration remains a second gate\n\nA synthetic receiver does not prove that the real provider locates the correct inherited method or supplies a valid memory descriptor. The later integration separately exercised original kernel clients, media discovery and real request completion. [E09](/ios/evidence/E09/)\n\nEven then, completion timing mattered. Calling the correct action with correct arguments synchronously caused recursive provider entry in the early one-sector implementation. Moving the completion to a deferred context closed a different defect. [E11](/ios/evidence/E11/)\n\nThis is a useful preservation pattern: isolate the narrow ABI contract with original fixtures, then establish its integration through the original client. Keep those evidence layers distinct so that later lifetime or concurrency failures do not erase a valid boundary measurement—or get hidden behind it."
+    },
+    {
+      "slug": "async-storage",
+      "title": "Completion order is part of the storage device",
+      "description": "Reentrancy, backpressure and shutdown turned a sector adapter into a system contract.",
+      "section": "Storage",
+      "order": 10,
+      "evidence": [
+        "E11",
+        "E13",
+        "E14"
+      ],
+      "sources": [
+        "S05"
+      ],
+      "related": [
+        "storage-abi",
+        "hfs-integrity",
+        "time-and-interrupts"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Why an inline callback exhausted the stack\n\nThe first integrated provider used one-sector transfers and completed successful requests synchronously. The original block driver could respond by submitting the next chunk immediately. Each operation retained the previous transfer's frames, so a sequence of correct reads grew the kernel stack until it faulted. [E11](/ios/evidence/E11/)\n\nIncreasing transfer size would only change how many recursive steps occurred. The successful control deferred completion through a preallocated kernel thread call. Callback arguments were captured before making the slot available to another request. The next request could then arrive without inheriting the entire prior transfer stack.\n\nThe unchanged one-sector diagnostic completed 39 reads after that correction. It was still a small read-only test, with a much narrower queue policy than the later userspace workload.\n\n<figure class=\"research-figure\">\n<img src=\"/ios/figures/storage-completion.svg\" alt=\"A request has a lifetime: Client submits a read. A provider owns a pending operation.. Provider completes the transfer. Bytes alone do not complete the contract.. Return through a deferred context. Arguments, lifetime and ordering must agree.\" width=\"440\" height=\"568\" loading=\"lazy\" />\n<figcaption>The completion belongs to the request contract. This sequence is conceptual; it is not a timing trace.</figcaption>\n</figure>\n\n## Admission pressure is not a media failure\n\nLater writable experiments exposed queue-full failures. Two runs with catalog damage also recorded rejected request starts. The provider advertised a 512-byte maximum transfer even though its transfer layer could handle much larger requests, multiplying admissions. A recovery copy obtained before host mass-storage attachment already contained catalog corruption, excluding host automount as the cause of that particular instance.\n\nThe exact filesystem sequence linking a rejected request to the damaged catalog bytes was not fully proven. The evidence supports a concrete transport-pressure concern and a corrected control, not an unrestricted causal claim about every HFS failure. [E13](/ios/evidence/E13/)\n\nThe revised path advertised a larger transfer size and handled queue pressure in normal thread context. Reentrant submissions from the completion worker received a distinct overflow strategy. Those changes preserved the rule that an accepted operation receives exactly one completion while avoiding inline transfer recursion.\n\n## A passing workload has an exposure limit\n\nTwo consecutive corrected 12-minute phone boots returned to recovery without manual reset. Full data copies passed read-only fsck, clean bits were set, and root hashes were unchanged. However, both runs recorded zero uses of the new overflow path. [E13](/ios/evidence/E13/)\n\nThat last sentence is essential. A branch may be compiled and covered by synthetic checks yet remain unexercised on the phone. The physical result supports the observed workload, not arbitrary queue saturation or all allocation-failure behavior.\n\n## Shutdown must close the outstanding work\n\nA clean reboot requires more than entering a reboot function. Accepted writes must drain, their results must be accounted for, and the underlying medium must finish the required operation before reset. A printed reboot marker once preceded a separate integration failure and no actual watchdog reset.\n\nThe stronger acceptance observes return to recovery and checks the resulting volume. A separate QEMU file experiment also follows a write through sync, guest reset and fresh-process readback. [E14](/ios/evidence/E14/)\n\nStorage preservation therefore includes time and ownership: when a request is accepted, who retains its memory, when its completion becomes visible, and what a synchronization boundary guarantees. A sector checksum alone cannot answer those questions."
+    },
+    {
+      "slug": "hfs-integrity",
+      "title": "Persistence is a ladder of evidence",
+      "description": "A completed write, a clean bit and a durable application setting are different results.",
+      "section": "Storage",
+      "order": 11,
+      "evidence": [
+        "E12",
+        "E13",
+        "E14",
+        "E25"
+      ],
+      "sources": [
+        "S05"
+      ],
+      "related": [
+        "async-storage",
+        "observability",
+        "preservation-method"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Begin with a precise persistence claim\n\nA controller can return a sector correctly without the filesystem being healthy. A filesystem can mount without userspace starting. A data volume can pass fsck after a clean reboot without proving survival of arbitrary power loss. These are not rhetorical caveats; the project encountered the boundaries separately. [E12](/ios/evidence/E12/)\n\nThe useful progression is:\n\n1. The controller reports completion and a direct read returns the expected sector.\n2. A separate process or recovery environment reads the saved bytes.\n3. The original filesystem exposes the intended file after synchronization and reboot.\n4. A complete consistency check accepts the resulting volume.\n5. The original application restores its setting in a new session.\n6. A separately designed interruption experiment establishes a stated power-loss property.\n\nEvidence at a lower step should remain valuable without being promoted to a higher one.\n\n<figure class=\"research-figure\">\n<img src=\"/ios/figures/persistence-ladder.svg\" alt=\"Stronger claims need more evidence: The filesystem is recognized. Does not establish a healthy writable volume.. A written file survives a reset. A narrow persistence observation.. Recovery examines the whole volume. Still bounded by the workload and run length.\" width=\"440\" height=\"568\" loading=\"lazy\" />\n<figcaption>A ladder of acceptance claims. A later check strengthens a bounded observation; it does not prove all future workloads.</figcaption>\n</figure>\n\n## Read-only is a policy with several surfaces\n\nAn early mount listing described the root as read-only while storage-level metadata writes were observed or rejected. A mount label alone did not describe every route that could reach the provider. The later partition-level policy kept root writes outside the allowed path while permitting data writes. [E14](/ios/evidence/E14/)\n\nThis distinction explains why the atlas reports both logical mount state and independent root hashes. The root hash is a concrete postcondition about the bytes that were checked. It does not identify every attempted write or prove why a request was issued.\n\nThe native work keeps the original filesystem implementation. Replacing the storage provider does not make the host responsible for interpreting all HFS structures, but it does make request status, ordering and synchronization part of the compatibility contract.\n\n## A clean bit is not a full check\n\nA volume-header flag records a state claim. It does not enumerate the consistency of catalogs, allocation maps or directory counts. The research retained cases where a clean-looking state was insufficient and performed full read-only checks on complete recovery copies.\n\nObtaining those copies before a desktop automount matters. A host filesystem driver may replay or modify metadata, making it harder to attribute a later difference. The decisive storage controls used a recovery transfer before host mass-storage access and verified the copy's identity. [E13](/ios/evidence/E13/)\n\nRepairs also change the experiment. A disposable repaired copy can test whether a checker accepts a corrected structure. It cannot make the preceding damaged run successful. A report should retain both states and identify which image was booted next.\n\n## What the accepted runs establish\n\nTwo consecutive corrected physical runs passed their bounded storage and clean-reboot checks. Later UART-requested reboot trials also returned to recovery with a full data check and unchanged root. [E13](/ios/evidence/E13/) [E25](/ios/evidence/E25/)\n\nThe QEMU file experiment adds a different result: explicit guest synchronization, guest reset and fresh-process readback of a known file with data checks passing. [E14](/ios/evidence/E14/)\n\nTogether, these results justify continued native interaction work. They leave application-setting persistence and arbitrary power interruption as separate acceptance gates. A reference guide should preserve that separation so future readers can choose the evidence appropriate to their own claim."
+    },
+    {
+      "slug": "graphics-stack",
+      "title": "A pixel passes through several systems",
+      "description": "Drawing, surfaces, presentation and panel scanout deserve separate names and separate tests.",
+      "section": "Graphics",
+      "order": 12,
+      "evidence": [
+        "E15",
+        "E16",
+        "E17",
+        "E18"
+      ],
+      "sources": [
+        "S01",
+        "S07"
+      ],
+      "related": [
+        "surface-memory",
+        "presentation",
+        "display-blanking",
+        "audio"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Start at the producer and follow the bytes\n\nA visible frame can originate in a bootloader, a kernel console, an application renderer or a diagnostic pattern. A photograph alone rarely identifies the producer. The native research therefore follows the chain from original-client surface to descriptor access, presentation buffer and physical scanout. [E17](/ios/evidence/E17/)\n\nThe conceptual path is:\n\n**Original userspace → CoreSurface storage → framebuffer client → native presentation service → panel scanout → display engine → panel.**\n\nRendering creates or updates pixels. Presentation selects and transfers the image that should be shown. Scanout is the device's consumption of the active buffer. These roles can share memory in some designs, but their contracts do not become identical.\n\n## Preserve the original client boundary\n\nThe native service retains the original framebuffer-facing class and common client/queue machinery while supplying native hardware behavior. That lets the original userspace request geometry, obtain a surface and submit through its expected interface. A generic service with a plausible name would not be equivalent if the original client never discovered or opened it.\n\nThe evidence strengthened in stages: service publication, original-client attachment, valid source memory, copied nondefault surfaces, and finally physical panel observation. Each stage narrowed a different uncertainty. [E15](/ios/evidence/E15/) [E16](/ios/evidence/E16/)\n\nThe project also recorded software frame notifications. Calling a notification path does not establish physical vertical blank timing or prove client receipt. Completion, notification and actual presentation require their own observation.\n\n## A black frame has many possible causes\n\nBefore reaching the panel, a source can be unallocated, incorrectly mapped, inaccessible to the client, read through an ineffective probe, or overwritten by another owner. Presentation can choose the wrong source or use the wrong stride. After a correct copy, cache visibility or backlight policy can still hide the result.\n\nFinally, the guest can deliberately request black. The recorded SpringBoard trace did exactly that: its dim path requested blanking while the setup image remained in source backing. [E18](/ios/evidence/E18/)\n\nThese explanations predict different observations. Inspecting source bytes through a validated path, recording the selected surface, and tracing the blank request is more discriminating than repeatedly capturing the final black screen.\n\n## What setup pixels do—and do not—prove\n\nThe physical operator saw a known pattern followed by the original client's setup graphic. Matching source and scanout signatures corroborated that route. This establishes original-client pixels on the real panel for those frames. [E17](/ios/evidence/E17/)\n\nIt does not establish a complete PowerVR MBX implementation, Mali acceleration, every OpenGL workload, touch interaction or a generally usable home screen. A setup image may exercise only a subset of the rendering stack.\n\nThe next investigation should follow the first concrete failure of the next required workload. Adding a broad GPU subsystem before identifying that boundary risks solving a different problem. The architecture becomes easier to understand when each visual result carries its producer, memory route and presentation scope."
+    },
+    {
+      "slug": "surface-memory",
+      "title": "Three buffers that must not be confused",
+      "description": "Graphics allocation, default-surface backing and active scanout solve different problems.",
+      "section": "Graphics",
+      "order": 13,
+      "evidence": [
+        "E15",
+        "E16"
+      ],
+      "sources": [
+        "S07"
+      ],
+      "related": [
+        "mmu-and-caches",
+        "graphics-stack",
+        "presentation"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The console concealed an allocation problem\n\nThe native console could paint into a valid framebuffer while original application drawing still faulted. The reason was that the tree advertised a separate legacy graphics pool at an unbacked physical address. A read-only task page-table walk connected the user drawing address to that physical target. [E15](/ios/evidence/E15/)\n\nThe distinction is important: a visible kernel console validates the console's allocation and route. It says little about the memory handed to an application by CoreSurface. The two may be entirely different regions with different permissions.\n\nA controlled relocation preserved the graphics pool's size while placing it in backed RAM outside the general allocator's advertised range. The measured invalid write disappeared, but the captured final screen still did not establish a completed graphical boot. Closing one memory defect exposed later boundaries.\n\n<figure class=\"research-figure\">\n<img src=\"/ios/figures/surface-ownership.svg\" alt=\"Three ownership boundaries: Original graphics client. The bytes requested by the client.. Backed pages + valid mapping. Ownership and addressability both matter.. Display engine + panel. Presentation is a separate hardware result.\" width=\"440\" height=\"568\" loading=\"lazy\" />\n<figcaption>A conceptual ownership model. Mapping, backing and visible presentation require separate evidence.</figcaption>\n</figure>\n\n## Backing, permissions and aliasing failed separately\n\nThe next captured fault involved a user mapping of a surface without the expected write permission. The source descriptor's direction policy mattered to how the original framework exposed that memory. A narrowly changed binding let the observed drawing worker advance. That is different from the earlier unbacked-memory correction.\n\nAnother defect appeared when the default CoreSurface backing reused the scanout allocation. Presenting a different surface could overwrite the default source. Returning to the default then skipped a restoring copy, because the implementation treated it as already resident in scanout. [E15](/ios/evidence/E15/)\n\nThe corrected ownership model keeps the default surface separate and copies whichever source the original client selects. An A-to-B-to-A test is more revealing here than presenting A once: it checks whether A survived B's presentation.\n\n## A minimal ownership diagram\n\n| Allocation | Written by | Read by | Lifetime condition |\n| --- | --- | --- | --- |\n| Graphics pool | Original rendering clients | Surface consumers | Retained while its surfaces exist |\n| Default surface backing | Original default-surface client | Presentation service | Preserved across other submissions |\n| Active scanout | Presentation service | Display engine | Stable and visible while scanned |\n\nThe table describes roles rather than one universal allocation strategy. A production system can use page flips or other ownership transfers. The recorded native experiment uses a simpler copy route whose boundaries are inspectable.\n\n## Validate the inspection route too\n\nA source-memory claim depends on the observer. The earlier readBytes route could leave its diagnostic destination zero. Without a verified return count and a known-pattern control, that output did not establish that the selected surface was blank. The mapped-descriptor route later showed original-client content and its copied scanout. [E16](/ios/evidence/E16/)\n\nA good graphics evidence packet therefore names the selected surface, its backing extent, the access method, the verified transfer length and the destination extent. A screenshot is valuable as an independent visible result, but should not replace the memory evidence when the question is about source ownership.\n\nThe broader lesson applies beyond graphics: two objects can expose the same physical storage while their clients believe they have independent lifetimes. Keeping ownership explicit prevents one apparently valid operation from destroying another subsystem's state."
+    },
+    {
+      "slug": "presentation",
+      "title": "From a guest surface to the PinePhone panel",
+      "description": "The physical display milestone combined geometry, visibility, ownership and direct observation.",
+      "section": "Graphics",
+      "order": 14,
+      "evidence": [
+        "E16",
+        "E17"
+      ],
+      "sources": [
+        "S09",
+        "S07"
+      ],
+      "related": [
+        "graphics-stack",
+        "surface-memory",
+        "display-blanking",
+        "touch"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Geometry is part of the interface\n\nThe original guest surface is 320 × 480 pixels. The PinePhone panel is 720 × 1440. The measured presentation route expands each guest pixel to a 2 × 2 panel block, producing a 640 × 960 image centered with 40-pixel horizontal margins and 240-pixel vertical margins. [E17](/ios/evidence/E17/)\n\nThose numbers are not merely visual styling. They define the relationship between source stride, destination stride, clipping, scanout extent and eventual touch coordinates. A correct image with a mismatched input transform would still be an unusable interface.\n\nThe synthetic copy tests checked differing row strides, padding, guards and rejected invalid layouts. The integrated original-client test then checked an actual selected surface. The physical trial added the panel and its independent memory consumer.\n\n## Visibility needs a physical contract\n\nThe display initializer configured the panel before XNU took ownership. The native presentation service reused the reserved active scanout. Its physical mapping and ordering policy made XNU's writes visible to the display engine, while the initializer's earlier cached contents were cleaned at the handoff.\n\nThe backlight had to remain on for the trial. A headless power diagnostic that deliberately disabled it would invalidate a visual acceptance test even if every pixel copy succeeded. The publication snapshot establishes the lit-panel trial, not complete backlight policy or suspend/resume.\n\n## Corroborate bytes with appearance\n\nThe first known-pattern frames supplied an independent control for the copy route. The original framebuffer client then supplied a nonzero setup surface whose signature matched the corresponding QEMU observation. A later physical run added direct operator confirmation: colored quadrants appeared, followed by the Connect-to-iTunes graphic. [E16](/ios/evidence/E16/) [E17](/ios/evidence/E17/)\n\nThe first UART-based gate and the later direct observation are distinct evidence. A signature supports the bytes written to the active buffer; a person seeing the expected image supports the physical presentation route. Neither should silently stand in for the other.\n\n## Clearing a live scanout can create flashes\n\nThe display engine consumes the active buffer while the CPU updates it. Clearing that entire buffer before every ordinary copy temporarily exposes a black frame. The recorded correction clears it when necessary and preserves the preceding image between normal swaps.\n\nThat change does not suppress a deliberate guest request for a black background. Preserving the old frame unconditionally would hide guest behavior and make the display look stable for the wrong reason. The original queue and completion semantics still govern which image is selected.\n\n## The boundary still open\n\nThe observed setup image is a meaningful native milestone. It is not proof of physical VBlank synchronization, tear-free presentation, every pixel format, comprehensive surface teardown or arbitrary rendering workloads. The operator also observed black transitions; later button work established a visible wake response, while the QEMU trace identified one intentional blanking path.\n\nThe next stage should continue to connect visible behavior to its originating client action. That makes the port's display history useful as a general case study in separating memory correctness from presentation correctness."
+    },
+    {
+      "slug": "display-blanking",
+      "title": "Black can be the requested frame",
+      "description": "The dimming investigation separated guest policy from memory failure and panel power.",
+      "section": "Graphics",
+      "order": 15,
+      "evidence": [
+        "E18",
+        "E17",
+        "E20"
+      ],
+      "sources": [
+        "S01"
+      ],
+      "related": [
+        "presentation",
+        "buttons",
+        "observability"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The surface still contained the image\n\nA later QEMU capture found the setup image preserved in the default backing memory while the active scanout was opaque black. The original client had selected no surface and requested a black background. Sampled provider power fields remained enabled. This sharply narrowed the explanation: the visible black was a submitted result, not evidence that the source pixels had vanished. [E18](/ios/evidence/E18/)\n\nA separate caller trace then connected SpringBoard's dimTimerFired path to LayerKit's screen-blanking routine before the black presentation. That observation identifies a specific policy action in a specific run.\n\nIt should not be generalized to every black frame. The phone had also exposed possible presentation flashes, and its later-frame instrumentation was limited. A matching visual symptom is a useful hypothesis, not a substitute for the missing trace.\n\n## Three states that look similar from a distance\n\n| State | Potential visible appearance | Discriminating observation |\n| --- | --- | --- |\n| Guest requests black pixels | Black panel, possibly still backlit | Selected surface and background request |\n| Backlight turns off | Dark panel | Backlight control and visible illumination |\n| System stops making progress | Last frame or black | Independent liveness and controlled response |\n\nIdle CPU residency is another distinct quantity. A CPU can be mostly idle while the compositor and event system remain healthy. A backlit black panel can consume power even though the guest has blanked its content.\n\nThis is why a screen photograph, a heartbeat and a framebuffer dump answer different questions. Combining them is useful; collapsing them into one “sleep” label is not.\n\n## Test the normal wake path\n\nThe cleanest next discriminator was a guest input event. If the original HID path receives a valid press and release and the original client selects a nonblack frame, that supports the intended interaction between input policy and presentation.\n\nThe committed button work passed that test in the partial model and then on the physical phone. Three short physical taps produced setup image, black, setup image with corresponding HID edges. [E20](/ios/evidence/E20/)\n\nThis result supports waking and blanking the observed setup display. It does not establish deep suspend/resume, lock-screen navigation, touch, or every long-press behavior.\n\n## Preserve the distinction in future experiments\n\nA tempting diagnostic shortcut is to force the last nonblack image to remain visible. That may help identify where pixels exist, but it must be labeled as an observation override. It would not validate the guest's own dim/wake behavior.\n\nA better final acceptance records the guest request, resulting surface selection, visible frame and input response. The background should turn black when the client requests it; the device's power policy can then be tested independently.\n\nThis investigation is a useful preservation result because it recovers a behavior, not just a picture. The original operating system is making a timed presentation decision, and the native adaptation must preserve enough of the event path for the user to reverse it."
+    },
+    {
+      "slug": "hid-dependencies",
+      "title": "An absent sensor was blocking the event system",
+      "description": "A controlled absence declaration revealed how HID startup waits for service registration.",
+      "section": "Interaction",
+      "order": 16,
+      "evidence": [
+        "E19",
+        "E20"
+      ],
+      "sources": [
+        "S11"
+      ],
+      "related": [
+        "iokit-discovery",
+        "buttons",
+        "audio"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Follow the thread that signals readiness\n\nThe first useful SpringBoard snapshot showed the main thread waiting during HID session initialization. That alone did not identify the cause. A waiting main thread may be normal while a worker performs startup work. The critical question was which worker would eventually signal readiness and what it was doing. [E19](/ios/evidence/E19/)\n\nRead-only user-stack capture connected the HID registration worker to a legacy ambient-light-sensor open through IOKit. Its kernel-side call waited on the old shared IIC controller path. The worker signaled readiness only after registration calls returned.\n\nThis established a dependency chain from a peripheral declaration to application startup. It did not prove that a particular physical sensor register was failing, or even that the pending operation reached the intended hardware.\n\n## Advertising a device is a promise\n\nThe legacy sensor could register from its tree node without first demonstrating a successful transaction. On the native board, that declaration invited the original client to wait on hardware that was not actually implemented.\n\nA narrowly controlled tree change omitted exactly that unavailable sensor and preserved the remaining baseline. With the same observation window, the main thread left the readiness wait and reached its event loop. The HID worker also completed registration and reached its own run loop. [E19](/ios/evidence/E19/)\n\nThe interpretation is limited but useful: the old advertised sensor path blocked readiness in the measured baseline, and declaring its absence removed that wait. No fabricated sensor reading was needed to make the trace look successful.\n\n## Absence is not replacement\n\nThe PinePhone has its own light/proximity hardware. A Linux driver and board tree provide references for a later native implementation, but they do not supply a drop-in XNU service. Compatible names in a board tree also need to be distinguished from a measured chip identity.\n\nThe project therefore treats the absence control and a physical sensor driver as separate milestones. The former establishes a startup policy for unavailable hardware. The latter would need real acquisition, units, timing, error behavior and original-client integration.\n\nThe same discipline applies to audio, power functions and display enable services. A replacement should either provide the promised behavior or expose a supported absence. Returning success without that behavior can move the failure into a less observable part of the system.\n\n## Event loops are not interaction tests\n\nReaching a CoreFoundation or Mach-message wait is evidence of startup progress. It does not establish that a physical event reaches the application or that the application responds. The later button work independently demonstrated the event path through original HID and a visible wake/blank sequence. [E20](/ios/evidence/E20/)\n\nThis gives a useful two-stage acceptance pattern: first establish service readiness, then establish a controlled input and independently observable response. It keeps a quiet event loop from being mistaken for either a frozen application or a fully working user interface."
+    },
+    {
+      "slug": "buttons",
+      "title": "A physical key becomes a guest event",
+      "description": "The successful wake path connects two different hardware sources to the original HID contract.",
+      "section": "Interaction",
+      "order": 17,
+      "evidence": [
+        "E20",
+        "E18"
+      ],
+      "sources": [
+        "S12",
+        "S13"
+      ],
+      "related": [
+        "display-blanking",
+        "touch",
+        "power"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Power and volume come from different devices\n\nThe PinePhone power key is observed through the AXP803 PMIC's power-key events. The volume keys use the A64 analog key input. Treating all three as ordinary GPIO inputs would miss the actual board paths. The native work uses a polled kernel callback to translate their validated events into the original N45 HID service. [E20](/ios/evidence/E20/)\n\nThis retains the original client-facing event machinery. It does not emulate the old Samsung GPIO controller merely because the original button class once used that controller internally.\n\n## Preserve identity and edges\n\nThe inspected N45 profile expects a hold/sleep-wake button and a menu/Home button. The accepted binding maps the physical Power key to the former. Each volume key is temporarily mapped to Home/menu. A successful volume-key test therefore establishes Home event delivery, not audio-volume adjustment.\n\nA short input must contain both a press and a release. If both hardware edges arrive between polls, the consumer still needs the pair. If two physical sources alias the same logical key, releasing one must not necessarily release a key still held by the other. Lost releases can leave the original user interface behaving as though a key is permanently held.\n\nThe publication records the semantic route without distributing firmware bindings. The result is the preserved relation between a physical edge and the original client's event interpretation.\n\n## The evidence has a visible endpoint\n\nThe model gate began with black scanout. A short Power event through the same polling route produced the original setup image; a second produced black again. The physical Power trial then recorded three short taps and three corresponding press-release pairs. The operator saw setup image, black, setup image, and the first wake had nonzero panel-frame evidence. [E20](/ios/evidence/E20/)\n\nA separate physical boot tested the two volume keys individually. Each produced a Home/menu press followed by a release. Both runs ended through the UART clean-reboot path. Complete recovery copies of the data volume passed read-only fsck with clean bits, and the root hash remained unchanged.\n\nThese checks couple the new input behavior to already established storage and recovery postconditions. They do not prove every subsystem is stable, but they help detect regressions caused by the new integration.\n\n## What remains outside this result\n\nThe experiment did not validate a held Power key, whose PMIC behavior may independently turn the board off. It did not validate sustained volume-key auto-repeat, touchscreen events or a complete home-screen interaction. The panel response is the original setup display's wake/blank behavior, not deep suspend/resume. [E18](/ios/evidence/E18/)\n\nA later publication should add separate evidence for each expanded interaction. It should preserve the original meaning of this first result: a physical key, a correctly formed guest event, and a visible response through the original operating system's own input and display policy."
+    },
+    {
+      "slug": "touch",
+      "title": "Coordinates are only the beginning of touch",
+      "description": "Acquisition, contact lifetime, queue delivery and viewport geometry must agree.",
+      "section": "Interaction",
+      "order": 18,
+      "evidence": [
+        "E21",
+        "E17",
+        "E20"
+      ],
+      "sources": [
+        "S17",
+        "S11"
+      ],
+      "related": [
+        "buttons",
+        "presentation",
+        "iokit-discovery"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The obvious convenience method did nothing\n\nStatic inspection found that this build's absolute-pointer convenience method was an empty stub. Sending coordinates to a plausible-sounding API would therefore discard the event. The original touch route instead involves a user-client queue, a MultitouchSupport parser and a plugin that converts packets into digitizer events. [E21](/ios/evidence/E21/)\n\nThis is a recurring lesson in legacy research: modern API expectations and method names do not establish an older binary's behavior. A live original-client test must follow the actual delivery path.\n\n## A packet parser is not a touchscreen driver\n\nThe project has original building blocks for reading and validating Goodix-style reports and for encoding a bounded legacy contact payload. Constructed down/end vectors and host checks provide useful component evidence. They do not establish physical bus transfers or delivery to an original application.\n\nA complete path needs board power/reset configuration, an I2C transport, a consumed-report acknowledgment policy, contact-ID tracking, event ordering, original queue publication, notification and user-client interpretation. A failure in any one of these can look like “touch does not work.”\n\nThe physical binding must also establish the fitted controller identity. A board tree and a shared driver support list are references, not substitutes for a valid device response.\n\n## Contacts have lifetimes\n\nAn application does not receive an unrelated coordinate on every sample. It observes a contact beginning, moving and ending. IDs must remain consistent across reports; a zero-contact frame is an event with meaning. Lost releases can leave a gesture active indefinitely. Duplicate or out-of-range IDs require explicit handling.\n\nA useful synthetic sequence includes a press, movement across several samples, release, and a second contact reusing an ID only after the first lifetime ended. Queue-full and missed-report cases also need a defined policy. Those are proposed acceptance dimensions, not claims that the current physical port passes them.\n\n## Use the display's geometry\n\nThe accepted panel route centers a 2× 320 × 480 guest image inside a 720 × 1440 panel. Its active rectangle has 40-pixel horizontal and 240-pixel vertical margins. [E17](/ios/evidence/E17/)\n\nA touch transform must agree with that exact viewport. Points inside the displayed image map to guest coordinates; points outside need an explicit policy instead of being silently clamped onto an edge. Sensor orientation, calibration and contact size remain additional inputs.\n\nA correct formula on synthetic points is still only a transform test. It should be followed by a visible target in the original application and a controlled physical tap that causes the expected response.\n\n## The current frontier\n\nPhysical buttons already reach original HID and wake the setup display. That result provides a working example of event delivery but does not validate the different touch queue and parser. [E20](/ios/evidence/E20/)\n\nAt this publication snapshot, physical touch and complete home-screen interaction remain open. The proposed first touch gate is intentionally narrow: one down/end sequence through the original client, a visible response, no stuck contact, and the existing clean-reboot and filesystem checks afterward."
+    },
+    {
+      "slug": "audio",
+      "title": "An audio service can unblock startup without making sound",
+      "description": "Discovery, shared memory, timing and the physical sink are separate compatibility boundaries.",
+      "section": "Interaction",
+      "order": 19,
+      "evidence": [
+        "E22",
+        "E19"
+      ],
+      "sources": [
+        "S04"
+      ],
+      "related": [
+        "iokit-discovery",
+        "hid-dependencies",
+        "time-and-interrupts"
+      ],
+      "updated": "2026-09-29",
+      "body": "## The media service expected an output device\n\nThe native media investigation observed an empty CoreAudio device list and a later null active-device access in the original media stack. A compatible IOAudio2 publication experiment changed that frontier: the original client enumerated one output, opened it and mapped its memory; mediaserverd reached its event loop. [E22](/ios/evidence/E22/)\n\nThat is a concrete startup result. It is not a playback result. The published backend was explicitly unbound, and stream start remained unsupported. No sound output was established.\n\nThe distinction prevents a common preservation error: satisfying discovery well enough for another service to start does not mean the advertised physical capability exists in full.\n\n## The interface includes time\n\nThe inspected output profile uses 44.1 kHz stereo, 16-bit linear PCM. Its buffer is 65,536 bytes, or 16,384 four-byte frames. The client also uses shared completion state and timestamps to extrapolate sample position. Those observations make a clock part of the interface, not an optional optimization.\n\nA device that exposes a buffer but never advances a meaningful completion position cannot satisfy every client expectation. Equally, advancing a counter as though samples were played would misreport an unbound sink's behavior.\n\nThe research keeps the semantic layers explicit: memory accepted by a transfer helper, samples accepted by a timed sink, and sound produced by an actual output device are different events.\n\n## Backpressure protects the samples\n\nAn original ring-transfer component was tested separately. It handles wraparound and partial backend progress, clears only accepted frames and preserves pending samples when a sink cannot accept more. Its cumulative count measures backend acceptance, not DAC playback.\n\nThat definition is valuable because it can be tested with original synthetic fixtures. A captured RAM sink establishes ordering and byte handling without requiring Apple software or a physical codec. It leaves scheduling, shared status publication and hardware integration for later gates.\n\nA future asynchronous backend would also need to own any memory it retains. A helper that clears accepted ring data cannot safely hand out pointers to that same storage for later consumption without an explicit ownership transfer.\n\n## Startup dependencies can cross subsystem names\n\nSpringBoard and media initialization are not independent just because one appears visual and the other audible. An application can wait on media registration before it draws its normal interface. Earlier HID work similarly showed a visual startup wait caused by a legacy sensor dependency. [E19](/ios/evidence/E19/)\n\nA useful investigation therefore captures the waiting original client and its dependency, rather than assigning the failure to the subsystem visible on screen. A black display can be the final symptom of an audio-service startup failure even when the framebuffer path itself is correct.\n\n## The remaining audio acceptance\n\nThe next meaningful playback claim would require original-client start/stop, coherent shared timestamps, a timed consumer, sample delivery, underrun behavior and reopen. A physical result would additionally need codec, routing and output evidence.\n\nUntil those gates pass, the accurate statement is that compatible publication cleared a measured media startup fault. That finding is useful on its own, and remains useful precisely because it does not claim sound that was never observed."
+    },
+    {
+      "slug": "power",
+      "title": "Measure energy flow, not just idle",
+      "description": "CPU residency, USB input usability and backlight power are related but independent variables.",
+      "section": "Method",
+      "order": 20,
+      "evidence": [
+        "E23",
+        "E07",
+        "E17",
+        "E20"
+      ],
+      "sources": [
+        "S09",
+        "S11",
+        "S13"
+      ],
+      "related": [
+        "time-and-interrupts",
+        "display-blanking",
+        "hfs-integrity"
+      ],
+      "updated": "2026-09-29",
+      "body": "## High idle residency did not settle the drain\n\nThe physical research measured substantial time in the CPU's wait state while battery drain remained a concern. That observation rules out a simplistic equation between “CPU idle” and “the device is charging.” Other rails, the panel, peripheral state and the USB input path can dominate the energy balance. [E23](/ios/evidence/E23/)\n\nLikewise, a charging label observed later in recovery describes that environment at that moment. It does not prove that the same power path was usable while XNU was running. The relevant experiment needs measurements during the target state and a bounded before/after comparison.\n\n## A controlled inactive state changed the result\n\nThe project compared the USB-C controller's native-run state with a known recovery environment, then tested a defined inactive ANX7688 state. The accepted 12-minute run reported usable USB input and increased battery from 29% to 31%. A matched known-good-data control also gained two percentage points. [E23](/ios/evidence/E23/)\n\nThis establishes the usefulness of that tested sink configuration. It does not establish full USB-C Power Delivery, every charger/cable combination, complete peripheral shutdown or a universal explanation for earlier resets.\n\nThe exact electrical mechanism was investigated through board documentation and control observations. A plausible backfeed hypothesis and a successful state change are not identical to a complete measured causal chain. The public guide preserves the result and its scope without providing hardware-write recipes.\n\n## Time and observation windows matter\n\nA fixed-duration power test is only meaningful when the platform's timebase is correct. The earlier nominal one-second delay lasted about three seconds until its clock declaration was corrected. [E07](/ios/evidence/E07/)\n\nBattery percentages are also coarse, filtered readings. A two-point change over a short interval is useful when supported by PMIC status and a matched setup, but it is not a precision power measurement or a long-term runtime estimate. Voltage, current, temperature, screen policy and source capability would strengthen a broader study.\n\nA lit-panel experiment and a headless experiment should not be combined into one battery-performance claim. The physical presentation work deliberately kept the backlight on; later input runs could still lose battery even though recovery reported charging. [E17](/ios/evidence/E17/) [E20](/ios/evidence/E20/)\n\n## Recovery is part of the measurement\n\nA spontaneous reset can end a power experiment before the target state is sampled. The recovery environment may then alter rails and resume charging. Recording only the final battery reading leaves a large causal gap.\n\nThe project improved this boundary with low-rate UART observations and a requested clean reboot. A controlled end point permits a complete filesystem copy and a known transition back to recovery. Those controls support interpretation, but do not guarantee recovery from every kernel failure.\n\n## A bounded claim worth preserving\n\nThe accepted claim is modest and useful: the tested controller state restored usable USB input and net battery gain during the stated headless run. Complete power management, thermal behavior, battery runtime and suspend/resume remain independent research topics. Keeping them separate prevents a successful charging experiment from becoming an unsupported claim about the entire phone."
+    },
+    {
+      "slug": "emulator-fidelity",
+      "title": "A model must fail honestly",
+      "description": "Unexpected zeros, inherited memory and instantaneous devices can make an emulator too helpful.",
+      "section": "Method",
+      "order": 21,
+      "evidence": [
+        "E26",
+        "E07",
+        "E03",
+        "E28"
+      ],
+      "sources": [
+        "S01",
+        "S14"
+      ],
+      "related": [
+        "three-machines",
+        "observability",
+        "preservation-method"
+      ],
+      "updated": "2026-09-29",
+      "body": "## A false radio was the warning\n\nA phone restore-stage diagnostic reported that a radio board was present while running on a model with no radio. The inspected predicate read an input whose model returned zero. That low value selected the “present” branch. The log was real; its implied hardware claim was false. [E26](/ios/evidence/E26/)\n\nThis is a particularly useful example because the failure mode looks like progress. A developer watching only console milestones could promote a default response into a modem achievement. The source-level and binary comparison instead identified an unsupported input accidentally satisfying a detection predicate.\n\n## Unknown behavior should stay visible\n\nAn unimplemented register returning zero can be reasonable only when that value is part of an explicit contract. Otherwise it may clear an error, advertise a device or satisfy a polling condition. The same concern applies to writes accepted without effect and completion events emitted before their prerequisites exist.\n\nA useful model identifies unsupported accesses and preserves a trace of them. A peripheral test should include a negative case showing that absence or failure is observable. The objective is not to make every guest check pass; it is to make the modeled subset internally meaningful.\n\nThis principle also applies to inherited board resources. A custom machine built on a generic platform may inherit memory or devices at addresses where the physical target has nothing equivalent. Successful access in the model then fails to test the native assumption.\n\n## Match the contract used by the experiment\n\nThe timebase discrepancy is a concrete model-to-hardware lesson. The earlier model value and the physical counter differed. Once the phone measurement established 24 MHz, the current contract adopted matching counter/deadline conversion while retaining an explicit historical mode for old trees. [E07](/ios/evidence/E07/)\n\nMatching those units improves one comparison. It does not make the machine a complete A64 implementation. Analog charging, cache visibility, DRAM initialization and electrical timing need separate evidence.\n\nAn emulator that completes storage commands quickly cannot certify the adequacy of physical timeout budgets. A host screenshot of RAM scanout cannot certify the panel's DSI timing. These are limitations of the chosen model boundary, not reasons to discard it.\n\n## Use the reference as a control\n\nThe iPod reference and native contract answer different questions. If an original service behaves similarly in both, that can narrow a native failure. If it differs, the comparison is useful only when software identity, prepared data and observation windows are controlled. [E28](/ios/evidence/E28/)\n\nThe early native entry test deliberately stopped at a CPU-specific fault and reported no OS boot. That makes it a good model experiment: it established the reachable frontier without fabricating the missing behavior. [E03](/ios/evidence/E03/)\n\nThe preservation value of an emulator is its inspectable, reproducible contract. Every extension should state which observed behavior it models and which physical questions remain outside that contract."
+    },
+    {
+      "slug": "observability",
+      "title": "Measure the observer before trusting the observation",
+      "description": "The project repeatedly found that the diagnostic path could mimic the failure under investigation.",
+      "section": "Method",
+      "order": 22,
+      "evidence": [
+        "E16",
+        "E24",
+        "E25",
+        "E26"
+      ],
+      "sources": [
+        "S14"
+      ],
+      "related": [
+        "emulator-fidelity",
+        "preservation-method",
+        "display-blanking"
+      ],
+      "updated": "2026-09-29",
+      "body": "## A zero-filled buffer can mean no measurement happened\n\nThe framebuffer investigation initially found zeros in a diagnostic destination and treated them as evidence that the original source was blank. A known-pattern control exposed the weakness: the descriptor access route was not producing a validated transfer. The corrected mapped-descriptor path then revealed real original-client pixels. [E16](/ios/evidence/E16/)\n\nThe general rule is to include a control with a known nonzero result and verify the amount of data actually observed. Initializing a buffer to zero is good defensive programming, but that zero becomes ambiguous if failed or empty reads are not distinguished from successful reads of zero bytes.\n\n## A missing message can mean a changed route\n\nBOOT_TIME was another ambiguous signal. Two physical runs reached comparable HID and power-client milestones while only one printed that console message. Compared runtime-state files did not support the proposed stale-state explanation. A logging-route race remained plausible but untraced. [E24](/ios/evidence/E24/)\n\nThe correct conclusion is that the marker alone is insufficient. It is not that every absent marker is harmless. Some QEMU runs also lacked later milestones, so those runs retained separate uncertainty.\n\nPositive markers have the same limitation. MACH Reboot showed that code reached a logging point; an earlier experiment still failed before the actual reset. Acceptance improved when it required observed return to recovery and post-run filesystem checks. [E25](/ios/evidence/E25/)\n\n## A liveness probe proves its own route\n\nA low-rate heartbeat can establish that its timer and callback continue running. It cannot prove application responsiveness. A debugger may display stale register state when its protocol and the current execution state disagree. A host capture process can exit while the phone keeps running.\n\nEach observer needs a declared scope. Pair independent observations when they answer the same question from different directions: a source-memory signature and physical appearance, a guest event and client response, a transfer hash and complete-volume check.\n\nAvoid making all “independent” checks depend on the same unverified helper. Two tools that read the same wrong address do not become corroborating evidence merely because their output formats differ.\n\n## Record a failed hypothesis as a result\n\nA useful experiment log has five fields: the claim being tested, the control, the observation, the updated interpretation and the remaining uncertainty. The false-radio experiment is a model example: the console reported presence; the model contained no radio; source and predicate inspection explained how the default input caused the message. [E26](/ios/evidence/E26/)\n\nThat record teaches more than deleting the misleading line from a status summary. It identifies a reusable class of error.\n\n## Keep timing and identities attached\n\nA screenshot without its selected surface and run identity loses much of its diagnostic value. A filesystem result without the input/output image identities cannot be assigned confidently to a trial. A comparison with different observation windows may merely sample different startup phases.\n\nThis atlas therefore treats environment, method, date, document digest and limitations as part of the evidence, not administrative decoration. The measurements remain private experiment reports, but the public summaries preserve enough structure to explain why a conclusion was drawn and where a stronger conclusion would need new work."
+    },
+    {
+      "slug": "source-archaeology",
+      "title": "Nearby source is a reference, not the missing kernel",
+      "description": "Version identity, provenance and measured interfaces constrain what public source can tell us.",
+      "section": "Foundations",
+      "order": 23,
+      "evidence": [
+        "E01",
+        "E10",
+        "E27"
+      ],
+      "sources": [
+        "S03",
+        "S04",
+        "S05",
+        "S16"
+      ],
+      "related": [
+        "orientation",
+        "storage-abi",
+        "preservation-method"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Begin with the target's own identity\n\nThe inspected software identifies itself as iPhone OS 1.1.4, build 4A102. The kernel reports a 933-era ARM XNU build. That identity should remain fixed while comparing public source. Similar Darwin version strings or nearby desktop releases do not make another tree the source of this binary. [E01](/ios/evidence/E01/) [E27](/ios/evidence/E27/)\n\nThe source survey examined official distribution metadata, tags and relevant implementation directories. No matching public XNU 933 ARM implementation was found in that inspected set. The result is deliberately scoped: it is a survey of named repositories and revisions, not proof that no historical archive could exist anywhere.\n\n## Three useful references with different roles\n\n| Reference | What it can help explain | What it does not establish |\n| --- | --- | --- |\n| Nearby Apple desktop XNU | Common Mach, BSD and IOKit concepts and interface changes | The target ARM machine layer |\n| Later community ARM XNU | Shape of ARM platform initialization and board code | 4A102 ABI or userspace compatibility |\n| Contemporaneous family source | Class matching and subsystem design | Exact embedded method layout and calling convention |\n\nThe inspected darwin-on-arm tree contains relevant ARM platform material, but it is a later kernel family. Replacing the running target with it would create a new compatibility project, not automatically finish the current port.\n\nLikewise, a source header can describe a newer overload than the one called by the embedded target. That is why the storage completion work measured the exact boundary and tested it with independent receivers. [E10](/ios/evidence/E10/)\n\n## Symbols are aids, not recovered declarations\n\nNames from a binary can make the investigation understandable. A decompiler can suggest object structure and control flow. Those tools still require checks against instruction bytes, call sites and runtime objects. An inferred signature may be wrong even when its name is correct.\n\nThe preservation record should distinguish a published source declaration, a binary observation, an inferred role and a tested interface. Merging those categories into an apparently authoritative reconstructed header makes later mistakes hard to locate.\n\n## Reuse also has a provenance boundary\n\nPublic availability is not a single license. Apple source archives, Linux drivers, firmware projects and community experiments carry their own terms. This atlas links to those works and summarizes the concepts relevant to the research. Its MIT license covers the original publication material and website; it does not relicense the referenced source or Apple software.\n\nThe same distinction applies to upstream demonstrations. An author's successful emulator boot is an upstream report until independently reproduced under a recorded local configuration. The project's own reference reproduction has a separate evidence identity.\n\n## A durable research practice\n\nPin the source revision, record what was inspected, identify the question it answered and state what remains unverified. A negative finding should include its search scope. An interface inference should have a path to a discriminating test.\n\nThis approach keeps source archaeology productive without allowing familiar code to substitute for the actual legacy system under study. It also makes the publication maintainable: a newly found source tree can extend or revise a specific survey result instead of forcing readers to reinterpret every earlier claim."
+    },
+    {
+      "slug": "preservation-method",
+      "title": "Preserve the chain of evidence",
+      "description": "A research atlas should let a future reader distinguish the measurement from the story around it.",
+      "section": "Method",
+      "order": 24,
+      "evidence": [
+        "E13",
+        "E16",
+        "E20",
+        "E24",
+        "E27"
+      ],
+      "sources": [
+        "S18"
+      ],
+      "related": [
+        "orientation",
+        "observability",
+        "source-archaeology"
+      ],
+      "updated": "2026-09-29",
+      "body": "## Treat a claim as structured data\n\nA useful preservation claim includes the software/build identity, execution environment, method, observation and limitation. Its identity changes when any of those changes. “Buttons work” is too broad; “three short physical Power taps produced three guest edge pairs and the observed setup/black/setup sequence” is inspectable. [E20](/ios/evidence/E20/)\n\nThis atlas stores evidence records separately from explanatory articles. Articles can connect several records without silently changing their scopes. The concept map and guided tours are generated from the same article relationships, while the evidence pages show where each reported result is used.\n\nThe organizational inspiration is Understand-Anything's linked knowledge and guided exploration. The publication adapts those ideas to concepts and claims rather than exposing a function-by-function graph of the implementation repository.\n\n## Separate observation from interpretation\n\nThe missing BOOT_TIME experiment observed comparable later milestones with different console output. The interpretation that a logging-route race explains the difference is plausible, but the route was not directly traced. Both statements belong in the record, with different confidence. [E24](/ios/evidence/E24/)\n\nThe empty-framebuffer case similarly requires a correction history. The early probe output did not validate source content; the known-pattern and mapped-descriptor control changed the interpretation. Removing the old hypothesis entirely would lose the reason the improved measurement matters. [E16](/ios/evidence/E16/)\n\nA useful correction entry follows: earlier belief, discriminating observation, replacement statement, remaining limit. “We were wrong” is less useful than naming exactly which inference exceeded the data.\n\n## Make acceptance falsifiable\n\nA clean storage gate can specify an unchanged root hash, a complete data copy, a read-only consistency check, no recorded request failures and observed recovery return. Those postconditions can fail independently. The two consecutive physical trials passed that stated gate, while leaving the unexercised overflow path and power-loss behavior open. [E13](/ios/evidence/E13/)\n\nAn acceptance marker should never be renamed to imply a larger milestone. A synthetic CPU or pixel test remains synthetic even when it is a necessary prerequisite for original-client work.\n\n## Publish useful evidence without distributing the experiment\n\nThis repository contains original prose, diagrams, curated measurement summaries and document digests. It does not include the source implementation repository, raw firmware, images, binary modifications, private logs, device identifiers or session conversations.\n\nThat boundary imposes an honest limitation: the public package is not a complete reproducibility archive. A digest identifies the reviewed private document if an authorized reviewer later obtains it; the digest alone cannot independently verify its contents. Public primary references corroborate architecture and source context, while the local experiment summaries remain reported observations.\n\n## Keep editions stable\n\nThe first edition has a fixed source revision and date. In-progress work after that boundary is not silently promoted into the published frontier. A later result should add a reviewed evidence record, revise affected articles and note which earlier conclusion it supersedes.\n\nThe original source survey is a good example: “not found in these inspected releases” can be updated if new material appears, without pretending the earlier scoped observation was universal. [E27](/ios/evidence/E27/)\n\nPreservation succeeds when the next researcher inherits both the useful result and the information needed to question it. A polished presentation should make that discipline easier to follow, not smooth away the uncertainty."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "title": "One kernel, different products",
+      "environment": "Static inspection",
+      "method": "Archive metadata and full-byte hash comparison",
+      "observation": "The inspected iPhone and iPod touch 1.1.4/4A102 archives contain a byte-identical kernelcache. Their board trees, bootloaders and primary root images differ.",
+      "limits": "Shared kernel identity does not establish cross-product userspace, peripheral or telephony compatibility.",
+      "records": [
+        {
+          "document": "20-iphone-1g-4a102.md",
+          "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E02",
+      "title": "iBoot changes the device tree",
+      "environment": "iPod reference",
+      "method": "Capture at the live kernel handoff; compare archived and live tree",
+      "observation": "The archived N45AP CPU clock properties are zero. At the observed iBoot handoff the corresponding properties are populated; three captures agree on clock values while whole-tree hashes vary.",
+      "limits": "N45AP values are not measurements of M68AP or PinePhone clocks.",
+      "records": [
+        {
+          "document": "29-live-apple-device-tree.md",
+          "sha256": "6d89c86f2971019ac15ff41ab6156f9dc418f1ee942f8f150371658a464729f8",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-live-tree-2026-09-24.json",
+          "sha256": "b1da05c0657a2e8633f06315d5eab41e7e739aaad59d6f430254d4b5cc952778",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Timebase",
+          "value": "6 MHz"
+        },
+        {
+          "label": "CPU",
+          "value": "412 MHz"
+        },
+        {
+          "label": "Bus",
+          "value": "103 MHz"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E03",
+      "title": "Entry is a state contract",
+      "environment": "PinePhone QEMU",
+      "method": "Reference handoff capture and bounded unchanged-kernel entry trace",
+      "observation": "The common ARMv6 kernel enters its bootstrap and reaches arm_init on the A53 model, then faults at an ARM1176-specific peripheral remap register access.",
+      "limits": "This entry diagnostic does not establish a kernel boot. The M68AP-tree trial still uses reference boot arguments captured from N45AP.",
+      "records": [
+        {
+          "document": "22-kernel-entry-contract.md",
+          "sha256": "2a94b671ed42fbfd521d6f5293c6db23f5ff57f82e96799cc5deca2f7569e2ff",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-xnu-entry-2026-09-24.json",
+          "sha256": "55b149d3954549c4a28f6f025fa79c110fdaffa692973489a844d0c99f346d71",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E04",
+      "title": "A mapping can exist and still fault",
+      "environment": "PinePhone QEMU",
+      "method": "Descriptor walk and isolated control of translation interpretation",
+      "observation": "The commpage address translated into backed RAM, but the A53 access-flag interpretation rejected the legacy descriptor. A control retaining the same descriptors permitted the read and ran for 40.12 seconds without the measured synchronous fault.",
+      "limits": "This control establishes one mapping interpretation on the model, not complete VM correctness or a physical memory test.",
+      "records": [
+        {
+          "document": "pinephone-qemu-afe-2026-09-25.json",
+          "sha256": "f5a661fbb0fa575da55150196b857baaaf36777b569b3c600f433e5a70326dfc",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E05",
+      "title": "Cache maintenance is a physical boundary",
+      "environment": "Physical PinePhone",
+      "method": "Calibrated visual progress markers around VM initialization",
+      "observation": "An A53 range-clean adaptation allowed the observed original mapping routine to return on the phone. All nine diagnostic progress markers were observed.",
+      "limits": "This terminal probe stopped before continuing console initialization. It does not establish all cache-maintenance operations or coherency under concurrent devices.",
+      "records": [
+        {
+          "document": "pinephone-emmc-a53-range-clean-return.json",
+          "sha256": "39714a12d72d405efefc86d469d3c34d8bbce99b580bc33506fff4eff83a7534",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E06",
+      "title": "Legacy SWP is exercised by userspace",
+      "environment": "Physical PinePhone",
+      "method": "Saved user exception state followed by bounded continuation",
+      "observation": "Original userspace executed an obsolete ARM SWP instruction. The experimental compatibility path allowed the observed resident-address exchanges and subsequent startup progress.",
+      "limits": "The exchange backend is not validated for complete atomicity, copy-on-write, permission faults, unmapped pages or multiprocessor behavior.",
+      "records": [
+        {
+          "document": "79-pinephone-aarch32-swp.md",
+          "sha256": "b29c498601c17949b19ed39cf16c4dc23625dab3205468bbe91a709d1c72c0ea",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-user-swp-2026-09-26.json",
+          "sha256": "294161d51d19e80da639daf4377c6ee07d18ed97be251d97cf462602acaf030f",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E07",
+      "title": "The timebase declaration changes real delays",
+      "environment": "Physical PinePhone",
+      "method": "Matched one-variable tree comparison with UART arrival timing",
+      "observation": "With the inherited 62.5 MHz declaration, a nominal one-second delay took 3.014805055 seconds. With the physical 24 MHz value it took 1.010080943 seconds; kernel and adapter hashes were unchanged.",
+      "limits": "These are host UART arrival intervals, not exact CPU-side timing. The comparison does not validate the A64 counter erratum handling.",
+      "records": [
+        {
+          "document": "80-pinephone-clock-and-storage-reliability.md",
+          "sha256": "295e80f2755f1ecd6966aa2ec628b20e8d3f948dabc18be91c0851ed5f997e3a",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-clock-storage-2026-09-27.json",
+          "sha256": "619fed90da7df90414fa3a59cf4bfd8cea1d7575b4633d63db96aeffeadc33dc",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Old declaration",
+          "value": "3.015 s"
+        },
+        {
+          "label": "Corrected declaration",
+          "value": "1.010 s"
+        },
+        {
+          "label": "Physical counter",
+          "value": "24 MHz"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E08",
+      "title": "Later registration can replace a working interrupt callback",
+      "environment": "PinePhone QEMU",
+      "method": "Registration trace and bounded integrated interrupt control",
+      "observation": "A later legacy callback replaced the native nonsecure timer callback. The combined routing control delivered and returned from 51 timer interrupts, preserving earlier console and commpage evidence.",
+      "limits": "The bounded run did not establish all interrupt sources or complete boot.",
+      "records": [
+        {
+          "document": "pinephone-qemu-irq-frontier-2026-09-25.json",
+          "sha256": "b26649aeb0738b8b842f3c1669f588686d52fc22f7426b6a6549812a07a67f5f",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-qemu-irq-routing-2026-09-25.json",
+          "sha256": "e0328a4e58767d9e2fa019488cac85c088a4317579d522bc0ad69f424fd6434b",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E09",
+      "title": "Storage discovery depends on class registration",
+      "environment": "PinePhone QEMU",
+      "method": "Registry/metaclass inspection and positive/negative media controls",
+      "observation": "Removing the original flash devices also removed the demand that loaded IOStorageFamily. Once the original family was initialized, a concrete native provider matched the generic block driver and published a synthetic GPT partition.",
+      "limits": "Class identity and matching are necessary, but do not certify later lifetime, concurrency or filesystem behavior.",
+      "records": [
+        {
+          "document": "45-pinephone-native-mmc-storage.md",
+          "sha256": "20363b1b45adea160f0145cc2c5ca15290e3c6f362bfb6644355321bb245c877",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-native-mmc-storage.json",
+          "sha256": "836a1621d8a40fb803f4895f035270bc2beced6ad67b16d510407780038e7381",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E10",
+      "title": "The storage callback ABI crosses compiler conventions",
+      "environment": "Synthetic probe",
+      "method": "Exact-build call-site inspection; ARM and Thumb receivers; negative control",
+      "observation": "The measured completion convention splits its final 64-bit count between a register and the stack. The contemporary bare-metal EABI comparison places it differently. Synthetic receivers verify both words and register preservation; the ordinary-EABI control fails as expected.",
+      "limits": "The probe isolates the boundary. It does not recover the full Darwin C++ ABI or exercise a physical storage device.",
+      "records": [
+        {
+          "document": "44-legacy-storage-completion-abi.md",
+          "sha256": "1e1024355277cf7ec32e64aeeaa4c3decea79fd3efcc3ba32ef6630a775ad725",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-storage-completion-abi.json",
+          "sha256": "0b11e1273cc5d1981696a354394c7ebe740406071a710e2515123412823ae092",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E11",
+      "title": "Synchronous completion grows the kernel stack",
+      "environment": "PinePhone QEMU",
+      "method": "Per-request trace and deferred-completion control",
+      "observation": "Inline completion reentered the provider while earlier frames remained on the kernel stack. Deferring completion through an existing kernel thread-call mechanism allowed the unchanged one-sector diagnostic to finish 39 reads.",
+      "limits": "This early read-only diagnostic had one pending slot and does not validate the later writable queue under saturation.",
+      "records": [
+        {
+          "document": "45-pinephone-native-mmc-storage.md",
+          "sha256": "20363b1b45adea160f0145cc2c5ca15290e3c6f362bfb6644355321bb245c877",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E12",
+      "title": "A filesystem mount can finish before userspace starts",
+      "environment": "PinePhone QEMU",
+      "method": "Debugger-observed return value, mount list and subsequent waiting thread",
+      "observation": "The original HFS mount returned success, while the root vnode was not yet installed and startup waited in a platform service handshake.",
+      "limits": "Mount success is one stage. It does not establish launchd, writable data, graphical startup or full boot-chain authenticity.",
+      "records": [
+        {
+          "document": "46-pinephone-hfs-root-mount.md",
+          "sha256": "5735e78acb05ed7707b53872e6cdc9e2e67d2b546cd2f67a4ac286433109a99d",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-hfs-root-mount.json",
+          "sha256": "2d9f4029e8688d8d1ed3e060f34bb9817a29e1c505f15429c9490636ab8c39bf",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E13",
+      "title": "Two consecutive physical storage gates passed",
+      "environment": "Physical PinePhone",
+      "method": "Matched 720-second runs; clean guest reboot; full recovery copies before host attachment",
+      "observation": "After the storage backpressure and restart integration corrections, two consecutive phone boots returned to recovery automatically. Both full data copies passed read-only fsck with a clean bit; root hashes were unchanged.",
+      "limits": "Both runs recorded zero overflow-path uses. These results do not validate queue saturation, arbitrary power loss or application-setting persistence.",
+      "records": [
+        {
+          "document": "82-pinephone-power-and-hfs-integrity.md",
+          "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Consecutive boots",
+          "value": "2"
+        },
+        {
+          "label": "Observation per boot",
+          "value": "12 min"
+        },
+        {
+          "label": "Data fsck",
+          "value": "exit 0"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E14",
+      "title": "Read-only policy belongs at the right boundary",
+      "environment": "PinePhone QEMU",
+      "method": "Partition policy control; guest sync/reset/readback; full image comparison",
+      "observation": "A root read-only and data-writable experiment preserved the root hash while a guest file survived sync, guest reset and fresh-process readback. Complete data checks passed.",
+      "limits": "Earlier root mount labels did not prevent every metadata write path. The file experiment is QEMU evidence, not a physical application-setting result.",
+      "records": [
+        {
+          "document": "81-pinephone-qemu-physical-feedback.md",
+          "sha256": "651ba84aaaddd3a88487464d19644c5d3c1c334c75abb89500125510622a341b",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "82-pinephone-power-and-hfs-integrity.md",
+          "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E15",
+      "title": "Graphics backing and scanout have different owners",
+      "environment": "PinePhone QEMU",
+      "method": "Fault-state capture, task page-table walk and independent memory reservations",
+      "observation": "A graphics pool was advertised at an unbacked legacy physical address. Later experiments distinguished user-write permissions, source backing and live scanout; separating default-surface storage removed a source/destination alias.",
+      "limits": "Successful backing and copies do not imply a complete GPU, display driver or stable interactive session.",
+      "records": [
+        {
+          "document": "62-native-graphics-memory.md",
+          "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-native-graphics-memory.json",
+          "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E16",
+      "title": "The first blank-surface probe was misleading",
+      "environment": "PinePhone QEMU",
+      "method": "Known-pattern control and mapped-descriptor capture",
+      "observation": "The readBytes-based route could leave the diagnostic buffer zero. After validating the mapped-descriptor route, the original framebuffer client supplied a nonzero setup frame that reached scanout.",
+      "limits": "A zero-initialized destination without a verified transfer is not evidence that the source was blank. General MBX rendering coverage remains unproven.",
+      "records": [
+        {
+          "document": "62-native-graphics-memory.md",
+          "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+          "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E17",
+      "title": "Original-client pixels reached the physical panel",
+      "environment": "Physical PinePhone",
+      "method": "Source/scanout signatures, direct observation, bounded reboot and filesystem check",
+      "observation": "The phone displayed the known color pattern and then the original client’s Connect-to-iTunes graphic. The operator also observed intermittent black frames with the backlight on.",
+      "limits": "This establishes physical presentation of those frames. It does not establish a home screen, touch, general app rendering or flicker-free operation.",
+      "records": [
+        {
+          "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+          "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-xnu-panel-visibility-2026-09-28.json",
+          "sha256": "203334cef1c3a83e1b5df7c2c69b62fe59a4058943b2c5f8913759095b9cc35c",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Panel",
+          "value": "720 × 1440"
+        },
+        {
+          "label": "Guest surface",
+          "value": "320 × 480"
+        },
+        {
+          "label": "Presentation",
+          "value": "2× centered"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E18",
+      "title": "SpringBoard can intentionally submit black",
+      "environment": "PinePhone QEMU",
+      "method": "Read-only caller trace, surface selection and backing/scanout comparison",
+      "observation": "A captured SpringBoard dimTimerFired call reached LayerKit’s blanking routine before an explicit null-surface, opaque-black presentation. The prior setup pixels remained in backing memory.",
+      "limits": "The trace identifies this QEMU transition. It does not automatically explain every physical flash or prove a backlight power transition.",
+      "records": [
+        {
+          "document": "pinephone-native-display-blank.json",
+          "sha256": "54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E19",
+      "title": "An advertised missing sensor can block HID readiness",
+      "environment": "PinePhone QEMU",
+      "method": "Matched baseline and single-node sensor-absence control; user/kernel stacks",
+      "observation": "A HID registration worker waited through the unsupported legacy light-sensor path before signaling readiness. Omitting that unavailable sensor let the main thread and HID worker reach their event loops.",
+      "limits": "This is an absence declaration, not a replacement sensor implementation. An event loop is not proof of input delivery.",
+      "records": [
+        {
+          "document": "57-native-hid-startup-and-sensor.md",
+          "sha256": "5ef747e22052bc2b7abb90f935db6d49cea80987a4da2b173844eae16d0fa0b4",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-native-hid-startup.json",
+          "sha256": "02bfc51b8f56c655785fc1135c20acce40f584a2829ae9902c108dd17dfb6751",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E20",
+      "title": "Physical button edges reach original HID",
+      "environment": "Physical PinePhone",
+      "method": "QEMU poller control, physical taps, visible response and post-run filesystem checks",
+      "observation": "Three short physical power taps yielded setup image, black, setup image. In a separate boot each volume key delivered one Home/menu press-release pair. Both boots ended with clean recovery, fsck exit 0 and unchanged root.",
+      "limits": "Touch, long power holds, volume auto-repeat and a complete home-screen interaction were not validated. The volume keys are mapped to Home, not audio volume.",
+      "records": [
+        {
+          "document": "84-pinephone-native-buttons.md",
+          "sha256": "c2bab031dd8cffec9517f3da2ad63e4ddb2f329e92eb3d07326e51508cac660c",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-native-buttons-2026-09-29.json",
+          "sha256": "c86c7549f421603ed847d4b5ad120c24c77ca84ea4ccb9d9990056a7f74d3b1a",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Power edge pairs",
+          "value": "3"
+        },
+        {
+          "label": "Volume/Home pairs",
+          "value": "2"
+        },
+        {
+          "label": "Physical touch",
+          "value": "not tested"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E21",
+      "title": "A touch convenience method can be an empty stub",
+      "environment": "Static inspection",
+      "method": "Exact-build interface inspection and constructed packet-vector checks",
+      "observation": "The inspected absolute-pointer convenience method is empty in this build. The original touch path instead passes through a user-client queue, a framework parser and a digitizer conversion plugin.",
+      "limits": "A synthetic packet encoder and a static interface map do not prove live Goodix acquisition, event lifetimes or application-visible touch.",
+      "records": [
+        {
+          "document": "pinephone-touch-delivery-abi-2026-09-25.json",
+          "sha256": "c4a771ebe9a2356c4d901ee7564414c060b2186e52ac353b48cc2169aedf2d43",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E22",
+      "title": "Audio discovery can affect graphical startup",
+      "environment": "PinePhone QEMU",
+      "method": "Original CoreAudio client queries and mediaserverd thread capture",
+      "observation": "Publishing one compatible IOAudio2 output cleared a measured null-device media startup fault. The original client opened and mapped it; mediaserverd reached its event loop.",
+      "limits": "The backend was unbound and playback unsupported. Enumeration and mapped PCM memory are not audible output.",
+      "records": [
+        {
+          "document": "61-native-audio-provider.md",
+          "sha256": "e5a9f286be4f3aceef7ded34551bd171da02f91b8f54aa8cf90558ced060a154",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "pinephone-native-audio-service.json",
+          "sha256": "e6073d97f598c8d5ea8a9b8399957fe6aedbda8aa54214e8ecd0fa6ec4df6461",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E23",
+      "title": "Idle residency does not measure charging",
+      "environment": "Physical PinePhone",
+      "method": "Matched pin-state control and timed PMIC/battery observations",
+      "observation": "A defined inactive ANX7688 state yielded usable USB input. A 12-minute trial increased battery from 29% to 31%; a matched control also gained two percentage points.",
+      "limits": "This validates the tested USB sink configuration, not full USB-C negotiation or all power sources. Recovery-time charging labels alone cannot identify charging during XNU.",
+      "records": [
+        {
+          "document": "pinephone-anx-off-charging-2026-09-28.json",
+          "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [
+        {
+          "label": "Trial duration",
+          "value": "12 min"
+        },
+        {
+          "label": "Battery before",
+          "value": "29%"
+        },
+        {
+          "label": "Battery after",
+          "value": "31%"
+        }
+      ],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E24",
+      "title": "A console marker is not the underlying event",
+      "environment": "Physical PinePhone",
+      "method": "Matched late userspace milestones and data-state comparison",
+      "observation": "Two physical runs reached the same HID and power-client milestones although only one printed BOOT_TIME. Their compared runtime-state files were identical apart from one service log.",
+      "limits": "A logging-route race is plausible but was not directly traced. This does not retrospectively classify every missing-marker QEMU run as healthy.",
+      "records": [
+        {
+          "document": "pinephone-anx-off-charging-2026-09-28.json",
+          "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "82-pinephone-power-and-hfs-integrity.md",
+          "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E25",
+      "title": "Reboot acceptance extends beyond the printed message",
+      "environment": "Physical PinePhone",
+      "method": "Explicit UART request; observed recovery return; full data-volume check",
+      "observation": "The corrected UART listener survived input, accepted the explicit request and returned through BSD shutdown to recovery. A later remote-only run passed the former three-minute cutoff, rebooted on request and passed full data fsck with an unchanged root.",
+      "limits": "The command is a dedicated reboot channel, not a shell. It depends on a live polling path and does not guarantee recovery from arbitrary kernel failure.",
+      "records": [
+        {
+          "document": "83-pinephone-uart-clean-reboot.md",
+          "sha256": "d103d4eda4d7ad80fe710c3379e49c6108e411867cbb90be5a93efb36a8dae0b",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E26",
+      "title": "Zero-valued MMIO can fabricate device presence",
+      "environment": "iPod reference",
+      "method": "Mixed-board restore-stage observation and source/disassembly comparison",
+      "observation": "A phone restore-stage diagnostic running on the iPod QEMU model reported a radio board in a model without a radio. The relevant input defaulted to zero, which the diagnostic interpreted as presence.",
+      "limits": "This is a false positive about a detection predicate, not evidence of a working modem or a complete iPhone profile.",
+      "records": [
+        {
+          "document": "20-iphone-1g-4a102.md",
+          "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E27",
+      "title": "The public source survey has a bounded negative result",
+      "environment": "Static inspection",
+      "method": "Official distribution/tag/tree inspection and pinned community-source comparison",
+      "observation": "No matching public XNU 933 ARM source was found in the inspected Apple release repositories. Nearby desktop XNU and later community ARM trees provide references but not verified replacements.",
+      "limits": "This is a scoped survey result, not proof that no historical archive exists. A later source tree does not establish 4A102 binary compatibility.",
+      "records": [
+        {
+          "document": "50-xnu-source-options.md",
+          "sha256": "abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    },
+    {
+      "id": "E28",
+      "title": "The reference and native routes establish different results",
+      "environment": "iPod reference",
+      "method": "Local baseline boot and comparison against the native research route",
+      "observation": "The original iPod reference reaches interactive SpringBoard under software emulation. Native PinePhone results are recorded separately and include adapted kernel/platform behavior.",
+      "limits": "Reference interactivity does not transfer to the native port; neither route establishes a usable iPhone telephony profile.",
+      "records": [
+        {
+          "document": "ipod-4a102-2026-09-23.json",
+          "sha256": "cbacdf824aeae5ddd1b950e18730585fded1124e2036a37f08f0afc8c81e7a58",
+          "access": "Private project record; original material is not distributed"
+        },
+        {
+          "document": "24-ipod-1g-4a102.md",
+          "sha256": "68547b8bf2e4d3ecb60ba936fb3435eabf9894be2319a8b976eb9414fddf43d2",
+          "access": "Private project record; original material is not distributed"
+        }
+      ],
+      "measurements": [],
+      "status": "Reported observation",
+      "reviewedOn": "2026-09-29"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "title": "QEMU-iOS: first-generation iPod work",
+      "url": "https://github.com/devos50/qemu-ios/tree/501c85c4f8a3503965e38d5d4f30a02c4bc9171c",
+      "kind": "Upstream source",
+      "scope": "Pinned software reference; its model is not a hardware specification."
+    },
+    {
+      "id": "S02",
+      "title": "Emulating an iPod touch 1G, Part I",
+      "url": "https://devos50.github.io/blog/2022/ipod-touch-qemu/",
+      "kind": "Author report",
+      "scope": "Martijn de Vos, 2022. Upstream result, distinct from this project’s local reproductions."
+    },
+    {
+      "id": "S03",
+      "title": "Apple iPhone OS 1.1.4 source distribution",
+      "url": "https://github.com/apple-oss-distributions/distribution-iOS/tree/iphone-114",
+      "kind": "Apple source archive",
+      "scope": "The inspected release metadata does not supply the matching XNU 933 ARM implementation."
+    },
+    {
+      "id": "S04",
+      "title": "Apple XNU 1228",
+      "url": "https://github.com/apple-oss-distributions/xnu/tree/e13b1fa57645afc8a7b2e7d868fe9845c6b08c40",
+      "kind": "Apple source archive",
+      "scope": "A common-core comparison point, not the exact target kernel."
+    },
+    {
+      "id": "S05",
+      "title": "Apple IOStorageFamily 89",
+      "url": "https://github.com/apple-oss-distributions/IOStorageFamily/tree/IOStorageFamily-89",
+      "kind": "Apple source archive",
+      "scope": "Class matching and storage interface reference; exact call conventions were measured separately."
+    },
+    {
+      "id": "S06",
+      "title": "Legacy instructions in the Linux arm64 port",
+      "url": "https://docs.kernel.org/arch/arm64/legacy_instructions.html",
+      "kind": "Kernel documentation",
+      "scope": "Independent architecture context for obsolete SWP and deprecated CP15 barrier instructions."
+    },
+    {
+      "id": "S07",
+      "title": "Cortex-A53 technical reference manual",
+      "url": "https://documentation-service.arm.com/static/5e9075f9c8052b1608761519",
+      "kind": "Architecture manual",
+      "scope": "Arm DDI 0500E r0p3; AArch32 control and memory-system reference."
+    },
+    {
+      "id": "S08",
+      "title": "ARM1176 technical reference manual",
+      "url": "https://documentation-service.arm.com/static/5e8e358afd977155116a8b47",
+      "kind": "Architecture manual",
+      "scope": "Arm DDI 0333H; original CPU-specific peripheral remap behavior."
+    },
+    {
+      "id": "S09",
+      "title": "PinePhone hardware documentation",
+      "url": "https://pine64.org/documentation/PinePhone/_full/",
+      "kind": "Board documentation",
+      "scope": "Original A64 PinePhone, distinct from PinePhone Pro."
+    },
+    {
+      "id": "S10",
+      "title": "Allwinner A64 datasheet",
+      "url": "https://files.pine64.org/doc/datasheet/pine64/A64_Datasheet_V1.1.pdf",
+      "kind": "Manufacturer document",
+      "scope": "Peripheral overview; does not establish guest software compatibility."
+    },
+    {
+      "id": "S11",
+      "title": "PinePhone device tree",
+      "url": "https://github.com/torvalds/linux/blob/v6.18/arch/arm64/boot/dts/allwinner/sun50i-a64-pinephone.dtsi",
+      "kind": "Kernel source",
+      "scope": "Pinned board wiring reference. The live board identity remains a separate observation."
+    },
+    {
+      "id": "S12",
+      "title": "Linux LRADC keys driver",
+      "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/keyboard/sun4i-lradc-keys.c",
+      "kind": "Kernel source",
+      "scope": "Reference for analog key sampling and event interpretation."
+    },
+    {
+      "id": "S13",
+      "title": "Linux AXP power-key driver",
+      "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/misc/axp20x-pek.c",
+      "kind": "Kernel source",
+      "scope": "Reference for PMIC power-key event semantics."
+    },
+    {
+      "id": "S14",
+      "title": "QEMU Arm virt machine",
+      "url": "https://www.qemu.org/docs/master/system/arm/virt.html",
+      "kind": "Emulator documentation",
+      "scope": "A generic virtual platform; the partial PinePhone contract inherits selected foundations."
+    },
+    {
+      "id": "S15",
+      "title": "U-Boot Allwinner platforms",
+      "url": "https://docs.u-boot.org/en/latest/board/allwinner/sunxi.html",
+      "kind": "Firmware documentation",
+      "scope": "Host boot responsibilities; separate from the original Apple boot chain."
+    },
+    {
+      "id": "S16",
+      "title": "darwin-on-arm XNU source reference",
+      "url": "https://github.com/darwin-on-arm/xnu/tree/707bfdc4e9a46e3612e53994fffc64542d3f7e72",
+      "kind": "Community source",
+      "scope": "Later ARM machine-layer reference; not the missing XNU 933 source."
+    },
+    {
+      "id": "S17",
+      "title": "Linux Goodix touchscreen driver",
+      "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/touchscreen/goodix.c",
+      "kind": "Kernel source",
+      "scope": "Packet and hardware-interface reference; not an XNU-ready driver."
+    },
+    {
+      "id": "S18",
+      "title": "Understand Anything",
+      "url": "https://github.com/Egonex-AI/Understand-Anything",
+      "kind": "Publication inspiration",
+      "scope": "Inspired the linked concept map and guided reading paths. No upstream application code is incorporated."
+    }
+  ],
+  "corrections": [
+    {
+      "belief": "A missing BOOT_TIME line means boot stalled.",
+      "test": "Compare later service milestones and runtime-state files across matched physical runs.",
+      "result": "The later milestones matched even when the console marker did not. A logging-route race is plausible but untraced.",
+      "replacement": "Use independent progress and response evidence; keep QEMU runs that lacked later milestones unresolved.",
+      "evidence": [
+        "E24"
+      ]
+    },
+    {
+      "belief": "The submitted surfaces are zero, so a renderer is missing.",
+      "test": "Present a known pattern and validate the descriptor read path before classifying the original source.",
+      "result": "The early read route was ineffective. A mapped-descriptor capture subsequently showed original-client setup pixels.",
+      "replacement": "Verify the observer and transfer length before drawing conclusions about the source. General GPU coverage remains open.",
+      "evidence": [
+        "E16",
+        "E17"
+      ]
+    },
+    {
+      "belief": "The radio-present message establishes a modeled radio.",
+      "test": "Compare the guest detection predicate with the model's actual register responses.",
+      "result": "An unsupported input defaulted to zero, satisfying the presence predicate despite the absence of a radio model.",
+      "replacement": "A log message proves a code path. It does not prove the hardware capability named by that path.",
+      "evidence": [
+        "E26"
+      ]
+    },
+    {
+      "belief": "A backed physical address rules out a translation problem.",
+      "test": "Walk the active descriptors and inspect the fault class and interpretation controls.",
+      "result": "The A53 access-flag interpretation rejected a legacy descriptor even though its physical target was backed RAM.",
+      "replacement": "Translation, permissions and interpretation must agree before an access is valid.",
+      "evidence": [
+        "E04"
+      ]
+    },
+    {
+      "belief": "MACH Reboot means the device reset cleanly.",
+      "test": "Observe return to recovery and check the complete post-run data image.",
+      "result": "An earlier printed marker preceded an integration failure. Corrected trials independently established actual recovery return.",
+      "replacement": "Require the state transition and its postconditions, not merely the log before it.",
+      "evidence": [
+        "E13",
+        "E25"
+      ]
+    },
+    {
+      "belief": "A black screen is necessarily a display-driver failure.",
+      "test": "Inspect selected surfaces and backing bytes, then trace the original client's blank request.",
+      "result": "One QEMU transition was explicitly requested by SpringBoard's dimming path while prior pixels remained intact.",
+      "replacement": "Separate intentional black, failed presentation, backlight policy and system liveness. Attribute each physical case with its own evidence.",
+      "evidence": [
+        "E18",
+        "E20"
+      ]
+    },
+    {
+      "belief": "A quiet CPU and a recovery charging label settle the power question.",
+      "test": "Measure the USB input state during XNU and compare battery readings over a controlled interval.",
+      "result": "The accepted USB-controller state yielded usable input and net battery gain in the measured configuration.",
+      "replacement": "Measure the energy path in the target state; idle residency and charging are independent observations.",
+      "evidence": [
+        "E23"
+      ]
+    }
+  ],
+  "glossary": [
+    [
+      "AArch32",
+      "The 32-bit execution state used by the native XNU research on the Cortex-A53. Application instruction support alone does not establish kernel compatibility.",
+      "cpu-compatibility"
+    ],
+    [
+      "ABI",
+      "Application binary interface: the concrete calling, layout and preservation rules that independently compiled components must agree on.",
+      "storage-abi"
+    ],
+    [
+      "A64",
+      "The Allwinner SoC used by the original PinePhone in this research. It is not the PinePhone Pro platform.",
+      "three-machines"
+    ],
+    [
+      "Backpressure",
+      "A producer encountering limited capacity in a downstream queue or sink. It needs an explicit admission and progress policy.",
+      "async-storage"
+    ],
+    [
+      "Boot arguments",
+      "The runtime structure through which a loader supplies the kernel with memory and platform context.",
+      "boot-handoff"
+    ],
+    [
+      "BOOT_TIME",
+      "A launchd log message used during research. Its absence from a console is insufficient evidence that userspace failed to progress.",
+      "observability"
+    ],
+    [
+      "CoreSurface",
+      "The legacy shared graphics-surface service observed in this build. Source storage must be distinguished from active display scanout.",
+      "surface-memory"
+    ],
+    [
+      "Copy-on-write",
+      "A memory policy in which a write to a shared mapping can require a private copy. Compatibility operations must preserve that behavior.",
+      "cpu-compatibility"
+    ],
+    [
+      "Descriptor",
+      "A structure describing a memory region or translation. In this atlas, a page-table descriptor and an IOKit memory descriptor are different objects.",
+      "mmu-and-caches"
+    ],
+    [
+      "Device tree",
+      "Structured platform metadata. The Apple-format tree given to XNU is distinct from the native board FDT, and its live contents can differ from the archive.",
+      "device-tree"
+    ],
+    [
+      "FDT",
+      "Flattened device tree: a board-description format used in the native platform environment, separate from the inspected legacy Apple tree format.",
+      "device-tree"
+    ],
+    [
+      "fsck",
+      "A filesystem consistency check. A full-volume check is stronger than reading the clean-unmount bit, but does not prove arbitrary power-loss durability.",
+      "hfs-integrity"
+    ],
+    [
+      "GIC",
+      "Generic Interrupt Controller: part of the native A64 interrupt-delivery path, with different semantics from the original Samsung platform's controllers.",
+      "time-and-interrupts"
+    ],
+    [
+      "HFSX",
+      "A member of the HFS Plus filesystem family used by the inspected volumes. The native adapter retains the original kernel filesystem implementation.",
+      "hfs-integrity"
+    ],
+    [
+      "HID",
+      "Human Interface Device. The research follows the original event-service and client paths for button and touch delivery.",
+      "buttons"
+    ],
+    [
+      "IOKit",
+      "XNU's object, registry and driver-service framework. Construction, registration, matching and client operations are separate observable steps.",
+      "iokit-discovery"
+    ],
+    [
+      "IOAudio2",
+      "The original audio family required by the inspected media client. Publishing a compatible output does not establish sound playback.",
+      "audio"
+    ],
+    [
+      "IOMobileFramebuffer",
+      "The common original framebuffer interface retained around native presentation behavior in the display experiments.",
+      "graphics-stack"
+    ],
+    [
+      "LRADC",
+      "Low-resolution analog-to-digital input used for the PinePhone volume-key ladder in the recorded button experiment.",
+      "buttons"
+    ],
+    [
+      "M68AP",
+      "The original iPhone product profile. Its 4A102 archive shares a kernelcache with N45AP while differing in board and root-image contents.",
+      "orientation"
+    ],
+    [
+      "MBX",
+      "The original PowerVR graphics family associated with the Apple reference hardware. A setup-frame result does not certify general MBX command coverage.",
+      "graphics-stack"
+    ],
+    [
+      "MMU",
+      "Memory Management Unit: the translation and access-control machinery between a task's virtual address and a physical target.",
+      "mmu-and-caches"
+    ],
+    [
+      "N45AP",
+      "The first-generation iPod touch profile used as the working original-device reference in this research.",
+      "three-machines"
+    ],
+    [
+      "Negative control",
+      "A deliberately wrong or absent condition that should make a test reject the result. It checks whether the observer can detect the failure of interest.",
+      "preservation-method"
+    ],
+    [
+      "PEK",
+      "Power-enable key events exposed by the PMIC. These supply the physical Power-button input in the accepted native experiment.",
+      "buttons"
+    ],
+    [
+      "PMIC",
+      "Power-management integrated circuit. Its target-state measurements help distinguish USB input availability, charging and peripheral power.",
+      "power"
+    ],
+    [
+      "Presentation",
+      "Selecting and making a frame available to the display path. It is distinct from rendering the source pixels and from device scanout timing.",
+      "presentation"
+    ],
+    [
+      "QEMU contract",
+      "The deliberately partial native-board model used to test selected A64 interfaces and original-client integrations.",
+      "emulator-fidelity"
+    ],
+    [
+      "Scanout",
+      "The active pixel storage consumed by the display engine. Its lifetime and visibility are different from those of an application's source surface.",
+      "surface-memory"
+    ],
+    [
+      "SpringBoard",
+      "The original user-interface process studied through service startup, rendering, dimming and input response. A process being alive does not imply a complete UI session.",
+      "display-blanking"
+    ],
+    [
+      "SWP",
+      "An obsolete ARM memory-exchange instruction observed in original userspace. Correct compatibility requires more than instruction decoding.",
+      "cpu-compatibility"
+    ],
+    [
+      "Timebase",
+      "The units and counter used to represent time. A stale frequency declaration can change the real duration of delays and timeouts.",
+      "time-and-interrupts"
+    ],
+    [
+      "VBlank",
+      "The display's vertical blank interval. A software notification or completed memory copy is not automatically evidence of physical VBlank synchronization.",
+      "presentation"
+    ],
+    [
+      "WFI",
+      "Wait For Interrupt. Time spent waiting is evidence about CPU activity, not a complete measurement of board power or charging.",
+      "power"
+    ],
+    [
+      "XNU",
+      "The kernel family underlying the target software. This research studies the measured 933-era ARM binary and native adaptations, not a recovered complete source tree.",
+      "source-archaeology"
+    ]
+  ]
+}

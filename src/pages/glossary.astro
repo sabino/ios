@@ -1,0 +1,4 @@
+---
+import Base from '../layouts/Base.astro';import glossary from '../data/glossary.json';import {url} from '../lib/content';
+---
+<Base title="Glossary" description="A contextual glossary for early iPhone OS architecture and the native PinePhone research."><div class="page-heading"><span class="section-number">TERMS IN CONTEXT</span><h1>A working vocabulary.</h1><p>Definitions scoped to the software and experiments in this atlas. Each term leads back to the chapter that explains its role.</p></div><dl class="glossary">{glossary.map(([term,definition,slug])=><div id={term.toLowerCase().replace(/[^a-z0-9]+/g,'-')}><dt>{term}</dt><dd><p>{definition}</p><a href={url('articles/'+slug+'/')}>Read in context →</a></dd></div>)}</dl></Base>

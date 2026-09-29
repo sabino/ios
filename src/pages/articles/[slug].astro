@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import {articles,evidence,sources,publication,url,articleBySlug,tours} from '../../lib/content';
+export function getStaticPaths(){return articles.map(article=>({params:{slug:article.slug},props:{article}}))}
+const {article}=Astro.props;const {Content}=article;
+const cited=evidence.filter(e=>article.evidence.includes(e.id));const external=sources.filter(s=>article.sources.includes(s.id));
+const citation=`iPhone OS Research Atlas contributors. “${article.title}.” iPhone OS Research Atlas, edition ${publication.edition}, ${publication.date}. https://sabino.pro/ios/articles/${article.slug}/ (source snapshot ${publication.sourceRevision.slice(0,7)}).`;
+const next=articles.find(a=>a.order===article.order+1);const previous=articles.find(a=>a.order===article.order-1);
+---
+<Base title={article.title} description={article.description}>
+<div class="article-topline"><a href={url('library/#'+article.section.toLowerCase())}>← {article.section}</a><span>CHAPTER {String(article.order).padStart(2,'0')} / 24</span><span>{Math.max(2,Math.ceil(article.words/220))} MIN READ</span></div>
+<header class="article-heading"><h1>{article.title}</h1><p>{article.description}</p><div class="article-tools"><span>Edition 01 · {publication.date}</span><button data-copy-citation={citation}>Copy citation</button><button data-print>Print chapter</button></div></header>
+<div class="article-layout"><aside class="article-rail"><nav class="toc" aria-label="On this page"><p class="mono">IN THIS CHAPTER</p>{article.headings.filter((h:any)=>h.depth===2).map((h:any)=><a href={'#'+h.slug}>{h.text}</a>)}<a href="#evidence">Evidence & references</a></nav><div class="rail-note"><span class="mono">READING CONTEXT</span><p>Measured results retain their original environment. A model result is not a hardware result.</p><a href={url('method/')}>How to read the evidence ↗</a></div></aside>
+<div class="article-body"><article class="prose article-prose"><Content/></article>
+<section id="evidence" class="article-evidence"><span class="section-number">THE SUPPORTING RECORD</span><h2>Evidence & references</h2><p class="muted">Curated summaries of private project experiments. Each record states its method and limit; raw experimental artifacts are not distributed.</p><div class="citation-list">{cited.map(e=><a href={url('evidence/'+e.id+'/')}><code>{e.id}</code><span><strong>{e.title}</strong><small>{e.environment} · {e.method}</small></span><span>↗</span></a>)}</div><h3>Public context</h3><ul class="source-list">{external.map(s=><li><a href={s.url}>{s.title} ↗</a><p>{s.scope}</p></li>)}</ul></section>
+<section class="related"><span class="section-number">CONNECTED IDEAS</span><div>{article.related.map((slug:string)=>{const a=articleBySlug(slug);return a&&<a href={url('articles/'+slug+'/')}><span>{a.section}</span><strong>{a.title}</strong><span>→</span></a>})}</div><a class="text-link" href={url('map/?focus='+article.slug)}>Locate this chapter on the map ↗</a></section>
+<section class="citation-box" id="citation"><span class="mono">CITE THIS CHAPTER</span><p>{citation}</p><a href={url('sources/#provenance')}>Review source provenance and access limits →</a></section>
+<nav class="chapter-pagination" aria-label="Adjacent chapters">{previous?<a href={url('articles/'+previous.slug+'/')}><small>← PREVIOUS CHAPTER</small><strong>{previous.title}</strong></a>:<span/>}{next?<a href={url('articles/'+next.slug+'/')}><small>NEXT CHAPTER →</small><strong>{next.title}</strong></a>:<a href={url('library/')}><small>CONTINUE EXPLORING →</small><strong>Return to the atlas</strong></a>}</nav>
+</div></div>
+</Base>

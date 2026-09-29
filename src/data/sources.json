@@ -1,0 +1,128 @@
+[
+  {
+    "id": "S01",
+    "title": "QEMU-iOS: first-generation iPod work",
+    "url": "https://github.com/devos50/qemu-ios/tree/501c85c4f8a3503965e38d5d4f30a02c4bc9171c",
+    "kind": "Upstream source",
+    "scope": "Pinned software reference; its model is not a hardware specification."
+  },
+  {
+    "id": "S02",
+    "title": "Emulating an iPod touch 1G, Part I",
+    "url": "https://devos50.github.io/blog/2022/ipod-touch-qemu/",
+    "kind": "Author report",
+    "scope": "Martijn de Vos, 2022. Upstream result, distinct from this project’s local reproductions."
+  },
+  {
+    "id": "S03",
+    "title": "Apple iPhone OS 1.1.4 source distribution",
+    "url": "https://github.com/apple-oss-distributions/distribution-iOS/tree/iphone-114",
+    "kind": "Apple source archive",
+    "scope": "The inspected release metadata does not supply the matching XNU 933 ARM implementation."
+  },
+  {
+    "id": "S04",
+    "title": "Apple XNU 1228",
+    "url": "https://github.com/apple-oss-distributions/xnu/tree/e13b1fa57645afc8a7b2e7d868fe9845c6b08c40",
+    "kind": "Apple source archive",
+    "scope": "A common-core comparison point, not the exact target kernel."
+  },
+  {
+    "id": "S05",
+    "title": "Apple IOStorageFamily 89",
+    "url": "https://github.com/apple-oss-distributions/IOStorageFamily/tree/IOStorageFamily-89",
+    "kind": "Apple source archive",
+    "scope": "Class matching and storage interface reference; exact call conventions were measured separately."
+  },
+  {
+    "id": "S06",
+    "title": "Legacy instructions in the Linux arm64 port",
+    "url": "https://docs.kernel.org/arch/arm64/legacy_instructions.html",
+    "kind": "Kernel documentation",
+    "scope": "Independent architecture context for obsolete SWP and deprecated CP15 barrier instructions."
+  },
+  {
+    "id": "S07",
+    "title": "Cortex-A53 technical reference manual",
+    "url": "https://documentation-service.arm.com/static/5e9075f9c8052b1608761519",
+    "kind": "Architecture manual",
+    "scope": "Arm DDI 0500E r0p3; AArch32 control and memory-system reference."
+  },
+  {
+    "id": "S08",
+    "title": "ARM1176 technical reference manual",
+    "url": "https://documentation-service.arm.com/static/5e8e358afd977155116a8b47",
+    "kind": "Architecture manual",
+    "scope": "Arm DDI 0333H; original CPU-specific peripheral remap behavior."
+  },
+  {
+    "id": "S09",
+    "title": "PinePhone hardware documentation",
+    "url": "https://pine64.org/documentation/PinePhone/_full/",
+    "kind": "Board documentation",
+    "scope": "Original A64 PinePhone, distinct from PinePhone Pro."
+  },
+  {
+    "id": "S10",
+    "title": "Allwinner A64 datasheet",
+    "url": "https://files.pine64.org/doc/datasheet/pine64/A64_Datasheet_V1.1.pdf",
+    "kind": "Manufacturer document",
+    "scope": "Peripheral overview; does not establish guest software compatibility."
+  },
+  {
+    "id": "S11",
+    "title": "PinePhone device tree",
+    "url": "https://github.com/torvalds/linux/blob/v6.18/arch/arm64/boot/dts/allwinner/sun50i-a64-pinephone.dtsi",
+    "kind": "Kernel source",
+    "scope": "Pinned board wiring reference. The live board identity remains a separate observation."
+  },
+  {
+    "id": "S12",
+    "title": "Linux LRADC keys driver",
+    "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/keyboard/sun4i-lradc-keys.c",
+    "kind": "Kernel source",
+    "scope": "Reference for analog key sampling and event interpretation."
+  },
+  {
+    "id": "S13",
+    "title": "Linux AXP power-key driver",
+    "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/misc/axp20x-pek.c",
+    "kind": "Kernel source",
+    "scope": "Reference for PMIC power-key event semantics."
+  },
+  {
+    "id": "S14",
+    "title": "QEMU Arm virt machine",
+    "url": "https://www.qemu.org/docs/master/system/arm/virt.html",
+    "kind": "Emulator documentation",
+    "scope": "A generic virtual platform; the partial PinePhone contract inherits selected foundations."
+  },
+  {
+    "id": "S15",
+    "title": "U-Boot Allwinner platforms",
+    "url": "https://docs.u-boot.org/en/latest/board/allwinner/sunxi.html",
+    "kind": "Firmware documentation",
+    "scope": "Host boot responsibilities; separate from the original Apple boot chain."
+  },
+  {
+    "id": "S16",
+    "title": "darwin-on-arm XNU source reference",
+    "url": "https://github.com/darwin-on-arm/xnu/tree/707bfdc4e9a46e3612e53994fffc64542d3f7e72",
+    "kind": "Community source",
+    "scope": "Later ARM machine-layer reference; not the missing XNU 933 source."
+  },
+  {
+    "id": "S17",
+    "title": "Linux Goodix touchscreen driver",
+    "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/input/touchscreen/goodix.c",
+    "kind": "Kernel source",
+    "scope": "Packet and hardware-interface reference; not an XNU-ready driver."
+  },
+  {
+    "id": "S18",
+    "title": "Understand Anything",
+    "url": "https://github.com/Egonex-AI/Understand-Anything",
+    "kind": "Publication inspiration",
+    "scope": "Inspired the linked concept map and guided reading paths. No upstream application code is incorporated."
+  }
+]

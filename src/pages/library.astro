@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import {articles,sections,sectionDescriptions,url} from '../lib/content';
+---
+<Base title="The chapter index" description="Twenty-four connected research chapters on early iPhone OS architecture, native execution, storage, graphics, interaction and evidence.">
+<div class="page-heading"><span class="section-number">THE ATLAS / 24 CHAPTERS</span><h1>Read the system.</h1><p>Start with the foundations, follow a reading path, or enter at the boundary you’re studying.</p></div>
+<nav class="section-tabs" aria-label="Chapter sections">{sections.map(s=><a href={'#'+s.toLowerCase()}>{s}</a>)}</nav>
+{sections.map((section,i)=><section id={section.toLowerCase()} class="library-section"><div class="library-heading"><span class="section-number">{String(i+1).padStart(2,'0')}</span><h2>{section}</h2><p>{sectionDescriptions[section]}</p></div><div class="chapter-list">{articles.filter(a=>a.section===section).map(a=><a class="chapter-row" href={url('articles/'+a.slug+'/')}><span class="chapter-no">{String(a.order).padStart(2,'0')}</span><div><h3>{a.title}</h3><p>{a.description}</p></div><span class="chapter-meta">{Math.max(2,Math.ceil(a.words/220))} min <span>↗</span></span></a>)}</div></section>)}
+</Base>

@@ -1,0 +1,669 @@
+[
+  {
+    "id": "E01",
+    "title": "One kernel, different products",
+    "environment": "Static inspection",
+    "method": "Archive metadata and full-byte hash comparison",
+    "observation": "The inspected iPhone and iPod touch 1.1.4/4A102 archives contain a byte-identical kernelcache. Their board trees, bootloaders and primary root images differ.",
+    "limits": "Shared kernel identity does not establish cross-product userspace, peripheral or telephony compatibility.",
+    "records": [
+      {
+        "document": "20-iphone-1g-4a102.md",
+        "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E02",
+    "title": "iBoot changes the device tree",
+    "environment": "iPod reference",
+    "method": "Capture at the live kernel handoff; compare archived and live tree",
+    "observation": "The archived N45AP CPU clock properties are zero. At the observed iBoot handoff the corresponding properties are populated; three captures agree on clock values while whole-tree hashes vary.",
+    "limits": "N45AP values are not measurements of M68AP or PinePhone clocks.",
+    "records": [
+      {
+        "document": "29-live-apple-device-tree.md",
+        "sha256": "6d89c86f2971019ac15ff41ab6156f9dc418f1ee942f8f150371658a464729f8",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-live-tree-2026-09-24.json",
+        "sha256": "b1da05c0657a2e8633f06315d5eab41e7e739aaad59d6f430254d4b5cc952778",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Timebase",
+        "value": "6 MHz"
+      },
+      {
+        "label": "CPU",
+        "value": "412 MHz"
+      },
+      {
+        "label": "Bus",
+        "value": "103 MHz"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E03",
+    "title": "Entry is a state contract",
+    "environment": "PinePhone QEMU",
+    "method": "Reference handoff capture and bounded unchanged-kernel entry trace",
+    "observation": "The common ARMv6 kernel enters its bootstrap and reaches arm_init on the A53 model, then faults at an ARM1176-specific peripheral remap register access.",
+    "limits": "This entry diagnostic does not establish a kernel boot. The M68AP-tree trial still uses reference boot arguments captured from N45AP.",
+    "records": [
+      {
+        "document": "22-kernel-entry-contract.md",
+        "sha256": "2a94b671ed42fbfd521d6f5293c6db23f5ff57f82e96799cc5deca2f7569e2ff",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-entry-2026-09-24.json",
+        "sha256": "55b149d3954549c4a28f6f025fa79c110fdaffa692973489a844d0c99f346d71",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E04",
+    "title": "A mapping can exist and still fault",
+    "environment": "PinePhone QEMU",
+    "method": "Descriptor walk and isolated control of translation interpretation",
+    "observation": "The commpage address translated into backed RAM, but the A53 access-flag interpretation rejected the legacy descriptor. A control retaining the same descriptors permitted the read and ran for 40.12 seconds without the measured synchronous fault.",
+    "limits": "This control establishes one mapping interpretation on the model, not complete VM correctness or a physical memory test.",
+    "records": [
+      {
+        "document": "pinephone-qemu-afe-2026-09-25.json",
+        "sha256": "f5a661fbb0fa575da55150196b857baaaf36777b569b3c600f433e5a70326dfc",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E05",
+    "title": "Cache maintenance is a physical boundary",
+    "environment": "Physical PinePhone",
+    "method": "Calibrated visual progress markers around VM initialization",
+    "observation": "An A53 range-clean adaptation allowed the observed original mapping routine to return on the phone. All nine diagnostic progress markers were observed.",
+    "limits": "This terminal probe stopped before continuing console initialization. It does not establish all cache-maintenance operations or coherency under concurrent devices.",
+    "records": [
+      {
+        "document": "pinephone-emmc-a53-range-clean-return.json",
+        "sha256": "39714a12d72d405efefc86d469d3c34d8bbce99b580bc33506fff4eff83a7534",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E06",
+    "title": "Legacy SWP is exercised by userspace",
+    "environment": "Physical PinePhone",
+    "method": "Saved user exception state followed by bounded continuation",
+    "observation": "Original userspace executed an obsolete ARM SWP instruction. The experimental compatibility path allowed the observed resident-address exchanges and subsequent startup progress.",
+    "limits": "The exchange backend is not validated for complete atomicity, copy-on-write, permission faults, unmapped pages or multiprocessor behavior.",
+    "records": [
+      {
+        "document": "79-pinephone-aarch32-swp.md",
+        "sha256": "b29c498601c17949b19ed39cf16c4dc23625dab3205468bbe91a709d1c72c0ea",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-user-swp-2026-09-26.json",
+        "sha256": "294161d51d19e80da639daf4377c6ee07d18ed97be251d97cf462602acaf030f",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E07",
+    "title": "The timebase declaration changes real delays",
+    "environment": "Physical PinePhone",
+    "method": "Matched one-variable tree comparison with UART arrival timing",
+    "observation": "With the inherited 62.5 MHz declaration, a nominal one-second delay took 3.014805055 seconds. With the physical 24 MHz value it took 1.010080943 seconds; kernel and adapter hashes were unchanged.",
+    "limits": "These are host UART arrival intervals, not exact CPU-side timing. The comparison does not validate the A64 counter erratum handling.",
+    "records": [
+      {
+        "document": "80-pinephone-clock-and-storage-reliability.md",
+        "sha256": "295e80f2755f1ecd6966aa2ec628b20e8d3f948dabc18be91c0851ed5f997e3a",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-clock-storage-2026-09-27.json",
+        "sha256": "619fed90da7df90414fa3a59cf4bfd8cea1d7575b4633d63db96aeffeadc33dc",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Old declaration",
+        "value": "3.015 s"
+      },
+      {
+        "label": "Corrected declaration",
+        "value": "1.010 s"
+      },
+      {
+        "label": "Physical counter",
+        "value": "24 MHz"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E08",
+    "title": "Later registration can replace a working interrupt callback",
+    "environment": "PinePhone QEMU",
+    "method": "Registration trace and bounded integrated interrupt control",
+    "observation": "A later legacy callback replaced the native nonsecure timer callback. The combined routing control delivered and returned from 51 timer interrupts, preserving earlier console and commpage evidence.",
+    "limits": "The bounded run did not establish all interrupt sources or complete boot.",
+    "records": [
+      {
+        "document": "pinephone-qemu-irq-frontier-2026-09-25.json",
+        "sha256": "b26649aeb0738b8b842f3c1669f588686d52fc22f7426b6a6549812a07a67f5f",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-qemu-irq-routing-2026-09-25.json",
+        "sha256": "e0328a4e58767d9e2fa019488cac85c088a4317579d522bc0ad69f424fd6434b",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E09",
+    "title": "Storage discovery depends on class registration",
+    "environment": "PinePhone QEMU",
+    "method": "Registry/metaclass inspection and positive/negative media controls",
+    "observation": "Removing the original flash devices also removed the demand that loaded IOStorageFamily. Once the original family was initialized, a concrete native provider matched the generic block driver and published a synthetic GPT partition.",
+    "limits": "Class identity and matching are necessary, but do not certify later lifetime, concurrency or filesystem behavior.",
+    "records": [
+      {
+        "document": "45-pinephone-native-mmc-storage.md",
+        "sha256": "20363b1b45adea160f0145cc2c5ca15290e3c6f362bfb6644355321bb245c877",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-mmc-storage.json",
+        "sha256": "836a1621d8a40fb803f4895f035270bc2beced6ad67b16d510407780038e7381",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E10",
+    "title": "The storage callback ABI crosses compiler conventions",
+    "environment": "Synthetic probe",
+    "method": "Exact-build call-site inspection; ARM and Thumb receivers; negative control",
+    "observation": "The measured completion convention splits its final 64-bit count between a register and the stack. The contemporary bare-metal EABI comparison places it differently. Synthetic receivers verify both words and register preservation; the ordinary-EABI control fails as expected.",
+    "limits": "The probe isolates the boundary. It does not recover the full Darwin C++ ABI or exercise a physical storage device.",
+    "records": [
+      {
+        "document": "44-legacy-storage-completion-abi.md",
+        "sha256": "1e1024355277cf7ec32e64aeeaa4c3decea79fd3efcc3ba32ef6630a775ad725",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-storage-completion-abi.json",
+        "sha256": "0b11e1273cc5d1981696a354394c7ebe740406071a710e2515123412823ae092",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E11",
+    "title": "Synchronous completion grows the kernel stack",
+    "environment": "PinePhone QEMU",
+    "method": "Per-request trace and deferred-completion control",
+    "observation": "Inline completion reentered the provider while earlier frames remained on the kernel stack. Deferring completion through an existing kernel thread-call mechanism allowed the unchanged one-sector diagnostic to finish 39 reads.",
+    "limits": "This early read-only diagnostic had one pending slot and does not validate the later writable queue under saturation.",
+    "records": [
+      {
+        "document": "45-pinephone-native-mmc-storage.md",
+        "sha256": "20363b1b45adea160f0145cc2c5ca15290e3c6f362bfb6644355321bb245c877",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E12",
+    "title": "A filesystem mount can finish before userspace starts",
+    "environment": "PinePhone QEMU",
+    "method": "Debugger-observed return value, mount list and subsequent waiting thread",
+    "observation": "The original HFS mount returned success, while the root vnode was not yet installed and startup waited in a platform service handshake.",
+    "limits": "Mount success is one stage. It does not establish launchd, writable data, graphical startup or full boot-chain authenticity.",
+    "records": [
+      {
+        "document": "46-pinephone-hfs-root-mount.md",
+        "sha256": "5735e78acb05ed7707b53872e6cdc9e2e67d2b546cd2f67a4ac286433109a99d",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-hfs-root-mount.json",
+        "sha256": "2d9f4029e8688d8d1ed3e060f34bb9817a29e1c505f15429c9490636ab8c39bf",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E13",
+    "title": "Two consecutive physical storage gates passed",
+    "environment": "Physical PinePhone",
+    "method": "Matched 720-second runs; clean guest reboot; full recovery copies before host attachment",
+    "observation": "After the storage backpressure and restart integration corrections, two consecutive phone boots returned to recovery automatically. Both full data copies passed read-only fsck with a clean bit; root hashes were unchanged.",
+    "limits": "Both runs recorded zero overflow-path uses. These results do not validate queue saturation, arbitrary power loss or application-setting persistence.",
+    "records": [
+      {
+        "document": "82-pinephone-power-and-hfs-integrity.md",
+        "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Consecutive boots",
+        "value": "2"
+      },
+      {
+        "label": "Observation per boot",
+        "value": "12 min"
+      },
+      {
+        "label": "Data fsck",
+        "value": "exit 0"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E14",
+    "title": "Read-only policy belongs at the right boundary",
+    "environment": "PinePhone QEMU",
+    "method": "Partition policy control; guest sync/reset/readback; full image comparison",
+    "observation": "A root read-only and data-writable experiment preserved the root hash while a guest file survived sync, guest reset and fresh-process readback. Complete data checks passed.",
+    "limits": "Earlier root mount labels did not prevent every metadata write path. The file experiment is QEMU evidence, not a physical application-setting result.",
+    "records": [
+      {
+        "document": "81-pinephone-qemu-physical-feedback.md",
+        "sha256": "651ba84aaaddd3a88487464d19644c5d3c1c334c75abb89500125510622a341b",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "82-pinephone-power-and-hfs-integrity.md",
+        "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E15",
+    "title": "Graphics backing and scanout have different owners",
+    "environment": "PinePhone QEMU",
+    "method": "Fault-state capture, task page-table walk and independent memory reservations",
+    "observation": "A graphics pool was advertised at an unbacked legacy physical address. Later experiments distinguished user-write permissions, source backing and live scanout; separating default-surface storage removed a source/destination alias.",
+    "limits": "Successful backing and copies do not imply a complete GPU, display driver or stable interactive session.",
+    "records": [
+      {
+        "document": "62-native-graphics-memory.md",
+        "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-graphics-memory.json",
+        "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E16",
+    "title": "The first blank-surface probe was misleading",
+    "environment": "PinePhone QEMU",
+    "method": "Known-pattern control and mapped-descriptor capture",
+    "observation": "The readBytes-based route could leave the diagnostic buffer zero. After validating the mapped-descriptor route, the original framebuffer client supplied a nonzero setup frame that reached scanout.",
+    "limits": "A zero-initialized destination without a verified transfer is not evidence that the source was blank. General MBX rendering coverage remains unproven.",
+    "records": [
+      {
+        "document": "62-native-graphics-memory.md",
+        "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+        "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E17",
+    "title": "Original-client pixels reached the physical panel",
+    "environment": "Physical PinePhone",
+    "method": "Source/scanout signatures, direct observation, bounded reboot and filesystem check",
+    "observation": "The phone displayed the known color pattern and then the original client\u2019s Connect-to-iTunes graphic. The operator also observed intermittent black frames with the backlight on.",
+    "limits": "This establishes physical presentation of those frames. It does not establish a home screen, touch, general app rendering or flicker-free operation.",
+    "records": [
+      {
+        "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+        "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-panel-visibility-2026-09-28.json",
+        "sha256": "203334cef1c3a83e1b5df7c2c69b62fe59a4058943b2c5f8913759095b9cc35c",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Panel",
+        "value": "720 \u00d7 1440"
+      },
+      {
+        "label": "Guest surface",
+        "value": "320 \u00d7 480"
+      },
+      {
+        "label": "Presentation",
+        "value": "2\u00d7 centered"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E18",
+    "title": "SpringBoard can intentionally submit black",
+    "environment": "PinePhone QEMU",
+    "method": "Read-only caller trace, surface selection and backing/scanout comparison",
+    "observation": "A captured SpringBoard dimTimerFired call reached LayerKit\u2019s blanking routine before an explicit null-surface, opaque-black presentation. The prior setup pixels remained in backing memory.",
+    "limits": "The trace identifies this QEMU transition. It does not automatically explain every physical flash or prove a backlight power transition.",
+    "records": [
+      {
+        "document": "pinephone-native-display-blank.json",
+        "sha256": "54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E19",
+    "title": "An advertised missing sensor can block HID readiness",
+    "environment": "PinePhone QEMU",
+    "method": "Matched baseline and single-node sensor-absence control; user/kernel stacks",
+    "observation": "A HID registration worker waited through the unsupported legacy light-sensor path before signaling readiness. Omitting that unavailable sensor let the main thread and HID worker reach their event loops.",
+    "limits": "This is an absence declaration, not a replacement sensor implementation. An event loop is not proof of input delivery.",
+    "records": [
+      {
+        "document": "57-native-hid-startup-and-sensor.md",
+        "sha256": "5ef747e22052bc2b7abb90f935db6d49cea80987a4da2b173844eae16d0fa0b4",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-hid-startup.json",
+        "sha256": "02bfc51b8f56c655785fc1135c20acce40f584a2829ae9902c108dd17dfb6751",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E20",
+    "title": "Physical button edges reach original HID",
+    "environment": "Physical PinePhone",
+    "method": "QEMU poller control, physical taps, visible response and post-run filesystem checks",
+    "observation": "Three short physical power taps yielded setup image, black, setup image. In a separate boot each volume key delivered one Home/menu press-release pair. Both boots ended with clean recovery, fsck exit 0 and unchanged root.",
+    "limits": "Touch, long power holds, volume auto-repeat and a complete home-screen interaction were not validated. The volume keys are mapped to Home, not audio volume.",
+    "records": [
+      {
+        "document": "84-pinephone-native-buttons.md",
+        "sha256": "c2bab031dd8cffec9517f3da2ad63e4ddb2f329e92eb3d07326e51508cac660c",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-buttons-2026-09-29.json",
+        "sha256": "c86c7549f421603ed847d4b5ad120c24c77ca84ea4ccb9d9990056a7f74d3b1a",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Power edge pairs",
+        "value": "3"
+      },
+      {
+        "label": "Volume/Home pairs",
+        "value": "2"
+      },
+      {
+        "label": "Physical touch",
+        "value": "not tested"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E21",
+    "title": "A touch convenience method can be an empty stub",
+    "environment": "Static inspection",
+    "method": "Exact-build interface inspection and constructed packet-vector checks",
+    "observation": "The inspected absolute-pointer convenience method is empty in this build. The original touch path instead passes through a user-client queue, a framework parser and a digitizer conversion plugin.",
+    "limits": "A synthetic packet encoder and a static interface map do not prove live Goodix acquisition, event lifetimes or application-visible touch.",
+    "records": [
+      {
+        "document": "pinephone-touch-delivery-abi-2026-09-25.json",
+        "sha256": "c4a771ebe9a2356c4d901ee7564414c060b2186e52ac353b48cc2169aedf2d43",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E22",
+    "title": "Audio discovery can affect graphical startup",
+    "environment": "PinePhone QEMU",
+    "method": "Original CoreAudio client queries and mediaserverd thread capture",
+    "observation": "Publishing one compatible IOAudio2 output cleared a measured null-device media startup fault. The original client opened and mapped it; mediaserverd reached its event loop.",
+    "limits": "The backend was unbound and playback unsupported. Enumeration and mapped PCM memory are not audible output.",
+    "records": [
+      {
+        "document": "61-native-audio-provider.md",
+        "sha256": "e5a9f286be4f3aceef7ded34551bd171da02f91b8f54aa8cf90558ced060a154",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-audio-service.json",
+        "sha256": "e6073d97f598c8d5ea8a9b8399957fe6aedbda8aa54214e8ecd0fa6ec4df6461",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E23",
+    "title": "Idle residency does not measure charging",
+    "environment": "Physical PinePhone",
+    "method": "Matched pin-state control and timed PMIC/battery observations",
+    "observation": "A defined inactive ANX7688 state yielded usable USB input. A 12-minute trial increased battery from 29% to 31%; a matched control also gained two percentage points.",
+    "limits": "This validates the tested USB sink configuration, not full USB-C negotiation or all power sources. Recovery-time charging labels alone cannot identify charging during XNU.",
+    "records": [
+      {
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Trial duration",
+        "value": "12 min"
+      },
+      {
+        "label": "Battery before",
+        "value": "29%"
+      },
+      {
+        "label": "Battery after",
+        "value": "31%"
+      }
+    ],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E24",
+    "title": "A console marker is not the underlying event",
+    "environment": "Physical PinePhone",
+    "method": "Matched late userspace milestones and data-state comparison",
+    "observation": "Two physical runs reached the same HID and power-client milestones although only one printed BOOT_TIME. Their compared runtime-state files were identical apart from one service log.",
+    "limits": "A logging-route race is plausible but was not directly traced. This does not retrospectively classify every missing-marker QEMU run as healthy.",
+    "records": [
+      {
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "82-pinephone-power-and-hfs-integrity.md",
+        "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E25",
+    "title": "Reboot acceptance extends beyond the printed message",
+    "environment": "Physical PinePhone",
+    "method": "Explicit UART request; observed recovery return; full data-volume check",
+    "observation": "The corrected UART listener survived input, accepted the explicit request and returned through BSD shutdown to recovery. A later remote-only run passed the former three-minute cutoff, rebooted on request and passed full data fsck with an unchanged root.",
+    "limits": "The command is a dedicated reboot channel, not a shell. It depends on a live polling path and does not guarantee recovery from arbitrary kernel failure.",
+    "records": [
+      {
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "d103d4eda4d7ad80fe710c3379e49c6108e411867cbb90be5a93efb36a8dae0b",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E26",
+    "title": "Zero-valued MMIO can fabricate device presence",
+    "environment": "iPod reference",
+    "method": "Mixed-board restore-stage observation and source/disassembly comparison",
+    "observation": "A phone restore-stage diagnostic running on the iPod QEMU model reported a radio board in a model without a radio. The relevant input defaulted to zero, which the diagnostic interpreted as presence.",
+    "limits": "This is a false positive about a detection predicate, not evidence of a working modem or a complete iPhone profile.",
+    "records": [
+      {
+        "document": "20-iphone-1g-4a102.md",
+        "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E27",
+    "title": "The public source survey has a bounded negative result",
+    "environment": "Static inspection",
+    "method": "Official distribution/tag/tree inspection and pinned community-source comparison",
+    "observation": "No matching public XNU 933 ARM source was found in the inspected Apple release repositories. Nearby desktop XNU and later community ARM trees provide references but not verified replacements.",
+    "limits": "This is a scoped survey result, not proof that no historical archive exists. A later source tree does not establish 4A102 binary compatibility.",
+    "records": [
+      {
+        "document": "50-xnu-source-options.md",
+        "sha256": "abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  },
+  {
+    "id": "E28",
+    "title": "The reference and native routes establish different results",
+    "environment": "iPod reference",
+    "method": "Local baseline boot and comparison against the native research route",
+    "observation": "The original iPod reference reaches interactive SpringBoard under software emulation. Native PinePhone results are recorded separately and include adapted kernel/platform behavior.",
+    "limits": "Reference interactivity does not transfer to the native port; neither route establishes a usable iPhone telephony profile.",
+    "records": [
+      {
+        "document": "ipod-4a102-2026-09-23.json",
+        "sha256": "cbacdf824aeae5ddd1b950e18730585fded1124e2036a37f08f0afc8c81e7a58",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "24-ipod-1g-4a102.md",
+        "sha256": "68547b8bf2e4d3ecb60ba936fb3435eabf9894be2319a8b976eb9414fddf43d2",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Reported observation",
+    "reviewedOn": "2026-09-29"
+  }
+]
