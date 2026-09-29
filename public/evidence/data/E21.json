@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E21",
+    "title": "A touch convenience method can be an empty stub",
+    "environment": "Static inspection",
+    "method": "Exact-build interface inspection and constructed packet-vector checks",
+    "observation": "The inspected absolute-pointer convenience method is empty in this build. The original touch path instead passes through a user-client queue, a framework parser and a digitizer conversion plugin.",
+    "limits": "A synthetic packet encoder and a static interface map do not prove live Goodix acquisition, event lifetimes or application-visible touch.",
+    "records": [
+      {
+        "document": "pinephone-touch-delivery-abi-2026-09-25.json",
+        "sha256": "c4a771ebe9a2356c4d901ee7564414c060b2186e52ac353b48cc2169aedf2d43",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "stub-and-queue",
+        "kind": "table",
+        "title": "The inspected boundary is concrete",
+        "columns": [
+          "Object",
+          "Measured value",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Convenience dispatch",
+            "0xc0367e52: bx lr",
+            "Immediate return in the inspected build"
+          ],
+          [
+            "Queue memory type",
+            "0",
+            "IODataQueue path"
+          ],
+          [
+            "Queue object field",
+            "offset 0x88",
+            "Original user-client layout"
+          ],
+          [
+            "Queue descriptor field",
+            "offset 0x8c",
+            "Original user-client layout"
+          ],
+          [
+            "One-contact header",
+            "24 bytes",
+            "Static parser comparison"
+          ],
+          [
+            "One-contact record",
+            "28 bytes",
+            "Static parser comparison"
+          ],
+          [
+            "Constructed vectors dynamically observed",
+            "false",
+            "No live touch claim"
+          ]
+        ],
+        "interpretation": "The method name is not evidence of an implementation. These field offsets identify the inspected layout; they do not supply a complete validated packet format.",
+        "sourceIds": [
+          "touch"
+        ]
+      },
+      {
+        "id": "consumer-chain",
+        "kind": "table",
+        "title": "The consumer path identified by inspection",
+        "columns": [
+          "Order",
+          "Component"
+        ],
+        "rows": [
+          [
+            "1",
+            "AppleMultitouchSPI IOService"
+          ],
+          [
+            "2",
+            "MultitouchDriverUserClient / memory type 0 / IODataQueue"
+          ],
+          [
+            "3",
+            "MultitouchSupport raw-packet parser and contact callback"
+          ],
+          [
+            "4",
+            "MultitouchHID.plugin digitizer conversion"
+          ]
+        ],
+        "interpretation": "This is a static interface chain. Event acquisition, lifetime, down/move/up behavior and a physical Goodix-to-application path remain unvalidated in this snapshot.",
+        "sourceIds": [
+          "touch"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "touch",
+        "document": "pinephone-touch-delivery-abi-2026-09-25.json",
+        "sha256": "c4a771ebe9a2356c4d901ee7564414c060b2186e52ac353b48cc2169aedf2d43",
+        "locator": "$.absolute_pointer_convenience_dispatch; $.original_multitouch_user_client_memory_types_seen; $.original_user_client_queue_type; $.original_user_client_queue_descriptor_offset; $.original_user_client_queue_object_offset; $.original_touch_userland_path; $.ipod_qemu_one_contact_header_bytes; $.ipod_qemu_one_contact_record_bytes; $.ipod_qemu_down_and_release_vectors_dynamically_observed; $.original_touch_pipeline_dynamically_verified",
+        "format": "json",
+        "content": "{\n  \"absolute_pointer_convenience_dispatch\": {\n    \"kernel_address\": \"0xc0367e52\",\n    \"instruction\": \"bx lr\",\n    \"touch_delivery_proven\": false\n  },\n  \"original_multitouch_user_client_memory_types_seen\": [\n    0,\n    16\n  ],\n  \"original_user_client_queue_type\": 0,\n  \"original_user_client_queue_descriptor_offset\": \"0x8c\",\n  \"original_user_client_queue_object_offset\": \"0x88\",\n  \"original_touch_userland_path\": [\n    \"AppleMultitouchSPI IOService\",\n    \"MultitouchDriverUserClient memory type 0 IODataQueue\",\n    \"MultitouchSupport raw packet parser and contact callback\",\n    \"MultitouchHID.plugin digitizer HID event conversion\"\n  ],\n  \"ipod_qemu_one_contact_header_bytes\": 24,\n  \"ipod_qemu_one_contact_record_bytes\": 28,\n  \"ipod_qemu_down_and_release_vectors_dynamically_observed\": false,\n  \"original_touch_pipeline_dynamically_verified\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

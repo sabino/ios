@@ -1,0 +1,20 @@
+E17 / pinephone-xnu-panel-handoff-2026-09-28.json
+Source SHA-256: 6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041
+Locator: $.qemu.screen_dimensions; $.qemu.screen_png_sha256; $.physical.known_pattern_source; $.physical.known_pattern_scanout; $.physical.original_framebuffer_client_attached_seconds; $.physical.original_client_frame_seconds; $.physical.original_client_source; $.physical.original_client_scanout; $.physical.matches_qemu_frame_signature; $.physical.visual_confirmation
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "qemu.screen_dimensions": [
+    720,
+    1440
+  ],
+  "qemu.screen_png_sha256": "23c256b5a32be64b74d9ad8fa2a3df02105a74e56dfd6a0ca3fe19dfcfbe4aa7",
+  "physical.known_pattern_source": "frame 1: rgb=233568, raw=233568",
+  "physical.known_pattern_scanout": "probe 1: nonzero=38400, mix=98cd98cd",
+  "physical.original_framebuffer_client_attached_seconds": 36.5,
+  "physical.original_client_frame_seconds": 52.0,
+  "physical.original_client_source": "frame 3: rgb=36661, raw=190261",
+  "physical.original_client_scanout": "probe 3: nonzero=3208, mix=7a6aa5e9",
+  "physical.matches_qemu_frame_signature": true,
+  "physical.visual_confirmation": "UART shows XNU-owned nonzero source and scanout frames; no panel photo was captured"
+}

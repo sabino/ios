@@ -1,0 +1,31 @@
+E16 / pinephone-native-graphics-memory.json
+Source SHA-256: 847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d
+Locator: $.mapped_descriptor_copy.logo_sequences; $.mapped_descriptor_copy.setup_screen_sequences; $.mapped_descriptor_copy.default_scanout_equal_sequences; $.mapped_descriptor_copy.setup_scanout_sha256; $.mapped_descriptor_copy.method; $.mapped_descriptor_copy.touch_validated; $.mapped_descriptor_copy.home_screen_validated
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "mapped_descriptor_copy.logo_sequences": [
+    1,
+    2
+  ],
+  "mapped_descriptor_copy.setup_screen_sequences": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "mapped_descriptor_copy.default_scanout_equal_sequences": [
+    1,
+    2,
+    5,
+    6,
+    7,
+    8
+  ],
+  "mapped_descriptor_copy.setup_scanout_sha256": "27f9ae2d3c9d9fa551830b2dbbfd29b5ca84753397f38608facddc12c5806bd9",
+  "mapped_descriptor_copy.method": "original descriptor kernel mapping, bounded CPU read, mapping released after frame",
+  "mapped_descriptor_copy.touch_validated": false,
+  "mapped_descriptor_copy.home_screen_validated": false
+}

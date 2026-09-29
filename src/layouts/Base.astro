@@ -5,21 +5,40 @@ import '@fontsource/ibm-plex-mono/latin-400.css';
 import { publication, url } from '../lib/content';
 const {title=publication.title, description='An independent, evidence-led reference to early iPhone OS: architecture, native execution, storage, graphics and input.',wide=false} = Astro.props;
 const current = Astro.url.pathname;
-const links=[['Read','library/'],['Concept map','map/'],['Evidence','evidence/'],['Method','method/']];
+const links=[['Read','library/'],['Concept map','map/'],['Evidence','evidence/'],['Timeline','timeline/']];
 ---
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>{title === publication.title ? title : `${title} · iPhone OS Research Atlas`}</title>
-<meta name="description" content={description}/><meta name="theme-color" content="#f1f3f4"/>
+<meta name="description" content={description}/><meta name="theme-color" content="#f0f2f3"/>
 <link rel="canonical" href={new URL(Astro.url.pathname, 'https://sabino.pro').href}/>
 <link rel="icon" href={url('favicon.svg')} type="image/svg+xml"/>
 <meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/>
 <meta property="og:url" content={new URL(Astro.url.pathname,'https://sabino.pro').href}/>
 <meta property="og:image" content="https://sabino.pro/ios/social.png"/>
 <meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="iPhone OS Research Atlas: an independent field guide to the system beneath the interface."/><meta name="twitter:card" content="summary_large_image"/>
-<meta name="color-scheme" content="light"/>
+<meta name="color-scheme" content="light dark"/>
+<script is:inline>
+  // Resolve before first paint; storage may be unavailable in private contexts.
+  (() => {
+    let preference = 'system';
+    try { const saved = localStorage.getItem('ios-atlas-appearance'); if (['light', 'dark', 'system'].includes(saved)) preference = saved; } catch {}
+    const media = matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => {
+      const theme = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference;
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.appearance = preference;
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#111820' : '#f0f2f3');
+      document.querySelectorAll('select[data-appearance]').forEach(select => select.value = preference);
+    };
+    window.setAtlasAppearance = value => { preference = ['light', 'dark', 'system'].includes(value) ? value : 'system'; try { localStorage.setItem('ios-atlas-appearance', preference); } catch {} apply(); };
+    media.addEventListener('change', apply);
+    window.addEventListener('storage', event => { if (event.key === 'ios-atlas-appearance' || event.key === null) { preference = ['light','dark'].includes(event.newValue) ? event.newValue : 'system'; apply(); } });
+    apply();
+  })();
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -27,10 +46,10 @@ const links=[['Read','library/'],['Concept map','map/'],['Evidence','evidence/']
 <header class="site-header">
 <a class="brand" href={url()} aria-label="iPhone OS Research Atlas home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 8 16 2l11 6-11 6Z M5 15l11 6 11-6 M5 22l11 6 11-6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>iPhone OS <span class="brand-sub">Research Atlas</span></span></a>
 <nav class="desktop-nav" aria-label="Primary">{links.map(([label,path])=><a href={url(path)} aria-current={current.startsWith(url(path))?'page':undefined}>{label}</a>)}</nav>
-<div class="header-actions"><button class="search-trigger" data-search-open aria-label="Search the atlas"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>Search</span><kbd>/</kbd></button><details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile">{links.map(([label,path])=><a href={url(path)}>{label}</a>)}</nav></details></div>
+<div class="header-actions"><label class="appearance-control"><span class="sr-only">Appearance</span><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 3a7 7 0 0 1 0 14Z"/></svg><select data-appearance aria-label="Appearance"><option value="light">Light</option><option value="dark">Dark</option><option value="system" selected>System</option></select></label><button class="search-trigger" data-search-open aria-label="Search the atlas"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span>Search</span><kbd>/</kbd></button><details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile">{links.map(([label,path])=><a href={url(path)}>{label}</a>)}</nav></details></div>
 </header>
 <main id="main" class:list={['site-main',{wide}]}><slot/></main>
-<footer class="site-footer"><div><a class="footer-title" href={url()}>iPhone OS Research Atlas</a><p>An independent preservation study.<br/>Original research writing, diagrams and website · MIT.</p></div><div class="footer-links"><a href={url('sources/')}>Sources & provenance</a><a href={url('glossary/')}>Glossary</a><a href={url('method/#publication-boundary')}>Publication boundary</a><a href="https://github.com/sabino/ios">GitHub ↗</a><a href={url('atlas.json')} download>Download research index ↓</a></div><div class="edition-note"><span class="mono">EDITION 01 / {publication.date}</span><p>Source snapshot <code>{publication.sourceRevision.slice(0,7)}</code>.<br/>Not affiliated with Apple or PINE64.</p><a href="https://sabino.pro">sabino.pro ↗</a></div></footer>
-<dialog class="search-dialog" aria-labelledby="search-title"><div class="search-top"><h2 id="search-title">Search the atlas</h2><button data-search-close class="icon-button" aria-label="Close search">✕</button></div><label class="sr-only" for="atlas-search">Search chapters and concepts</label><input id="atlas-search" type="search" placeholder="Try “blank screen”, “storage ABI”, “clock”…" autocomplete="off"/><p id="search-status" role="status" class="search-status">Search across all 24 chapters. Everything stays in your browser.</p><ul id="search-results"></ul><div class="search-bottom"><span><kbd>Esc</kbd> to close</span><a href={url('library/')}>Browse all chapters →</a></div></dialog>
+<footer class="site-footer"><div><a class="footer-title" href={url()}>iPhone OS Research Atlas</a><p>An independent preservation study.<br/>Original research writing, diagrams and website · MIT.</p></div><div class="footer-links"><a href={url('timeline/')}>Research timeline</a><a href={url('method/')}>Research method</a><a href={url('sources/')}>Sources & provenance</a><a href={url('glossary/')}>Glossary</a><a href={url('method/#publication-boundary')}>Publication boundary</a><a href="https://github.com/sabino/ios">GitHub ↗</a><a href={url('atlas.json')} download>Download research index ↓</a></div><div class="edition-note"><span class="mono">EDITION {publication.edition} / {publication.date}</span><p>Source snapshot <code>{publication.sourceRevision.slice(0,7)}</code>.<br/>Not affiliated with Apple or PINE64.</p><a href="https://sabino.pro">sabino.pro ↗</a></div></footer>
+<dialog class="search-dialog" aria-labelledby="search-title"><div class="search-top"><h2 id="search-title">Search the atlas</h2><button data-search-close class="icon-button" aria-label="Close search">✕</button></div><label class="sr-only" for="atlas-search">Search chapters, evidence and addresses</label><input id="atlas-search" type="search" placeholder="Try “blank screen”, “storage ABI”, “2fe25724”…" autocomplete="off"/><p id="search-status" role="status" class="search-status">Search chapters, captured values and source excerpts. Everything stays in your browser.</p><ul id="search-results"></ul><div class="search-bottom"><span><kbd>Esc</kbd> to close</span><a href={url('library/')}>Browse all chapters →</a></div></dialog>
 <script src="../lib/interactions.ts"></script>
 </body></html>

@@ -1,0 +1,26 @@
+E15 / pinephone-native-graphics-memory.json
+Source SHA-256: 847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d
+Locator: $.fault_mapping_before; $.separate_default_storage.default_surface_pa; $.separate_default_storage.scanout_pa; $.trace_has_old_invalid_write; $.trace_has_dfsr_0x808; $.elapsed_seconds
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "fault_mapping_before": {
+    "map": "0xe00997d0",
+    "pmap": "0xc0858d48",
+    "pv": "0xc109c000",
+    "pp": "0x5109c000",
+    "l1pa": "0x5109c0bc",
+    "l1": "0x52e13001",
+    "l2pa": "0x52e1312c",
+    "l2": "0xf400837",
+    "va": "0x2f4b000",
+    "pa": "0xf400000",
+    "shadowpa": "0x52e1378c",
+    "shadow": "0xdb4b837"
+  },
+  "separate_default_storage.default_surface_pa": "0x57f00000",
+  "separate_default_storage.scanout_pa": "0x57e00000",
+  "trace_has_old_invalid_write": false,
+  "trace_has_dfsr_0x808": false,
+  "elapsed_seconds": 103.93442046700511
+}

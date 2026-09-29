@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E27",
+    "title": "The public source survey has a bounded negative result",
+    "environment": "Static inspection",
+    "method": "Official distribution/tag/tree inspection and pinned community-source comparison",
+    "observation": "No matching public XNU 933 ARM source was found in the inspected Apple release repositories. Nearby desktop XNU and later community ARM trees provide references but not verified replacements.",
+    "limits": "This is a scoped survey result, not proof that no historical archive exists. A later source tree does not establish 4A102 binary compatibility.",
+    "records": [
+      {
+        "document": "50-xnu-source-options.md",
+        "sha256": "abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "version-string",
+        "kind": "trace",
+        "title": "The target identifies itself",
+        "text": "Darwin Kernel Version 9.0.0d1: Wed Dec 12 00:16:00 PST 2007;\nroot:xnu-933.0.0.211.obj~2/RELEASE_ARM_S5L8900XRB",
+        "interpretation": "The target’s XNU build is 933.0.0.211. A public source tag with a nearby Darwin version is not automatically this kernel’s source.",
+        "sourceIds": [
+          "kernel-id"
+        ]
+      },
+      {
+        "id": "source-matrix",
+        "kind": "table",
+        "title": "What the bounded source survey found",
+        "columns": [
+          "Inspected source",
+          "Version evidence",
+          "ARM implementation in the inspected tree"
+        ],
+        "rows": [
+          [
+            "Target binary",
+            "XNU 933.0.0.211 / Darwin 9.0.0d1",
+            "ARM_S5L8900XRB in build string"
+          ],
+          [
+            "Apple xnu-792.6.22",
+            "MasterVersion 8.3.0",
+            "No osfmk/arm or pexpert/arm"
+          ],
+          [
+            "Apple xnu-1228",
+            "MasterVersion 9.0.0",
+            "No osfmk/arm or pexpert/arm"
+          ],
+          [
+            "Apple xnu-4570.1.46",
+            "Much later source release",
+            "Both implementation trees present"
+          ]
+        ],
+        "interpretation": "This is a historical survey of identified source trees. It does not prove that no other archive exists, and none of these candidate trees was built in the survey.",
+        "sourceIds": [
+          "kernel-id",
+          "survey"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "kernel-id",
+        "document": "50-xnu-source-options.md",
+        "sha256": "abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac",
+        "locator": "lines 16–17",
+        "format": "text",
+        "content": "Darwin Kernel Version 9.0.0d1: Wed Dec 12 00:16:00 PST 2007;\nroot:xnu-933.0.0.211.obj~2/RELEASE_ARM_S5L8900XRB",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      },
+      {
+        "id": "survey",
+        "document": "50-xnu-source-options.md",
+        "sha256": "abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac",
+        "locator": "lines 30–33; lines 37–37",
+        "format": "text",
+        "content": "| Apple tag | Pinned commit | `MasterVersion` | ARM implementation |\n| --- | --- | --- | --- |\n| [`xnu-792.6.22`](https://github.com/apple-oss-distributions/xnu/tree/xnu-792.6.22) | `a4e089e7e528cbf0904e4c5fbe13f6ae65a00d1d` | `8.3.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |\n| [`xnu-1228`](https://github.com/apple-oss-distributions/xnu/tree/xnu-1228) | `e13b1fa57645afc8a7b2e7d868fe9845c6b08c40` | `9.0.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |\n\n[…]\n\nThe earliest official Apple XNU tag found in this survey with both real `osfmk/arm` and `pexpert/arm` implementation trees is [`xnu-4570.1.46`](https://github.com/apple-oss-distributions/xnu/tree/xnu-4570.1.46), commit `76e12aa3ea3036173a61fa1081c3be890e626e79`. It includes [`config/MASTER.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/config/MASTER.arm), [`osfmk/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/osfmk/conf/files.arm), [`pexpert/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/pexpert/conf/files.arm), and the ARM make fragments. This is a genuine ARM32 source/build structure, but much later than 933.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

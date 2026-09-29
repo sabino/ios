@@ -1,0 +1,22 @@
+E12 / pinephone-hfs-root-mount.json
+Source SHA-256: 2d9f4029e8688d8d1ed3e060f34bb9817a29e1c505f15429c9490636ab8c39bf
+Locator: $.volume.volume_type; $.volume.volume_bytes; $.volume.volume_block_size; $.volume.volume_total_blocks; $.volume.first_lba; $.volume.last_lba; $.executed.hfs_completed_sector_reads; $.executed.real_vfs_mountroot_return; $.executed.mount_list_nonnull; $.executed.mount_memory_filesystem_string; $.executed.mount_memory_source_string; $.executed.root_vnode_installed; $.executed.secure_root_request_pending; $.executed.secure_root_completion_observed; $.executed.userspace_booted
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "volume.volume_type": "HFSX",
+  "volume.volume_bytes": 293588992,
+  "volume.volume_block_size": 4096,
+  "volume.volume_total_blocks": 71677,
+  "volume.first_lba": 2048,
+  "volume.last_lba": 575463,
+  "executed.hfs_completed_sector_reads": 80,
+  "executed.real_vfs_mountroot_return": 0,
+  "executed.mount_list_nonnull": true,
+  "executed.mount_memory_filesystem_string": "hfs",
+  "executed.mount_memory_source_string": "root_device",
+  "executed.root_vnode_installed": false,
+  "executed.secure_root_request_pending": true,
+  "executed.secure_root_completion_observed": false,
+  "executed.userspace_booted": false
+}

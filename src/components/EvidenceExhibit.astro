@@ -1,0 +1,19 @@
+---
+import {url} from '../lib/content';
+const {exhibit: x, excerpts, index} = Astro.props;
+const traceSource=x.kind==='trace'?excerpts.find(e=>e.id===x.sourceIds[0]):null;
+const kindNames={table:'Captured values',trace:'Original capture excerpt',image:'Original image capture'};
+---
+<section class:list={['evidence-exhibit',`exhibit-type-${x.kind}`]} id={x.id} aria-labelledby={`${x.id}-title`}>
+  <header class="exhibit-heading">
+    <span class="exhibit-number">{String(index+1).padStart(2,'0')}</span>
+    <div><span class="exhibit-kind">{kindNames[x.kind]}</span><h2 id={`${x.id}-title`}>{x.title}</h2></div>
+    <a class="exhibit-permalink" href={'#'+x.id} aria-label={`Link to ${x.title}`}>#</a>
+  </header>
+  {x.kind==='table'&&<p class="scroll-cue">Scroll the table horizontally to inspect every column →</p>}
+  {x.kind==='table'&&<div class="exhibit-table-wrap" tabindex="0" role="region" aria-label={`${x.title}, scroll table if needed`}><table class="exhibit-table"><thead><tr>{x.columns.map(c=><th scope="col">{c}</th>)}</tr></thead><tbody>{x.rows.map(row=><tr>{row.map((cell,i)=>i===0?<th scope="row">{cell}</th>:<td class:list={{'technical-value':/^0x[0-9a-f]+$|^[0-9a-f]{64}$/i.test(cell)}}>{cell}</td>)}</tr>)}</tbody></table></div>}
+  {x.kind==='trace'&&<div class="trace-panel"><div class="trace-toolbar"><span><strong>{traceSource.document}</strong><small>{traceSource.locator} · SHA-256 {traceSource.sha256.slice(0,12)}…</small></span><button data-copy-exhibit={x.id}>Copy text</button></div><p class="trace-scroll-cue">Selected lines · values unchanged · scroll horizontally if needed →</p><pre tabindex="0" aria-label={x.title}><code id={`text-${x.id}`}>{x.text}</code></pre></div>}
+  {x.kind==='image'&&<figure class="capture-figure"><a class:list={['capture-image',{portrait:x.height>x.width}]} href={x.src} target="_blank" rel="noopener" aria-label={`Open capture: ${x.title}`}><img src={x.src} width={x.width} height={x.height} alt={x.alt} loading="lazy"/></a><figcaption>{x.caption}<a class="text-link" href={x.src} target="_blank" rel="noopener">Open {x.width} × {x.height} image ↗</a></figcaption><details class="capture-identity"><summary>File identity and rights</summary><p><code>{x.sha256}</code></p><p>{x.rights}</p>{x.originalSha256&&<p>Uncropped source SHA-256: <code>{x.originalSha256}</code></p>}</details></figure>}
+  <p class="exhibit-reading"><strong>How to read it.</strong> {x.interpretation}</p>
+  <div class="exhibit-sources"><span>Inspect the source</span>{x.sourceIds.map(id=>{const e=excerpts.find(e=>e.id===id);return <a href={`#source-${id}`} data-source-link>{e.document} ↓</a>})}</div>
+</section>

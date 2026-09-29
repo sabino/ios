@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E16",
+    "title": "The first blank-surface probe was misleading",
+    "environment": "PinePhone QEMU",
+    "method": "Known-pattern control and mapped-descriptor capture",
+    "observation": "The readBytes-based route could leave the diagnostic buffer zero. After validating the mapped-descriptor route, the original framebuffer client supplied a nonzero setup frame that reached scanout.",
+    "limits": "A zero-initialized destination without a verified transfer is not evidence that the source was blank. General MBX rendering coverage remains unproven.",
+    "records": [
+      {
+        "document": "62-native-graphics-memory.md",
+        "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+        "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-graphics-memory.json",
+        "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+        "access": "Selected excerpts are published below; full source remains private"
+      },
+      {
+        "document": "gdb.txt",
+        "sha256": "70abbaf4988e887849d4128767ba383df0ddd6200a9df3b24ac22c3da5ddaa6e",
+        "access": "Selected excerpts are published below; full source remains private"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "setup-capture",
+        "kind": "image",
+        "title": "A real copied guest frame",
+        "src": "/ios/evidence/images/E16-setup-seq5.png",
+        "alt": "320 by 480 guest scanout showing the Connect-to-iTunes setup graphic and battery indicator.",
+        "caption": "PinePhone QEMU, mapped-descriptor capture, sequence 5. This is the actual guest scanout PNG, not a diagram or a physical-panel photograph.",
+        "interpretation": "The file is reproduced unchanged. Open it at full size to inspect the capture.",
+        "sourceIds": [
+          "copies",
+          "frame-log"
+        ],
+        "sha256": "10f958f406e854aaa40588d5ee859a20fa7df030521cf17b003f8b9b42d578f0",
+        "width": 320,
+        "height": 480,
+        "rights": "Research capture; depicted Apple interface retains its original rights."
+      },
+      {
+        "id": "surface-swaps",
+        "kind": "table",
+        "title": "Follow the selected surface through the swaps",
+        "columns": [
+          "Sequence",
+          "Selected surface pointer",
+          "Scanout content",
+          "Default backing equals scanout"
+        ],
+        "rows": [
+          [
+            "1",
+            "0xc05a3700",
+            "Preloaded boot logo",
+            "Yes"
+          ],
+          [
+            "3",
+            "0xc1050100",
+            "Original-client setup pixels",
+            "No; default still holds logo"
+          ],
+          [
+            "5",
+            "0xc05a3700",
+            "Original-client setup pixels",
+            "Yes"
+          ],
+          [
+            "8",
+            "0xc05a3700",
+            "Original-client setup pixels",
+            "Yes"
+          ]
+        ],
+        "interpretation": "These pointer values identify objects only within this capture. Sequences 3 and 5 distinguish a nondefault source from the later default-surface update. A screenshot alone would not reveal that ownership transition.",
+        "sourceIds": [
+          "copies",
+          "frame-log"
+        ]
+      },
+      {
+        "id": "boot-capture",
+        "kind": "image",
+        "title": "QEMU reference: the earlier boot surface",
+        "src": "/ios/evidence/images/E16-boot-seq1.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "013310b73d6996f06a034772d894d30c7241b38da9c2bdd49d0281a6af5eb639",
+        "caption": "PinePhone QEMU, mapped-capture run, sequence 1. The scanout still shows the boot logo. Compare sequence 5 above, where the selected original-client surface supplies setup imagery.",
+        "alt": "White Apple boot logo on a black 320 by 480 guest display.",
+        "interpretation": "Original QEMU capture, reproduced unchanged. It illustrates only the named environment and run; no physical-board result is inferred from this image.",
+        "sourceIds": [
+          "copies"
+        ],
+        "rights": "Research capture; depicted Apple interface retains its original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "copies",
+        "document": "pinephone-native-graphics-memory.json",
+        "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+        "locator": "$.mapped_descriptor_copy.logo_sequences; $.mapped_descriptor_copy.setup_screen_sequences; $.mapped_descriptor_copy.default_scanout_equal_sequences; $.mapped_descriptor_copy.setup_scanout_sha256; $.mapped_descriptor_copy.method; $.mapped_descriptor_copy.touch_validated; $.mapped_descriptor_copy.home_screen_validated",
+        "format": "json",
+        "content": "{\n  \"mapped_descriptor_copy.logo_sequences\": [\n    1,\n    2\n  ],\n  \"mapped_descriptor_copy.setup_screen_sequences\": [\n    3,\n    4,\n    5,\n    6,\n    7,\n    8\n  ],\n  \"mapped_descriptor_copy.default_scanout_equal_sequences\": [\n    1,\n    2,\n    5,\n    6,\n    7,\n    8\n  ],\n  \"mapped_descriptor_copy.setup_scanout_sha256\": \"27f9ae2d3c9d9fa551830b2dbbfd29b5ca84753397f38608facddc12c5806bd9\",\n  \"mapped_descriptor_copy.method\": \"original descriptor kernel mapping, bounded CPU read, mapping released after frame\",\n  \"mapped_descriptor_copy.touch_validated\": false,\n  \"mapped_descriptor_copy.home_screen_validated\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "frame-log",
+        "document": "gdb.txt",
+        "sha256": "70abbaf4988e887849d4128767ba383df0ddd6200a9df3b24ac22c3da5ddaa6e",
+        "locator": "selected lines 7, 19, 31, 49",
+        "format": "text",
+        "content": "FRAME {\"sequence\": 1, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc05a3900\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-00-seq1.ppm\", \"scanout\": \"frame-00-seq1-scanout.raw\", \"default\": \"frame-00-seq1-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 3, \"selected_surface\": \"0xc1050100\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc057c700\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-02-seq3.ppm\", \"scanout\": \"frame-02-seq3-scanout.raw\", \"default\": \"frame-02-seq3-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 5, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc2b26d00\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-04-seq5.ppm\", \"scanout\": \"frame-04-seq5-scanout.raw\", \"default\": \"frame-04-seq5-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 8, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc2b26d00\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-07-seq8.ppm\", \"scanout\": \"frame-07-seq8-scanout.raw\", \"default\": \"frame-07-seq8-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      }
+    ]
+  }
+}

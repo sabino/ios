@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E24",
+    "title": "A console marker is not the underlying event",
+    "environment": "Physical PinePhone",
+    "method": "Matched late userspace milestones and data-state comparison",
+    "observation": "Two physical runs reached the same HID and power-client milestones although only one printed BOOT_TIME. Their compared runtime-state files were identical apart from one service log.",
+    "limits": "A logging-route race is plausible but was not directly traced. This does not retrospectively classify every missing-marker QEMU run as healthy.",
+    "records": [
+      {
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "82-pinephone-power-and-hfs-integrity.md",
+        "sha256": "46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "independent-milestones",
+        "kind": "table",
+        "title": "The missing line disagreed with independent milestones",
+        "columns": [
+          "Observation",
+          "Missing-marker phone trial",
+          "Known-good-data phone control"
+        ],
+        "rows": [
+          [
+            "BOOT_TIME",
+            "Not printed",
+            "29.5 s"
+          ],
+          [
+            "HID attachment",
+            "Observed",
+            "Observed"
+          ],
+          [
+            "Power-client attachments",
+            "13",
+            "13"
+          ],
+          [
+            "Heartbeats",
+            "37",
+            "37"
+          ],
+          [
+            "PC samples in machine_idle",
+            "32 of 37",
+            "34 of 37"
+          ],
+          [
+            "Compared runtime-state files",
+            "Identical except one service log",
+            "Identical except one service log"
+          ]
+        ],
+        "interpretation": "The only extracted-file delta was logs/BTServer/stderr. These controls weaken BOOT_TIME as a sole acceptance marker; they do not identify the cause of its absence. The separate QEMU repeat also lacked HID attachment and must not be classified by analogy.",
+        "sourceIds": [
+          "markers"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "markers",
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "locator": "$.phone_720_second_trial.boot_time_seen; $.phone_720_second_trial.hid_attach_seen; $.phone_720_second_trial.power_client_attach_count; $.phone_720_second_trial.heartbeat_samples; $.phone_720_second_trial.heartbeat_idle_pc_samples; $.known_good_data_control.boot_time_seconds; $.known_good_data_control.hid_attach_seen; $.known_good_data_control.power_client_attach_count; $.known_good_data_control.heartbeat_samples; $.known_good_data_control.heartbeat_idle_pc_samples; $.known_good_data_control.run_tmp_sbshutdowncookie_data_ark_identical_to_missing_marker_image; $.known_good_data_control.only_extracted_file_delta; $.qemu_postrun_data_repeat.hid_attach_seen",
+        "format": "json",
+        "content": "{\n  \"phone_720_second_trial.boot_time_seen\": false,\n  \"phone_720_second_trial.hid_attach_seen\": true,\n  \"phone_720_second_trial.power_client_attach_count\": 13,\n  \"phone_720_second_trial.heartbeat_samples\": 37,\n  \"phone_720_second_trial.heartbeat_idle_pc_samples\": 32,\n  \"known_good_data_control.boot_time_seconds\": 29.5,\n  \"known_good_data_control.hid_attach_seen\": true,\n  \"known_good_data_control.power_client_attach_count\": 13,\n  \"known_good_data_control.heartbeat_samples\": 37,\n  \"known_good_data_control.heartbeat_idle_pc_samples\": 34,\n  \"known_good_data_control.run_tmp_sbshutdowncookie_data_ark_identical_to_missing_marker_image\": true,\n  \"known_good_data_control.only_extracted_file_delta\": \"logs/BTServer/stderr\",\n  \"qemu_postrun_data_repeat.hid_attach_seen\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+E09 / pinephone-native-mmc-storage.json
+Source SHA-256: 836a1621d8a40fb803f4895f035270bc2beced6ad67b16d510407780038e7381
+Locator: $.positive.checks.completed_reads; $.positive.checks.class_registered; $.positive.checks.driver_started; $.positive.checks.gpt_started; $.positive.checks.synthetic_partition_registered; $.positive.checks.fdisk_fallback_boot_device_seen; $.negative.checks.completed_reads; $.negative.checks.class_registered; $.negative.checks.driver_started; $.negative.checks.gpt_started; $.negative.checks.synthetic_partition_registered; $.negative.checks.fdisk_fallback_boot_device_seen; $.positive.exception_counts; $.negative.exception_counts
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "positive.checks.completed_reads": 39,
+  "positive.checks.class_registered": true,
+  "positive.checks.driver_started": true,
+  "positive.checks.gpt_started": true,
+  "positive.checks.synthetic_partition_registered": true,
+  "positive.checks.fdisk_fallback_boot_device_seen": false,
+  "negative.checks.completed_reads": 7,
+  "negative.checks.class_registered": true,
+  "negative.checks.driver_started": true,
+  "negative.checks.gpt_started": false,
+  "negative.checks.synthetic_partition_registered": false,
+  "negative.checks.fdisk_fallback_boot_device_seen": true,
+  "positive.exception_counts": {
+    "6 [FIQ]": 1201,
+    "5 [IRQ]": 286,
+    "4 [Data Abort]": 98,
+    "1 [Undefined Instruction]": 0
+  },
+  "negative.exception_counts": {
+    "6 [FIQ]": 1197,
+    "5 [IRQ]": 256,
+    "4 [Data Abort]": 98,
+    "1 [Undefined Instruction]": 0
+  }
+}

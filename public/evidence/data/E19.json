@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E19",
+    "title": "An advertised missing sensor can block HID readiness",
+    "environment": "PinePhone QEMU",
+    "method": "Matched baseline and single-node sensor-absence control; user/kernel stacks",
+    "observation": "A HID registration worker waited through the unsupported legacy light-sensor path before signaling readiness. Omitting that unavailable sensor let the main thread and HID worker reach their event loops.",
+    "limits": "This is an absence declaration, not a replacement sensor implementation. An event loop is not proof of input delivery.",
+    "records": [
+      {
+        "document": "57-native-hid-startup-and-sensor.md",
+        "sha256": "5ef747e22052bc2b7abb90f935db6d49cea80987a4da2b173844eae16d0fa0b4",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-hid-startup.json",
+        "sha256": "02bfc51b8f56c655785fc1135c20acce40f584a2829ae9902c108dd17dfb6751",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "readiness-control",
+        "kind": "table",
+        "title": "Baseline and sensor-absence control",
+        "columns": [
+          "Observation",
+          "Baseline",
+          "One-node absence control"
+        ],
+        "rows": [
+          [
+            "SpringBoard threads",
+            "5",
+            "7"
+          ],
+          [
+            "Main thread",
+            "HID readiness wait",
+            "GraphicsServices event loop"
+          ],
+          [
+            "HID worker",
+            "Service registration → ALS → legacy IIC wait",
+            "CoreFoundation run loop"
+          ],
+          [
+            "AppleISL service",
+            "Registered, transaction unsupported",
+            "Absent"
+          ],
+          [
+            "Buttons HID client",
+            "Not the isolated failure",
+            "Still attaches"
+          ],
+          [
+            "Display",
+            "Verbose text",
+            "Verbose text"
+          ]
+        ],
+        "interpretation": "The worker signals readiness after registration returns. The paired captures connect the blocked sensor registration to the startup wait without claiming a working replacement sensor or live input.",
+        "sourceIds": [
+          "hid-wait"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "hid-wait",
+        "document": "57-native-hid-startup-and-sensor.md",
+        "sha256": "5ef747e22052bc2b7abb90f935db6d49cea80987a4da2b173844eae16d0fa0b4",
+        "locator": "lines 19–27; lines 43–55",
+        "format": "text",
+        "content": "The main thread waits in HID session initialization during application\nstartup. The same worker whose kernel stack reaches AppleISL29003 has this\nuser call chain: HID session thread, service-set traversal, service\nregistration, ALS state setup, HID service open, IOKit connection method,\nMach message. Exact library analysis shows the worker signals readiness\nonly after these registration calls return. Its kernel-side sensor call\nis blocked on a shared legacy IIC controller queue. Other kernel threads\nalso wait on that controller; this does not identify a sensor register\nfailure or prove that this particular transfer reached hardware.\n\n[…]\n\nAfter the same 90-second observation window:\n\n- SpringBoard has seven threads, compared with five in the baseline.\n- Its main thread has left the HID readiness wait and reached\n  GraphicsServices' event loop inside UIKit application run.\n- The HID worker has passed registration/signaling and reached its own\n  CoreFoundation run loop.\n- The unsupported AppleISL service is absent; the buttons HID client still\n  attaches. Other legacy IIC clients are not established as working.\n- Both observed run-loop threads wait for Mach messages, which is expected\n  at an idle snapshot. This does not prove input delivery or responsiveness.\n- Captured display pixels remain XNU verbose text. No native graphical\n  session, touchscreen or app interaction is demonstrated.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

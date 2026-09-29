@@ -1,0 +1,30 @@
+E20 / pinephone-native-buttons-2026-09-29.json
+Source SHA-256: c86c7549f421603ed847d4b5ad120c24c77ca84ea4ccb9d9990056a7f74d3b1a
+Locator: $.qemu.visual_sequence; $.qemu.consumer_hold_press_release_pairs; $.phone_power.physical_short_power_taps; $.phone_power.consumer_hold_press_release_pairs; $.phone_power.user_observed; $.phone_power.nonzero_wake_panel_frames; $.phone_power.data_fsck_exit; $.phone_power.root_unchanged; $.phone_volume.volume_up_consumer_menu_press_release_pairs; $.phone_volume.volume_down_consumer_menu_press_release_pairs; $.phone_volume.data_fsck_exit; $.phone_volume.root_unchanged
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "qemu.visual_sequence": [
+    "black",
+    "Connect to iTunes",
+    "black"
+  ],
+  "qemu.consumer_hold_press_release_pairs": 2,
+  "phone_power.physical_short_power_taps": 3,
+  "phone_power.consumer_hold_press_release_pairs": 3,
+  "phone_power.user_observed": [
+    "Connect to iTunes",
+    "black",
+    "Connect to iTunes"
+  ],
+  "phone_power.nonzero_wake_panel_frames": [
+    9,
+    10
+  ],
+  "phone_power.data_fsck_exit": 0,
+  "phone_power.root_unchanged": true,
+  "phone_volume.volume_up_consumer_menu_press_release_pairs": 1,
+  "phone_volume.volume_down_consumer_menu_press_release_pairs": 1,
+  "phone_volume.data_fsck_exit": 0,
+  "phone_volume.root_unchanged": true
+}

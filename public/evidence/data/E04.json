@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E04",
+    "title": "A mapping can exist and still fault",
+    "environment": "PinePhone QEMU",
+    "method": "Descriptor walk and isolated control of translation interpretation",
+    "observation": "The commpage address translated into backed RAM, but the A53 access-flag interpretation rejected the legacy descriptor. A control retaining the same descriptors permitted the read and ran for 40.12 seconds without the measured synchronous fault.",
+    "limits": "This control establishes one mapping interpretation on the model, not complete VM correctness or a physical memory test.",
+    "records": [
+      {
+        "document": "pinephone-qemu-afe-2026-09-25.json",
+        "sha256": "f5a661fbb0fa575da55150196b857baaaf36777b569b3c600f433e5a70326dfc",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "descriptor-walk",
+        "kind": "table",
+        "title": "The address was backed; the access still faulted",
+        "columns": [
+          "Captured item",
+          "Value",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Fault PC",
+            "0xc0064284",
+            "_commpage_set_timestamp"
+          ],
+          [
+            "Fault VA / DFAR",
+            "0x40000054",
+            "Commpage access"
+          ],
+          [
+            "Active TTBR",
+            "0x506e0000",
+            "Physical table base"
+          ],
+          [
+            "L1 descriptor",
+            "0x50989001",
+            "First-level descriptor"
+          ],
+          [
+            "L2 descriptor",
+            "0x5096a02e",
+            "Second-level descriptor"
+          ],
+          [
+            "Physical page",
+            "0x5096a000",
+            "Inside modeled RAM 0x40000000..0x60000000"
+          ],
+          [
+            "DFSR",
+            "0x6",
+            "Level-2 access-flag fault in this mode"
+          ],
+          [
+            "SCTLR at fault",
+            "0x30d0382d",
+            "AFE interpretation active"
+          ]
+        ],
+        "interpretation": "The translation lands inside RAM. The failure concerns descriptor interpretation, so adding RAM at the virtual address would address the wrong problem.",
+        "sourceIds": [
+          "fault"
+        ]
+      },
+      {
+        "id": "control",
+        "kind": "table",
+        "title": "Observed control result",
+        "columns": [
+          "Check",
+          "Result"
+        ],
+        "rows": [
+          [
+            "PTE values unchanged",
+            "true"
+          ],
+          [
+            "Commpage virtual read",
+            "passed"
+          ],
+          [
+            "Observation window",
+            "40.12 seconds"
+          ],
+          [
+            "Synchronous faults in that window",
+            "0"
+          ],
+          [
+            "Physical phone tested",
+            "false"
+          ]
+        ],
+        "interpretation": "The control isolates one interpretation of the existing descriptors. It is not a complete VM or hardware validation.",
+        "sourceIds": [
+          "fault"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fault",
+        "document": "pinephone-qemu-afe-2026-09-25.json",
+        "sha256": "f5a661fbb0fa575da55150196b857baaaf36777b569b3c600f433e5a70326dfc",
+        "locator": "$.memory_map.qemu_backed_ram; $.memory_map.fault_virtual_address; $.memory_map.commpage_physical_page; $.stage029_fault; $.stage030_control.pte_values_unchanged; $.stage030_control.commpage_virtual_read_passed; $.stage030_control.extended_observation_seconds; $.stage030_control.synchronous_faults_in_extended_trace; $.stage030_control.physical_phone_tested_with_afe_clear",
+        "format": "json",
+        "content": "{\n  \"memory_map.qemu_backed_ram\": \"0x40000000..0x60000000 (half-open, 512 MiB)\",\n  \"memory_map.fault_virtual_address\": \"0x40000054\",\n  \"memory_map.commpage_physical_page\": \"0x5096a000\",\n  \"stage029_fault\": {\n    \"pc\": \"0xc0064284\",\n    \"function\": \"_commpage_set_timestamp\",\n    \"dfar\": \"0x40000054\",\n    \"dfsr\": \"0x6\",\n    \"active_ttbr\": \"0x506e0000\",\n    \"l1_descriptor\": \"0x50989001\",\n    \"l2_descriptor\": \"0x5096a02e\",\n    \"sctlr\": \"0x30d0382d\",\n    \"interpretation\": \"SCTLR.AFE=1 treats clear PTE AP[0] as a level-2 access-flag fault\"\n  },\n  \"stage030_control.pte_values_unchanged\": true,\n  \"stage030_control.commpage_virtual_read_passed\": true,\n  \"stage030_control.extended_observation_seconds\": 40.12,\n  \"stage030_control.synchronous_faults_in_extended_trace\": 0,\n  \"stage030_control.physical_phone_tested_with_afe_clear\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

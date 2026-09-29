@@ -1,0 +1,14 @@
+E17 / pinephone-xnu-panel-visibility-2026-09-28.json
+Source SHA-256: 203334cef1c3a83e1b5df7c2c69b62fe59a4058943b2c5f8913759095b9cc35c
+Locator: $.first_visible_run.user_observation; $.first_visible_run.pattern_seconds; $.first_visible_run.client_frame_seconds; $.first_visible_run.data_fsck_exit_after; $.no_clear_phone_run.visual_result; $.no_clear_change.behavior; $.no_clear_change.qemu_screen_identical_to_prior
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "first_visible_run.user_observation": "Colored quadrants, then iTunes graphic; backlight stayed on while graphic blinked to black and reappeared, then black",
+  "first_visible_run.pattern_seconds": 8.0,
+  "first_visible_run.client_frame_seconds": 51.5,
+  "first_visible_run.data_fsck_exit_after": 0,
+  "no_clear_phone_run.visual_result": "Unobserved; user missed the boot",
+  "no_clear_change.behavior": "On the 720x1440 live scanout, clear once before the first surface copy and again only after an explicit background fill; preserve the preceding frame during ordinary swaps",
+  "no_clear_change.qemu_screen_identical_to_prior": true
+}

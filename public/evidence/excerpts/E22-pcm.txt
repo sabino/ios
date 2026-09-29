@@ -1,0 +1,19 @@
+E22 / 61-native-audio-provider.md
+Source SHA-256: e5a9f286be4f3aceef7ded34551bd171da02f91b8f54aa8cf90558ced060a154
+Locator: lines 57–63; lines 81–84
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The private 4A102 kernel analysis identifies an initial 44,100 Hz,
+two-channel, 16-bit linear PCM output: 4 bytes per frame, a 65,536-byte
+buffer (16,384 frames), and a 512-frame safety offset. The original status
+descriptor requests 24 bytes. Its first two 64-bit fields hold completed
+frames and a completion timestamp; the third changes on stream startup.
+The original completion path advances frames from reported completed bytes.
+These facts guide the adapter, but the final callback ABI,
+
+[…]
+
+Its type-0 connection registers
+a notification port and maps status memory type 0 (at least 24 bytes) plus
+PCM memory type `0x10000000 + stream ID`. Selectors 0 and 1 start and stop
+the stream.

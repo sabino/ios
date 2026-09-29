@@ -1,0 +1,13 @@
+E08 / pinephone-qemu-irq-frontier-2026-09-25.json
+Source SHA-256: b26649aeb0738b8b842f3c1669f588686d52fc22f7426b6a6549812a07a67f5f
+Locator: $.run.seconds; $.run.pc_at_stop; $.run.irq_id_r6; $.run.cpu_mode_at_stop; $.run.data_aborts; $.run.root_mount_or_launchd_observed
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "run.seconds": 75.22,
+  "run.pc_at_stop": "0xc066378c",
+  "run.irq_id_r6": 30,
+  "run.cpu_mode_at_stop": "nonsecure AArch32 IRQ",
+  "run.data_aborts": 0,
+  "run.root_mount_or_launchd_observed": false
+}

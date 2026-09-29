@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E07",
+    "title": "The timebase declaration changes real delays",
+    "environment": "Physical PinePhone",
+    "method": "Matched one-variable tree comparison with UART arrival timing",
+    "observation": "With the inherited 62.5 MHz declaration, a nominal one-second delay took 3.014805055 seconds. With the physical 24 MHz value it took 1.010080943 seconds; kernel and adapter hashes were unchanged.",
+    "limits": "These are host UART arrival intervals, not exact CPU-side timing. The comparison does not validate the A64 counter erratum handling.",
+    "records": [
+      {
+        "document": "80-pinephone-clock-and-storage-reliability.md",
+        "sha256": "295e80f2755f1ecd6966aa2ec628b20e8d3f948dabc18be91c0851ed5f997e3a",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-clock-storage-2026-09-27.json",
+        "sha256": "619fed90da7df90414fa3a59cf4bfd8cea1d7575b4633d63db96aeffeadc33dc",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Old declaration",
+        "value": "3.015 s"
+      },
+      {
+        "label": "Corrected declaration",
+        "value": "1.010 s"
+      },
+      {
+        "label": "Physical counter",
+        "value": "24 MHz"
+      }
+    ],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "delay-comparison",
+        "kind": "table",
+        "title": "Nominal one-second delay: matched physical comparison",
+        "columns": [
+          "Quantity",
+          "Inherited declaration",
+          "Physical declaration"
+        ],
+        "rows": [
+          [
+            "Declared counter / Hz",
+            "62500000",
+            "24000000"
+          ],
+          [
+            "UART arrival interval / s",
+            "3.014805055",
+            "1.010080943"
+          ],
+          [
+            "Excess over 1 s (derived)",
+            "201.48%",
+            "1.01%"
+          ]
+        ],
+        "interpretation": "The percentages are derived as (observed interval − 1 s) × 100. UART arrival includes host and output latency; the many decimal places are recorded precision, not a claim of stopwatch accuracy.",
+        "sourceIds": [
+          "clock"
+        ]
+      },
+      {
+        "id": "changed-field",
+        "kind": "table",
+        "title": "What changed in the tree",
+        "columns": [
+          "Serialized offsets (decimal)",
+          "Change scope"
+        ],
+        "rows": [
+          [
+            "3288, 3289, 3290, 3291",
+            "Four bytes of the timebase property"
+          ]
+        ],
+        "interpretation": "The matched comparison kept the kernel and adapter unchanged. This supports the declared-frequency explanation without attributing every delay to the clock.",
+        "sourceIds": [
+          "clock"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "clock",
+        "document": "pinephone-clock-storage-2026-09-27.json",
+        "sha256": "619fed90da7df90414fa3a59cf4bfd8cea1d7575b4633d63db96aeffeadc33dc",
+        "locator": "$.clock.prior_hz; $.clock.corrected_hz; $.clock.prior_uart_interval_seconds; $.clock.corrected_uart_interval_seconds; $.clock.host_arrival_timing_not_cpu_stopwatch; $.clock.tree_changed_byte_offsets",
+        "format": "json",
+        "content": "{\n  \"clock.prior_hz\": 62500000,\n  \"clock.corrected_hz\": 24000000,\n  \"clock.prior_uart_interval_seconds\": 3.014805055,\n  \"clock.corrected_uart_interval_seconds\": 1.010080943,\n  \"clock.host_arrival_timing_not_cpu_stopwatch\": true,\n  \"clock.tree_changed_byte_offsets\": [\n    3288,\n    3289,\n    3290,\n    3291\n  ]\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

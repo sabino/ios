@@ -1,0 +1,40 @@
+E13 / 82-pinephone-power-and-hfs-integrity.md
+Source SHA-256: 46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447
+Locator: lines 1143–1155; lines 1159–1177
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The first corrected 720-second phone run reached `BOOT_TIME` at 34 seconds,
+printed 37 heartbeats with rising idle/WFI counters, and recorded zero queue
+waits, overflow uses, failed request starts, CMD17/CMD24 failures, or error
+completions. The BSD reboot callback fired at 728 seconds, `MACH Reboot`
+followed at 731 seconds, and the phone returned to Jumpdrive through WDOG0
+without a manual reset. A full data copy through Jumpdrive UART before USB
+host attach had its clean bit set and passed read-only fsck (exit 0); the
+root hash remained
+`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.
+Battery changed from 31% / 3.754 V before boot to 27% / 3.740 V after
+recovery, when Jumpdrive again reported charging. This is one of the two
+required consecutive clean runs. Its full data copy is the rollback for the
+second run.
+
+[…]
+
+The second consecutive 720-second phone run used the same staged kernel,
+storage, and timer hashes, with the first run's fsck-clean data volume left
+in place. The battery read 34% / 3.830 V and Charging in Jumpdrive at the
+restored 500 mA USB input limit before boot. It reached `BOOT_TIME` at about
+70 seconds, printed 37 heartbeats with rising idle/WFI counters, and had no
+queue waits, overflow uses, failed request starts, CMD17/CMD24 failures,
+drain failures, or error completions. The BSD reboot callback fired at 728
+seconds and the phone returned to Jumpdrive through WDOG0 at 731 seconds.
+The full 512 MiB data copy taken through Jumpdrive UART before USB host
+attach has SHA-256
+`d3016b5e1cda3e968528ad076ab7343f4c591abb34bd67ed48b6a9554f419137`,
+its clean bit is set, and read-only fsck exits 0. The root hash remains
+`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.
+Jumpdrive then read 26% / 3.735 V, Charging. Thus two consecutive timed
+phone boots passed the storage integrity gate without a manual reset or
+data repair. Both observed zero overflow uses, so the overflow path remains
+unexercised on physical hardware; its build and log-retention checks do not
+establish behavior under actual queue saturation. The battery drop remains
+a separate power problem.

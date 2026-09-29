@@ -1,0 +1,14 @@
+E28 / 24-ipod-1g-4a102.md
+Source SHA-256: 68547b8bf2e4d3ecb60ba936fb3435eabf9894be2319a8b976eb9414fddf43d2
+Locator: lines 121–121; lines 123–123; lines 127–127
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+Run 048 sent values within 0–32,767; the guest read touch start, move, end and full-end frames, and the captured screen changed from the dialog to the full SpringBoard icon grid. The touchscreen's Y-velocity calculation also now uses the Y displacement. These results establish one working tap, not keyboard editing or all gestures.
+
+[…]
+
+Run 051 reached the dialog and dismissed it by touch, with 800 accepted 3D renders, zero 3D or 2D rejections, zero graphics recovery messages and no panic through 73 seconds. This is a bounded observation; longer uptime remains to be checked.
+
+[…]
+
+The user's subsequent visible 4A102 session reached Settings, Calculator, Safari's keyboard and Notes, with changing degrees of responsiveness and visual artifacts. In the final recorded run, Notes reached a pending 2D graphics hang, then QEMU aborted when an idle zero byte reached the multitouch SPI command decoder. These are two distinct failures; the graphics hang remains unexplained.

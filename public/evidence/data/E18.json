@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E18",
+    "title": "SpringBoard can intentionally submit black",
+    "environment": "PinePhone QEMU",
+    "method": "Read-only caller trace, surface selection and backing/scanout comparison",
+    "observation": "A captured SpringBoard dimTimerFired call reached LayerKit’s blanking routine before an explicit null-surface, opaque-black presentation. The prior setup pixels remained in backing memory.",
+    "limits": "The trace identifies this QEMU transition. It does not automatically explain every physical flash or prove a backlight power transition.",
+    "records": [
+      {
+        "document": "pinephone-native-display-blank.json",
+        "sha256": "54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "blank-boundary",
+        "kind": "table",
+        "title": "The null-surface swap is explicit",
+        "columns": [
+          "Boundary capture",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Previous → first null sequence",
+            "17 → 18"
+          ],
+          [
+            "Selected surface",
+            "0x00000000"
+          ],
+          [
+            "Swap masks",
+            "0x80000007 / 0x80000007"
+          ],
+          [
+            "Background word",
+            "0xff000000 (opaque black)"
+          ],
+          [
+            "Default backing retained",
+            "true"
+          ],
+          [
+            "Sampled power fields enabled",
+            "true"
+          ]
+        ],
+        "interpretation": "Black is the requested output in this capture. The nonzero retained source and explicit null selection distinguish a blank request from destroyed source memory.",
+        "sourceIds": [
+          "blank"
+        ]
+      },
+      {
+        "id": "caller-sequence",
+        "kind": "table",
+        "title": "A separate caller trace identifies the request",
+        "columns": [
+          "Step",
+          "Observed state"
+        ],
+        "rows": [
+          [
+            "Caller chain",
+            "SBAwayController dimTimerFired → relockForButtonPress:afterCall: → dimScreen:"
+          ],
+          [
+            "LayerKit boundary",
+            "LKPurpleServerSetScreenBlanked(1)"
+          ],
+          [
+            "In-flight visible swaps after request",
+            "2"
+          ],
+          [
+            "Last visible → null sequence in this run",
+            "16 → 17"
+          ],
+          [
+            "Request-to-null interval",
+            "0.521213 s"
+          ]
+        ],
+        "interpretation": "Sequence numbers differ because this is a separate capture. The caller trace identifies the origin of this blank; it does not establish a backlight power change.",
+        "sourceIds": [
+          "caller"
+        ]
+      },
+      {
+        "id": "buffer-identity",
+        "kind": "table",
+        "title": "Different bytes remained in the two buffers",
+        "columns": [
+          "Buffer",
+          "SHA-256"
+        ],
+        "rows": [
+          [
+            "Opaque-black scanout",
+            "011c5ce8f02344ae5dc34541e57864470fdd61c76193d6025a0fa13116d3ff16"
+          ],
+          [
+            "Retained default backing",
+            "27f9ae2d3c9d9fa551830b2dbbfd29b5ca84753397f38608facddc12c5806bd9"
+          ]
+        ],
+        "interpretation": "The retained backing digest matches the setup scanout digest recorded in E16. This is a byte-identity comparison, not merely two descriptions of an image.",
+        "sourceIds": [
+          "blank"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "blank",
+        "document": "pinephone-native-display-blank.json",
+        "sha256": "54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61",
+        "locator": "$.previous_sequence; $.first_null_sequence; $.selected_surface; $.swap_masks; $.background_color; $.scanout_sha256; $.default_backing_sha256; $.opaque_black_scanout; $.default_backing_preserved; $.sampled_power_fields_enabled",
+        "format": "json",
+        "content": "{\n  \"previous_sequence\": 17,\n  \"first_null_sequence\": 18,\n  \"selected_surface\": \"0x0\",\n  \"swap_masks\": [\n    \"0x80000007\",\n    \"0x80000007\"\n  ],\n  \"background_color\": \"0xff000000\",\n  \"scanout_sha256\": \"011c5ce8f02344ae5dc34541e57864470fdd61c76193d6025a0fa13116d3ff16\",\n  \"default_backing_sha256\": \"27f9ae2d3c9d9fa551830b2dbbfd29b5ca84753397f38608facddc12c5806bd9\",\n  \"opaque_black_scanout\": true,\n  \"default_backing_preserved\": true,\n  \"sampled_power_fields_enabled\": true\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "caller",
+        "document": "pinephone-native-display-blank.json",
+        "sha256": "54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61",
+        "locator": "$.caller_trace.caller; $.caller_trace.visible_sequence; $.caller_trace.null_sequence; $.caller_trace.request_to_null_seconds; $.caller_trace.in_flight_visible_swaps_after_request",
+        "format": "json",
+        "content": "{\n  \"caller_trace.caller\": \"SpringBoard SBAwayController dimTimerFired -> relockForButtonPress:afterCall: -> dimScreen: -> LayerKit LKPurpleServerSetScreenBlanked(1)\",\n  \"caller_trace.visible_sequence\": 16,\n  \"caller_trace.null_sequence\": 17,\n  \"caller_trace.request_to_null_seconds\": 0.521213,\n  \"caller_trace.in_flight_visible_swaps_after_request\": 2\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

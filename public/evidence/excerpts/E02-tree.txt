@@ -1,0 +1,17 @@
+E02 / pinephone-live-tree-2026-09-24.json
+Source SHA-256: b1da05c0657a2e8633f06315d5eab41e7e739aaad59d6f430254d4b5cc952778
+Locator: $.archived_n45ap.nodes; $.archived_n45ap.cpu_timebase_hz; $.live_n45ap.nodes; $.live_n45ap.cpu_timebase_hz; $.live_n45ap.cpu_fixed_hz; $.live_n45ap.cpu_clock_hz; $.live_n45ap.cpu_bus_hz; $.live_n45ap.cpu_peripheral_hz; $.live_n45ap.cpu_memory_hz; $.archived_m68ap.live_tree_captured
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "archived_n45ap.nodes": 73,
+  "archived_n45ap.cpu_timebase_hz": 0,
+  "live_n45ap.nodes": 73,
+  "live_n45ap.cpu_timebase_hz": 6000000,
+  "live_n45ap.cpu_fixed_hz": 24000000,
+  "live_n45ap.cpu_clock_hz": 412000000,
+  "live_n45ap.cpu_bus_hz": 103000000,
+  "live_n45ap.cpu_peripheral_hz": 51500000,
+  "live_n45ap.cpu_memory_hz": 137333333,
+  "archived_m68ap.live_tree_captured": false
+}

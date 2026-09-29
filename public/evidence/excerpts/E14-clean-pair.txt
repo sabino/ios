@@ -1,0 +1,42 @@
+E14 / 82-pinephone-power-and-hfs-integrity.md
+Source SHA-256: 46bcf57b5b225cf8267f72951571e9f6474cae2c53f325f646fd5c1c6f690447
+Locator: lines 579–598; lines 663–676
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+A follow-up removed the two pre-existing data-volume fsck warnings on an
+**offline, disposable data copy**. `fsck_hfs -dfy` changed only data-volume
+sectors 2, 98384 and 1048574; the catalog-sector changes set the two
+`HasFolderCount` flags. Read-only `fsck_hfs -dfn` then exited 0. No root
+image, phone partition or backup was repaired. The same QEMU partition-level
+root read-only patch and data-only storage guard booted this repaired input.
+The first guest wrote the exact 47-byte `START`/`OK` marker, returned zero
+from `sync(2)`, and reset via the guest watchdog without QMP at 15.5 seconds.
+The root hash remained unchanged, and data fsck exited 0 after the reset.
+
+A fresh QEMU process then used that data with the readback-job root. It
+created a 47-byte readback file whose bytes exactly match both the persisted
+marker and the original guest output. Its root hash remained unchanged, and
+data fsck again exited 0, including the bitmap, catalog and volume-header
+checks. This second run did **not** print `BOOT_TIME` during its 50-second
+window, although it mounted both volumes and completed the readback job; the
+prior pair reached `BOOT_TIME` with the same readback root and an unrepaired
+data input. The clean-data pair therefore proves QEMU data write, sync,
+guest reboot and fresh-process readback with fsck exit 0, but not a reliable
+second normal boot or physical durability.
+
+[…]
+
+The same job on a fresh card with the watchdog-enabled kernel caused QEMU to
+exit on the guest's request after 51.01 seconds, without a QMP or host reset.
+The data header retained its clean-unmount bit (`0x80000100`), full read-only
+fsck exited 0, and both the original marker and guest readback contained the
+same 47 bytes (SHA-256
+`4f319ed2db04f95950946175d8b4736c254db39fcbddb3a5c985d23f977a5853`).
+The root partition hash did not change during the guest run. A third fresh
+QEMU process, using that card's data and the original readback root, mounted
+data and reached `BOOT_TIME` at 77.83 seconds. Its root also stayed unchanged
+and data fsck exited 0. That third process was stopped by the host at 90
+seconds, leaving the data clean-unmount bit clear again (`0x80000000`). Thus
+guest sync/readback/watchdog reboot produced a clean HFS volume that booted
+again; a host stop still leaves the older guest's next mount vulnerable to
+the dirty-header failure above. These runs touched no physical phone media.

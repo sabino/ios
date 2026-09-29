@@ -1,0 +1,13 @@
+E27 / 50-xnu-source-options.md
+Source SHA-256: abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac
+Locator: lines 30–33; lines 37–37
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+| Apple tag | Pinned commit | `MasterVersion` | ARM implementation |
+| --- | --- | --- | --- |
+| [`xnu-792.6.22`](https://github.com/apple-oss-distributions/xnu/tree/xnu-792.6.22) | `a4e089e7e528cbf0904e4c5fbe13f6ae65a00d1d` | `8.3.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |
+| [`xnu-1228`](https://github.com/apple-oss-distributions/xnu/tree/xnu-1228) | `e13b1fa57645afc8a7b2e7d868fe9845c6b08c40` | `9.0.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |
+
+[…]
+
+The earliest official Apple XNU tag found in this survey with both real `osfmk/arm` and `pexpert/arm` implementation trees is [`xnu-4570.1.46`](https://github.com/apple-oss-distributions/xnu/tree/xnu-4570.1.46), commit `76e12aa3ea3036173a61fa1081c3be890e626e79`. It includes [`config/MASTER.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/config/MASTER.arm), [`osfmk/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/osfmk/conf/files.arm), [`pexpert/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/pexpert/conf/files.arm), and the ARM make fragments. This is a genuine ARM32 source/build structure, but much later than 933.

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E28",
+    "title": "The reference and native routes establish different results",
+    "environment": "iPod reference",
+    "method": "Local baseline boot and comparison against the native research route",
+    "observation": "The early 4A102 reference record reached SpringBoard but was blocked before the home screen. Later notebook runs document a working tap and icon grid; run 051 recorded 800 accepted 3D renders without rejection or panic through 73 seconds. Later app exploration still encountered graphics and emulator failures.",
+    "limits": "These are bounded, prepared iPod reference runs. They do not establish durable app compatibility, an unmodified end-to-end boot chain, native PinePhone interactivity or a usable iPhone telephony profile.",
+    "records": [
+      {
+        "document": "ipod-4a102-2026-09-23.json",
+        "sha256": "cbacdf824aeae5ddd1b950e18730585fded1124e2036a37f08f0afc8c81e7a58",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "24-ipod-1g-4a102.md",
+        "sha256": "68547b8bf2e4d3ecb60ba936fb3435eabf9894be2319a8b976eb9414fddf43d2",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "reference-timeline",
+        "kind": "table",
+        "title": "The reference record changed over time",
+        "columns": [
+          "Recorded stage",
+          "Concrete observation",
+          "Remaining boundary"
+        ],
+        "rows": [
+          [
+            "Early JSON snapshot",
+            "XNU + launchd + SpringBoard; home_screen=false",
+            "MBX status +0x12c, awaited bit 0x40 / EVM_DALLOC"
+          ],
+          [
+            "Later run 048",
+            "Touch frames consumed; dialog changed to icon grid",
+            "One tap, not all gestures"
+          ],
+          [
+            "Later run 051",
+            "800 accepted 3D renders; 0 2D/3D rejections; no panic through 73 s",
+            "Bounded interactive result"
+          ],
+          [
+            "Subsequent visible session",
+            "Settings, Calculator, Safari keyboard and Notes observed",
+            "Visual artifacts; Notes graphics hang; later QEMU SPI abort"
+          ]
+        ],
+        "interpretation": "The earlier JSON is not an up-to-date success summary. The later notebook supplies the bounded interaction evidence. These prepared reference runs are separate from physical PinePhone validation.",
+        "sourceIds": [
+          "early-reference",
+          "later-reference"
+        ]
+      },
+      {
+        "id": "reference-home",
+        "kind": "image",
+        "title": "iPod QEMU reference: the icon grid",
+        "src": "/ios/evidence/images/E28-reference-home.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "c3387a11973911b45989610357f06539da892ed15a4b1ed5647c8f2b747ec0ed",
+        "caption": "Original iPod reference model, run 051, after a tap. This prepared reference environment reached the icon grid; the physical PinePhone record establishes a different frontier. Clock and stock icon contents are guest UI, not personal data.",
+        "alt": "First-generation iPod interface showing its home icon grid.",
+        "interpretation": "Original QEMU capture, reproduced unchanged. It illustrates only the named environment and run; no physical-board result is inferred from this image.",
+        "sourceIds": [
+          "later-reference"
+        ],
+        "rights": "Research capture; depicted Apple interface retains its original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "early-reference",
+        "document": "ipod-4a102-2026-09-23.json",
+        "sha256": "cbacdf824aeae5ddd1b950e18730585fded1124e2036a37f08f0afc8c81e7a58",
+        "locator": "$.target; $.status; $.milestones.xnu; $.milestones.launchd; $.milestones.springboard_process; $.milestones.home_screen; $.milestones.controlled_input_4a102; $.remaining_blocker.status_offset; $.remaining_blocker.awaited_bit; $.remaining_blocker.event",
+        "format": "json",
+        "content": "{\n  \"target\": {\n    \"board\": \"N45AP\",\n    \"product\": \"iPod1,1\",\n    \"os\": \"1.1.4\",\n    \"build\": \"4A102\"\n  },\n  \"status\": \"kernel-and-userspace-running-home-screen-blocked\",\n  \"milestones.xnu\": true,\n  \"milestones.launchd\": true,\n  \"milestones.springboard_process\": true,\n  \"milestones.home_screen\": false,\n  \"milestones.controlled_input_4a102\": false,\n  \"remaining_blocker.status_offset\": \"0x12c\",\n  \"remaining_blocker.awaited_bit\": \"0x40\",\n  \"remaining_blocker.event\": \"EVM_DALLOC\"\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "later-reference",
+        "document": "24-ipod-1g-4a102.md",
+        "sha256": "68547b8bf2e4d3ecb60ba936fb3435eabf9894be2319a8b976eb9414fddf43d2",
+        "locator": "lines 121–121; lines 123–123; lines 127–127",
+        "format": "text",
+        "content": "Run 048 sent values within 0–32,767; the guest read touch start, move, end and full-end frames, and the captured screen changed from the dialog to the full SpringBoard icon grid. The touchscreen's Y-velocity calculation also now uses the Y displacement. These results establish one working tap, not keyboard editing or all gestures.\n\n[…]\n\nRun 051 reached the dialog and dismissed it by touch, with 800 accepted 3D renders, zero 3D or 2D rejections, zero graphics recovery messages and no panic through 73 seconds. This is a bounded observation; longer uptime remains to be checked.\n\n[…]\n\nThe user's subsequent visible 4A102 session reached Settings, Calculator, Safari's keyboard and Notes, with changing degrees of responsiveness and visual artifacts. In the final recorded run, Notes reached a pending 2D graphics hang, then QEMU aborted when an idle zero byte reached the multitouch SPI command decoder. These are two distinct failures; the graphics hang remains unexplained.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

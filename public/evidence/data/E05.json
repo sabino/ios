@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E05",
+    "title": "Cache maintenance is a physical boundary",
+    "environment": "Physical PinePhone",
+    "method": "Calibrated visual progress markers around VM initialization",
+    "observation": "An A53 range-clean adaptation allowed the observed original mapping routine to return on the phone. All nine diagnostic progress markers were observed.",
+    "limits": "This terminal probe stopped before continuing console initialization. It does not establish all cache-maintenance operations or coherency under concurrent devices.",
+    "records": [
+      {
+        "document": "pinephone-emmc-a53-range-clean-return.json",
+        "sha256": "39714a12d72d405efefc86d469d3c34d8bbce99b580bc33506fff4eff83a7534",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "physical-photo",
+        "kind": "image",
+        "title": "Physical progress-marker capture",
+        "src": "/ios/evidence/images/E05-progress-screen.png",
+        "alt": "Cropped physical phone screen with bright progress markers against a blue field.",
+        "caption": "Physical PinePhone photograph, cropped to the visible display. The camera was sideways; some marker edges are outside this crop. No pixels were generated or retouched.",
+        "interpretation": "Screen-only crop at x=472, y=60, width=808, height=420 from the 1280 × 720 capture. The PNG preserves the decoded source pixels exactly. The source photograph is identified below; the marker table describes the full recorded experiment, not a count reconstructed from the crop.",
+        "sourceIds": [
+          "markers"
+        ],
+        "sha256": "128b31c00107bd156bca23394afea719131cc98c2ea4b673a7284344c9ff2d17",
+        "width": 808,
+        "height": 420,
+        "rights": "Original research photograph; MIT.",
+        "originalSha256": "6b54c58715ed2fb2098f2fe512677d1606eb886eb1e546280f13cdf7ad12ceef",
+        "crop": {
+          "x": 472,
+          "y": 60,
+          "width": 808,
+          "height": 420,
+          "originalWidth": 1280,
+          "originalHeight": 720
+        }
+      },
+      {
+        "id": "marker-rows",
+        "kind": "table",
+        "title": "Five named marker ranges from the nine-marker probe",
+        "columns": [
+          "Instrumented boundary",
+          "Framebuffer rows (inclusive)"
+        ],
+        "rows": [
+          [
+            "Cache clean entry",
+            "144–159"
+          ],
+          [
+            "Cache clean return",
+            "176–191"
+          ],
+          [
+            "TLB flush entry",
+            "208–223"
+          ],
+          [
+            "TLB flush return",
+            "240–255"
+          ],
+          [
+            "pmap return",
+            "336–351"
+          ]
+        ],
+        "interpretation": "The notebook reports all nine progress markers visible. It names these five row ranges and explicitly records original_console_text_observed=false. The terminal probe stopped before console initialization resumed.",
+        "sourceIds": [
+          "markers"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "markers",
+        "document": "pinephone-emmc-a53-range-clean-return.json",
+        "sha256": "39714a12d72d405efefc86d469d3c34d8bbce99b580bc33506fff4eff83a7534",
+        "locator": "$.diagnostic.progress_rows; $.diagnostic.qemu_all_markers; $.physical_observation.all_nine_markers_observed; $.physical_observation.original_pmap_map_bd_return_supported; $.physical_observation.original_console_text_observed; $.physical_observation.camera_progress_frame_24_sha256",
+        "format": "json",
+        "content": "{\n  \"diagnostic.progress_rows\": {\n    \"cache_clean_entry\": [\n      144,\n      159\n    ],\n    \"cache_clean_return\": [\n      176,\n      191\n    ],\n    \"tlb_flush_entry\": [\n      208,\n      223\n    ],\n    \"tlb_flush_return\": [\n      240,\n      255\n    ],\n    \"pmap_return\": [\n      336,\n      351\n    ]\n  },\n  \"diagnostic.qemu_all_markers\": true,\n  \"physical_observation.all_nine_markers_observed\": true,\n  \"physical_observation.original_pmap_map_bd_return_supported\": true,\n  \"physical_observation.original_console_text_observed\": false,\n  \"physical_observation.camera_progress_frame_24_sha256\": \"6b54c58715ed2fb2098f2fe512677d1606eb886eb1e546280f13cdf7ad12ceef\"\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

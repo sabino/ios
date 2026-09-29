@@ -1,0 +1,19 @@
+E08 / pinephone-qemu-irq-routing-2026-09-25.json
+Source SHA-256: e0328a4e58767d9e2fa019488cac85c088a4317579d522bc0ad69f424fd6434b
+Locator: $.mechanism; $.run.seconds; $.run.active_irq_callback; $.run.timer_irq_count; $.run.timer_clock_return_count; $.run.last_interrupt_id; $.run.sgi1_delivery_observed; $.run.next_frontier
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "mechanism": "The nonsecure timer callback was installed, then the original ml_install_interrupt_handler path overwrote CPU+0xa4 with the legacy SGI1-only callback. An isolated private kernel binding selects the source-built combined callback instead.",
+  "run.seconds": 12.13,
+  "run.active_irq_callback": "0xc06d0438",
+  "run.timer_irq_count": 51,
+  "run.timer_clock_return_count": 51,
+  "run.last_interrupt_id": 30,
+  "run.sgi1_delivery_observed": false,
+  "run.next_frontier": {
+    "driver": "AppleS5L8900XEdgeIC",
+    "virtual_abort_address": "0xef6a9000",
+    "physical_mmio_address": "0x02a02000"
+  }
+}

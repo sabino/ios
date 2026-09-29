@@ -55,3 +55,14 @@ Graphics research encountered all three. A legacy graphics pool pointed into an 
 The panel buffer, source surfaces, graphics pool, bootstrap tables and ordinary allocator need separate ownership rules. An overlap checker can reject impossible layouts before execution; it cannot establish that a live DMA engine has stopped using a region. Releasing or reusing memory requires knowledge of the consumer's lifetime.
 
 This is why the atlas follows a pixel through allocation, task mapping, client writes, descriptor access, presentation and device scanout. Each step can be individually plausible while the complete route is broken. Preserving the boundaries makes later failures diagnosable.
+
+## Follow one address through the recorded walk
+
+The captured virtual address is `0x40000054`. Its short-descriptor walk records L1 `0x50989001`, L2 `0x5096a02e`, and a page base of `0x5096a000`. For the recorded 4 KiB page, the address decomposition is:
+
+```text
+page offset = 0x40000054 & 0x00000fff = 0x54
+physical address = 0x5096a000 + 0x54 = 0x5096a054
+```
+
+This arithmetic explains the backing location; it does not independently validate access permissions, access-flag interpretation or cacheability. In the faulting capture, DFSR is 6. The control retains the same PTE and progresses without that fault. See the [descriptor walk and control](/ios/evidence/E04/#descriptor-walk), then compare the independent [physical marker photograph](/ios/evidence/E05/#physical-photo).

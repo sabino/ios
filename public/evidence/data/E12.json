@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E12",
+    "title": "A filesystem mount can finish before userspace starts",
+    "environment": "PinePhone QEMU",
+    "method": "Debugger-observed return value, mount list and subsequent waiting thread",
+    "observation": "The original HFS mount returned success, while the root vnode was not yet installed and startup waited in a platform service handshake.",
+    "limits": "Mount success is one stage. It does not establish launchd, writable data, graphical startup or full boot-chain authenticity.",
+    "records": [
+      {
+        "document": "46-pinephone-hfs-root-mount.md",
+        "sha256": "5735e78acb05ed7707b53872e6cdc9e2e67d2b546cd2f67a4ac286433109a99d",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-hfs-root-mount.json",
+        "sha256": "2d9f4029e8688d8d1ed3e060f34bb9817a29e1c505f15429c9490636ab8c39bf",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "mount-state",
+        "kind": "table",
+        "title": "Success at one stage, pending at the next",
+        "columns": [
+          "Observed field",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Completed sector reads",
+            "80"
+          ],
+          [
+            "VFS mountroot return",
+            "0"
+          ],
+          [
+            "Mount-list entry",
+            "Present"
+          ],
+          [
+            "Filesystem string",
+            "hfs"
+          ],
+          [
+            "Source string",
+            "root_device"
+          ],
+          [
+            "Root vnode installed",
+            "false"
+          ],
+          [
+            "Platform secure-root request",
+            "Pending; completion not observed"
+          ],
+          [
+            "Userspace booted",
+            "false"
+          ]
+        ],
+        "interpretation": "The debugger return value establishes the mount phase. The captured state explicitly separates it from root-vnode installation and userspace startup.",
+        "sourceIds": [
+          "mount"
+        ]
+      },
+      {
+        "id": "volume-geometry",
+        "kind": "table",
+        "title": "The mounted test volume",
+        "columns": [
+          "Field",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Filesystem",
+            "HFSX"
+          ],
+          [
+            "Volume size",
+            "293,588,992 bytes"
+          ],
+          [
+            "Allocation block",
+            "4,096 bytes"
+          ],
+          [
+            "Allocation blocks",
+            "71,677"
+          ],
+          [
+            "Card-sector range",
+            "LBA 2048–575463, inclusive"
+          ]
+        ],
+        "interpretation": "This geometry describes the QEMU fixture used for the mount experiment. It is not a command to write a physical device.",
+        "sourceIds": [
+          "mount"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "mount",
+        "document": "pinephone-hfs-root-mount.json",
+        "sha256": "2d9f4029e8688d8d1ed3e060f34bb9817a29e1c505f15429c9490636ab8c39bf",
+        "locator": "$.volume.volume_type; $.volume.volume_bytes; $.volume.volume_block_size; $.volume.volume_total_blocks; $.volume.first_lba; $.volume.last_lba; $.executed.hfs_completed_sector_reads; $.executed.real_vfs_mountroot_return; $.executed.mount_list_nonnull; $.executed.mount_memory_filesystem_string; $.executed.mount_memory_source_string; $.executed.root_vnode_installed; $.executed.secure_root_request_pending; $.executed.secure_root_completion_observed; $.executed.userspace_booted",
+        "format": "json",
+        "content": "{\n  \"volume.volume_type\": \"HFSX\",\n  \"volume.volume_bytes\": 293588992,\n  \"volume.volume_block_size\": 4096,\n  \"volume.volume_total_blocks\": 71677,\n  \"volume.first_lba\": 2048,\n  \"volume.last_lba\": 575463,\n  \"executed.hfs_completed_sector_reads\": 80,\n  \"executed.real_vfs_mountroot_return\": 0,\n  \"executed.mount_list_nonnull\": true,\n  \"executed.mount_memory_filesystem_string\": \"hfs\",\n  \"executed.mount_memory_source_string\": \"root_device\",\n  \"executed.root_vnode_installed\": false,\n  \"executed.secure_root_request_pending\": true,\n  \"executed.secure_root_completion_observed\": false,\n  \"executed.userspace_booted\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

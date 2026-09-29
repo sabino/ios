@@ -1,0 +1,22 @@
+E28 / ipod-4a102-2026-09-23.json
+Source SHA-256: cbacdf824aeae5ddd1b950e18730585fded1124e2036a37f08f0afc8c81e7a58
+Locator: $.target; $.status; $.milestones.xnu; $.milestones.launchd; $.milestones.springboard_process; $.milestones.home_screen; $.milestones.controlled_input_4a102; $.remaining_blocker.status_offset; $.remaining_blocker.awaited_bit; $.remaining_blocker.event
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "target": {
+    "board": "N45AP",
+    "product": "iPod1,1",
+    "os": "1.1.4",
+    "build": "4A102"
+  },
+  "status": "kernel-and-userspace-running-home-screen-blocked",
+  "milestones.xnu": true,
+  "milestones.launchd": true,
+  "milestones.springboard_process": true,
+  "milestones.home_screen": false,
+  "milestones.controlled_input_4a102": false,
+  "remaining_blocker.status_offset": "0x12c",
+  "remaining_blocker.awaited_bit": "0x40",
+  "remaining_blocker.event": "EVM_DALLOC"
+}

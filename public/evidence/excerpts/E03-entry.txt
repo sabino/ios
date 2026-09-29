@@ -1,0 +1,21 @@
+E03 / pinephone-xnu-entry-2026-09-24.json
+Source SHA-256: 55b149d3954549c4a28f6f025fa79c110fdaffa692973489a844d0c99f346d71
+Locator: $.reference_handoff.breakpoint_pc; $.reference_handoff.r0; $.reference_handoff.cpsr; $.reference_handoff.ttbr0; $.reference_handoff.sctlr; $.reference_handoff.device_tree_virtual; $.reference_handoff.device_tree_length; $.pinephone_qemu_entry.apple_memory_span; $.pinephone_qemu_entry.kernel_entry_phys; $.pinephone_qemu_entry.arm_init_virtual; $.pinephone_qemu_entry.ppmr_read_undefined; $.pinephone_qemu_entry.secondary_abort_dfsr; $.pinephone_qemu_entry.secondary_abort_dfar; $.kernel_booted
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "reference_handoff.breakpoint_pc": "0x080607ec",
+  "reference_handoff.r0": "0x0866c000",
+  "reference_handoff.cpsr": "0x1d3",
+  "reference_handoff.ttbr0": "0x180fc000",
+  "reference_handoff.sctlr": "0xc50878",
+  "reference_handoff.device_tree_virtual": "0xc0664000",
+  "reference_handoff.device_tree_length": 32040,
+  "pinephone_qemu_entry.apple_memory_span": "0x50000000..0x57400000",
+  "pinephone_qemu_entry.kernel_entry_phys": "0x500607ec",
+  "pinephone_qemu_entry.arm_init_virtual": "0xc01a27bc",
+  "pinephone_qemu_entry.ppmr_read_undefined": true,
+  "pinephone_qemu_entry.secondary_abort_dfsr": "0x5",
+  "pinephone_qemu_entry.secondary_abort_dfar": "0x30",
+  "kernel_booted": false
+}

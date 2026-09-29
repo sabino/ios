@@ -1,0 +1,20 @@
+E23 / pinephone-anx-off-charging-2026-09-28.json
+Source SHA-256: 6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419
+Locator: $.xnu_without_off_state.pmic_reg00; $.xnu_without_off_state.pmic_reg01; $.xnu_without_off_state.pmic_reg2f; $.short_off_state_probe.pmic_reg00_at_5_and_45_seconds; $.short_off_state_probe.pmic_reg01_at_5_and_45_seconds; $.short_off_state_probe.pmic_reg2f_at_5_and_45_seconds; $.phone_720_second_trial.battery_before_percent; $.phone_720_second_trial.battery_after_percent; $.phone_720_second_trial.battery_before_uv; $.phone_720_second_trial.battery_after_uv; $.phone_720_second_trial.pmic_reg00_at_600_seconds; $.known_good_data_control.battery_before_percent; $.known_good_data_control.battery_after_percent
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "xnu_without_off_state.pmic_reg00": "0xa3",
+  "xnu_without_off_state.pmic_reg01": "0x30",
+  "xnu_without_off_state.pmic_reg2f": "0x10",
+  "short_off_state_probe.pmic_reg00_at_5_and_45_seconds": "0xfb",
+  "short_off_state_probe.pmic_reg01_at_5_and_45_seconds": "0x70",
+  "short_off_state_probe.pmic_reg2f_at_5_and_45_seconds": "0x30",
+  "phone_720_second_trial.battery_before_percent": 29,
+  "phone_720_second_trial.battery_after_percent": 31,
+  "phone_720_second_trial.battery_before_uv": 3747000,
+  "phone_720_second_trial.battery_after_uv": 3756000,
+  "phone_720_second_trial.pmic_reg00_at_600_seconds": "0xff",
+  "known_good_data_control.battery_before_percent": 31,
+  "known_good_data_control.battery_after_percent": 33
+}

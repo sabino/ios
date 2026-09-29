@@ -1,0 +1,30 @@
+E19 / 57-native-hid-startup-and-sensor.md
+Source SHA-256: 5ef747e22052bc2b7abb90f935db6d49cea80987a4da2b173844eae16d0fa0b4
+Locator: lines 19–27; lines 43–55
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The main thread waits in HID session initialization during application
+startup. The same worker whose kernel stack reaches AppleISL29003 has this
+user call chain: HID session thread, service-set traversal, service
+registration, ALS state setup, HID service open, IOKit connection method,
+Mach message. Exact library analysis shows the worker signals readiness
+only after these registration calls return. Its kernel-side sensor call
+is blocked on a shared legacy IIC controller queue. Other kernel threads
+also wait on that controller; this does not identify a sensor register
+failure or prove that this particular transfer reached hardware.
+
+[…]
+
+After the same 90-second observation window:
+
+- SpringBoard has seven threads, compared with five in the baseline.
+- Its main thread has left the HID readiness wait and reached
+  GraphicsServices' event loop inside UIKit application run.
+- The HID worker has passed registration/signaling and reached its own
+  CoreFoundation run loop.
+- The unsupported AppleISL service is absent; the buttons HID client still
+  attaches. Other legacy IIC clients are not established as working.
+- Both observed run-loop threads wait for Mach messages, which is expected
+  at an idle snapshot. This does not prove input delivery or responsiveness.
+- Captured display pixels remain XNU verbose text. No native graphical
+  session, touchscreen or app interaction is demonstrated.

@@ -1,0 +1,9 @@
+E16 / gdb.txt
+Source SHA-256: 70abbaf4988e887849d4128767ba383df0ddd6200a9df3b24ac22c3da5ddaa6e
+Locator: selected lines 7, 19, 31, 49
+Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private.
+
+FRAME {"sequence": 1, "selected_surface": "0xc05a3700", "default_surface": "0xc05a3700", "swap": "0xc05a3900", "self": "0xc05a0c00", "screen": "frame-00-seq1.ppm", "scanout": "frame-00-seq1-scanout.raw", "default": "frame-00-seq1-default.raw", "power_fields": {"0x1c0": "0x1", "0x1c4": "0x1", "0x1c8": "0x1", "0x1cc": "0x1"}}
+FRAME {"sequence": 3, "selected_surface": "0xc1050100", "default_surface": "0xc05a3700", "swap": "0xc057c700", "self": "0xc05a0c00", "screen": "frame-02-seq3.ppm", "scanout": "frame-02-seq3-scanout.raw", "default": "frame-02-seq3-default.raw", "power_fields": {"0x1c0": "0x1", "0x1c4": "0x1", "0x1c8": "0x1", "0x1cc": "0x1"}}
+FRAME {"sequence": 5, "selected_surface": "0xc05a3700", "default_surface": "0xc05a3700", "swap": "0xc2b26d00", "self": "0xc05a0c00", "screen": "frame-04-seq5.ppm", "scanout": "frame-04-seq5-scanout.raw", "default": "frame-04-seq5-default.raw", "power_fields": {"0x1c0": "0x1", "0x1c4": "0x1", "0x1c8": "0x1", "0x1cc": "0x1"}}
+FRAME {"sequence": 8, "selected_surface": "0xc05a3700", "default_surface": "0xc05a3700", "swap": "0xc2b26d00", "self": "0xc05a0c00", "screen": "frame-07-seq8.ppm", "scanout": "frame-07-seq8-scanout.raw", "default": "frame-07-seq8-default.raw", "power_fields": {"0x1c0": "0x1", "0x1c4": "0x1", "0x1c8": "0x1", "0x1cc": "0x1"}}

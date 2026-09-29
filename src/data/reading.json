@@ -1,0 +1,122 @@
+{
+  "orientation": {
+    "next": "three-machines",
+    "why": "Which parts of the result belong to the reference emulator, the partial board model and the physical phone?",
+    "open": "A result needs a build, an environment and an observable acceptance condition."
+  },
+  "three-machines": {
+    "next": "boot-handoff",
+    "why": "What state crosses from the loader into the original kernel?",
+    "open": "The reference icon grid cannot establish the native board\u2019s peripheral behavior."
+  },
+  "boot-handoff": {
+    "next": "device-tree",
+    "why": "How do the runtime properties describe that machine state?",
+    "open": "The entry PC is one receipt. Check the first successfully completed kernel boundary separately."
+  },
+  "device-tree": {
+    "next": "cpu-compatibility",
+    "why": "Which CPU semantics remain implicit in the original code?",
+    "open": "The archived tree alone does not establish the live handoff values."
+  },
+  "cpu-compatibility": {
+    "next": "mmu-and-caches",
+    "why": "What happens when an otherwise valid instruction accesses a mapped page?",
+    "open": "The observed SWP cases leave atomicity, copy-on-write and fault behavior open."
+  },
+  "mmu-and-caches": {
+    "next": "time-and-interrupts",
+    "why": "Once memory is observable, what drives forward progress?",
+    "open": "A descriptor walk and a physical cache-maintenance receipt answer different questions."
+  },
+  "time-and-interrupts": {
+    "next": "iokit-discovery",
+    "why": "How do working interrupts become discoverable services?",
+    "open": "Later registration must preserve the callback route already shown to return."
+  },
+  "iokit-discovery": {
+    "next": "storage-abi",
+    "why": "How does a discovered storage service return a completed request?",
+    "open": "Class registration proves discovery; a valid GPT control establishes additional reads."
+  },
+  "storage-abi": {
+    "next": "async-storage",
+    "why": "When may the correctly encoded completion execute?",
+    "open": "Synthetic register placement is useful only if the integrated caller uses the same convention."
+  },
+  "async-storage": {
+    "next": "hfs-integrity",
+    "why": "Did the completed requests leave a consistent volume?",
+    "open": "Deferred completion removes stack growth; persistence and filesystem integrity need their own receipts."
+  },
+  "hfs-integrity": {
+    "next": "graphics-stack",
+    "why": "What new service contracts appear when graphical clients begin?",
+    "open": "Mount return, BOOT_TIME, checked writes and clean reboot are separate milestones."
+  },
+  "graphics-stack": {
+    "next": "surface-memory",
+    "why": "Which allocation owns the pixels that the client just rendered?",
+    "open": "The next comparison needs the selected client surface and the eventual scanout in the same run."
+  },
+  "surface-memory": {
+    "next": "presentation",
+    "why": "How do the selected bytes reach a visible scanout?",
+    "open": "A default surface can retain a logo while a different surface contains setup imagery."
+  },
+  "presentation": {
+    "next": "display-blanking",
+    "why": "Is a later black frame a failure or an intentional submission?",
+    "open": "Physical signatures and human observation support different parts of the display claim."
+  },
+  "display-blanking": {
+    "next": "hid-dependencies",
+    "why": "Which event path can wake an intentionally blanked display?",
+    "open": "A null presentation and retained backing must be interpreted alongside the dimming caller."
+  },
+  "hid-dependencies": {
+    "next": "buttons",
+    "why": "Can a physical edge traverse the now-ready HID path?",
+    "open": "Removing one readiness wait does not establish delivery from every input device."
+  },
+  "buttons": {
+    "next": "touch",
+    "why": "Why can a working button path coexist with missing touch?",
+    "open": "The observed Power and volume-to-Home mappings do not establish an absolute touch queue."
+  },
+  "touch": {
+    "next": "audio",
+    "why": "How can another service affect readiness before useful output exists?",
+    "open": "The concrete touch frontier is descriptor, memory mapping and queue delivery; no physical touch result is claimed."
+  },
+  "audio": {
+    "next": "power",
+    "why": "What does a running media and graphics stack imply about idle power?",
+    "open": "Device enumeration and mapped streams do not establish audible output or a working sample clock."
+  },
+  "power": {
+    "next": "emulator-fidelity",
+    "why": "Which of those peripheral assumptions can the emulator actually model?",
+    "open": "Bracketed battery readings are not a continuous current trace; reproduce the physical conditions before generalizing."
+  },
+  "emulator-fidelity": {
+    "next": "observability",
+    "why": "How do we distinguish a model defect from a misleading observer?",
+    "open": "An unimplemented zero MMIO read can select a plausible but wrong presence branch."
+  },
+  "observability": {
+    "next": "source-archaeology",
+    "why": "Which source release can explain the observed machine behavior?",
+    "open": "A missing console marker must be checked against independent liveness and integrity receipts."
+  },
+  "source-archaeology": {
+    "next": "preservation-method",
+    "why": "How should mismatched source and incomplete observations be preserved?",
+    "open": "Later source explains concepts but cannot replace the missing matching ARM implementation."
+  },
+  "preservation-method": {
+    "next": "orientation",
+    "why": "Revisit the system with the evidence ledger open beside it.",
+    "open": "Future work should add a dated record, retain the previous limit and state the new acceptance condition."
+  }
+}

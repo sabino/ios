@@ -48,7 +48,7 @@ An acceptance marker should never be renamed to imply a larger milestone. A synt
 
 ## Publish useful evidence without distributing the experiment
 
-This repository contains original prose, diagrams, curated measurement summaries and document digests. It does not include the source implementation repository, raw firmware, images, binary modifications, private logs, device identifiers or session conversations.
+This repository contains original prose, diagrams, captured measurement tables, selected source excerpts, reviewed capture images and document digests. It does not include the source implementation repository, raw firmware, storage images, binary modifications, complete private logs, device identifiers or session conversations.
 
 That boundary imposes an honest limitation: the public package is not a complete reproducibility archive. A digest identifies the reviewed private document if an authorized reviewer later obtains it; the digest alone cannot independently verify its contents. Public primary references corroborate architecture and source context, while the local experiment summaries remain reported observations.
 

@@ -1,0 +1,9 @@
+E20 / uart-volume.raw
+Source SHA-256: 5f32993983db371a728b1c69de217e09877d52f29e127994a87b0c4d144bd0e2
+Locator: selected lines 2308, 2310, 2318, 2320
+Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private.
+
+AppleHV button: usage=40 down=1
+AppleHV button: usage=40 down=0
+AppleHV button: usage=40 down=1
+AppleHV button: usage=40 down=0

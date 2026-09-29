@@ -1,0 +1,51 @@
+[
+  {
+    "date": "2026-09-23",
+    "title": "Establish the reference before judging the port",
+    "evidence": "E28",
+    "chapter": "orientation",
+    "description": "The early reference JSON records a narrower frontier than later notebook runs. The later icon-grid capture is retained in the same record as an explicitly later result; it is not retroactively assigned to the early run."
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Capture the live handoff",
+    "evidence": "E02",
+    "chapter": "device-tree",
+    "description": "The N45AP live tree reports a 6 MHz timebase and 24 MHz fixed clock where the archived timebase is zero. A separate entry capture records PC 0x080607ec and r0 0x0866c000; the native model reaches a CPU-specific instruction frontier, not a completed boot."
+  },
+  {
+    "date": "2026-09-25",
+    "title": "Separate translation, interrupt routing and input ABI",
+    "evidence": "E04",
+    "chapter": "mmu-and-caches",
+    "description": "At VA 0x40000054, the recorded L1 and L2 descriptors exist and resolve into backed RAM, yet the model reports DFSR 6. The control keeps the PTE fixed. Separate IRQ routing and touch ABI reports on this date address independent contracts."
+  },
+  {
+    "date": "2026-09-26",
+    "title": "Observe a real legacy memory exchange",
+    "evidence": "E06",
+    "chapter": "cpu-compatibility",
+    "description": "Physical userspace reaches SWP at PC 0x2fe25724, opcode 0xe1002091, with address 0x2fe3c788 and old value zero. The success receipt and the earlier undefined-instruction register dump belong to different runs."
+  },
+  {
+    "date": "2026-09-27",
+    "title": "Check declared time against elapsed time",
+    "evidence": "E07",
+    "chapter": "time-and-interrupts",
+    "description": "The nominal one-second delay changes from 3.014805055 s at a declared 62.5 MHz to 1.010080943 s at 24 MHz. UART-bracketed elapsed time is enough to detect this large scale error; it is not a precision timer characterization."
+  },
+  {
+    "date": "2026-09-28",
+    "title": "Follow client pixels into the panel",
+    "evidence": "E17",
+    "chapter": "presentation",
+    "description": "The physical display record distinguishes a deliberate pattern from original-client imagery, while QEMU supplies a separate visible reference. Charging reports bracket native intervals with recovery-mode battery samples; they do not provide an in-interval current trace."
+  },
+  {
+    "date": "2026-09-29",
+    "title": "Connect a physical edge to visible wake",
+    "evidence": "E20",
+    "chapter": "buttons",
+    "description": "Three physical Power down/up pairs traverse the original HID path. Visible setup imagery returns after blanking. Volume edges are mapped to Home in these experiments; this does not establish guest volume adjustment or physical touch."
+  }
+]

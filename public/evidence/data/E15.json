@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E15",
+    "title": "Graphics backing and scanout have different owners",
+    "environment": "PinePhone QEMU",
+    "method": "Fault-state capture, task page-table walk and independent memory reservations",
+    "observation": "A graphics pool was advertised at an unbacked legacy physical address. Later experiments distinguished user-write permissions, source backing and live scanout; separating default-surface storage removed a source/destination alias.",
+    "limits": "Successful backing and copies do not imply a complete GPU, display driver or stable interactive session.",
+    "records": [
+      {
+        "document": "62-native-graphics-memory.md",
+        "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-graphics-memory.json",
+        "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "address-map",
+        "kind": "table",
+        "title": "Before: a valid translation into an unbacked legacy pool",
+        "columns": [
+          "Quantity",
+          "Value",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "User VA",
+            "0x02f4b000",
+            "Original drawing address"
+          ],
+          [
+            "L1 descriptor",
+            "0x52e13001",
+            "Captured first level"
+          ],
+          [
+            "L2 descriptor",
+            "0x0f400837",
+            "Captured second level"
+          ],
+          [
+            "Resulting physical address",
+            "0x0f400000",
+            "Outside modeled native RAM"
+          ],
+          [
+            "Kernel shadow",
+            "0x0db4b837",
+            "Recorded shadow value"
+          ]
+        ],
+        "interpretation": "The faulting address was translated. Its physical destination belonged to the legacy graphics layout, not to backed native RAM.",
+        "sourceIds": [
+          "mapping"
+        ]
+      },
+      {
+        "id": "memory-reservations",
+        "kind": "table",
+        "title": "After: separate physical ownership ranges",
+        "columns": [
+          "Owner",
+          "Start",
+          "End, excluded"
+        ],
+        "rows": [
+          [
+            "Modeled RAM",
+            "0x40000000",
+            "0x60000000"
+          ],
+          [
+            "XNU advertised arena",
+            "0x50000000",
+            "0x57400000"
+          ],
+          [
+            "Scanout",
+            "0x57e00000",
+            "0x57e96000"
+          ],
+          [
+            "Default-surface backing",
+            "0x57f00000",
+            "0x57f96000"
+          ],
+          [
+            "Graphics allocation pool",
+            "0x58000000",
+            "0x58c00000"
+          ]
+        ],
+        "interpretation": "These are QEMU diagnostic reservations. Separating source backing from destination scanout prevents an A → B → A presentation from overwriting A while displaying B. The earlier address correction and the later ownership correction solve different defects.",
+        "sourceIds": [
+          "layout",
+          "mapping"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "mapping",
+        "document": "pinephone-native-graphics-memory.json",
+        "sha256": "847652ec842e665f1165cfa8c6e41714757d1805e2eca39388d3dd7f05e4349d",
+        "locator": "$.fault_mapping_before; $.separate_default_storage.default_surface_pa; $.separate_default_storage.scanout_pa; $.trace_has_old_invalid_write; $.trace_has_dfsr_0x808; $.elapsed_seconds",
+        "format": "json",
+        "content": "{\n  \"fault_mapping_before\": {\n    \"map\": \"0xe00997d0\",\n    \"pmap\": \"0xc0858d48\",\n    \"pv\": \"0xc109c000\",\n    \"pp\": \"0x5109c000\",\n    \"l1pa\": \"0x5109c0bc\",\n    \"l1\": \"0x52e13001\",\n    \"l2pa\": \"0x52e1312c\",\n    \"l2\": \"0xf400837\",\n    \"va\": \"0x2f4b000\",\n    \"pa\": \"0xf400000\",\n    \"shadowpa\": \"0x52e1378c\",\n    \"shadow\": \"0xdb4b837\"\n  },\n  \"separate_default_storage.default_surface_pa\": \"0x57f00000\",\n  \"separate_default_storage.scanout_pa\": \"0x57e00000\",\n  \"trace_has_old_invalid_write\": false,\n  \"trace_has_dfsr_0x808\": false,\n  \"elapsed_seconds\": 103.93442046700511\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "layout",
+        "document": "62-native-graphics-memory.md",
+        "sha256": "c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2",
+        "locator": "lines 29–35; lines 112–118",
+        "format": "text",
+        "content": "| Region | Half-open physical range | Ownership |\n| --- | --- | --- |\n| Modeled RAM | `0x40000000–0x60000000` | QEMU's 512 MiB RAM |\n| XNU advertised memory | `0x50000000–0x57400000` | Includes staged kernel; first-free boundary is `0x506c0000` |\n| Native scanout | `0x57e00000–0x57e96000` | Existing 320×480 framebuffer |\n| Separate default surface (later correction) | `0x57f00000–0x57f96000` | CPU-rendered CoreSurface backing |\n| Relocated graphics pool | `0x58000000–0x58c00000` | Reserved for original CoreSurface allocations |\n\n[…]\n\nThe previous adapter used scanout RAM as the default CoreSurface backing.\nCopying another surface into scanout therefore overwrote the default source,\nand returning to the default surface skipped copying. The source now requires\na distinct, page-aligned default allocation with validated nonoverlapping\n32-bit ranges, and copies every selected non-null surface. A host regression\nexecutes setup and A → B → A presentation, checking whole-frame equality and\nunchanged default-source contents alongside one-shot console ownership.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

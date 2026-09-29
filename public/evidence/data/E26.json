@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E26",
+    "title": "Zero-valued MMIO can fabricate device presence",
+    "environment": "iPod reference",
+    "method": "Mixed-board restore-stage observation and source/disassembly comparison",
+    "observation": "A phone restore-stage diagnostic running on the iPod QEMU model reported a radio board in a model without a radio. The relevant input defaulted to zero, which the diagnostic interpreted as presence.",
+    "limits": "This is a false positive about a detection predicate, not evidence of a working modem or a complete iPhone profile.",
+    "records": [
+      {
+        "document": "20-iphone-1g-4a102.md",
+        "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "presence-predicate",
+        "kind": "table",
+        "title": "A specific address explains the false detection",
+        "columns": [
+          "Step",
+          "Recorded value"
+        ],
+        "rows": [
+          [
+            "GPIO selection",
+            "Bank 7, bit 1"
+          ],
+          [
+            "Read address",
+            "0x3e400004 + 7 × 0x20 = 0x3e4000e4"
+          ],
+          [
+            "Test mask",
+            "0x00000002"
+          ],
+          [
+            "Model’s unsupported-register response",
+            "0x00000000"
+          ],
+          [
+            "Selected branch",
+            "“Radio board detected.”"
+          ]
+        ],
+        "interpretation": "The zero value satisfies the firmware’s presence predicate. The QEMU model has no radio; the observation demonstrates a false positive in the model contract.",
+        "sourceIds": [
+          "radio"
+        ]
+      },
+      {
+        "id": "truth-table",
+        "kind": "table",
+        "title": "Interpret the predicate, not the message",
+        "columns": [
+          "Masked value",
+          "Diagnostic interpretation",
+          "Evidence status"
+        ],
+        "rows": [
+          [
+            "0",
+            "Radio present",
+            "Observed with default-zero model response"
+          ],
+          [
+            "Nonzero",
+            "Radio absent",
+            "Branch identified by static analysis"
+          ]
+        ],
+        "interpretation": "The nonzero row describes the inspected branch, not an executed negative-control run. Explicitly separating those evidence types prevents a second unsupported claim.",
+        "sourceIds": [
+          "radio"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "radio",
+        "document": "20-iphone-1g-4a102.md",
+        "sha256": "f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f",
+        "locator": "lines 47–47; lines 49–49",
+        "format": "text",
+        "content": "The read helper selects GPIO bank 7, bit 1: it reads a word at `0x3e400004 + 7 * 0x20 = 0x3e4000e4` and tests mask `0x2`. A zero result takes the branch to the radio-present message at `0x18000ed4`; a nonzero result prints that no radio board was detected.\n\n[…]\n\nThe pinned QEMU `hw/arm/ipod_touch_gpio.c` handles only offset `0x2c4` in its read callback and returns zero for every other GPIO offset. Its write callback ignores all writes. Thus the read at offset `0xe4` supplies the low bit value that this iBEC interprets as an installed radio board. This explains the existing console observation without implying a working baseband.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+E06 / pinephone-user-swp-2026-09-26.json
+Source SHA-256: 294161d51d19e80da639daf4377c6ee07d18ed97be251d97cf462602acaf030f
+Locator: $.observer.repeated_swp_pc; $.observer.repeated_swp_opcode; $.swp_physical.successful_swp_log_count; $.swp_physical.last_successful_storage_completion; $.quiet_storage_physical.successful_swp_log_count; $.quiet_storage_physical.distinct_swp_pcs; $.quiet_storage_physical.sector_count_after_quieting; $.post_reset_power_readback.battery_capacity_percent; $.post_reset_power_readback.battery_voltage_microvolts
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "observer.repeated_swp_pc": "0x2fe25724",
+  "observer.repeated_swp_opcode": "0xe1002091",
+  "swp_physical.successful_swp_log_count": 1,
+  "swp_physical.last_successful_storage_completion": 6299,
+  "quiet_storage_physical.successful_swp_log_count": 12,
+  "quiet_storage_physical.distinct_swp_pcs": [
+    "0x2fe25724",
+    "0x30095ff4"
+  ],
+  "quiet_storage_physical.sector_count_after_quieting": "not observable from UART",
+  "post_reset_power_readback.battery_capacity_percent": 1,
+  "post_reset_power_readback.battery_voltage_microvolts": 3424000
+}

@@ -1,0 +1,16 @@
+E22 / pinephone-native-audio-service.json
+Source SHA-256: e6073d97f598c8d5ea8a9b8399957fe6aedbda8aa54214e8ecd0fa6ec4df6461
+Locator: $.prototype_enumeration_run.device_count; $.prototype_enumeration_run.device_list_bytes; $.prototype_enumeration_run.default_output_id; $.prototype_enumeration_run.query_status; $.prototype_enumeration_run.mecca_active_object_nonnull; $.public_service_run.output_stream_mapped; $.public_service_run.mediaserverd_thread_count; $.playback_sink_implemented; $.stream_start_exercised
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "prototype_enumeration_run.device_count": 1,
+  "prototype_enumeration_run.device_list_bytes": 4,
+  "prototype_enumeration_run.default_output_id": 257,
+  "prototype_enumeration_run.query_status": 0,
+  "prototype_enumeration_run.mecca_active_object_nonnull": true,
+  "public_service_run.output_stream_mapped": true,
+  "public_service_run.mediaserverd_thread_count": 14,
+  "playback_sink_implemented": false,
+  "stream_start_exercised": false
+}

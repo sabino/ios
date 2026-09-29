@@ -1,0 +1,22 @@
+E15 / 62-native-graphics-memory.md
+Source SHA-256: c8079fecd3b7f06e61b23281e8d16ece96455c584f056867976c6dd6958a76c2
+Locator: lines 29–35; lines 112–118
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+| Region | Half-open physical range | Ownership |
+| --- | --- | --- |
+| Modeled RAM | `0x40000000–0x60000000` | QEMU's 512 MiB RAM |
+| XNU advertised memory | `0x50000000–0x57400000` | Includes staged kernel; first-free boundary is `0x506c0000` |
+| Native scanout | `0x57e00000–0x57e96000` | Existing 320×480 framebuffer |
+| Separate default surface (later correction) | `0x57f00000–0x57f96000` | CPU-rendered CoreSurface backing |
+| Relocated graphics pool | `0x58000000–0x58c00000` | Reserved for original CoreSurface allocations |
+
+[…]
+
+The previous adapter used scanout RAM as the default CoreSurface backing.
+Copying another surface into scanout therefore overwrote the default source,
+and returning to the default surface skipped copying. The source now requires
+a distinct, page-aligned default allocation with validated nonoverlapping
+32-bit ranges, and copies every selected non-null surface. A host regression
+executes setup and A → B → A presentation, checking whole-frame equality and
+unchanged default-source contents alongside one-shot console ownership.

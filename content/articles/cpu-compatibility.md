@@ -52,3 +52,13 @@ A clear validation plan distinguishes three layers. First, synthetic cases estab
 Failure in one layer should not be hidden by success in another. Conversely, a limitation should be stated precisely enough that future work can address it without discarding the useful measurements already made.
 
 The Linux arm64 legacy-instruction documentation provides an independent example of explicitly classifying obsolete and deprecated instructions. It is a reference for the nature of the problem, not evidence that the native XNU implementation inherits Linux's correctness. The port's actual obligations remain tied to its own mappings, fault paths and tested workload.
+
+## Read the captured exchange
+
+The instruction word `0xe1002091` in the physical receipt decodes to the following single instruction. This is a semantic illustration of the captured opcode, not the compatibility backend:
+
+```asm
+swp r2, r1, [r0]  ; read old word into r2; exchange with r1
+```
+
+The successful receipt names PC `0x2fe25724`, address `0x2fe3c788`, width 4 and old value 0. The earlier observer dump supplies `r0=0x2fe3c788` and `r1=1`, but comes from a different run. Neither line is a post-exchange register dump. Therefore a calculated final register value must not be presented as a separately observed register value. Compare the [original lines and instruction-state table](/ios/evidence/E06/#observed-swap) before considering broader atomicity claims.

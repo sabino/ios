@@ -1,0 +1,7 @@
+E27 / 50-xnu-source-options.md
+Source SHA-256: abfce1804dfd9b4c8810d6041a951f9664057fb25c3d4a2bf5bebbb631aab1ac
+Locator: lines 16–17
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+Darwin Kernel Version 9.0.0d1: Wed Dec 12 00:16:00 PST 2007;
+root:xnu-933.0.0.211.obj~2/RELEASE_ARM_S5L8900XRB

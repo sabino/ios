@@ -1,0 +1,18 @@
+E20 / 84-pinephone-native-buttons.md
+Source SHA-256: c2bab031dd8cffec9517f3da2ad63e4ddb2f329e92eb3d07326e51508cac660c
+Locator: lines 17–21; lines 28–32
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The event callback calls the inherited
+`dispatchKeyboardEvent` with Consumer page `0x0c`: usage `0x30` for Power
+(the iPod hold/sleep-wake button) and usage `0x40` for either Volume key
+(the iPod menu/Home button). These usages and the user-client path were
+checked against the original 4A102 binary and SpringBoard's HID filter.
+
+[…]
+
+The LRADC at `0x01c21800` is polled with its IRQ disabled.
+The live Jumpdrive tree declares Volume Up at 200 mV and Down at 400 mV on
+channel 0, supplied by the 3 V ALDO3 rail. The A64's two-thirds reference
+gives expected six-bit codes near 6 and 13, with bounded ranges on either
+side of their midpoint.

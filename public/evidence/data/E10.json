@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E10",
+    "title": "The storage callback ABI crosses compiler conventions",
+    "environment": "Synthetic probe",
+    "method": "Exact-build call-site inspection; ARM and Thumb receivers; negative control",
+    "observation": "The measured completion convention splits its final 64-bit count between a register and the stack. The contemporary bare-metal EABI comparison places it differently. Synthetic receivers verify both words and register preservation; the ordinary-EABI control fails as expected.",
+    "limits": "The probe isolates the boundary. It does not recover the full Darwin C++ ABI or exercise a physical storage device.",
+    "records": [
+      {
+        "document": "44-legacy-storage-completion-abi.md",
+        "sha256": "1e1024355277cf7ec32e64aeeaa4c3decea79fd3efcc3ba32ef6630a775ad725",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-storage-completion-abi.json",
+        "sha256": "0b11e1273cc5d1981696a354394c7ebe740406071a710e2515123412823ae092",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "uart0.txt",
+        "sha256": "5f0d7e60f853cf4f165e7e9a31df50de426c07127fb7afb96f41d5f6b6131c2f",
+        "access": "Selected excerpts are published below; full source remains private"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "register-layout",
+        "kind": "table",
+        "title": "The completion call crosses conventions",
+        "columns": [
+          "Argument",
+          "Observed legacy callback",
+          "Ordinary EABI comparison"
+        ],
+        "rows": [
+          [
+            "target",
+            "r0",
+            "r0"
+          ],
+          [
+            "parameter",
+            "r1",
+            "r1"
+          ],
+          [
+            "status",
+            "r2",
+            "r2"
+          ],
+          [
+            "actual bytes, low word",
+            "r3",
+            "[sp]"
+          ],
+          [
+            "actual bytes, high word",
+            "[sp]",
+            "[sp + 4]"
+          ]
+        ],
+        "interpretation": "A 64-bit fourth argument is the discriminator. The probe used nonzero high and low words so an incorrect placement could not hide behind a short transfer.",
+        "sourceIds": [
+          "abi"
+        ]
+      },
+      {
+        "id": "negative-control",
+        "kind": "table",
+        "title": "Actual synthetic probe values",
+        "columns": [
+          "Receiver",
+          "Low word",
+          "High word",
+          "Verdict"
+        ],
+        "rows": [
+          [
+            "Expected",
+            "0x9abcdef0",
+            "0x12345678",
+            "Synthetic fixture"
+          ],
+          [
+            "ARM bridge",
+            "0x9abcdef0",
+            "0x12345678",
+            "Values and r9 preserved"
+          ],
+          [
+            "Thumb bridge",
+            "0x9abcdef0",
+            "0x12345678",
+            "Values and r9 preserved"
+          ],
+          [
+            "Ordinary EABI negative control",
+            "0xdeadbeef",
+            "0x9abcdef0",
+            "Mismatch detected"
+          ]
+        ],
+        "interpretation": "The failing ordinary-EABI result demonstrates that the fixture detects the mismatch being studied. This is a synthetic receiver, not an Apple callback execution.",
+        "sourceIds": [
+          "probe-uart"
+        ]
+      },
+      {
+        "id": "serial",
+        "kind": "trace",
+        "title": "Inspect the probe receipts",
+        "text": "BRIDGE_TARGET=0x11223344\nBRIDGE_PARAMETER=0x55667788\nBRIDGE_STATUS=0x89abcdef\nBRIDGE_ACTUAL_LO=0x9abcdef0\nBRIDGE_ACTUAL_HI=0x12345678\nBRIDGE_R9=0x13579bdf\nBRIDGE_VALUES_OK=0x00000001\nBRIDGE_R9_PRESERVED=0x00000001\nTHUMB_TARGET=0x11223344\nTHUMB_PARAMETER=0x55667788\nTHUMB_STATUS=0x89abcdef\nTHUMB_ACTUAL_LO=0x9abcdef0\nTHUMB_ACTUAL_HI=0x12345678\nTHUMB_R9=0x0badc0de\nTHUMB_VALUES_OK=0x00000001\nTHUMB_R9_PRESERVED=0x00000001\nNULL_ACTION_NOOP=0x00000001\nEABI_DIRECT_ACTUAL_LO=0xdeadbeef\nEABI_DIRECT_ACTUAL_HI=0x9abcdef0\nEABI_NEGATIVE_MISMATCH=0x00000001\nA32_STORAGE_ABI_PASS",
+        "interpretation": "These are selected original serial lines, including the expected-failure result and final pass marker. Hexadecimal test constants are synthetic values, not device identifiers.",
+        "sourceIds": [
+          "probe-uart"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "abi",
+        "document": "44-legacy-storage-completion-abi.md",
+        "sha256": "1e1024355277cf7ec32e64aeeaa4c3decea79fd3efcc3ba32ef6630a775ad725",
+        "locator": "lines 5–5",
+        "format": "text",
+        "content": "The embedded `IOBlockStorageDriver` calls the provider's legacy 64-bit asynchronous read/write slot with block in `r2/r3`, count in the first two stack words, and the three completion fields by value after it. Its completion helper invokes the action with target in `r0`, parameter in `r1`, status in `r2`, byte-count low word in `r3` and high word at the top of the stack. A normal EABI call with a 64-bit fourth argument places both words on the stack instead. The mismatch would corrupt a transfer's completion count even if its sector data were correct.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      },
+      {
+        "id": "probe-uart",
+        "document": "uart0.txt",
+        "sha256": "5f0d7e60f853cf4f165e7e9a31df50de426c07127fb7afb96f41d5f6b6131c2f",
+        "locator": "selected lines 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26",
+        "format": "text",
+        "content": "BRIDGE_TARGET=0x11223344\nBRIDGE_PARAMETER=0x55667788\nBRIDGE_STATUS=0x89abcdef\nBRIDGE_ACTUAL_LO=0x9abcdef0\nBRIDGE_ACTUAL_HI=0x12345678\nBRIDGE_R9=0x13579bdf\nBRIDGE_VALUES_OK=0x00000001\nBRIDGE_R9_PRESERVED=0x00000001\nTHUMB_TARGET=0x11223344\nTHUMB_PARAMETER=0x55667788\nTHUMB_STATUS=0x89abcdef\nTHUMB_ACTUAL_LO=0x9abcdef0\nTHUMB_ACTUAL_HI=0x12345678\nTHUMB_R9=0x0badc0de\nTHUMB_VALUES_OK=0x00000001\nTHUMB_R9_PRESERVED=0x00000001\nNULL_ACTION_NOOP=0x00000001\nEABI_DIRECT_ACTUAL_LO=0xdeadbeef\nEABI_DIRECT_ACTUAL_HI=0x9abcdef0\nEABI_NEGATIVE_MISMATCH=0x00000001\nA32_STORAGE_ABI_PASS",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      }
+    ]
+  }
+}

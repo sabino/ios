@@ -51,3 +51,14 @@ A synthetic receiver does not prove that the real provider locates the correct i
 Even then, completion timing mattered. Calling the correct action with correct arguments synchronously caused recursive provider entry in the early one-sector implementation. Moving the completion to a deferred context closed a different defect. [E11](/ios/evidence/E11/)
 
 This is a useful preservation pattern: isolate the narrow ABI contract with original fixtures, then establish its integration through the original client. Keep those evidence layers distinct so that later lifetime or concurrency failures do not erase a valid boundary measurement—or get hidden behind it.
+
+## Read the boundary as words, not a C signature
+
+A 64-bit actual byte count crosses this call boundary. The synthetic fixture uses `0x123456789abcdef0`, making word displacement visible:
+
+```text
+legacy callback: r3 = 0x9abcdef0; [sp]   = 0x12345678
+EABI fourth arg: [sp] = 0x9abcdef0; [sp+4] = 0x12345678
+```
+
+This is an explanatory register layout, not executable bridge code. ARM and Thumb fixtures check the legacy placement and restored r9. The deliberate direct-EABI negative control observes low word `0xdeadbeef` and high word `0x9abcdef0`: the caller and callee disagree about where the value lives. The [original serial receipt](/ios/evidence/E10/#serial) makes that disagreement inspectable.

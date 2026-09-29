@@ -1,10 +1,10 @@
 {
   "title": "iPhone OS Research Atlas",
-  "edition": "1.0",
+  "edition": "1.1",
   "date": "2026-09-29",
   "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
   "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
-  "provenance": "Original editorial synthesis of private project notebooks and experiment reports. Curated evidence summaries are public; raw firmware, images, logs and the implementation repository are not included.",
+  "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
   "independentReproduction": false,
   "license": "MIT"
 }

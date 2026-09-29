@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E25",
+    "title": "Reboot acceptance extends beyond the printed message",
+    "environment": "Physical PinePhone",
+    "method": "Explicit UART request; observed recovery return; full data-volume check",
+    "observation": "The corrected UART listener survived input, accepted the explicit request and returned through BSD shutdown to recovery. A later remote-only run passed the former three-minute cutoff, rebooted on request and passed full data fsck with an unchanged root.",
+    "limits": "The command is a dedicated reboot channel, not a shell. It depends on a live polling path and does not guarantee recovery from arbitrary kernel failure.",
+    "records": [
+      {
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "d103d4eda4d7ad80fe710c3379e49c6108e411867cbb90be5a93efb36a8dae0b",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "register-collision",
+        "kind": "table",
+        "title": "A board mismatch at the same MMIO offset",
+        "columns": [
+          "Address / interrupt",
+          "A64 interpretation",
+          "Legacy interpretation"
+        ],
+        "rows": [
+          [
+            "UART base 0x01c28000",
+            "A64 UART0",
+            "Advertised as uart,s5l8900x"
+          ],
+          [
+            "Base + 0x04 = 0x01c28004",
+            "Interrupt Enable Register (IER)",
+            "Samsung UCON"
+          ],
+          [
+            "GIC SPI 32",
+            "Live A64 UART0 interrupt",
+            "Not handled as the native UART source"
+          ]
+        ],
+        "interpretation": "A plausible driver name does not make the register layouts compatible. The first receive event exposed that mismatch.",
+        "sourceIds": [
+          "uart"
+        ]
+      },
+      {
+        "id": "reboot-receipts",
+        "kind": "table",
+        "title": "Progress beyond the printed acknowledgement",
+        "columns": [
+          "Physical gate",
+          "Register receipt",
+          "Observed acceptance"
+        ],
+        "rows": [
+          [
+            "Corrected five-minute gate",
+            "spi32_before=00000001 after=00000000 ier=00000001",
+            "Harmless RX survived; recovery about 6 s after request"
+          ],
+          [
+            "Remote-only gate",
+            "spi32_before=00000001 after=00000000 ier=00000000",
+            "Ten heartbeats past old cutoff; recovery about 6 s later"
+          ],
+          [
+            "Both post-run copies",
+            "512 MiB; fsck exit 0; clean bit set",
+            "Root hash unchanged"
+          ]
+        ],
+        "interpretation": "The record distinguishes the first interrupt-masking correction from the later explicit IER clear. Actual recovery and filesystem checks complete the reboot claim.",
+        "sourceIds": [
+          "uart"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "uart",
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "d103d4eda4d7ad80fe710c3379e49c6108e411867cbb90be5a93efb36a8dae0b",
+        "locator": "lines 11–16; lines 29–37; lines 41–47",
+        "format": "text",
+        "content": "The phone Apple tree originally exposed `uart0` at the real A64 UART0 MMIO\naddress `0x01c28000` as `uart,s5l8900x`. AppleS5L8900XSerial attached in the\nfirst physical UART-command trial. Its Samsung UCON register at offset 4\noverlaps A64 UART IER. The first trial stopped printing after host RX and did\nnot reach either command acknowledgement or the five-minute fallback. The\nlive A64 UART0 interrupt is GIC SPI 32.\n\n[…]\n\nThe corrected five-minute physical gate captured\n`spi32_before=00000001 after=00000000 ier=00000001`: masking was actually\nneeded on the phone. A harmless RX byte did not stop the idle or UART\nheartbeats. The full token was accepted, `MACH Reboot` appeared, and\nJumpdrive returned six seconds after the host request. The subsequent full\n512 MiB data copy had its HFS clean bit set and passed `fsck_hfs -dfn` with\nexit 0; the root partition SHA-256 remained\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nUART0 IER still read 1 in that gate because U-Boot had left it enabled.\n\n[…]\n\nIts first phone\nrun logged `spi32_before=00000001 after=00000000 ier=00000000` at listener\nstartup. Ten subsequent UART heartbeats retained `ier=00000000 spi32=0\nremask=0` beyond the old three-minute cutoff. The host requested a reboot,\nand Jumpdrive returned about six seconds later. Its complete post-run data\ncopy had the clean bit set and passed fsck with exit 0; the root hash was\nunchanged.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

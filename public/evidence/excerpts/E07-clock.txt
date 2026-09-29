@@ -1,0 +1,18 @@
+E07 / pinephone-clock-storage-2026-09-27.json
+Source SHA-256: 619fed90da7df90414fa3a59cf4bfd8cea1d7575b4633d63db96aeffeadc33dc
+Locator: $.clock.prior_hz; $.clock.corrected_hz; $.clock.prior_uart_interval_seconds; $.clock.corrected_uart_interval_seconds; $.clock.host_arrival_timing_not_cpu_stopwatch; $.clock.tree_changed_byte_offsets
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "clock.prior_hz": 62500000,
+  "clock.corrected_hz": 24000000,
+  "clock.prior_uart_interval_seconds": 3.014805055,
+  "clock.corrected_uart_interval_seconds": 1.010080943,
+  "clock.host_arrival_timing_not_cpu_stopwatch": true,
+  "clock.tree_changed_byte_offsets": [
+    3288,
+    3289,
+    3290,
+    3291
+  ]
+}

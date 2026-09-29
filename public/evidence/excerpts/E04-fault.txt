@@ -1,0 +1,26 @@
+E04 / pinephone-qemu-afe-2026-09-25.json
+Source SHA-256: f5a661fbb0fa575da55150196b857baaaf36777b569b3c600f433e5a70326dfc
+Locator: $.memory_map.qemu_backed_ram; $.memory_map.fault_virtual_address; $.memory_map.commpage_physical_page; $.stage029_fault; $.stage030_control.pte_values_unchanged; $.stage030_control.commpage_virtual_read_passed; $.stage030_control.extended_observation_seconds; $.stage030_control.synchronous_faults_in_extended_trace; $.stage030_control.physical_phone_tested_with_afe_clear
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "memory_map.qemu_backed_ram": "0x40000000..0x60000000 (half-open, 512 MiB)",
+  "memory_map.fault_virtual_address": "0x40000054",
+  "memory_map.commpage_physical_page": "0x5096a000",
+  "stage029_fault": {
+    "pc": "0xc0064284",
+    "function": "_commpage_set_timestamp",
+    "dfar": "0x40000054",
+    "dfsr": "0x6",
+    "active_ttbr": "0x506e0000",
+    "l1_descriptor": "0x50989001",
+    "l2_descriptor": "0x5096a02e",
+    "sctlr": "0x30d0382d",
+    "interpretation": "SCTLR.AFE=1 treats clear PTE AP[0] as a level-2 access-flag fault"
+  },
+  "stage030_control.pte_values_unchanged": true,
+  "stage030_control.commpage_virtual_read_passed": true,
+  "stage030_control.extended_observation_seconds": 40.12,
+  "stage030_control.synchronous_faults_in_extended_trace": 0,
+  "stage030_control.physical_phone_tested_with_afe_clear": false
+}

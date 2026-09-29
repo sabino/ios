@@ -1,0 +1,20 @@
+E24 / pinephone-anx-off-charging-2026-09-28.json
+Source SHA-256: 6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419
+Locator: $.phone_720_second_trial.boot_time_seen; $.phone_720_second_trial.hid_attach_seen; $.phone_720_second_trial.power_client_attach_count; $.phone_720_second_trial.heartbeat_samples; $.phone_720_second_trial.heartbeat_idle_pc_samples; $.known_good_data_control.boot_time_seconds; $.known_good_data_control.hid_attach_seen; $.known_good_data_control.power_client_attach_count; $.known_good_data_control.heartbeat_samples; $.known_good_data_control.heartbeat_idle_pc_samples; $.known_good_data_control.run_tmp_sbshutdowncookie_data_ark_identical_to_missing_marker_image; $.known_good_data_control.only_extracted_file_delta; $.qemu_postrun_data_repeat.hid_attach_seen
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "phone_720_second_trial.boot_time_seen": false,
+  "phone_720_second_trial.hid_attach_seen": true,
+  "phone_720_second_trial.power_client_attach_count": 13,
+  "phone_720_second_trial.heartbeat_samples": 37,
+  "phone_720_second_trial.heartbeat_idle_pc_samples": 32,
+  "known_good_data_control.boot_time_seconds": 29.5,
+  "known_good_data_control.hid_attach_seen": true,
+  "known_good_data_control.power_client_attach_count": 13,
+  "known_good_data_control.heartbeat_samples": 37,
+  "known_good_data_control.heartbeat_idle_pc_samples": 34,
+  "known_good_data_control.run_tmp_sbshutdowncookie_data_ark_identical_to_missing_marker_image": true,
+  "known_good_data_control.only_extracted_file_delta": "logs/BTServer/stderr",
+  "qemu_postrun_data_repeat.hid_attach_seen": false
+}

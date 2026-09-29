@@ -5,8 +5,13 @@ const select=document.querySelector<HTMLSelectElement>('#concept-select')!;
 const nodeLinks=Array.from(document.querySelectorAll<SVGAElement>('[data-node]'));
 const canvas=document.querySelector<HTMLElement>('#map-canvas')!,list=document.querySelector<HTMLElement>('#map-list')!;
 const mapButton=document.querySelector('#map-view')!,listButton=document.querySelector('#list-view')!;
-function mode(isMap:boolean){canvas.hidden=!isMap;list.hidden=isMap;mapButton.setAttribute('aria-pressed',String(isMap));listButton.setAttribute('aria-pressed',String(!isMap));}
-mapButton.addEventListener('click',()=>mode(true));listButton.addEventListener('click',()=>mode(false));if(matchMedia('(max-width: 760px)').matches)mode(false);
+const graph=document.querySelector<HTMLElement>('#floating-graph')!,graphButton=document.querySelector('#graph-view')!;
+function mode(view:'graph'|'structured'|'list'){
+ canvas.hidden=view!=='structured';list.hidden=view!=='list';graph.hidden=view!=='graph';
+ mapButton.setAttribute('aria-pressed',String(view==='structured'));listButton.setAttribute('aria-pressed',String(view==='list'));graphButton.setAttribute('aria-pressed',String(view==='graph'));
+ document.dispatchEvent(new CustomEvent('atlas-graph-view',{detail:view}));
+}
+mapButton.addEventListener('click',()=>mode('structured'));listButton.addEventListener('click',()=>mode('list'));graphButton.addEventListener('click',()=>mode('graph'));if(matchMedia('(max-width:760px)').matches)mode('list');
 function choose(slug:string){
  const a=data.find((a:any)=>a.slug===slug);select.value=a?slug:'';
  const related=new Set(a?[a.slug,...a.related,...data.filter((b:any)=>b.related.includes(slug)).map((b:any)=>b.slug)]:[]);
@@ -23,8 +28,8 @@ function choose(slug:string){
  }
  const u=new URL(location.href);if(a)u.searchParams.set('focus',slug);else u.searchParams.delete('focus');history.replaceState(null,'',u);
 }
-nodeLinks.forEach(el=>el.addEventListener('click',e=>{if((e as MouseEvent).ctrlKey||(e as MouseEvent).metaKey)return;e.preventDefault();choose(el.dataset.node!)}));
-select.addEventListener('change',()=>choose(select.value));document.querySelector('#map-reset')?.addEventListener('click',()=>choose(''));
+nodeLinks.forEach(el=>el.addEventListener('click',e=>{if((e as MouseEvent).ctrlKey||(e as MouseEvent).metaKey||(e as MouseEvent).shiftKey||(e as MouseEvent).altKey)return;e.preventDefault();if(el.dataset.dragged==='true'){delete el.dataset.dragged;return;}choose(el.dataset.node!)}));
+select.addEventListener('change',()=>choose(select.value));document.querySelector('#map-reset')?.addEventListener('click',()=>{choose('');document.dispatchEvent(new Event('atlas-graph-reset'));});
 const initial=new URL(location.href).searchParams.get('focus');if(initial)choose(initial);
 
 for(const node of nodeLinks){const preview=(on:boolean)=>document.querySelectorAll<SVGPathElement>('[data-edge-from]').forEach(edge=>edge.classList.toggle('preview',on&&(edge.dataset.edgeFrom===node.dataset.node||edge.dataset.edgeTo===node.dataset.node)));node.addEventListener('mouseenter',()=>preview(true));node.addEventListener('mouseleave',()=>preview(false));node.addEventListener('focus',()=>preview(true));node.addEventListener('blur',()=>preview(false));}

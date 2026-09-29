@@ -1,0 +1,29 @@
+E21 / pinephone-touch-delivery-abi-2026-09-25.json
+Source SHA-256: c4a771ebe9a2356c4d901ee7564414c060b2186e52ac353b48cc2169aedf2d43
+Locator: $.absolute_pointer_convenience_dispatch; $.original_multitouch_user_client_memory_types_seen; $.original_user_client_queue_type; $.original_user_client_queue_descriptor_offset; $.original_user_client_queue_object_offset; $.original_touch_userland_path; $.ipod_qemu_one_contact_header_bytes; $.ipod_qemu_one_contact_record_bytes; $.ipod_qemu_down_and_release_vectors_dynamically_observed; $.original_touch_pipeline_dynamically_verified
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "absolute_pointer_convenience_dispatch": {
+    "kernel_address": "0xc0367e52",
+    "instruction": "bx lr",
+    "touch_delivery_proven": false
+  },
+  "original_multitouch_user_client_memory_types_seen": [
+    0,
+    16
+  ],
+  "original_user_client_queue_type": 0,
+  "original_user_client_queue_descriptor_offset": "0x8c",
+  "original_user_client_queue_object_offset": "0x88",
+  "original_touch_userland_path": [
+    "AppleMultitouchSPI IOService",
+    "MultitouchDriverUserClient memory type 0 IODataQueue",
+    "MultitouchSupport raw packet parser and contact callback",
+    "MultitouchHID.plugin digitizer HID event conversion"
+  ],
+  "ipod_qemu_one_contact_header_bytes": 24,
+  "ipod_qemu_one_contact_record_bytes": 28,
+  "ipod_qemu_down_and_release_vectors_dynamically_observed": false,
+  "original_touch_pipeline_dynamically_verified": false
+}

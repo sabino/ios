@@ -1,0 +1,34 @@
+E05 / pinephone-emmc-a53-range-clean-return.json
+Source SHA-256: 39714a12d72d405efefc86d469d3c34d8bbce99b580bc33506fff4eff83a7534
+Locator: $.diagnostic.progress_rows; $.diagnostic.qemu_all_markers; $.physical_observation.all_nine_markers_observed; $.physical_observation.original_pmap_map_bd_return_supported; $.physical_observation.original_console_text_observed; $.physical_observation.camera_progress_frame_24_sha256
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "diagnostic.progress_rows": {
+    "cache_clean_entry": [
+      144,
+      159
+    ],
+    "cache_clean_return": [
+      176,
+      191
+    ],
+    "tlb_flush_entry": [
+      208,
+      223
+    ],
+    "tlb_flush_return": [
+      240,
+      255
+    ],
+    "pmap_return": [
+      336,
+      351
+    ]
+  },
+  "diagnostic.qemu_all_markers": true,
+  "physical_observation.all_nine_markers_observed": true,
+  "physical_observation.original_pmap_map_bd_return_supported": true,
+  "physical_observation.original_console_text_observed": false,
+  "physical_observation.camera_progress_frame_24_sha256": "6b54c58715ed2fb2098f2fe512677d1606eb886eb1e546280f13cdf7ad12ceef"
+}

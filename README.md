@@ -12,15 +12,15 @@ The atlas preserves the discoveries, failed explanations and remaining questions
 - **Three guided paths** trace boot to userspace, follow a pixel, or examine how the evidence changed.
 - **The concept map** connects related questions. These are editorial relationships, not a recovered call graph.
 
-The publication includes 28 evidence summaries, 18 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
+The publication includes 28 evidence records with 57 concrete exhibits and 42 inspectable source excerpts, 18 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
 
 ## What the evidence establishes
 
-Edition 1.0 reviews source revision `a87a56a30513fb600a61758541465e613f0d8813`. Its physical frontier includes original-client setup imagery, display wake through the original HID path, checked storage runs and a measured charging observation. Touch integration, useful audio output and a generally usable phone are not established by this edition.
+Edition 1.1 reviews source revision `a87a56a30513fb600a61758541465e613f0d8813`. Its physical frontier includes original-client setup imagery, display wake through the original HID path, checked storage runs and a measured charging observation. Touch integration, useful audio output and a generally usable phone are not established by this edition.
 
 The experiments are **reported private project results**. Public records preserve the observation, method, environment, limitations, reviewed document name and SHA-256 digest. A digest identifies a document; it does not make its findings independently reproducible. Public upstream references supply architectural context, not independent replication of these local experiments.
 
-This repository contains original editorial writing, original diagrams, curated metadata and the website implementation. It does **not** distribute the port implementation, proprietary firmware, decrypted images, device dumps, raw run logs, keys or firmware modification procedures.
+This repository contains original editorial writing, original diagrams, curated metadata, selected reviewed capture images and short source excerpts, and the website implementation. It does **not** distribute the port implementation, proprietary firmware, decrypted images, device dumps, complete raw run logs, keys or firmware modification procedures.
 
 ## Develop
 
@@ -67,3 +67,9 @@ Before publishing a new edition, follow [the editorial protocol](docs/EDITORIAL.
 [Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) inspired the connected-concept and guided-reading organization; its code is not incorporated. Claude participated in interface design and review. Original diagrams avoid firmware screenshots and product trade dress.
 
 Original content, diagrams, curated data organization and site code: [MIT](LICENSE). Schibsted Grotesk and IBM Plex Mono: SIL Open Font License, included under `public/licenses/`. Linked works retain their own licenses. Apple and PINE64 names are descriptive; this publication is independent of both organizations.
+
+## Reading and appearance
+
+The [timeline](https://sabino.pro/ios/timeline/) connects dated records to continuous reading paths and open questions. The concept map offers a draggable graph, a structured view and a list. Search includes addresses and selected logs. Appearance supports Light, Dark and System; the preference is stored locally. No preference is sent to a server.
+
+Research captures retain explicit environment labels. The physical photo is cropped to its screen without changing decoded pixel values; its crop bounds and source digest are preserved. Apple interface content retains its original rights.

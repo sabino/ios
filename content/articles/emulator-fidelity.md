@@ -53,3 +53,14 @@ The iPod reference and native contract answer different questions. If an origina
 The early native entry test deliberately stopped at a CPU-specific fault and reported no OS boot. That makes it a good model experiment: it established the reachable frontier without fabricating the missing behavior. [E03](/ios/evidence/E03/)
 
 The preservation value of an emulator is its inspectable, reproducible contract. Every extension should state which observed behavior it models and which physical questions remain outside that contract.
+
+## Read a presence predicate literally
+
+The static GPIO example uses address `0x3e4000e4`, obtained from base `0x3e400004` plus seven register strides of `0x20`. Its tested mask is `0x2`. A minimal expression of the inspected predicate is:
+
+```c
+/* Explanation of the branch condition, not a driver implementation. */
+bool bit_is_clear = (register_value & 0x2) == 0;
+```
+
+An unimplemented read that returns zero makes this expression true. That can select a device-present branch even though the model has no such device. The nonzero alternative in the [truth table](/ios/evidence/E26/#truth-table) is static reasoning, not a measured alternate run. QEMU describes its [virt board as a generic virtual platform](https://www.qemu.org/docs/master/system/arm/virt.html); board-specific behavior still needs explicit modeling.

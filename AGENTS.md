@@ -1,6 +1,8 @@
 # Publication boundaries
 
-This is an independent documentation and website repository. Its subject is early iPhone OS preservation research. Never import the implementation repository, firmware, binary patches, device images, extracted Apple artwork, raw session transcripts, credentials, device identifiers, or private filesystem paths.
+This is an independent documentation and website repository. Its subject is early iPhone OS preservation research. Never import the implementation repository, firmware, binary patches, device storage images, extracted Apple artwork, raw session transcripts, credentials, device identifiers, or private filesystem paths.
+
+Selected research capture images and short log/notebook excerpts are authorized for publication after reviewing them for personal data, provenance and claim scope. Record source basenames, SHA-256, excerpt locators, and any crop bounds. Keep photo crops pixel-preserving; do not generate or retouch evidence. Depicted third-party interfaces retain their original rights. Never import entire run directories or raw capture files.
 
 Write original explanatory prose. Distinguish original iPod emulation, the partial PinePhone QEMU contract, physical PinePhone measurements, synthetic probes, static inspection, and interpretation. A result in one environment is not a result in another. Every article must cite evidence and state its limits. Evidence records are curated reports of private experiments; they are not independent public reproductions.
 

@@ -1,0 +1,33 @@
+E25 / 83-pinephone-uart-clean-reboot.md
+Source SHA-256: d103d4eda4d7ad80fe710c3379e49c6108e411867cbb90be5a93efb36a8dae0b
+Locator: lines 11–16; lines 29–37; lines 41–47
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The phone Apple tree originally exposed `uart0` at the real A64 UART0 MMIO
+address `0x01c28000` as `uart,s5l8900x`. AppleS5L8900XSerial attached in the
+first physical UART-command trial. Its Samsung UCON register at offset 4
+overlaps A64 UART IER. The first trial stopped printing after host RX and did
+not reach either command acknowledgement or the five-minute fallback. The
+live A64 UART0 interrupt is GIC SPI 32.
+
+[…]
+
+The corrected five-minute physical gate captured
+`spi32_before=00000001 after=00000000 ier=00000001`: masking was actually
+needed on the phone. A harmless RX byte did not stop the idle or UART
+heartbeats. The full token was accepted, `MACH Reboot` appeared, and
+Jumpdrive returned six seconds after the host request. The subsequent full
+512 MiB data copy had its HFS clean bit set and passed `fsck_hfs -dfn` with
+exit 0; the root partition SHA-256 remained
+`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.
+UART0 IER still read 1 in that gate because U-Boot had left it enabled.
+
+[…]
+
+Its first phone
+run logged `spi32_before=00000001 after=00000000 ier=00000000` at listener
+startup. Ten subsequent UART heartbeats retained `ier=00000000 spi32=0
+remask=0` beyond the old three-minute cutoff. The host requested a reboot,
+and Jumpdrive returned about six seconds later. Its complete post-run data
+copy had the clean bit set and passed fsck with exit 0; the root hash was
+unchanged.

@@ -1,0 +1,6 @@
+E10 / 44-legacy-storage-completion-abi.md
+Source SHA-256: 1e1024355277cf7ec32e64aeeaa4c3decea79fd3efcc3ba32ef6630a775ad725
+Locator: lines 5–5
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+The embedded `IOBlockStorageDriver` calls the provider's legacy 64-bit asynchronous read/write slot with block in `r2/r3`, count in the first two stack words, and the three completion fields by value after it. Its completion helper invokes the action with target in `r0`, parameter in `r1`, status in `r2`, byte-count low word in `r3` and high word at the top of the stack. A normal EABI call with a 64-bit fourth argument places both words on the stack instead. The mismatch would corrupt a transfer's completion count even if its sector data were correct.

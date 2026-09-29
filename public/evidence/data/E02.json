@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E02",
+    "title": "iBoot changes the device tree",
+    "environment": "iPod reference",
+    "method": "Capture at the live kernel handoff; compare archived and live tree",
+    "observation": "The archived N45AP CPU clock properties are zero. At the observed iBoot handoff the corresponding properties are populated; three captures agree on clock values while whole-tree hashes vary.",
+    "limits": "N45AP values are not measurements of M68AP or PinePhone clocks.",
+    "records": [
+      {
+        "document": "29-live-apple-device-tree.md",
+        "sha256": "6d89c86f2971019ac15ff41ab6156f9dc418f1ee942f8f150371658a464729f8",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-live-tree-2026-09-24.json",
+        "sha256": "b1da05c0657a2e8633f06315d5eab41e7e739aaad59d6f430254d4b5cc952778",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Timebase",
+        "value": "6 MHz"
+      },
+      {
+        "label": "CPU",
+        "value": "412 MHz"
+      },
+      {
+        "label": "Bus",
+        "value": "103 MHz"
+      }
+    ],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "clock-properties",
+        "kind": "table",
+        "title": "Archived tree versus live N45AP handoff",
+        "columns": [
+          "Property",
+          "Archived N45AP",
+          "Live N45AP"
+        ],
+        "rows": [
+          [
+            "Node count",
+            "73",
+            "73"
+          ],
+          [
+            "Timebase / Hz",
+            "0",
+            "6000000"
+          ],
+          [
+            "Fixed clock / Hz",
+            "Not transcribed in this JSON record",
+            "24000000"
+          ],
+          [
+            "CPU / Hz",
+            "Not transcribed in this JSON record",
+            "412000000"
+          ],
+          [
+            "Bus / Hz",
+            "Not transcribed in this JSON record",
+            "103000000"
+          ],
+          [
+            "Peripheral / Hz",
+            "Not transcribed in this JSON record",
+            "51500000"
+          ],
+          [
+            "Memory / Hz",
+            "Not transcribed in this JSON record",
+            "137333333"
+          ]
+        ],
+        "interpretation": "The same node count conceals a changed runtime contract. These are N45AP handoff values; no live M68AP tree was captured in this record.",
+        "sourceIds": [
+          "tree"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "tree",
+        "document": "pinephone-live-tree-2026-09-24.json",
+        "sha256": "b1da05c0657a2e8633f06315d5eab41e7e739aaad59d6f430254d4b5cc952778",
+        "locator": "$.archived_n45ap.nodes; $.archived_n45ap.cpu_timebase_hz; $.live_n45ap.nodes; $.live_n45ap.cpu_timebase_hz; $.live_n45ap.cpu_fixed_hz; $.live_n45ap.cpu_clock_hz; $.live_n45ap.cpu_bus_hz; $.live_n45ap.cpu_peripheral_hz; $.live_n45ap.cpu_memory_hz; $.archived_m68ap.live_tree_captured",
+        "format": "json",
+        "content": "{\n  \"archived_n45ap.nodes\": 73,\n  \"archived_n45ap.cpu_timebase_hz\": 0,\n  \"live_n45ap.nodes\": 73,\n  \"live_n45ap.cpu_timebase_hz\": 6000000,\n  \"live_n45ap.cpu_fixed_hz\": 24000000,\n  \"live_n45ap.cpu_clock_hz\": 412000000,\n  \"live_n45ap.cpu_bus_hz\": 103000000,\n  \"live_n45ap.cpu_peripheral_hz\": 51500000,\n  \"live_n45ap.cpu_memory_hz\": 137333333,\n  \"archived_m68ap.live_tree_captured\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

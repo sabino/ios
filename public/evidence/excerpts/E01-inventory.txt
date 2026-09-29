@@ -1,0 +1,20 @@
+E01 / 20-iphone-1g-4a102.md
+Source SHA-256: f83fac967d80608f0b77cdeb10543a0b3d80a86199650f225f44f4ca06f1b82f
+Locator: lines 7–10; lines 18–25
+Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document.
+
+| Product | Apple archive | Size (bytes) | SHA-256 |
+| --- | --- | ---: | --- |
+| iPhone1,1 / M68AP | [iPhone 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPhone/061-4313.20080226.Sw39i/iPhone1,1_1.1.4_4A102_Restore.ipsw) | 169,946,442 | `25fa72bc07e1879646a690e49090ff376904128cfa333b606a19337d4d02b586` |
+| iPod1,1 / N45AP comparison | [iPod 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPod/SBML/osx/bundles/061-4312.20080226.Btu45/iPod1,1_1.1.4_4A102_Restore.ipsw) | 173,519,589 | `9c3808664b6aee7ca90b53fab575db0f7a57a82ec842dfd8a78c6ca3e296aa94` |
+
+[…]
+
+| Component | Observed comparison |
+| --- | --- |
+| `kernelcache.release.s5l8900xrb` | Byte identical, 3,356,266 bytes, SHA-256 `b468dee8f4a1441932bb7c027f30912198d68c1c17d87a3bbc2b33329ce82d4c` |
+| `022-3896-4.dmg`, `022-3900-4.dmg` | Byte identical across archives; their roles have not been established here |
+| Normal-boot `iBoot`, `LLB`, `DeviceTree` | Different board-named members and different hashes |
+| DFU `iBEC`, `iBSS` | Different board-named members and different hashes |
+| Primary root DMG | iPhone `022-3894-4.dmg`: 128,495,616 bytes; iPod `022-3893-4.dmg`: 132,075,520 bytes; different hashes and both begin with an `encrcdsa` encrypted-DMG header |
+| Common display/recovery IMG2 resources and WTF DFU | Byte identical in the compared archives |

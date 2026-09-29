@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E20",
+    "title": "Physical button edges reach original HID",
+    "environment": "Physical PinePhone",
+    "method": "Physical taps, visible response and post-run filesystem checks; separate QEMU poller control",
+    "observation": "Three short physical power taps yielded setup image, black, setup image. In a separate boot each volume key delivered one Home/menu press-release pair. Both boots ended with clean recovery, fsck exit 0 and unchanged root.",
+    "limits": "Touch, long power holds, volume auto-repeat and a complete home-screen interaction were not validated. The volume keys are mapped to Home, not audio volume.",
+    "records": [
+      {
+        "document": "84-pinephone-native-buttons.md",
+        "sha256": "c2bab031dd8cffec9517f3da2ad63e4ddb2f329e92eb3d07326e51508cac660c",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-buttons-2026-09-29.json",
+        "sha256": "c86c7549f421603ed847d4b5ad120c24c77ca84ea4ccb9d9990056a7f74d3b1a",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "uart-native.raw",
+        "sha256": "d6c48b773af34f68588ff057abd383597b50fa3f457840b143fc2eb927a92350",
+        "access": "Selected excerpts are published below; full source remains private"
+      },
+      {
+        "document": "uart-volume.raw",
+        "sha256": "5f32993983db371a728b1c69de217e09877d52f29e127994a87b0c4d144bd0e2",
+        "access": "Selected excerpts are published below; full source remains private"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Power edge pairs",
+        "value": "3"
+      },
+      {
+        "label": "Volume/Home pairs",
+        "value": "2"
+      },
+      {
+        "label": "Physical touch",
+        "value": "not tested"
+      }
+    ],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "power-events",
+        "kind": "trace",
+        "title": "Physical Power press/release receipts",
+        "text": "AppleHV button: native start original=0 rsb=1 lradc=1 poll=1\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0",
+        "interpretation": "The original UART lines expose service setup and each HID edge. The three taps were observed as setup image → black → setup image; wake frames 9 and 10 were nonzero.",
+        "sourceIds": [
+          "power-uart"
+        ]
+      },
+      {
+        "id": "volume-events",
+        "kind": "trace",
+        "title": "Physical Volume keys delivered Home/menu edges",
+        "text": "AppleHV button: usage=40 down=1\nAppleHV button: usage=40 down=0\nAppleHV button: usage=40 down=1\nAppleHV button: usage=40 down=0",
+        "interpretation": "The usage is 0x40 (Home/menu), not audio volume. Each key produced one down/up pair during the separate Volume run.",
+        "sourceIds": [
+          "volume-uart"
+        ]
+      },
+      {
+        "id": "hardware-map",
+        "kind": "table",
+        "title": "Physical source to observed HID meaning",
+        "columns": [
+          "Physical input",
+          "Native source / reference",
+          "HID Consumer page 0x0c"
+        ],
+        "rows": [
+          [
+            "Power",
+            "AXP803 PEK through RSB",
+            "Usage 0x30; hold/sleep-wake"
+          ],
+          [
+            "Volume Up",
+            "LRADC 0x01c21800; 200 mV; expected code near 6",
+            "Usage 0x40; Home/menu"
+          ],
+          [
+            "Volume Down",
+            "LRADC 0x01c21800; 400 mV; expected code near 13",
+            "Usage 0x40; Home/menu"
+          ]
+        ],
+        "interpretation": "The ADC codes are expected values derived in the notebook, not new live samples. The event receipts above establish delivery for the tested taps.",
+        "sourceIds": [
+          "hardware"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "buttons",
+        "document": "pinephone-native-buttons-2026-09-29.json",
+        "sha256": "c86c7549f421603ed847d4b5ad120c24c77ca84ea4ccb9d9990056a7f74d3b1a",
+        "locator": "$.qemu.visual_sequence; $.qemu.consumer_hold_press_release_pairs; $.phone_power.physical_short_power_taps; $.phone_power.consumer_hold_press_release_pairs; $.phone_power.user_observed; $.phone_power.nonzero_wake_panel_frames; $.phone_power.data_fsck_exit; $.phone_power.root_unchanged; $.phone_volume.volume_up_consumer_menu_press_release_pairs; $.phone_volume.volume_down_consumer_menu_press_release_pairs; $.phone_volume.data_fsck_exit; $.phone_volume.root_unchanged",
+        "format": "json",
+        "content": "{\n  \"qemu.visual_sequence\": [\n    \"black\",\n    \"Connect to iTunes\",\n    \"black\"\n  ],\n  \"qemu.consumer_hold_press_release_pairs\": 2,\n  \"phone_power.physical_short_power_taps\": 3,\n  \"phone_power.consumer_hold_press_release_pairs\": 3,\n  \"phone_power.user_observed\": [\n    \"Connect to iTunes\",\n    \"black\",\n    \"Connect to iTunes\"\n  ],\n  \"phone_power.nonzero_wake_panel_frames\": [\n    9,\n    10\n  ],\n  \"phone_power.data_fsck_exit\": 0,\n  \"phone_power.root_unchanged\": true,\n  \"phone_volume.volume_up_consumer_menu_press_release_pairs\": 1,\n  \"phone_volume.volume_down_consumer_menu_press_release_pairs\": 1,\n  \"phone_volume.data_fsck_exit\": 0,\n  \"phone_volume.root_unchanged\": true\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "power-uart",
+        "document": "uart-native.raw",
+        "sha256": "d6c48b773af34f68588ff057abd383597b50fa3f457840b143fc2eb927a92350",
+        "locator": "selected lines 354, 2311, 2313, 2327, 2329, 2339, 2341",
+        "format": "text",
+        "content": "AppleHV button: native start original=0 rsb=1 lradc=1 poll=1\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0\nAppleHV button: usage=30 down=1\nAppleHV button: usage=30 down=0",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      },
+      {
+        "id": "volume-uart",
+        "document": "uart-volume.raw",
+        "sha256": "5f32993983db371a728b1c69de217e09877d52f29e127994a87b0c4d144bd0e2",
+        "locator": "selected lines 2308, 2310, 2318, 2320",
+        "format": "text",
+        "content": "AppleHV button: usage=40 down=1\nAppleHV button: usage=40 down=0\nAppleHV button: usage=40 down=1\nAppleHV button: usage=40 down=0",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      },
+      {
+        "id": "hardware",
+        "document": "84-pinephone-native-buttons.md",
+        "sha256": "c2bab031dd8cffec9517f3da2ad63e4ddb2f329e92eb3d07326e51508cac660c",
+        "locator": "lines 17–21; lines 28–32",
+        "format": "text",
+        "content": "The event callback calls the inherited\n`dispatchKeyboardEvent` with Consumer page `0x0c`: usage `0x30` for Power\n(the iPod hold/sleep-wake button) and usage `0x40` for either Volume key\n(the iPod menu/Home button). These usages and the user-client path were\nchecked against the original 4A102 binary and SpringBoard's HID filter.\n\n[…]\n\nThe LRADC at `0x01c21800` is polled with its IRQ disabled.\nThe live Jumpdrive tree declares Volume Up at 200 mV and Down at 400 mV on\nchannel 0, supplied by the 3 V ALDO3 rail. The A64's two-thirds reference\ngives expected six-bit codes near 6 and 13, with bounded ranges on either\nside of their midpoint.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

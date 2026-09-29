@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E22",
+    "title": "Audio discovery can affect graphical startup",
+    "environment": "PinePhone QEMU",
+    "method": "Original CoreAudio client queries and mediaserverd thread capture",
+    "observation": "Publishing one compatible IOAudio2 output cleared a measured null-device media startup fault. The original client opened and mapped it; mediaserverd reached its event loop.",
+    "limits": "The backend was unbound and playback unsupported. Enumeration and mapped PCM memory are not audible output.",
+    "records": [
+      {
+        "document": "61-native-audio-provider.md",
+        "sha256": "e5a9f286be4f3aceef7ded34551bd171da02f91b8f54aa8cf90558ced060a154",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-native-audio-service.json",
+        "sha256": "e6073d97f598c8d5ea8a9b8399957fe6aedbda8aa54214e8ecd0fa6ec4df6461",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "enumeration",
+        "kind": "table",
+        "title": "What the original media client actually returned",
+        "columns": [
+          "Query / observation",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Device count",
+            "1"
+          ],
+          [
+            "Device-list byte count",
+            "4"
+          ],
+          [
+            "Default output ID",
+            "257 (0x101)"
+          ],
+          [
+            "Query status",
+            "0"
+          ],
+          [
+            "MeCCA active object",
+            "Non-null"
+          ],
+          [
+            "PCM stream mapping",
+            "Observed"
+          ],
+          [
+            "mediaserverd threads",
+            "14"
+          ],
+          [
+            "Playback sink implemented",
+            "false"
+          ],
+          [
+            "Stream start exercised",
+            "false"
+          ]
+        ],
+        "interpretation": "Enumeration and mapping removed a startup dependency. Neither a device ID nor a mapped buffer is evidence of sound.",
+        "sourceIds": [
+          "audio"
+        ]
+      },
+      {
+        "id": "pcm-contract",
+        "kind": "table",
+        "title": "Measured output-memory contract",
+        "columns": [
+          "Field",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Rate",
+            "44,100 Hz"
+          ],
+          [
+            "Channels / sample size",
+            "2 / 16-bit PCM"
+          ],
+          [
+            "Bytes per frame",
+            "4"
+          ],
+          [
+            "PCM buffer",
+            "65,536 bytes / 16,384 frames"
+          ],
+          [
+            "Safety offset",
+            "512 frames"
+          ],
+          [
+            "Status descriptor",
+            "24 bytes"
+          ],
+          [
+            "Status memory type",
+            "0"
+          ],
+          [
+            "PCM memory type",
+            "0x10000000 + stream ID"
+          ]
+        ],
+        "interpretation": "These are exact-build interface measurements from the notebook. Timestamp/counter publication and a physical sink need their own acceptance evidence.",
+        "sourceIds": [
+          "pcm"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "audio",
+        "document": "pinephone-native-audio-service.json",
+        "sha256": "e6073d97f598c8d5ea8a9b8399957fe6aedbda8aa54214e8ecd0fa6ec4df6461",
+        "locator": "$.prototype_enumeration_run.device_count; $.prototype_enumeration_run.device_list_bytes; $.prototype_enumeration_run.default_output_id; $.prototype_enumeration_run.query_status; $.prototype_enumeration_run.mecca_active_object_nonnull; $.public_service_run.output_stream_mapped; $.public_service_run.mediaserverd_thread_count; $.playback_sink_implemented; $.stream_start_exercised",
+        "format": "json",
+        "content": "{\n  \"prototype_enumeration_run.device_count\": 1,\n  \"prototype_enumeration_run.device_list_bytes\": 4,\n  \"prototype_enumeration_run.default_output_id\": 257,\n  \"prototype_enumeration_run.query_status\": 0,\n  \"prototype_enumeration_run.mecca_active_object_nonnull\": true,\n  \"public_service_run.output_stream_mapped\": true,\n  \"public_service_run.mediaserverd_thread_count\": 14,\n  \"playback_sink_implemented\": false,\n  \"stream_start_exercised\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "pcm",
+        "document": "61-native-audio-provider.md",
+        "sha256": "e5a9f286be4f3aceef7ded34551bd171da02f91b8f54aa8cf90558ced060a154",
+        "locator": "lines 57–63; lines 81–84",
+        "format": "text",
+        "content": "The private 4A102 kernel analysis identifies an initial 44,100 Hz,\ntwo-channel, 16-bit linear PCM output: 4 bytes per frame, a 65,536-byte\nbuffer (16,384 frames), and a 512-frame safety offset. The original status\ndescriptor requests 24 bytes. Its first two 64-bit fields hold completed\nframes and a completion timestamp; the third changes on stream startup.\nThe original completion path advances frames from reported completed bytes.\nThese facts guide the adapter, but the final callback ABI,\n\n[…]\n\nIts type-0 connection registers\na notification port and maps status memory type 0 (at least 24 bytes) plus\nPCM memory type `0x10000000 + stream ID`. Selectors 0 and 1 start and stop\nthe stream.",
+        "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E23",
+    "title": "Idle residency does not measure charging",
+    "environment": "Physical PinePhone",
+    "method": "Matched pin-state control and timed PMIC/battery observations",
+    "observation": "A defined inactive ANX7688 state yielded usable USB input. A 12-minute trial increased battery from 29% to 31%; a matched control also gained two percentage points.",
+    "limits": "This validates the tested USB sink configuration, not full USB-C negotiation or all power sources. Recovery-time charging labels alone cannot identify charging during XNU.",
+    "records": [
+      {
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Trial duration",
+        "value": "12 min"
+      },
+      {
+        "label": "Battery before",
+        "value": "29%"
+      },
+      {
+        "label": "Battery after",
+        "value": "31%"
+      }
+    ],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "pmic-values",
+        "kind": "table",
+        "title": "Actual PMIC readbacks across the state control",
+        "columns": [
+          "AXP803 register",
+          "Without defined inactive state",
+          "Inactive state at 5 and 45 s"
+        ],
+        "rows": [
+          [
+            "0x00",
+            "0xa3",
+            "0xfb"
+          ],
+          [
+            "0x01",
+            "0x30",
+            "0x70"
+          ],
+          [
+            "0x2f",
+            "0x10",
+            "0x30"
+          ]
+        ],
+        "interpretation": "These are register addresses and captured bytes, not a fabricated “charging” badge. In the long trial, register 0x00 later read 0xff at 600 s. Interpret the bytes within this USB sink experiment.",
+        "sourceIds": [
+          "charge"
+        ]
+      },
+      {
+        "id": "battery-trials",
+        "kind": "table",
+        "title": "Two bounded battery comparisons",
+        "columns": [
+          "Trial",
+          "Before",
+          "After",
+          "Difference"
+        ],
+        "rows": [
+          [
+            "720-second phone trial",
+            "29% / 3.747 V",
+            "31% / 3.756 V",
+            "+2 percentage points / +0.009 V"
+          ],
+          [
+            "Matched known-good-data control",
+            "31%",
+            "33%",
+            "+2 percentage points"
+          ]
+        ],
+        "interpretation": "Voltages are converted from the recorded microvolts. The readings bracket the native run in recovery; they are not a continuous charge-current trace or a universal USB-C negotiation result.",
+        "sourceIds": [
+          "charge"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "charge",
+        "document": "pinephone-anx-off-charging-2026-09-28.json",
+        "sha256": "6e842e5a2b26a5fe66a93f7279acb08a86cd754bcbd0db67febdbd21ba07f419",
+        "locator": "$.xnu_without_off_state.pmic_reg00; $.xnu_without_off_state.pmic_reg01; $.xnu_without_off_state.pmic_reg2f; $.short_off_state_probe.pmic_reg00_at_5_and_45_seconds; $.short_off_state_probe.pmic_reg01_at_5_and_45_seconds; $.short_off_state_probe.pmic_reg2f_at_5_and_45_seconds; $.phone_720_second_trial.battery_before_percent; $.phone_720_second_trial.battery_after_percent; $.phone_720_second_trial.battery_before_uv; $.phone_720_second_trial.battery_after_uv; $.phone_720_second_trial.pmic_reg00_at_600_seconds; $.known_good_data_control.battery_before_percent; $.known_good_data_control.battery_after_percent",
+        "format": "json",
+        "content": "{\n  \"xnu_without_off_state.pmic_reg00\": \"0xa3\",\n  \"xnu_without_off_state.pmic_reg01\": \"0x30\",\n  \"xnu_without_off_state.pmic_reg2f\": \"0x10\",\n  \"short_off_state_probe.pmic_reg00_at_5_and_45_seconds\": \"0xfb\",\n  \"short_off_state_probe.pmic_reg01_at_5_and_45_seconds\": \"0x70\",\n  \"short_off_state_probe.pmic_reg2f_at_5_and_45_seconds\": \"0x30\",\n  \"phone_720_second_trial.battery_before_percent\": 29,\n  \"phone_720_second_trial.battery_after_percent\": 31,\n  \"phone_720_second_trial.battery_before_uv\": 3747000,\n  \"phone_720_second_trial.battery_after_uv\": 3756000,\n  \"phone_720_second_trial.pmic_reg00_at_600_seconds\": \"0xff\",\n  \"known_good_data_control.battery_before_percent\": 31,\n  \"known_good_data_control.battery_after_percent\": 33\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

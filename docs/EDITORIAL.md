@@ -34,7 +34,7 @@ Private records are not bundled. Their hashes establish the identity of the mate
 
 ## Publication boundary
 
-Publish original explanation, original schematic diagrams, bounded observations, non-identifying measurements and bibliographic references. Exclude personal paths, usernames in logs, emails, serial numbers, device identifiers, credentials, keys, proprietary images, binary fragments, firmware modifications and raw session transcripts. Website source is original publication infrastructure, not port source.
+Publish original explanation, original schematic diagrams, bounded observations, non-identifying measurements and bibliographic references. Exclude personal paths, usernames in logs, emails, serial numbers, device identifiers, credentials, keys, proprietary storage images, implementation binary fragments, firmware modifications and raw session transcripts. Website source is original publication infrastructure, not port source.
 
 Do not copy a whole directory from the private project. Work from a deliberately curated list. MIT covers this repository's original contributions; it cannot relicense a linked third-party work or proprietary software. Upstream names and symbols may be discussed descriptively without copying their implementation.
 
@@ -54,3 +54,9 @@ A substantive evidence update requires a new pinned revision, explicit review da
 - Review the deployment run, then load the live root, a deep chapter, the map and a data export.
 
 Automated privacy patterns catch only obvious mistakes. They supplement the curated source boundary and editorial review; they are not a claim that arbitrary material is safe to publish.
+
+## Reviewed excerpts and capture images
+
+Edition 1.1 publishes selected original lines and JSON fields with file identities and locators, plus reviewed research capture images. Do not import full run directories or complete logs. Inspect every image for personal data and metadata. Label QEMU reference captures separately from physical photographs; never fabricate missing observations. Photograph crops must preserve decoded source pixels, with original digest, output digest and crop bounds retained. Captured Apple interface content retains its original rights.
+
+A short instruction or register-layout example may explain a measured compatibility boundary. This does not authorize importing the native port, binary patch recipes or proprietary code.

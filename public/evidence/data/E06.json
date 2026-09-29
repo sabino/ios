@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E06",
+    "title": "Legacy SWP is exercised by userspace",
+    "environment": "Physical PinePhone",
+    "method": "Saved user exception state followed by bounded continuation",
+    "observation": "Original userspace executed an obsolete ARM SWP instruction. The experimental compatibility path allowed the observed resident-address exchanges and subsequent startup progress.",
+    "limits": "The exchange backend is not validated for complete atomicity, copy-on-write, permission faults, unmapped pages or multiprocessor behavior.",
+    "records": [
+      {
+        "document": "79-pinephone-aarch32-swp.md",
+        "sha256": "b29c498601c17949b19ed39cf16c4dc23625dab3205468bbe91a709d1c72c0ea",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-user-swp-2026-09-26.json",
+        "sha256": "294161d51d19e80da639daf4377c6ee07d18ed97be251d97cf462602acaf030f",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "uart-physical.raw",
+        "sha256": "54211b87dfa1d55d3e974a7093a9523385a16e4678b53b6e889e3f655c0b5f32",
+        "access": "Selected excerpts are published below; full source remains private"
+      },
+      {
+        "document": "uart-through-reset.raw",
+        "sha256": "1e66aaced1edcb5f354cd2729ab665f2486f41cdb25b171db18ce2c4a04ed474",
+        "access": "Selected excerpts are published below; full source remains private"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "observed-swap",
+        "kind": "trace",
+        "title": "The original UART swap receipt",
+        "text": "AppleHV SWP: result=1 pc=2fe25724 op=e1002091 addr=2fe3c788 width=4 old=0",
+        "interpretation": "result=1 records the exchange callback’s success at that observed resident address. old=0 is the value returned by the exchange. This receipt does not prove atomicity or correct fault/COW behavior.",
+        "sourceIds": [
+          "swap-uart"
+        ]
+      },
+      {
+        "id": "instruction-state",
+        "kind": "table",
+        "title": "Decode the observed instruction and saved state",
+        "columns": [
+          "Item",
+          "Captured value",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "PC",
+            "0x2fe25724",
+            "Address of the user instruction"
+          ],
+          [
+            "Opcode",
+            "0xe1002091",
+            "SWP r2, r1, [r0]"
+          ],
+          [
+            "r0",
+            "0x2fe3c788",
+            "Exchange address"
+          ],
+          [
+            "r1",
+            "0x00000001",
+            "Value supplied by the caller"
+          ],
+          [
+            "r2 before",
+            "0x2fffffa0",
+            "Destination register before the undefined instruction"
+          ],
+          [
+            "CPSR",
+            "0x00000010",
+            "User ARM state in the observer capture"
+          ],
+          [
+            "Successful receipt",
+            "width=4; old=0",
+            "Word exchange; old memory value was zero"
+          ]
+        ],
+        "interpretation": "The register tuple comes from run 030; the success receipt comes from the separate run 031. Architecturally SWP exchanges the supplied value with memory and returns the previous word. A post-exchange register/memory dump is not included, so those final values are not presented as directly captured.",
+        "sourceIds": [
+          "undefined-uart",
+          "swap-uart"
+        ]
+      },
+      {
+        "id": "bounded-progress",
+        "kind": "table",
+        "title": "Keep the two physical continuations separate",
+        "columns": [
+          "Observation",
+          "Verbose run 031",
+          "Quiet run 032"
+        ],
+        "rows": [
+          [
+            "Successful SWP receipts",
+            "1",
+            "12"
+          ],
+          [
+            "Distinct SWP PCs",
+            "0x2fe25724",
+            "0x2fe25724; 0x30095ff4"
+          ],
+          [
+            "Storage completion frontier",
+            "6299",
+            "Not observable after tracing was disabled"
+          ],
+          [
+            "Subsequent result",
+            "Spontaneous reset",
+            "Spontaneous reset"
+          ]
+        ],
+        "interpretation": "Reduced logging is not reduced I/O. The post-reset 1% battery reading suggests a power concern but does not establish the reset cause.",
+        "sourceIds": [
+          "runs"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "runs",
+        "document": "pinephone-user-swp-2026-09-26.json",
+        "sha256": "294161d51d19e80da639daf4377c6ee07d18ed97be251d97cf462602acaf030f",
+        "locator": "$.observer.repeated_swp_pc; $.observer.repeated_swp_opcode; $.swp_physical.successful_swp_log_count; $.swp_physical.last_successful_storage_completion; $.quiet_storage_physical.successful_swp_log_count; $.quiet_storage_physical.distinct_swp_pcs; $.quiet_storage_physical.sector_count_after_quieting; $.post_reset_power_readback.battery_capacity_percent; $.post_reset_power_readback.battery_voltage_microvolts",
+        "format": "json",
+        "content": "{\n  \"observer.repeated_swp_pc\": \"0x2fe25724\",\n  \"observer.repeated_swp_opcode\": \"0xe1002091\",\n  \"swp_physical.successful_swp_log_count\": 1,\n  \"swp_physical.last_successful_storage_completion\": 6299,\n  \"quiet_storage_physical.successful_swp_log_count\": 12,\n  \"quiet_storage_physical.distinct_swp_pcs\": [\n    \"0x2fe25724\",\n    \"0x30095ff4\"\n  ],\n  \"quiet_storage_physical.sector_count_after_quieting\": \"not observable from UART\",\n  \"post_reset_power_readback.battery_capacity_percent\": 1,\n  \"post_reset_power_readback.battery_voltage_microvolts\": 3424000\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "undefined-uart",
+        "document": "uart-physical.raw",
+        "sha256": "54211b87dfa1d55d3e974a7093a9523385a16e4678b53b6e889e3f655c0b5f32",
+        "locator": "selected lines 5562, 5564, 5566, 5568",
+        "format": "text",
+        "content": "AppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0\nAppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0\nAppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0\nAppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      },
+      {
+        "id": "swap-uart",
+        "document": "uart-through-reset.raw",
+        "sha256": "1e66aaced1edcb5f354cd2729ab665f2486f41cdb25b171db18ce2c4a04ed474",
+        "locator": "selected lines 5562",
+        "format": "text",
+        "content": "AppleHV SWP: result=1 pc=2fe25724 op=e1002091 addr=2fe3c788 width=4 old=0",
+        "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
+      }
+    ]
+  }
+}

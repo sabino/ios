@@ -1,0 +1,9 @@
+E06 / uart-physical.raw
+Source SHA-256: 54211b87dfa1d55d3e974a7093a9523385a16e4678b53b6e889e3f655c0b5f32
+Locator: selected lines 5562, 5564, 5566, 5568
+Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private.
+
+AppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0
+AppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0
+AppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0
+AppleHV USER UNDEF: kind=2 thread=c0a33000 pc=2fe25724 cpsr=10 op=e1002091 r0=2fe3c788 r1=1 r2=2fffffa0

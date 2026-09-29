@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E08",
+    "title": "Later registration can replace a working interrupt callback",
+    "environment": "PinePhone QEMU",
+    "method": "Registration trace and bounded integrated interrupt control",
+    "observation": "A later legacy callback replaced the native nonsecure timer callback. The combined routing control delivered and returned from 51 timer interrupts, preserving earlier console and commpage evidence.",
+    "limits": "The bounded run did not establish all interrupt sources or complete boot.",
+    "records": [
+      {
+        "document": "pinephone-qemu-irq-frontier-2026-09-25.json",
+        "sha256": "b26649aeb0738b8b842f3c1669f588686d52fc22f7426b6a6549812a07a67f5f",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-qemu-irq-routing-2026-09-25.json",
+        "sha256": "e0328a4e58767d9e2fa019488cac85c088a4317579d522bc0ad69f424fd6434b",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "callback-route",
+        "kind": "table",
+        "title": "Interrupt ownership changed after installation",
+        "columns": [
+          "Captured item",
+          "Before routing control",
+          "Integrated control"
+        ],
+        "rows": [
+          [
+            "Observation / s",
+            "75.22",
+            "12.13"
+          ],
+          [
+            "Stopped PC / active callback",
+            "0xc066378c (unexpected-ID loop)",
+            "0xc06d0438 (active callback)"
+          ],
+          [
+            "Interrupt ID",
+            "30",
+            "30"
+          ],
+          [
+            "Timer entries returned",
+            "No completed-return count in this record",
+            "51 entries / 51 returns"
+          ],
+          [
+            "SGI1 delivery established",
+            "No",
+            "No"
+          ]
+        ],
+        "interpretation": "The legacy callback accepted SGI1, whereas the arriving nonsecure timer was ID 30. Registration overwrote the CPU callback field at offset 0xa4. The control counted both entry and return, rather than only interrupt arrivals.",
+        "sourceIds": [
+          "before",
+          "after"
+        ]
+      },
+      {
+        "id": "next-fault",
+        "kind": "table",
+        "title": "The next boundary remained visible",
+        "columns": [
+          "Item",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Driver",
+            "AppleS5L8900XEdgeIC"
+          ],
+          [
+            "Virtual abort address",
+            "0xef6a9000"
+          ],
+          [
+            "Physical MMIO address",
+            "0x02a02000"
+          ]
+        ],
+        "interpretation": "Progress through the timer path exposed another absent legacy device. It did not establish a full kernel boot.",
+        "sourceIds": [
+          "after"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "before",
+        "document": "pinephone-qemu-irq-frontier-2026-09-25.json",
+        "sha256": "b26649aeb0738b8b842f3c1669f588686d52fc22f7426b6a6549812a07a67f5f",
+        "locator": "$.run.seconds; $.run.pc_at_stop; $.run.irq_id_r6; $.run.cpu_mode_at_stop; $.run.data_aborts; $.run.root_mount_or_launchd_observed",
+        "format": "json",
+        "content": "{\n  \"run.seconds\": 75.22,\n  \"run.pc_at_stop\": \"0xc066378c\",\n  \"run.irq_id_r6\": 30,\n  \"run.cpu_mode_at_stop\": \"nonsecure AArch32 IRQ\",\n  \"run.data_aborts\": 0,\n  \"run.root_mount_or_launchd_observed\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "after",
+        "document": "pinephone-qemu-irq-routing-2026-09-25.json",
+        "sha256": "e0328a4e58767d9e2fa019488cac85c088a4317579d522bc0ad69f424fd6434b",
+        "locator": "$.mechanism; $.run.seconds; $.run.active_irq_callback; $.run.timer_irq_count; $.run.timer_clock_return_count; $.run.last_interrupt_id; $.run.sgi1_delivery_observed; $.run.next_frontier",
+        "format": "json",
+        "content": "{\n  \"mechanism\": \"The nonsecure timer callback was installed, then the original ml_install_interrupt_handler path overwrote CPU+0xa4 with the legacy SGI1-only callback. An isolated private kernel binding selects the source-built combined callback instead.\",\n  \"run.seconds\": 12.13,\n  \"run.active_irq_callback\": \"0xc06d0438\",\n  \"run.timer_irq_count\": 51,\n  \"run.timer_clock_return_count\": 51,\n  \"run.last_interrupt_id\": 30,\n  \"run.sgi1_delivery_observed\": false,\n  \"run.next_frontier\": {\n    \"driver\": \"AppleS5L8900XEdgeIC\",\n    \"virtual_abort_address\": \"0xef6a9000\",\n    \"physical_mmio_address\": \"0x02a02000\"\n  }\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+E18 / pinephone-native-display-blank.json
+Source SHA-256: 54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61
+Locator: $.caller_trace.caller; $.caller_trace.visible_sequence; $.caller_trace.null_sequence; $.caller_trace.request_to_null_seconds; $.caller_trace.in_flight_visible_swaps_after_request
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "caller_trace.caller": "SpringBoard SBAwayController dimTimerFired -> relockForButtonPress:afterCall: -> dimScreen: -> LayerKit LKPurpleServerSetScreenBlanked(1)",
+  "caller_trace.visible_sequence": 16,
+  "caller_trace.null_sequence": 17,
+  "caller_trace.request_to_null_seconds": 0.521213,
+  "caller_trace.in_flight_visible_swaps_after_request": 2
+}

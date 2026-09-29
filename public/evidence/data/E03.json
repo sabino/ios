@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E03",
+    "title": "Entry is a state contract",
+    "environment": "PinePhone QEMU",
+    "method": "Reference handoff capture and bounded unchanged-kernel entry trace",
+    "observation": "The common ARMv6 kernel enters its bootstrap and reaches arm_init on the A53 model, then faults at an ARM1176-specific peripheral remap register access.",
+    "limits": "This entry diagnostic does not establish a kernel boot. The M68AP-tree trial still uses reference boot arguments captured from N45AP.",
+    "records": [
+      {
+        "document": "22-kernel-entry-contract.md",
+        "sha256": "2a94b671ed42fbfd521d6f5293c6db23f5ff57f82e96799cc5deca2f7569e2ff",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-entry-2026-09-24.json",
+        "sha256": "55b149d3954549c4a28f6f025fa79c110fdaffa692973489a844d0c99f346d71",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "handoff-registers",
+        "kind": "table",
+        "title": "Captured reference entry state",
+        "columns": [
+          "Register / object",
+          "Value",
+          "Address space / role"
+        ],
+        "rows": [
+          [
+            "PC",
+            "0x080607ec",
+            "Reference kernel entry"
+          ],
+          [
+            "r0",
+            "0x0866c000",
+            "Boot-argument pointer"
+          ],
+          [
+            "CPSR",
+            "0x000001d3",
+            "Saved processor state"
+          ],
+          [
+            "TTBR0",
+            "0x180fc000",
+            "Translation-table base"
+          ],
+          [
+            "SCTLR",
+            "0x00c50878",
+            "System control"
+          ],
+          [
+            "Device tree",
+            "0xc0664000; 32,040 bytes",
+            "Virtual pointer and length"
+          ]
+        ],
+        "interpretation": "These are observations at the reference breakpoint, not a recipe for substituting one board’s entry state for another.",
+        "sourceIds": [
+          "entry"
+        ]
+      },
+      {
+        "id": "native-frontier",
+        "kind": "table",
+        "title": "Where the native entry diagnostic stopped",
+        "columns": [
+          "Stage",
+          "Recorded address / value",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Native memory arena",
+            "0x50000000..0x57400000",
+            "Half-open physical range"
+          ],
+          [
+            "Kernel entry",
+            "0x500607ec",
+            "Physical entry reached"
+          ],
+          [
+            "arm_init",
+            "0xc01a27bc",
+            "Virtual function reached"
+          ],
+          [
+            "ARM1176 PPMR read",
+            "Undefined instruction",
+            "A53 compatibility boundary"
+          ],
+          [
+            "Secondary abort",
+            "DFSR=0x5; DFAR=0x30",
+            "Further diagnostic fault"
+          ],
+          [
+            "Kernel booted",
+            "false",
+            "Entry success is not OS boot"
+          ]
+        ],
+        "interpretation": "Physical and virtual addresses are labeled separately; the diagnostic’s own kernel_booted field is false.",
+        "sourceIds": [
+          "entry"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "entry",
+        "document": "pinephone-xnu-entry-2026-09-24.json",
+        "sha256": "55b149d3954549c4a28f6f025fa79c110fdaffa692973489a844d0c99f346d71",
+        "locator": "$.reference_handoff.breakpoint_pc; $.reference_handoff.r0; $.reference_handoff.cpsr; $.reference_handoff.ttbr0; $.reference_handoff.sctlr; $.reference_handoff.device_tree_virtual; $.reference_handoff.device_tree_length; $.pinephone_qemu_entry.apple_memory_span; $.pinephone_qemu_entry.kernel_entry_phys; $.pinephone_qemu_entry.arm_init_virtual; $.pinephone_qemu_entry.ppmr_read_undefined; $.pinephone_qemu_entry.secondary_abort_dfsr; $.pinephone_qemu_entry.secondary_abort_dfar; $.kernel_booted",
+        "format": "json",
+        "content": "{\n  \"reference_handoff.breakpoint_pc\": \"0x080607ec\",\n  \"reference_handoff.r0\": \"0x0866c000\",\n  \"reference_handoff.cpsr\": \"0x1d3\",\n  \"reference_handoff.ttbr0\": \"0x180fc000\",\n  \"reference_handoff.sctlr\": \"0xc50878\",\n  \"reference_handoff.device_tree_virtual\": \"0xc0664000\",\n  \"reference_handoff.device_tree_length\": 32040,\n  \"pinephone_qemu_entry.apple_memory_span\": \"0x50000000..0x57400000\",\n  \"pinephone_qemu_entry.kernel_entry_phys\": \"0x500607ec\",\n  \"pinephone_qemu_entry.arm_init_virtual\": \"0xc01a27bc\",\n  \"pinephone_qemu_entry.ppmr_read_undefined\": true,\n  \"pinephone_qemu_entry.secondary_abort_dfsr\": \"0x5\",\n  \"pinephone_qemu_entry.secondary_abort_dfar\": \"0x30\",\n  \"kernel_booted\": false\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

@@ -59,3 +59,15 @@ A source-memory claim depends on the observer. The earlier readBytes route could
 A good graphics evidence packet therefore names the selected surface, its backing extent, the access method, the verified transfer length and the destination extent. A screenshot is valuable as an independent visible result, but should not replace the memory evidence when the question is about source ownership.
 
 The broader lesson applies beyond graphics: two objects can expose the same physical storage while their clients believe they have independent lifetimes. Keeping ownership explicit prevents one apparently valid operation from destroying another subsystem's state.
+
+## Read selection as a sequence of ownership changes
+
+The mapped-capture run makes the ownership error concrete. At sequence 1, selected surface `0xc05a3700` shows the boot logo. At sequence 3, the selected surface changes to `0xc1050100` and supplies setup imagery, while the default surface still shows the logo. At sequence 5, `0xc05a3700` is selected again and now contains setup imagery. This is an A → B → A selection sequence, not evidence that one fixed allocation always represented the frame.
+
+```text
+sequence 1: A / boot logo
+sequence 3: B / setup; default A still logo
+sequence 5: A / setup
+```
+
+The [captured image and pointer table](/ios/evidence/E16/#surface-swaps) retain those pairings. These are capture-local kernel object addresses, not stable allocation identifiers across boots.

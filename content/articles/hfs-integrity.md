@@ -66,3 +66,14 @@ Two consecutive corrected physical runs passed their bounded storage and clean-r
 The QEMU file experiment adds a different result: explicit guest synchronization, guest reset and fresh-process readback of a known file with data checks passing. [E14](/ios/evidence/E14/)
 
 Together, these results justify continued native interaction work. They leave application-setting persistence and arbitrary power interruption as separate acceptance gates. A reference guide should preserve that separation so future readers can choose the evidence appropriate to their own claim.
+
+## Connect volume geometry to a checked boundary
+
+The root-mount record describes a 293,588,992-byte HFSX volume with 4,096-byte allocation blocks and 71,677 total blocks:
+
+```text
+71,677 × 4,096 bytes = 293,588,992 bytes
+(575,463 − 2,048 + 1) × 512 bytes = 293,588,992 bytes
+```
+
+These two independent units—filesystem blocks and disk sectors—describe the same extent in [E12](/ios/evidence/E12/#volume-geometry). They do not establish that a later write is persistent. The [physical run table](/ios/evidence/E13/#consecutive-runs) and [47-byte readback sequence](/ios/evidence/E14/#persistence-stages) supply separate liveness and integrity receipts. Keep the disk extent, mounted object and backing file identities distinct.

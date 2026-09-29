@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.1",
+    "date": "2026-09-29",
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E17",
+    "title": "Original-client pixels reached the physical panel",
+    "environment": "Physical PinePhone",
+    "method": "Source/scanout signatures, direct observation, bounded reboot and filesystem check",
+    "observation": "The phone displayed the known color pattern and then the original client’s Connect-to-iTunes graphic. The operator also observed intermittent black frames with the backlight on.",
+    "limits": "This establishes physical presentation of those frames. It does not establish a home screen, touch, general app rendering or flicker-free operation.",
+    "records": [
+      {
+        "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+        "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+        "access": "Private project record; original material is not distributed"
+      },
+      {
+        "document": "pinephone-xnu-panel-visibility-2026-09-28.json",
+        "sha256": "203334cef1c3a83e1b5df7c2c69b62fe59a4058943b2c5f8913759095b9cc35c",
+        "access": "Private project record; original material is not distributed"
+      }
+    ],
+    "measurements": [
+      {
+        "label": "Panel",
+        "value": "720 × 1440"
+      },
+      {
+        "label": "Guest surface",
+        "value": "320 × 480"
+      },
+      {
+        "label": "Presentation",
+        "value": "2× centered"
+      }
+    ],
+    "status": "Documented observation",
+    "reviewedOn": "2026-09-29",
+    "exhibits": [
+      {
+        "id": "panel-model",
+        "kind": "image",
+        "title": "The matching panel-layout control in QEMU",
+        "src": "/ios/evidence/images/E17-panel-qemu.png",
+        "alt": "720 by 1440 QEMU panel capture containing a centered, doubled setup graphic on black.",
+        "caption": "QEMU control: 720 × 1440 panel layout, with the 320 × 480 guest content centered at 2×. The physical trial has UART measurements and an operator observation; this image is not a photograph of that trial.",
+        "interpretation": "The file is reproduced unchanged. Open it at full size to inspect the capture.",
+        "sourceIds": [
+          "panel"
+        ],
+        "sha256": "23c256b5a32be64b74d9ad8fa2a3df02105a74e56dfd6a0ca3fe19dfcfbe4aa7",
+        "width": 720,
+        "height": 1440,
+        "rights": "Research capture; depicted Apple interface retains its original rights."
+      },
+      {
+        "id": "pixel-receipts",
+        "kind": "table",
+        "title": "Physical source and scanout receipts",
+        "columns": [
+          "Physical stage",
+          "Source receipt",
+          "Panel-probe receipt"
+        ],
+        "rows": [
+          [
+            "Known pattern / frame 1",
+            "rgb=233568; raw=233568",
+            "nonzero=38400; mix=98cd98cd"
+          ],
+          [
+            "Original client / frame 3",
+            "rgb=36661; raw=190261",
+            "nonzero=3208; mix=7a6aa5e9"
+          ]
+        ],
+        "interpretation": "The quoted fields are diagnostic counters/signatures, not full-frame pixel counts. The original-client frame was recorded at 52.0 s in this instrumented run; the separate visually observed run reports its client frame at 51.5 s.",
+        "sourceIds": [
+          "panel",
+          "visible"
+        ]
+      },
+      {
+        "id": "observed-versus-unobserved",
+        "kind": "table",
+        "title": "What the physical observation actually adds",
+        "columns": [
+          "Run",
+          "Visual evidence",
+          "Result"
+        ],
+        "rows": [
+          [
+            "First visible trial",
+            "Colored quadrants, then iTunes graphic; intermittent black",
+            "Presentation established; flicker remains"
+          ],
+          [
+            "Later no-clear trial",
+            "Not observed by the operator",
+            "UART progressed; flicker improvement not established"
+          ]
+        ],
+        "interpretation": "Preserving the preceding scanout during ordinary swaps is a distinct change from suppressing intentional blanking. The follow-up run cannot be promoted into visual success when it was not watched.",
+        "sourceIds": [
+          "visible"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "panel",
+        "document": "pinephone-xnu-panel-handoff-2026-09-28.json",
+        "sha256": "6c4bbf24c4a72ead38ae9675c3174a2c3c0de9920af6e024546ae92b1422d041",
+        "locator": "$.qemu.screen_dimensions; $.qemu.screen_png_sha256; $.physical.known_pattern_source; $.physical.known_pattern_scanout; $.physical.original_framebuffer_client_attached_seconds; $.physical.original_client_frame_seconds; $.physical.original_client_source; $.physical.original_client_scanout; $.physical.matches_qemu_frame_signature; $.physical.visual_confirmation",
+        "format": "json",
+        "content": "{\n  \"qemu.screen_dimensions\": [\n    720,\n    1440\n  ],\n  \"qemu.screen_png_sha256\": \"23c256b5a32be64b74d9ad8fa2a3df02105a74e56dfd6a0ca3fe19dfcfbe4aa7\",\n  \"physical.known_pattern_source\": \"frame 1: rgb=233568, raw=233568\",\n  \"physical.known_pattern_scanout\": \"probe 1: nonzero=38400, mix=98cd98cd\",\n  \"physical.original_framebuffer_client_attached_seconds\": 36.5,\n  \"physical.original_client_frame_seconds\": 52.0,\n  \"physical.original_client_source\": \"frame 3: rgb=36661, raw=190261\",\n  \"physical.original_client_scanout\": \"probe 3: nonzero=3208, mix=7a6aa5e9\",\n  \"physical.matches_qemu_frame_signature\": true,\n  \"physical.visual_confirmation\": \"UART shows XNU-owned nonzero source and scanout frames; no panel photo was captured\"\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      },
+      {
+        "id": "visible",
+        "document": "pinephone-xnu-panel-visibility-2026-09-28.json",
+        "sha256": "203334cef1c3a83e1b5df7c2c69b62fe59a4058943b2c5f8913759095b9cc35c",
+        "locator": "$.first_visible_run.user_observation; $.first_visible_run.pattern_seconds; $.first_visible_run.client_frame_seconds; $.first_visible_run.data_fsck_exit_after; $.no_clear_phone_run.visual_result; $.no_clear_change.behavior; $.no_clear_change.qemu_screen_identical_to_prior",
+        "format": "json",
+        "content": "{\n  \"first_visible_run.user_observation\": \"Colored quadrants, then iTunes graphic; backlight stayed on while graphic blinked to black and reappeared, then black\",\n  \"first_visible_run.pattern_seconds\": 8.0,\n  \"first_visible_run.client_frame_seconds\": 51.5,\n  \"first_visible_run.data_fsck_exit_after\": 0,\n  \"no_clear_phone_run.visual_result\": \"Unobserved; user missed the boot\",\n  \"no_clear_change.behavior\": \"On the 720x1440 live scanout, clear once before the first surface copy and again only after an explicit background fill; preserve the preceding frame during ordinary swaps\",\n  \"no_clear_change.qemu_screen_identical_to_prior\": true\n}",
+        "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
+      }
+    ]
+  }
+}

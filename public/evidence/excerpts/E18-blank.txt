@@ -1,0 +1,20 @@
+E18 / pinephone-native-display-blank.json
+Source SHA-256: 54a251f199a3f76322f9b440d700a2e2bb013eb354de70a38a0e6d94eb7f5e61
+Locator: $.previous_sequence; $.first_null_sequence; $.selected_surface; $.swap_masks; $.background_color; $.scanout_sha256; $.default_backing_sha256; $.opaque_black_scanout; $.default_backing_preserved; $.sampled_power_fields_enabled
+Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted.
+
+{
+  "previous_sequence": 17,
+  "first_null_sequence": 18,
+  "selected_surface": "0x0",
+  "swap_masks": [
+    "0x80000007",
+    "0x80000007"
+  ],
+  "background_color": "0xff000000",
+  "scanout_sha256": "011c5ce8f02344ae5dc34541e57864470fdd61c76193d6025a0fa13116d3ff16",
+  "default_backing_sha256": "27f9ae2d3c9d9fa551830b2dbbfd29b5ca84753397f38608facddc12c5806bd9",
+  "opaque_black_scanout": true,
+  "default_backing_preserved": true,
+  "sampled_power_fields_enabled": true
+}
