@@ -26,6 +26,7 @@ function choose(slug:string){
   [...related].filter(s=>s!==slug).forEach(s=>{const b=data.find((b:any)=>b.slug===s);if(!b)return;const li=document.createElement('li'),button=document.createElement('button');button.textContent=b.title;button.addEventListener('click',()=>choose(s as string));li.append(button);ul.append(li);});
   const count=document.createElement('p');count.className='mono';count.textContent=a.evidence.length+' supporting evidence records';detail.append(label,heading,p,read,sub,ul,count);
  }
+ document.dispatchEvent(new Event('atlas-graph-focus'));
  const u=new URL(location.href);if(a)u.searchParams.set('focus',slug);else u.searchParams.delete('focus');history.replaceState(null,'',u);
 }
 nodeLinks.forEach(el=>el.addEventListener('click',e=>{if((e as MouseEvent).ctrlKey||(e as MouseEvent).metaKey||(e as MouseEvent).shiftKey||(e as MouseEvent).altKey)return;e.preventDefault();if(el.dataset.dragged==='true'){delete el.dataset.dragged;return;}choose(el.dataset.node!)}));
