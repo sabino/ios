@@ -1,0 +1,12 @@
+E40 / 83-pinephone-uart-clean-reboot.md
+Source SHA-256: 1eb50bcd77b7bc17cf51584405843c6c5d5791827d00414508d5a35cba345f7c
+Locator: lines 97–103, ending with the sentence about Jumpdrive
+Exact selected sentences; implementation file references after this passage are omitted.
+
+The accepted native input module arms A64 WDOG0 for the verified 16-second
+reset interval. Its timer-IRQ hook reloads the watchdog during normal running;
+BSD shutdown status stops reloads so a stuck shutdown can return to recovery.
+The panic path likewise stops normal petting. This is stall/panic recovery,
+not thermal or battery supervision. QEMU controls exercise deliberate panic
+and shutdown stalls; physical normal runs record live IRQ petting and clean
+BSD/Mach reboot to Jumpdrive.

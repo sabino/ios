@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -150,6 +150,7 @@
         "content": "BRIDGE_TARGET=0x11223344\nBRIDGE_PARAMETER=0x55667788\nBRIDGE_STATUS=0x89abcdef\nBRIDGE_ACTUAL_LO=0x9abcdef0\nBRIDGE_ACTUAL_HI=0x12345678\nBRIDGE_R9=0x13579bdf\nBRIDGE_VALUES_OK=0x00000001\nBRIDGE_R9_PRESERVED=0x00000001\nTHUMB_TARGET=0x11223344\nTHUMB_PARAMETER=0x55667788\nTHUMB_STATUS=0x89abcdef\nTHUMB_ACTUAL_LO=0x9abcdef0\nTHUMB_ACTUAL_HI=0x12345678\nTHUMB_R9=0x0badc0de\nTHUMB_VALUES_OK=0x00000001\nTHUMB_R9_PRESERVED=0x00000001\nNULL_ACTION_NOOP=0x00000001\nEABI_DIRECT_ACTUAL_LO=0xdeadbeef\nEABI_DIRECT_ACTUAL_HI=0x9abcdef0\nEABI_NEGATIVE_MISMATCH=0x00000001\nA32_STORAGE_ABI_PASS",
         "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E34",
+    "title": "The first native camera frame is real but very dark",
+    "environment": "Physical PinePhone",
+    "method": "OV5640 sensor capture into guarded DRAM and post-run hash controls",
+    "observation": "A genuine 640 × 480 UYVY frame replaced the prefilled capture buffer with no unchanged sentinel rows and intact guards. Its luma ranged from 2 to 6; test-pattern mode was disabled.",
+    "limits": "This initial single-frame checkpoint establishes DMA capture, not usable exposure, recognizable scene content, Camera preview or JPEG saving. The later preview and saved-photo milestones have their own records. No new post-run fsck was executed in this read-only trial; prior fsck plus byte-identical data hashes supplied its cleanliness control.",
+    "records": [
+      {
+        "document": "pinephone-camera-capture-2026-10-01.json",
+        "sha256": "ae2c92ec412c131ea6d74bd90af9b9215de01eab1b87067135e461fe26b4e518",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "The first native camera frame is real but very dark",
+        "columns": [
+          "Boundary",
+          "Recorded value"
+        ],
+        "rows": [
+          [
+            "Sensor buffer",
+            "640 × 480 UYVY; 1,280-byte stride"
+          ],
+          [
+            "Capture validity",
+            "0 unchanged sentinel rows; guards intact"
+          ],
+          [
+            "Image usefulness",
+            "Luma 2–6; very dark"
+          ],
+          [
+            "Storage control",
+            "Eight hashes unchanged; no guest writes"
+          ]
+        ],
+        "interpretation": "Buffer replacement proves a transfer occurred. Scene quality and application integration require further observations.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-capture-2026-10-01.json",
+        "sha256": "ae2c92ec412c131ea6d74bd90af9b9215de01eab1b87067135e461fe26b4e518",
+        "locator": "$.result; $.mode.width; $.mode.height; $.mode.stride; $.mode.format; $.mode.sensor_test_pattern_enabled; $.frame.accepted; $.frame.luma_min; $.frame.luma_max; $.frame.luma_mean_milli; $.frame.unchanged_poison_rows; $.frame.guards_intact; $.frame.startup_frame_done_discarded; $.storage.all_eight_hashes_unchanged_during_trial; $.storage.post_run_fsck_executed; $.excluded",
+        "format": "json",
+        "content": "{\n  \"result\": \"physical_capture_accepted\",\n  \"mode.width\": 640,\n  \"mode.height\": 480,\n  \"mode.stride\": 1280,\n  \"mode.format\": \"UYVY\",\n  \"mode.sensor_test_pattern_enabled\": false,\n  \"frame.accepted\": true,\n  \"frame.luma_min\": 2,\n  \"frame.luma_max\": 6,\n  \"frame.luma_mean_milli\": 3982,\n  \"frame.unchanged_poison_rows\": 0,\n  \"frame.guards_intact\": true,\n  \"frame.startup_frame_done_discarded\": 1,\n  \"storage.all_eight_hashes_unchanged_during_trial\": true,\n  \"storage.post_run_fsck_executed\": false,\n  \"excluded\": [\n    \"display\",\n    \"BGRA conversion\",\n    \"Camera app\",\n    \"LKImageQueue bridge\"\n  ]\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

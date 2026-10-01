@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -99,6 +99,7 @@
         "content": "{\n  \"diagnostic.progress_rows\": {\n    \"cache_clean_entry\": [\n      144,\n      159\n    ],\n    \"cache_clean_return\": [\n      176,\n      191\n    ],\n    \"tlb_flush_entry\": [\n      208,\n      223\n    ],\n    \"tlb_flush_return\": [\n      240,\n      255\n    ],\n    \"pmap_return\": [\n      336,\n      351\n    ]\n  },\n  \"diagnostic.qemu_all_markers\": true,\n  \"physical_observation.all_nine_markers_observed\": true,\n  \"physical_observation.original_pmap_map_bd_return_supported\": true,\n  \"physical_observation.original_console_text_observed\": false,\n  \"physical_observation.camera_progress_frame_24_sha256\": \"6b54c58715ed2fb2098f2fe512677d1606eb886eb1e546280f13cdf7ad12ceef\"\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

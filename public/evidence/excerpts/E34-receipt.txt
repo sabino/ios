@@ -1,0 +1,28 @@
+E34 / pinephone-camera-capture-2026-10-01.json
+Source SHA-256: ae2c92ec412c131ea6d74bd90af9b9215de01eab1b87067135e461fe26b4e518
+Locator: $.result; $.mode.width; $.mode.height; $.mode.stride; $.mode.format; $.mode.sensor_test_pattern_enabled; $.frame.accepted; $.frame.luma_min; $.frame.luma_max; $.frame.luma_mean_milli; $.frame.unchanged_poison_rows; $.frame.guards_intact; $.frame.startup_frame_done_discarded; $.storage.all_eight_hashes_unchanged_during_trial; $.storage.post_run_fsck_executed; $.excluded
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "result": "physical_capture_accepted",
+  "mode.width": 640,
+  "mode.height": 480,
+  "mode.stride": 1280,
+  "mode.format": "UYVY",
+  "mode.sensor_test_pattern_enabled": false,
+  "frame.accepted": true,
+  "frame.luma_min": 2,
+  "frame.luma_max": 6,
+  "frame.luma_mean_milli": 3982,
+  "frame.unchanged_poison_rows": 0,
+  "frame.guards_intact": true,
+  "frame.startup_frame_done_discarded": 1,
+  "storage.all_eight_hashes_unchanged_during_trial": true,
+  "storage.post_run_fsck_executed": false,
+  "excluded": [
+    "display",
+    "BGRA conversion",
+    "Camera app",
+    "LKImageQueue bridge"
+  ]
+}

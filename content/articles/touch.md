@@ -8,7 +8,8 @@
   "evidence": [
     "E21",
     "E17",
-    "E20"
+    "E20",
+    "E29"
   ],
   "sources": [
     "S17",
@@ -17,11 +18,15 @@
   "related": [
     "buttons",
     "presentation",
-    "iokit-discovery"
+    "iokit-discovery",
+    "native-iphone",
+    "measuring-performance"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## The obvious convenience method did nothing
 
@@ -56,3 +61,11 @@ A correct formula on synthetic points is still only a transform test. It should 
 Physical buttons already reach original HID and wake the setup display. That result provides a working example of event delivery but does not validate the different touch queue and parser. [E20](/ios/evidence/E20/)
 
 At this publication snapshot, physical touch and complete home-screen interaction remain open. The proposed first touch gate is intentionally narrow: one down/end sequence through the original client, a visible response, no stuck contact, and the existing clean-reboot and filesystem checks afterward.
+
+## Reviewed advance: from contacts to gestures, 1 October 2026
+
+The earlier touch gap is now closed for specific physical interactions. Goodix contacts traverse the original touch user-client and HID path with monotonic timing. A long physical run submitted 1,476 frames, including 470 with two active contact identities, but the owner could not establish visible pinch. That run proves contact delivery, not the gesture. [E29](/ios/evidence/E29/)
+
+A later trial exposed the missing distinction: two contact records shared the same interpreted finger identity. The consumer treated them as a collision. Stable distinct identities allowed the owner to enlarge the offline Photos grid by spreading two fingers. Trial 18 submitted 439 frames, 123 with two active contacts, and also accepted the visible brightness minimum and Power blank/wake. Its complete post-run data copy passed fsck with an unchanged root. [E29](/ios/evidence/E29/)
+
+The screenshot in the new record comes from that physical native run. It supports the captured screen state; the gesture claim rests on owner acceptance and the recorded contact path. General gesture, keyboard and application coverage remain open. The headless PinePhone QEMU tree disables touch, and a separate touch-enabled variant aborts early; neither is substitute acceptance for the phone.

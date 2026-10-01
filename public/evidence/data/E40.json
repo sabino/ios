@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E40",
+    "title": "Watchdog controls and clean reboot have different reach",
+    "environment": "PinePhone QEMU",
+    "method": "Deliberate emulator panic/shutdown stalls, compared with recorded physical normal-operation checks",
+    "observation": "The production watchdog has deliberate panic and stalled-shutdown controls in QEMU. Physical normal runs record IRQ petting and a clean BSD/Mach return to recovery.",
+    "limits": "The physical normal-run evidence is not a controlled physical hang or panic test. These controls do not establish recovery from every hardware stall, safe sudden power loss, thermal supervision or automatic battery protection.",
+    "records": [
+      {
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "1eb50bcd77b7bc17cf51584405843c6c5d5791827d00414508d5a35cba345f7c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Watchdog controls and clean reboot have different reach",
+        "columns": [
+          "Environment",
+          "Observation",
+          "Limit"
+        ],
+        "rows": [
+          [
+            "PinePhone QEMU",
+            "Deliberate panic and shutdown-stall controls",
+            "Model behavior only"
+          ],
+          [
+            "Physical PinePhone",
+            "Normal IRQ petting; clean BSD/Mach reboot",
+            "No general hardware-hang guarantee"
+          ],
+          [
+            "Supervision",
+            "Watchdog reset mechanism",
+            "No automatic battery or temperature supervisor"
+          ]
+        ],
+        "interpretation": "A fallback watchdog and an orderly filesystem shutdown address different failures. The capability page qualifies unattended recovery accordingly.",
+        "sourceIds": [
+          "notebook"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "notebook",
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "1eb50bcd77b7bc17cf51584405843c6c5d5791827d00414508d5a35cba345f7c",
+        "locator": "lines 97–103, ending with the sentence about Jumpdrive",
+        "format": "text",
+        "content": "The accepted native input module arms A64 WDOG0 for the verified 16-second\nreset interval. Its timer-IRQ hook reloads the watchdog during normal running;\nBSD shutdown status stops reloads so a stuck shutdown can return to recovery.\nThe panic path likewise stops normal petting. This is stall/panic recovery,\nnot thermal or battery supervision. QEMU controls exercise deliberate panic\nand shutdown stalls; physical normal runs record live IRQ petting and clean\nBSD/Mach reboot to Jumpdrive.",
+        "note": "Exact selected sentences; implementation file references after this passage are omitted."
+      }
+    ]
+  }
+}

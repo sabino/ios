@@ -7,7 +7,11 @@
   "order": 14,
   "evidence": [
     "E16",
-    "E17"
+    "E17",
+    "E29",
+    "E33",
+    "E35",
+    "E37"
   ],
   "sources": [
     "S09",
@@ -17,11 +21,14 @@
     "graphics-stack",
     "surface-memory",
     "display-blanking",
-    "touch"
+    "touch",
+    "camera-preview"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Geometry is part of the interface
 
@@ -54,3 +61,9 @@ That change does not suppress a deliberate guest request for a black background.
 The observed setup image is a meaningful native milestone. It is not proof of physical VBlank synchronization, tear-free presentation, every pixel format, comprehensive surface teardown or arbitrary rendering workloads. The operator also observed black transitions; later button work established a visible wake response, while the QEMU trace identified one intentional blanking path.
 
 The next stage should continue to connect visible behavior to its originating client action. That makes the port's display history useful as a general case study in separating memory correctness from presentation correctness.
+
+## Reviewed advance: interactive screens and camera content, 1 October 2026
+
+The September setup-frame record remains a setup-frame record. New physical evidence now includes a native N45 home-screen capture from the accepted touch trial, a pixel-identical M68 lock-screen screenshot and an owner-accepted live Camera preview. These extend the visible frontier through separate dated records. [E29](/ios/evidence/E29/) [E33](/ios/evidence/E33/) [E35](/ios/evidence/E35/)
+
+Camera performance shows why presentation terminology still matters. The baseline panel-update counter reports about 30.3 updates per second while the renderer selects about 7.9 distinct camera images per second. Reused images can participate in multiple updates. Neither counter independently measures the precise physical presentation time of each image. [E37](/ios/evidence/E37/)

@@ -9,7 +9,9 @@
     "E23",
     "E07",
     "E17",
-    "E20"
+    "E20",
+    "E30",
+    "E31"
   ],
   "sources": [
     "S09",
@@ -19,11 +21,14 @@
   "related": [
     "time-and-interrupts",
     "display-blanking",
-    "hfs-integrity"
+    "hfs-integrity",
+    "measuring-performance"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## High idle residency did not settle the drain
 
@@ -56,3 +61,11 @@ The project improved this boundary with low-rate UART observations and a request
 ## A bounded claim worth preserving
 
 The accepted claim is modest and useful: the tested controller state restored usable USB input and net battery gain during the stated headless run. Complete power management, thermal behavior, battery runtime and suspend/resume remain independent research topics. Keeping them separate prevents a successful charging experiment from becoming an unsupported claim about the entire phone.
+
+## Reviewed advance: native samples, 1 October 2026
+
+The earlier recovery-bracketed observations now have a separate native measurement record. A read-only AXP803 adapter publishes a genuine original power-source object. Controlled QEMU samples show original SpringBoard consumption of charging, unplugged and full states; those values are synthetic and establish the consumer contract only. [E30](/ios/evidence/E30/)
+
+On the physical phone, the initial bright lock-screen window drew a median 55 mA from the battery at the recorded 500 mA nominal input limit. Blanked idle instead supplied a median 166 mA to the battery. Brief wake windows had a positive median balance. These are net battery-side currents, not measurements of total USB input or whole-board watts. [E31](/ios/evidence/E31/)
+
+The charging icon and USB attachment therefore cannot certify that a demanding workload is replenishing the battery. Native temperature was unavailable, and these trials changed neither PMIC configuration nor CPU clocks. Longer camera workloads, thermal supervision, suspend and higher-current charging policies need separate acceptance. The current record supports a workload-dependent budget, not a battery-life estimate.

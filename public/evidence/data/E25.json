@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -101,6 +101,7 @@
         "content": "The phone Apple tree originally exposed `uart0` at the real A64 UART0 MMIO\naddress `0x01c28000` as `uart,s5l8900x`. AppleS5L8900XSerial attached in the\nfirst physical UART-command trial. Its Samsung UCON register at offset 4\noverlaps A64 UART IER. The first trial stopped printing after host RX and did\nnot reach either command acknowledgement or the five-minute fallback. The\nlive A64 UART0 interrupt is GIC SPI 32.\n\n[…]\n\nThe corrected five-minute physical gate captured\n`spi32_before=00000001 after=00000000 ier=00000001`: masking was actually\nneeded on the phone. A harmless RX byte did not stop the idle or UART\nheartbeats. The full token was accepted, `MACH Reboot` appeared, and\nJumpdrive returned six seconds after the host request. The subsequent full\n512 MiB data copy had its HFS clean bit set and passed `fsck_hfs -dfn` with\nexit 0; the root partition SHA-256 remained\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nUART0 IER still read 1 in that gate because U-Boot had left it enabled.\n\n[…]\n\nIts first phone\nrun logged `spi32_before=00000001 after=00000000 ier=00000000` at listener\nstartup. Ten subsequent UART heartbeats retained `ier=00000000 spi32=0\nremask=0` beyond the old three-minute cutoff. The host requested a reboot,\nand Jumpdrive returned about six seconds later. Its complete post-run data\ncopy had the clean bit set and passed fsck with exit 0; the root hash was\nunchanged.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

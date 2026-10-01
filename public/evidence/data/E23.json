@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -112,6 +112,7 @@
         "content": "{\n  \"xnu_without_off_state.pmic_reg00\": \"0xa3\",\n  \"xnu_without_off_state.pmic_reg01\": \"0x30\",\n  \"xnu_without_off_state.pmic_reg2f\": \"0x10\",\n  \"short_off_state_probe.pmic_reg00_at_5_and_45_seconds\": \"0xfb\",\n  \"short_off_state_probe.pmic_reg01_at_5_and_45_seconds\": \"0x70\",\n  \"short_off_state_probe.pmic_reg2f_at_5_and_45_seconds\": \"0x30\",\n  \"phone_720_second_trial.battery_before_percent\": 29,\n  \"phone_720_second_trial.battery_after_percent\": 31,\n  \"phone_720_second_trial.battery_before_uv\": 3747000,\n  \"phone_720_second_trial.battery_after_uv\": 3756000,\n  \"phone_720_second_trial.pmic_reg00_at_600_seconds\": \"0xff\",\n  \"known_good_data_control.battery_before_percent\": 31,\n  \"known_good_data_control.battery_after_percent\": 33\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

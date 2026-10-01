@@ -9,7 +9,9 @@
     "E15",
     "E16",
     "E17",
-    "E18"
+    "E18",
+    "E35",
+    "E37"
   ],
   "sources": [
     "S01",
@@ -19,11 +21,15 @@
     "surface-memory",
     "presentation",
     "display-blanking",
-    "audio"
+    "audio",
+    "camera-preview",
+    "frame-retirement"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Start at the producer and follow the bytes
 
@@ -58,3 +64,9 @@ The physical operator saw a known pattern followed by the original client's setu
 It does not establish a complete PowerVR MBX implementation, Mali acceleration, every OpenGL workload, touch interaction or a generally usable home screen. A setup image may exercise only a subset of the rendering stack.
 
 The next investigation should follow the first concrete failure of the next required workload. Adding a broad GPU subsystem before identifying that boundary risks solving a different problem. The architecture becomes easier to understand when each visual result carries its producer, memory route and presentation scope.
+
+## Reviewed advance: stock Camera as a consumer, 1 October 2026
+
+The physical stock Camera now displays an accepted live preview, adding an image-queue consumer to the earlier framebuffer and surface observations. Orientation, exposure, memory guards and clean restoration passed the bounded trial. [E35](/ios/evidence/E35/)
+
+This is software-path acceptance, not GPU acceleration or broad graphics compatibility. Native delivery, distinct renderer selection and panel-update counters differ substantially. Follow the [preview chapter](/ios/articles/camera-preview/) for the measured baseline and the ownership boundary that limits its fresh-image rate. [E37](/ios/evidence/E37/)

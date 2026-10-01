@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E38",
+    "title": "An isolated queue replay reproduces the bottleneck",
+    "environment": "Synthetic probe",
+    "method": "Execution of original ARM queue and display bookkeeping with synthetic image identities and stubbed services",
+    "observation": "A 400-frame isolated replay reproduced 7.58–9.92 distinct selections/s with two queue entries and three display pages. Six entries admitted all 400 at about 29.5/s in those modeled scenarios. A generated helper control also showed why one of six input surfaces must remain available to the producer.",
+    "limits": "The replay executes bookkeeping, not the sensor, pixel renderer, kernel scheduler or physical display. It does not prove the phone has exactly one frame of timestamp lag. The larger-queue candidate passed host, ARM and QEMU controls at this revision; a physical comparison was pending.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "An isolated queue replay reproduces the bottleneck",
+        "columns": [
+          "Isolated scenario",
+          "Accepted / 400",
+          "Distinct selection rate"
+        ],
+        "rows": [
+          [
+            "2 entries; 3 pages; no lag",
+            "135",
+            "9.915/s"
+          ],
+          [
+            "2 entries; 3 pages; 33.333 ms lag",
+            "103",
+            "7.584/s"
+          ],
+          [
+            "6 entries; 3 pages; no lag",
+            "400",
+            "29.452/s"
+          ],
+          [
+            "6 entries; 3 pages; 33.333 ms lag",
+            "400",
+            "29.452/s"
+          ]
+        ],
+        "interpretation": "The replay supplies a discriminating control for capacity and retirement. Keeping a producer reserve avoids confusing greater retention with forward progress. These values are synthetic, not measured phone improvements.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "locator": "$.isolated_arm_replay.passed; $.isolated_arm_replay.original_queue_and_display_bookkeeping_executed; $.isolated_arm_replay.synthetic_bitmap_ids; $.isolated_arm_replay.pixels_kernel_sensor_and_physical_display_modeled; $.isolated_arm_replay.scenario_frames; $.isolated_arm_replay.scenarios[0]; $.isolated_arm_replay.scenarios[2]; $.isolated_arm_replay.scenarios[3]; $.isolated_arm_replay.scenarios[5]; $.implementation_candidate.status; $.implementation_candidate.configured_max_in_flight; $.implementation_candidate.preserve_completed_update_checks; $.implementation_candidate.host_tests; $.implementation_candidate.generated_helper_arm_probe.unreserved_control.client_starved; $.implementation_candidate.generated_helper_arm_probe.pixels_and_hardware_modeled",
+        "format": "json",
+        "content": "{\n  \"isolated_arm_replay.passed\": true,\n  \"isolated_arm_replay.original_queue_and_display_bookkeeping_executed\": true,\n  \"isolated_arm_replay.synthetic_bitmap_ids\": true,\n  \"isolated_arm_replay.pixels_kernel_sensor_and_physical_display_modeled\": false,\n  \"isolated_arm_replay.scenario_frames\": 400,\n  \"isolated_arm_replay.scenarios.0\": {\n    \"capacity\": 2,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 0,\n    \"accepted\": 135,\n    \"dropped\": 265,\n    \"distinct_fps\": 9.91516988189436,\n    \"render_uses\": 416,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.2\": {\n    \"capacity\": 2,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 33.333,\n    \"accepted\": 103,\n    \"dropped\": 297,\n    \"distinct_fps\": 7.584455923078752,\n    \"render_uses\": 415,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.3\": {\n    \"capacity\": 6,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 0,\n    \"accepted\": 400,\n    \"dropped\": 0,\n    \"distinct_fps\": 29.451519624976765,\n    \"render_uses\": 416,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.5\": {\n    \"capacity\": 6,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 33.333,\n    \"accepted\": 400,\n    \"dropped\": 0,\n    \"distinct_fps\": 29.451519624976733,\n    \"render_uses\": 415,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"implementation_candidate.status\": \"host-cpu-qemu-passed-physical-comparison-pending\",\n  \"implementation_candidate.configured_max_in_flight\": 5,\n  \"implementation_candidate.preserve_completed_update_checks\": true,\n  \"implementation_candidate.host_tests\": {\n    \"ctest_passed\": 45,\n    \"python_passed\": 466,\n    \"focused_asan_ubsan_passed\": true\n  },\n  \"implementation_candidate.generated_helper_arm_probe.unreserved_control.client_starved\": 394,\n  \"implementation_candidate.generated_helper_arm_probe.pixels_and_hardware_modeled\": false\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

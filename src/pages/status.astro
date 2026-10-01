@@ -4,7 +4,7 @@ import {url} from '../lib/content';
 import LayerStack from '../components/LayerStack.astro';
 import caps from '../data/capabilities.json';
 const features = caps.domains.flatMap(domain => domain.features);
-const statuses = ['Working', 'Partial', 'Planned', 'N/A'];
+const statuses = ['Working', 'Partial', 'Experimental', 'Planned', 'N/A'].filter(status => features.some(feature => feature.status === status));
 const snapshotDate = new Intl.DateTimeFormat('en-GB', {day:'2-digit', month:'short', year:'numeric', timeZone:'UTC'}).format(new Date(caps.updated));
 ---
 <Base title="Capability status" description="Explore the reported capabilities of the native iPhone OS port on the physical PinePhone, their current limits and supporting evidence." wide={true}>
@@ -13,7 +13,7 @@ const snapshotDate = new Intl.DateTimeFormat('en-GB', {day:'2-digit', month:'sho
     <div class="overview-copy">
       <h1 id="status-title">What runs today.</h1>
       <p>iPhone OS 1.1.4 on the physical PinePhone. Explore each capability and the evidence behind it.</p>
-      <a class="snapshot-link" href={url('status/#snapshot')}>Development snapshot · <time datetime={caps.updated}>{snapshotDate}</time> <span aria-hidden="true">↗</span></a>
+      <a class="snapshot-link" href={url('status/#snapshot')}>Reviewed snapshot · <time datetime={caps.updated}>{snapshotDate}</time> <span aria-hidden="true">↗</span></a>
     </div>
     <dl class="status-counts" aria-label="Reported capability counts">
       {statuses.map(status => <div data-status={status}><dt><span class="count-dot" aria-hidden="true"></span>{status}</dt><dd>{features.filter(feature => feature.status === status).length}</dd></div>)}

@@ -1,0 +1,35 @@
+E33 / pinephone-m68ap-screenshot-2026-10-01.json
+Source SHA-256: ef83af2306e1f358bb88d1f61a3f59e563e7c2107d4ad355f1af2c8d3dd328eb
+Locator: $.result; $.screenshots; $.screenshot_pixel_checks; $.valid_saved_tiff_count; $.automatic_png_extraction_passed; $.interaction.uart_complete_screenshot_chords; $.interaction.pause_duration_measured; $.interaction.capture_latency_measured; $.interaction.reboot_was_host_requested; $.storage.all_nine_protected_regions_unchanged; $.storage.data_copy_fsck_exit
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "result": "physical_stock_screenshot_accepted",
+  "screenshots": [
+    {
+      "guest_path": "mobile/Media/DCIM/999APPLE/IMG_0001.TIF",
+      "tiff": "mobile-IMG_0001.tif",
+      "png": "mobile-IMG_0001.png",
+      "width": 320,
+      "height": 480,
+      "tiff_sha256": "e2b7b8a6a1e0df17c4a1285460f0fc8421ca771f1fc1d15b2a1c955bcd35e580",
+      "png_sha256": "08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02"
+    }
+  ],
+  "screenshot_pixel_checks": [
+    {
+      "guest_path": "mobile/Media/DCIM/999APPLE/IMG_0001.TIF",
+      "rgb_sha256": "944c16048f6473ec0c301f062693773cbd1a44790cbb25634e6b6ce16503f102",
+      "png_matches_tiff_pixels": true,
+      "nonflat": true
+    }
+  ],
+  "valid_saved_tiff_count": 1,
+  "automatic_png_extraction_passed": true,
+  "interaction.uart_complete_screenshot_chords": 1,
+  "interaction.pause_duration_measured": false,
+  "interaction.capture_latency_measured": false,
+  "interaction.reboot_was_host_requested": true,
+  "storage.all_nine_protected_regions_unchanged": true,
+  "storage.data_copy_fsck_exit": 0
+}

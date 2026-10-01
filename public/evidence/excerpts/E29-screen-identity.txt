@@ -1,0 +1,19 @@
+E29 / report.json
+Source SHA-256: f772ab4dd28860b5efdadd6b6fd5f6cba72380183cf97a5cd8370d49922901c7
+Locator: $.source_sha256; $.screenshots[4]; $.source_unchanged; $.device_written
+Selected extraction-manifest fields. The parent volume digest agrees with the trial-18 notebook; the PNG identity matches the published capture.
+
+{
+  "source_sha256": "da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7",
+  "screenshots[4]": {
+    "guest_path": "mobile/Media/DCIM/999APPLE/IMG_0005.TIF",
+    "tiff": "mobile-IMG_0005.tif",
+    "png": "mobile-IMG_0005.png",
+    "width": 320,
+    "height": 480,
+    "tiff_sha256": "b13ebba6d911ee14d62fbee810e630abc6e9c7f0cdef7178d46596f3e188d0c4",
+    "png_sha256": "a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc"
+  },
+  "source_unchanged": true,
+  "device_written": false
+}

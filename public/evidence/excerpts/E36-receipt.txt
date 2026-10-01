@@ -1,0 +1,46 @@
+E36 / pinephone-camera-still-saving-2026-10-01.json
+Source SHA-256: 6c1ce9c13b96f21bcd8f8c1884ceb3f42ec968cdf38fa51b72d56a9ca6611dbe
+Locator: $.status; $.candidate.single_core; $.candidate.sensor_frame; $.candidate.upscaling; $.jpeg_saved; $.gallery_accepted; $.fresh_boot_persistence_accepted; $.physical_runs[3].valid_jpeg_count; $.physical_runs[3].preview_resumed; $.physical_runs[3].data_fsck_exit; $.physical_runs[3].data_clean_bit; $.physical_runs[3].all_nine_protected_regions_unchanged; $.physical_runs[3].photos[0].sha256; $.physical_runs[3].photos[1].sha256; $.physical_runs[3].photos[1].encoded_size; $.physical_runs[3].photos[1].exif_orientation; $.physical_runs[4].fresh_boot; $.physical_runs[4].new_still_requests_observed; $.physical_runs[4].both_original_jpegs_byte_identical; $.physical_runs[4].data_fsck_exit; $.physical_runs[4].data_clean_bit; $.physical_runs[4].all_nine_protected_regions_unchanged; $.acceptance
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "status": "accepted-vga-jpeg-gallery-and-fresh-boot-persistence",
+  "candidate.single_core": true,
+  "candidate.sensor_frame": [
+    640,
+    480
+  ],
+  "candidate.upscaling": false,
+  "jpeg_saved": true,
+  "gallery_accepted": true,
+  "fresh_boot_persistence_accepted": true,
+  "physical_runs.3.valid_jpeg_count": 2,
+  "physical_runs.3.preview_resumed": true,
+  "physical_runs.3.data_fsck_exit": 0,
+  "physical_runs.3.data_clean_bit": true,
+  "physical_runs.3.all_nine_protected_regions_unchanged": true,
+  "physical_runs.3.photos.0.sha256": "caa09e2b70c1f9b989f08e4224a383473bba124dc17370c70388c2e423c1aa79",
+  "physical_runs.3.photos.1.sha256": "3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01",
+  "physical_runs.3.photos.1.encoded_size": [
+    640,
+    480
+  ],
+  "physical_runs.3.photos.1.exif_orientation": 6,
+  "physical_runs.4.fresh_boot": true,
+  "physical_runs.4.new_still_requests_observed": 0,
+  "physical_runs.4.both_original_jpegs_byte_identical": true,
+  "physical_runs.4.data_fsck_exit": 0,
+  "physical_runs.4.data_clean_bit": true,
+  "physical_runs.4.all_nine_protected_regions_unchanged": true,
+  "acceptance": {
+    "sensor_jpeg_and_thumbnail": true,
+    "orientation_and_color": true,
+    "preview_resumes": true,
+    "stock_gallery_owner_accepted": true,
+    "fresh_boot_both_jpeg_hashes_identical": true,
+    "full_data_copy_and_fsck": true,
+    "nine_protected_regions_unchanged": true,
+    "single_core": true,
+    "owner_feedback_before_each_shutdown": true
+  }
+}

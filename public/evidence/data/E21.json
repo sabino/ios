@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -121,6 +121,7 @@
         "content": "{\n  \"absolute_pointer_convenience_dispatch\": {\n    \"kernel_address\": \"0xc0367e52\",\n    \"instruction\": \"bx lr\",\n    \"touch_delivery_proven\": false\n  },\n  \"original_multitouch_user_client_memory_types_seen\": [\n    0,\n    16\n  ],\n  \"original_user_client_queue_type\": 0,\n  \"original_user_client_queue_descriptor_offset\": \"0x8c\",\n  \"original_user_client_queue_object_offset\": \"0x88\",\n  \"original_touch_userland_path\": [\n    \"AppleMultitouchSPI IOService\",\n    \"MultitouchDriverUserClient memory type 0 IODataQueue\",\n    \"MultitouchSupport raw packet parser and contact callback\",\n    \"MultitouchHID.plugin digitizer HID event conversion\"\n  ],\n  \"ipod_qemu_one_contact_header_bytes\": 24,\n  \"ipod_qemu_one_contact_record_bytes\": 28,\n  \"ipod_qemu_down_and_release_vectors_dynamically_observed\": false,\n  \"original_touch_pipeline_dynamically_verified\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

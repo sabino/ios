@@ -1,0 +1,20 @@
+E35 / pinephone-camera-app-bridge-2026-10-01.json
+Source SHA-256: 969791c7dee10048c2a40b418ad54fbf0b0386feb2de0f671c12745b1e5aca5c
+Locator: $.physical_app_preview_proven; $.physical_boot_trial_7.visible_preview_confirmed; $.physical_boot_trial_7.orientation_confirmed; $.physical_boot_trial_7.exposure_confirmed; $.physical_boot_trial_7.frames_delivered; $.physical_boot_trial_7.bridge_failures; $.physical_boot_trial_7.memory_guard_passed; $.physical_boot_trial_7.clean_reboot; $.physical_boot_trial_7.all_eight_hashes_unchanged; $.physical_boot_trial_7.still_capture_supported; $.physical_boot_trial_7.performance.native.fps; $.physical_boot_trial_7.performance.renderer.fps; $.physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "physical_app_preview_proven": true,
+  "physical_boot_trial_7.visible_preview_confirmed": true,
+  "physical_boot_trial_7.orientation_confirmed": true,
+  "physical_boot_trial_7.exposure_confirmed": true,
+  "physical_boot_trial_7.frames_delivered": 1561,
+  "physical_boot_trial_7.bridge_failures": 0,
+  "physical_boot_trial_7.memory_guard_passed": true,
+  "physical_boot_trial_7.clean_reboot": true,
+  "physical_boot_trial_7.all_eight_hashes_unchanged": true,
+  "physical_boot_trial_7.still_capture_supported": false,
+  "physical_boot_trial_7.performance.native.fps": 29.506986448974043,
+  "physical_boot_trial_7.performance.renderer.fps": 7.904454835192702,
+  "physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter": false
+}

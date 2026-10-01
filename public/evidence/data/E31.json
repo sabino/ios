@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E31",
+    "title": "USB power balance changes with the workload",
+    "environment": "Physical PinePhone",
+    "method": "Read-only AXP803 samples grouped by observed display state",
+    "observation": "At the recorded 500 mA nominal USB input limit, the initial bright lock screen drew a median 55 mA from the battery. Blanked idle supplied a median 166 mA to the battery; brief wake windows had a positive median balance. The original power-source service also published real battery state.",
+    "limits": "These are battery-side net measurements from bounded windows, not USB input current or whole-system watts. Continuous heavy UI use, battery life, native thermal monitoring and system suspend are unvalidated. PMIC configuration and CPU clocks were unchanged.",
+    "records": [
+      {
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "USB power balance changes with the workload",
+        "columns": [
+          "Window",
+          "Samples",
+          "Median net battery current",
+          "Median net battery power"
+        ],
+        "rows": [
+          [
+            "Initial bright lock screen",
+            "13",
+            "−55 mA",
+            "−207 mW"
+          ],
+          [
+            "Brief full-brightness wakes",
+            "12",
+            "+29.5 mA",
+            "+111 mW"
+          ],
+          [
+            "Blanked idle",
+            "64",
+            "+166 mA",
+            "+630 mW"
+          ]
+        ],
+        "interpretation": "Positive values charge the battery. A USB cable or charging icon does not imply a positive battery balance during every workload.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "locator": "$.nominal_vbus_limit_ma; $.power_units; $.physical_power_groups; $.native_temperature_available; $.pmic_configuration_writes; $.cpu_clock_changes; $.usb_conclusion; $.production_physical_run.panic_count",
+        "format": "json",
+        "content": "{\n  \"nominal_vbus_limit_ma\": 500,\n  \"power_units\": \"battery-side net mW; positive charges battery\",\n  \"physical_power_groups\": {\n    \"bright_lock\": {\n      \"samples\": 13,\n      \"ms_range\": [\n        40832,\n        57630\n      ],\n      \"net_ma_range\": [\n        -59,\n        -40\n      ],\n      \"median_net_ma\": -55,\n      \"median_battery_mw\": -206.965\n    },\n    \"wake_full_brightness\": {\n      \"samples\": 12,\n      \"ms_range\": [\n        95147,\n        163902\n      ],\n      \"net_ma_range\": [\n        26,\n        105\n      ],\n      \"median_net_ma\": 29.5,\n      \"median_battery_mw\": 111.362\n    },\n    \"blank_idle\": {\n      \"samples\": 64,\n      \"ms_range\": [\n        80133,\n        193386\n      ],\n      \"net_ma_range\": [\n        78,\n        169\n      ],\n      \"median_net_ma\": 166.0,\n      \"median_battery_mw\": 630.385\n    }\n  },\n  \"native_temperature_available\": false,\n  \"pmic_configuration_writes\": false,\n  \"cpu_clock_changes\": false,\n  \"usb_conclusion\": \"USB sustained dimmed idle and the two short wake animations; full-brightness initial lockscreen discharged at a median 55 mA. Continuous heavier UI load is not proven sustainable.\",\n  \"production_physical_run.panic_count\": 0\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

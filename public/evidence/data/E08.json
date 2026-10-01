@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -122,6 +122,7 @@
         "content": "{\n  \"mechanism\": \"The nonsecure timer callback was installed, then the original ml_install_interrupt_handler path overwrote CPU+0xa4 with the legacy SGI1-only callback. An isolated private kernel binding selects the source-built combined callback instead.\",\n  \"run.seconds\": 12.13,\n  \"run.active_irq_callback\": \"0xc06d0438\",\n  \"run.timer_irq_count\": 51,\n  \"run.timer_clock_return_count\": 51,\n  \"run.last_interrupt_id\": 30,\n  \"run.sgi1_delivery_observed\": false,\n  \"run.next_frontier\": {\n    \"driver\": \"AppleS5L8900XEdgeIC\",\n    \"virtual_abort_address\": \"0xef6a9000\",\n    \"physical_mmio_address\": \"0x02a02000\"\n  }\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

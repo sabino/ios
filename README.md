@@ -8,15 +8,15 @@ The atlas preserves the discoveries, failed explanations and remaining questions
 
 ## Read it in three ways
 
-- **24 chapters** explain the contracts and the evidence behind them.
+- **30 chapters** explain the contracts and the evidence behind them.
 - **Three guided paths** trace boot to userspace, follow a pixel, or examine how the evidence changed.
 - **The concept map** connects related questions. These are editorial relationships, not a recovered call graph.
 
-The publication includes 28 evidence records with 57 concrete exhibits and 42 inspectable source excerpts, 18 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
+The publication includes 40 evidence records with 72 concrete exhibits and 56 inspectable source excerpts, 21 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
 
 ## What the evidence establishes
 
-Edition 1.1 reviews source revision `a87a56a30513fb600a61758541465e613f0d8813`. Its physical frontier includes original-client setup imagery, display wake through the original HID path, checked storage runs and a measured charging observation. Touch integration, useful audio output and a generally usable phone are not established by this edition.
+Edition 1.2 reviews source revision `ec07dd0fedd12c0e00bd1052388235cbfda18de4`. It adds accepted physical touch and gestures, the separate M68AP home screen, native battery measurements, Camera preview and VGA photographs that reopen after a fresh boot. Preview delivery, distinct-image selection and display updates remain separate metrics. Audio playback, modem/Wi-Fi integration, full suspend, higher-resolution stills and broad app coverage remain open. E01–E28 retain their earlier snapshot and payload; E29–E40 record the reviewed advances. See [the edition changelog](docs/CHANGELOG.md).
 
 The experiments are **reported private project results**. Public records preserve the observation, method, environment, limitations, reviewed document name and SHA-256 digest. A digest identifies a document; it does not make its findings independently reproducible. Public upstream references supply architectural context, not independent replication of these local experiments.
 

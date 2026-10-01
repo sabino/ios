@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E29",
+    "title": "Physical touch reaches gestures and visible controls",
+    "environment": "Physical PinePhone",
+    "method": "UART contact counts, owner interaction, native screenshots and full post-run storage checks",
+    "observation": "The N45AP physical route supports unlock, Settings taps, visible pinch enlargement and brightness adjustment. The accepted finger-identity trial submitted 439 frames, including 123 with two active contacts, and completed a clean reboot.",
+    "limits": "The earlier 1,476-frame run proves two-contact delivery but did not establish visible pinch. The later owner-confirmed gesture is separate acceptance. One offline Photos fixture is not general gesture or app coverage. The headless QEMU tree disables touch; its passing boot is not touch evidence.",
+    "records": [
+      {
+        "document": "85-pinephone-touch-gate0.md",
+        "sha256": "a10d0580a232d413f37a59d79379814e2915a82131062b0b6b0bd241c747aa0c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      },
+      {
+        "document": "19-validation-report.md",
+        "sha256": "56055d800464c58ad272c902906f47653f8ff573e8d9e321326e43c4cc2475d6",
+        "access": "Private project record; only the selected excerpt is distributed"
+      },
+      {
+        "document": "report.json",
+        "sha256": "f772ab4dd28860b5efdadd6b6fd5f6cba72380183cf97a5cd8370d49922901c7",
+        "access": "Private extraction manifest; selected fields and the reviewed PNG are distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Physical touch reaches gestures and visible controls",
+        "columns": [
+          "Trial",
+          "Observation",
+          "Boundary"
+        ],
+        "rows": [
+          [
+            "Long interaction",
+            "1,476 frames; 470 with two active IDs",
+            "Visible pinch still unconfirmed"
+          ],
+          [
+            "Finger-identity trial 18",
+            "439 frames; 123 with two active contacts",
+            "Owner confirmed Photos enlargement"
+          ],
+          [
+            "Settings and storage",
+            "Visible brightness minimum; full blank/wake; clean fsck",
+            "Root hash unchanged; controlled reboot"
+          ]
+        ],
+        "interpretation": "Contact transport, interpreted finger identity and visible app response are separate checks. The later trial adds the visible gesture result to the earlier packet counts.",
+        "sourceIds": [
+          "touch-trials",
+          "brightness-trial"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "N45 home screen captured on the native phone",
+        "src": "/ios/evidence/images/E29-native-home.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc",
+        "originalDocument": "mobile-IMG_0005.png",
+        "originalSha256": "a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc",
+        "cropBounds": null,
+        "caption": "A stock screenshot extracted after physical trial 18. Its icon grid is evidence of this device run, separate from the iPod QEMU reference. A still image alone cannot prove the accepted gesture.",
+        "alt": "Native N45 home screen with stock application icons.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "touch-trials",
+          "screen-identity"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "touch-trials",
+        "document": "85-pinephone-touch-gate0.md",
+        "sha256": "a10d0580a232d413f37a59d79379814e2915a82131062b0b6b0bd241c747aa0c",
+        "locator": "lines 580–595; lines 671–679",
+        "format": "text",
+        "content": "The physical interactive window lasted about 12 minutes after client attach.\nThe user reported that the tests performed worked, but could not establish\nvisible pinch-to-zoom. UART recorded 1,476 submitted frames: 488 contained\ntwo contact records and 470 had two simultaneously active IDs. The median\ninterval within contact sequences was 46 ms; delays ranged from 45 to 247 ms\nwhen intervals of 250 ms or more were excluded. This proves two-contact\ndelivery and real timing, not visual acceptance of a pinch gesture.\nThe saved SpringBoard preferences retain `SBAutoLockTime = -1` and\n`SBAutoDimTime = -1` before and after the run.\n\nThe clean UART reboot was requested at 780 seconds and Jumpdrive returned\nat about 800 seconds, with no panic, full queue or failed-request marker.\nThe post-run 512 MiB data copy has SHA-256\n`5232beedca22b3211dc847011e3926fea974addbad9889086557104ce918d47a`,\nthe clean bit set and `fsck_hfs -dfn` exit 0. The root hash is unchanged.\nJumpdrive reported 37% battery before and after, charging on laptop USB.\n\n[…]\n\nPhysical trial 18 used the finger-identity revision alongside the brightness\nminimum adjustment. The user confirmed that spreading two fingers enlarged\nthe grid in Photos. Before clean shutdown, UART recorded 439 submitted\nframes including 123 with two active contacts. This is visible pinch\nacceptance, beyond packet-count evidence. All 30 CTests and 447 Python tests\npass; the private input image fits at 27,272 of 27,648 bytes. The combined\nheadless QEMU build also completed a clean reboot. The full 512 MiB post-run data copy matched the UART SHA-256\n`da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7`,\nretained the clean data bit and passed fsck. The root hash remained unchanged.",
+        "note": "Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages."
+      },
+      {
+        "id": "brightness-trial",
+        "document": "19-validation-report.md",
+        "sha256": "56055d800464c58ad272c902906f47653f8ff573e8d9e321326e43c4cc2475d6",
+        "locator": "lines 934–946",
+        "format": "text",
+        "content": "\nThe brightness revision maps the slider to the device-tree visible minimum\nwhile retaining complete blanking. QEMU verified original brightness writes\nand a clean reboot. The touch revision assigns distinct stable finger\nidentities, fixing a collision in the original HID child-event table.\nAll 30 CTests and 447 Python tests pass. The combined build passed a QEMU\nboot and clean reboot, but its headless tree disables Z2; a separate SPI2\ntree repeats an early null abort. Physical trial 18 received explicit user confirmation of the visible minimum,\nPower blank/wake and pinch enlargement. It completed a clean UART reboot;\nthe full data copy matched its UART hash, retained the clean bit, passed\nfsck and confirmed an unchanged root. Automatic extraction recovered six\nvalid screenshots, including two from that trial. No PMIC configuration,\nCPU clock or root-volume change was made.",
+        "note": "Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages."
+      },
+      {
+        "id": "screen-identity",
+        "document": "report.json",
+        "sha256": "f772ab4dd28860b5efdadd6b6fd5f6cba72380183cf97a5cd8370d49922901c7",
+        "locator": "$.source_sha256; $.screenshots[4]; $.source_unchanged; $.device_written",
+        "format": "json",
+        "content": "{\n  \"source_sha256\": \"da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7\",\n  \"screenshots[4]\": {\n    \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0005.TIF\",\n    \"tiff\": \"mobile-IMG_0005.tif\",\n    \"png\": \"mobile-IMG_0005.png\",\n    \"width\": 320,\n    \"height\": 480,\n    \"tiff_sha256\": \"b13ebba6d911ee14d62fbee810e630abc6e9c7f0cdef7178d46596f3e188d0c4\",\n    \"png_sha256\": \"a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc\"\n  },\n  \"source_unchanged\": true,\n  \"device_written\": false\n}",
+        "note": "Selected extraction-manifest fields. The parent volume digest agrees with the trial-18 notebook; the PNG identity matches the published capture."
+      }
+    ]
+  }
+}

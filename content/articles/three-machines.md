@@ -9,7 +9,11 @@
     "E03",
     "E17",
     "E20",
-    "E28"
+    "E28",
+    "E29",
+    "E32",
+    "E35",
+    "E38"
   ],
   "sources": [
     "S01",
@@ -19,11 +23,15 @@
   "related": [
     "orientation",
     "emulator-fidelity",
-    "boot-handoff"
+    "boot-handoff",
+    "native-iphone",
+    "camera-preview"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Keep the substrates separate
 
@@ -60,3 +68,11 @@ The later display experiment had a different acceptance boundary: the original f
 Button work subsequently closed another boundary: physical taps produced guest HID edges and visible wake/blank transitions. It did not inherit touch success from the reference emulator. [E20](/ios/evidence/E20/)
 
 The general method is to preserve the environment as part of every claim's identity. A reliable notebook should let a reader answer “which machine?” before asking “did it work?”
+
+## Reviewed advance: 1 October 2026
+
+The physical route now has accepted N45 gestures and an independently prepared M68 home-screen profile. The latter adds an accepted stock Camera preview. These are new physical observations, not consequences inferred from QEMU success. [E29](/ios/evidence/E29/) [E32](/ios/evidence/E32/) [E35](/ios/evidence/E35/)
+
+A fourth label is useful for the camera-performance work: an isolated ARM replay executes original queue bookkeeping with synthetic image identities and stubbed services. It is classified as a synthetic probe, not as a complete emulator boot or a physical camera. Its near-30 image-selection rate belongs only to the modeled scenarios. [E38](/ios/evidence/E38/)
+
+The native route continues to execute adapted XNU directly on the A64. Linux recovery is a separate staging and inspection environment; it is not the host underneath the accepted native userspace. The wireframe groups the board, kernel, services and applications without inserting a Linux or hypervisor layer into this path.

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E30",
+    "title": "Original power consumer accepts synthetic battery states",
+    "environment": "PinePhone QEMU",
+    "method": "Original SpringBoard consumer observations against controlled power-source samples",
+    "observation": "Original userspace consumed charging, unplugged discharge and externally powered full-battery states from the power-source service in QEMU.",
+    "limits": "These are synthetic battery samples. They validate consumer wiring, not physical battery capacity, charging current or a sustainable power budget.",
+    "records": [
+      {
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Original power consumer accepts synthetic battery states",
+        "columns": [
+          "Controlled sample",
+          "Capacity",
+          "Charging / external"
+        ],
+        "rows": [
+          [
+            "Charging",
+            "37%",
+            "1 / 1"
+          ],
+          [
+            "Unplugged",
+            "36%",
+            "0 / 0"
+          ],
+          [
+            "Full",
+            "100%",
+            "0 / 1"
+          ]
+        ],
+        "interpretation": "A changing original consumer distinguishes a working service contract from merely publishing a similarly named object. Physical power is reviewed separately in E31.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "locator": "$.consumer_validation.synthetic_qemu_samples; $.consumer_validation.valid_original_code_observations[0].pct; $.consumer_validation.valid_original_code_observations[0].charging; $.consumer_validation.valid_original_code_observations[0].external; $.consumer_validation.valid_original_code_observations[3].pct; $.consumer_validation.valid_original_code_observations[3].charging; $.consumer_validation.valid_original_code_observations[3].external; $.consumer_validation.valid_original_code_observations[4].pct; $.consumer_validation.valid_original_code_observations[4].charging; $.consumer_validation.valid_original_code_observations[4].external",
+        "format": "json",
+        "content": "{\n  \"consumer_validation.synthetic_qemu_samples\": true,\n  \"consumer_validation.valid_original_code_observations.0.pct\": 37,\n  \"consumer_validation.valid_original_code_observations.0.charging\": 1,\n  \"consumer_validation.valid_original_code_observations.0.external\": 1,\n  \"consumer_validation.valid_original_code_observations.3.pct\": 36,\n  \"consumer_validation.valid_original_code_observations.3.charging\": 0,\n  \"consumer_validation.valid_original_code_observations.3.external\": 0,\n  \"consumer_validation.valid_original_code_observations.4.pct\": 100,\n  \"consumer_validation.valid_original_code_observations.4.charging\": 0,\n  \"consumer_validation.valid_original_code_observations.4.external\": 1\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E36",
+    "title": "Two camera JPEGs survive a fresh boot",
+    "environment": "Physical PinePhone",
+    "method": "Stock software JPEG save, thumbnail checks, fresh-boot gallery acceptance and hash comparison",
+    "observation": "The accepted physical still trial saved two genuine 640 × 480 JPEGs and thumbnails, then resumed preview. After a fresh boot with no new capture, both JPEGs were byte-identical and the owner accepted their display in the gallery. Full 512 MiB data copies passed filesystem checks in both runs.",
+    "limits": "The sensor pixels are VGA, not upscaled or full-resolution OV5640 output. The first image initially appeared black on the device despite decoding correctly; both reopened after reboot, and the transient display cause remains unclassified. Two photos and one fresh-boot follow-up do not establish long-term durability or power-loss safety.",
+    "records": [
+      {
+        "document": "pinephone-camera-still-saving-2026-10-01.json",
+        "sha256": "6c1ce9c13b96f21bcd8f8c1884ceb3f42ec968cdf38fa51b72d56a9ca6611dbe",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Two camera JPEGs survive a fresh boot",
+        "columns": [
+          "Gate",
+          "Capture run",
+          "Fresh-boot run"
+        ],
+        "rows": [
+          [
+            "JPEG count",
+            "2 valid VGA files",
+            "Same 2; no new still requests"
+          ],
+          [
+            "Content identity",
+            "Hashes recorded",
+            "Both byte-identical"
+          ],
+          [
+            "Visible behavior",
+            "Preview resumed; second photo visible",
+            "Both photos reopened; owner accepted"
+          ],
+          [
+            "Data volume",
+            "Full 512 MiB copy; clean bit; fsck 0",
+            "Full 512 MiB copy; clean bit; fsck 0"
+          ],
+          [
+            "Protected regions",
+            "9 unchanged",
+            "9 unchanged"
+          ]
+        ],
+        "interpretation": "Save completion, file decoding, gallery display and post-reboot identity are distinct acceptance steps. The retained failed trials explain why a shutter callback alone was insufficient.",
+        "sourceIds": [
+          "receipt"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "A real VGA photograph saved by the stock Camera",
+        "src": "/ios/evidence/images/E36-camera-vga.jpg",
+        "width": 480,
+        "height": 640,
+        "sha256": "3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01",
+        "originalDocument": "mobile-100APPLE-IMG_0002.JPG",
+        "originalSha256": "3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01",
+        "cropBounds": null,
+        "caption": "The second accepted JPEG shows a small robot model. Its encoded pixels are 640 × 480, displayed upright as 480 × 640 by the original EXIF orientation. The stock Apple/iPhone metadata names the software profile, not the physical camera. The guest timestamp is not a trustworthy capture date.",
+        "alt": "VGA photograph of a blue and white robot model, captured with the PinePhone rear sensor.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "receipt"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-still-saving-2026-10-01.json",
+        "sha256": "6c1ce9c13b96f21bcd8f8c1884ceb3f42ec968cdf38fa51b72d56a9ca6611dbe",
+        "locator": "$.status; $.candidate.single_core; $.candidate.sensor_frame; $.candidate.upscaling; $.jpeg_saved; $.gallery_accepted; $.fresh_boot_persistence_accepted; $.physical_runs[3].valid_jpeg_count; $.physical_runs[3].preview_resumed; $.physical_runs[3].data_fsck_exit; $.physical_runs[3].data_clean_bit; $.physical_runs[3].all_nine_protected_regions_unchanged; $.physical_runs[3].photos[0].sha256; $.physical_runs[3].photos[1].sha256; $.physical_runs[3].photos[1].encoded_size; $.physical_runs[3].photos[1].exif_orientation; $.physical_runs[4].fresh_boot; $.physical_runs[4].new_still_requests_observed; $.physical_runs[4].both_original_jpegs_byte_identical; $.physical_runs[4].data_fsck_exit; $.physical_runs[4].data_clean_bit; $.physical_runs[4].all_nine_protected_regions_unchanged; $.acceptance",
+        "format": "json",
+        "content": "{\n  \"status\": \"accepted-vga-jpeg-gallery-and-fresh-boot-persistence\",\n  \"candidate.single_core\": true,\n  \"candidate.sensor_frame\": [\n    640,\n    480\n  ],\n  \"candidate.upscaling\": false,\n  \"jpeg_saved\": true,\n  \"gallery_accepted\": true,\n  \"fresh_boot_persistence_accepted\": true,\n  \"physical_runs.3.valid_jpeg_count\": 2,\n  \"physical_runs.3.preview_resumed\": true,\n  \"physical_runs.3.data_fsck_exit\": 0,\n  \"physical_runs.3.data_clean_bit\": true,\n  \"physical_runs.3.all_nine_protected_regions_unchanged\": true,\n  \"physical_runs.3.photos.0.sha256\": \"caa09e2b70c1f9b989f08e4224a383473bba124dc17370c70388c2e423c1aa79\",\n  \"physical_runs.3.photos.1.sha256\": \"3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01\",\n  \"physical_runs.3.photos.1.encoded_size\": [\n    640,\n    480\n  ],\n  \"physical_runs.3.photos.1.exif_orientation\": 6,\n  \"physical_runs.4.fresh_boot\": true,\n  \"physical_runs.4.new_still_requests_observed\": 0,\n  \"physical_runs.4.both_original_jpegs_byte_identical\": true,\n  \"physical_runs.4.data_fsck_exit\": 0,\n  \"physical_runs.4.data_clean_bit\": true,\n  \"physical_runs.4.all_nine_protected_regions_unchanged\": true,\n  \"acceptance\": {\n    \"sensor_jpeg_and_thumbnail\": true,\n    \"orientation_and_color\": true,\n    \"preview_resumes\": true,\n    \"stock_gallery_owner_accepted\": true,\n    \"fresh_boot_both_jpeg_hashes_identical\": true,\n    \"full_data_copy_and_fsck\": true,\n    \"nine_protected_regions_unchanged\": true,\n    \"single_core\": true,\n    \"owner_feedback_before_each_shutdown\": true\n  }\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

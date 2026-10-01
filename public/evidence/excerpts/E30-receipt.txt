@@ -1,0 +1,17 @@
+E30 / pinephone-native-battery-power-2026-09-30.json
+Source SHA-256: 5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c
+Locator: $.consumer_validation.synthetic_qemu_samples; $.consumer_validation.valid_original_code_observations[0].pct; $.consumer_validation.valid_original_code_observations[0].charging; $.consumer_validation.valid_original_code_observations[0].external; $.consumer_validation.valid_original_code_observations[3].pct; $.consumer_validation.valid_original_code_observations[3].charging; $.consumer_validation.valid_original_code_observations[3].external; $.consumer_validation.valid_original_code_observations[4].pct; $.consumer_validation.valid_original_code_observations[4].charging; $.consumer_validation.valid_original_code_observations[4].external
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "consumer_validation.synthetic_qemu_samples": true,
+  "consumer_validation.valid_original_code_observations.0.pct": 37,
+  "consumer_validation.valid_original_code_observations.0.charging": 1,
+  "consumer_validation.valid_original_code_observations.0.external": 1,
+  "consumer_validation.valid_original_code_observations.3.pct": 36,
+  "consumer_validation.valid_original_code_observations.3.charging": 0,
+  "consumer_validation.valid_original_code_observations.3.external": 0,
+  "consumer_validation.valid_original_code_observations.4.pct": 100,
+  "consumer_validation.valid_original_code_observations.4.charging": 0,
+  "consumer_validation.valid_original_code_observations.4.external": 1
+}

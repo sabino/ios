@@ -7,7 +7,8 @@
   "order": 5,
   "evidence": [
     "E03",
-    "E06"
+    "E06",
+    "E39"
   ],
   "sources": [
     "S06",
@@ -17,11 +18,14 @@
   "related": [
     "mmu-and-caches",
     "boot-handoff",
-    "observability"
+    "observability",
+    "measuring-performance"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Start with the code that actually executes
 
@@ -62,3 +66,9 @@ swp r2, r1, [r0]  ; read old word into r2; exchange with r1
 ```
 
 The successful receipt names PC `0x2fe25724`, address `0x2fe3c788`, width 4 and old value 0. The earlier observer dump supplies `r0=0x2fe3c788` and `r1=1`, but comes from a different run. Neither line is a post-exchange register dump. Therefore a calculated final register value must not be presented as a separately observed register value. Compare the [original lines and instruction-state table](/ios/evidence/E06/#observed-swap) before considering broader atomicity claims.
+
+## Reviewed advance: an atomic hotspot, 1 October 2026
+
+A later physical OFF/ON replay sharply reduced the measured legacy atomic-trap rate: mean reductions across four interaction windows were 98.50–99.91%. Mean frame gaps improved in two windows and worsened in two. This establishes removal of a major local source of trap overhead without establishing consistent UI acceleration. [E39](/ios/evidence/E39/)
+
+The sample is one pair, with intentional pauses and some damaged UART gap rows. App-open latency, repeated order controls, forced contention and SMP acceptance remain unmeasured. The user-reported startup slowdown is unresolved. The earlier generic compatibility questions about faults, permissions and copy-on-write remain open; optimizing one measured hot path does not close them. The [performance chapter](/ios/articles/measuring-performance/) explains the units and limits.

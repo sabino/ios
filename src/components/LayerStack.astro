@@ -4,9 +4,9 @@ import CapabilityRow from './CapabilityRow.astro';
 import caps from '../data/capabilities.json';
 const {id = 'atlas-layers', capabilities = false} = Astro.props;
 const features = caps.domains.flatMap(domain => domain.features.map(feature => ({...feature, category: domain.name})));
-const researchLayers = sections.filter(section => section !== 'Method');
 const architecture = [
-  {id: 'hardware', name: 'PinePhone hardware', kind: 'Physical board', detail: 'CPU · memory · devices', domains: ['Machine', 'Storage', 'Graphics', 'Interaction']},
+  {id: 'context', name: 'Foundations', kind: 'Research context', detail: 'Software · machines · provenance', domains: ['Foundations']},
+  {id: 'hardware', name: 'PinePhone · A64', kind: 'Physical board', detail: 'CPU · memory · devices', domains: ['Machine', 'Storage', 'Graphics', 'Interaction']},
   {id: 'kernel', name: 'XNU kernel & drivers', kind: 'Kernel space', detail: 'Mach · BSD · I/O Kit', domains: ['Machine', 'Storage', 'Graphics', 'Interaction']},
   {id: 'services', name: 'Services & frameworks', kind: 'User space', detail: 'Files · graphics · input · media', domains: ['Storage', 'Graphics', 'Interaction']},
   {id: 'apps', name: 'SpringBoard & apps', kind: 'User space', detail: 'Original iPhone OS software', domains: ['Graphics', 'Interaction']},
@@ -33,40 +33,22 @@ const architectureFocus: Record<string, string> = {
   <div class="layer-map">
   <div class="plate-head">
     {capabilities ? <h2>Explore the system</h2> : <span>Read the system in layers</span>}
-    <div class="diagram-switch" role="group" aria-label="Choose a diagram" data-layer-view-controls hidden>
-      <button type="button" data-layer-view="research" aria-pressed="true" aria-controls={`${id}-research`}>Research map</button>
-      <button type="button" data-layer-view="architecture" aria-pressed="false" aria-controls={`${id}-architecture`}>OS architecture</button>
-    </div>
+    <span class="wireframe-key"><span aria-hidden="true">◇</span> Architecture × research</span>
   </div>
   <div class="layer-visual">
-    <div id={`${id}-research`} data-layer-diagram="research">
-      <p class="diagram-guide">Read from Foundations upward. Method connects every domain.</p>
+    <div id={`${id}-architecture`} data-layer-diagram="architecture">
+      <p class="diagram-guide">One system. Six research paths.<span class="architecture-focus" data-tier-summary>{architectureFocus.Foundations}</span></p>
       <div class="layer-scene" aria-hidden="true">
-        <div class="stack-drift"><div class="stack research-stack">
-          {researchLayers.map((section, i) => (
-            <button type="button" class:list={['layer', {'is-active': i === 0}]} data-layer={i} data-domain={section} style={`--depth:${i};--order:${i};--lift:${i * 39}px`} tabindex="-1" aria-label={section}>
-              <span class="layer-face">
-                <span class="face-grid"></span><span class="face-mark">+</span>
-                <span class="face-label"><span>{String(i + 1).padStart(2, '0')}</span><strong>{section}</strong><span class="face-arrow">↗</span></span>
-              </span>
+        <div class="stack-drift"><div class="stack architecture-stack">
+          <span class="wire-spine wire-spine-left"></span><span class="wire-spine wire-spine-right"></span>
+          {architecture.map((tier, i) => (
+            <button type="button" class:list={['layer', 'architecture-layer', {'context-layer': i === 0, 'is-related': true}]} data-layer={i} data-tier={tier.id} data-research-domains={tier.domains.join(' ')} style={`--order:${i};--lift:${i * 39}px`} tabindex="-1" aria-label={`${tier.name}: explore ${sections[i]}`}>
+              <span class="layer-face"><span class="face-grid"></span><span class="architecture-kind">{tier.kind}</span><span class="face-label"><strong>{tier.name}</strong></span><span class="tier-domains">{tier.domains.filter(d => d !== 'Foundations').map(domain => <span data-domain={domain} class="layer-dot" title={domain}></span>)}</span></span>
               <span class="layer-edge"></span>
             </button>
           ))}
         </div></div>
         <button type="button" class="method-rail" data-layer="5" data-domain="Method" tabindex="-1" aria-label="Method applies across every research domain"><span class="method-label"><span class="layer-dot"></span>Method</span></button>
-      </div>
-    </div>
-    <div id={`${id}-architecture`} data-layer-diagram="architecture" hidden>
-      <p class="diagram-guide">Native PinePhone route · hardware below, applications above.<span class="architecture-focus" data-tier-summary>{architectureFocus.Foundations}</span></p>
-      <div class="layer-scene" aria-hidden="true">
-        <div class="stack-drift"><div class="stack architecture-stack">
-          {architecture.map((tier, i) => (
-            <div class="layer architecture-layer is-related" data-tier={tier.id} data-research-domains={tier.domains.join(' ')} style={`--order:${i};--lift:${i * 52}px`}>
-              <span class="layer-face"><span class="face-grid"></span><span class="architecture-kind">{tier.kind}</span><span class="face-label"><strong>{tier.name}</strong><span>{tier.detail}</span></span></span>
-              <span class="layer-edge"></span>
-            </div>
-          ))}
-        </div></div>
       </div>
       <ol class="sr-only" aria-label="Conceptual architecture from bottom to top">{architecture.map(tier => <li>{tier.name}. {tier.kind}: {tier.detail}.</li>)}</ol>
     </div>
@@ -79,10 +61,10 @@ const architectureFocus: Record<string, string> = {
     </div>
     {capabilities && <button class="layer-motion" type="button" data-layer-motion aria-pressed="false" hidden>Pause motion</button>}
     <details class="diagram-notes">
-      <summary>How the diagrams relate</summary>
-      <p>The research map is a reading sequence. Foundations identifies the software and the machines; Method tests the evidence throughout. Storage, Graphics and Interaction follow paths across the operating system.</p>
-      <p>The architecture view groups the native route into hardware, the adapted XNU kernel and drivers, system services and frameworks, and original userspace. Selecting a research domain highlights the parts it studies. These broad groups simplify relationships; they do not certify that a feature works.</p>
-      <p>XNU includes Mach, BSD and I/O Kit in its kernel environment. The atlas’s Foundations section concerns research context; Apple’s similarly named Foundation framework belongs to userspace.</p>
+      <summary>Reading this wireframe</summary>
+      <p>The planes show the native route: physical board, adapted XNU kernel and drivers, services and frameworks, then SpringBoard and apps. Colored dots place research domains at the boundaries they study. Selecting a domain highlights its route through the same system.</p>
+      <p>Foundations sits beneath the diagram as research context, not an operating-system component. Method spans every boundary. Connections are a reading guide; they do not establish runtime calls or certify that a feature works.</p>
+      <p>XNU includes Mach, BSD and I/O Kit in its kernel environment. Apple’s Foundation framework belongs to userspace and is distinct from the atlas’s Foundations section.</p>
       <p>Architecture references: <a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html">Apple’s kernel overview</a> and <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html">iOS framework layers</a>. For the project’s distinct execution environments, read <a href={url('articles/three-machines/')}>the three machines</a>.</p>
     </details>
   </div>
@@ -94,7 +76,7 @@ const architectureFocus: Record<string, string> = {
         <div class="capability-heading"><h3>{section}</h3><span class="capability-count"><span class="layer-dot" aria-hidden="true"></span>{features.filter(f => f.layers.includes(section)).length} related capabilities</span></div>
         <p class="domain-description">{sectionDescriptions[section]}</p>
       </div>)}
-      <div data-all-heading hidden><div class="capability-heading"><h3>All capabilities</h3><span class="capability-count">{features.length} features</span></div><p class="domain-description">The complete development snapshot. Select a research domain to follow its path through the system.</p></div>
+      <div data-all-heading hidden><div class="capability-heading"><h3>All capabilities</h3><span class="capability-count">{features.length} features</span></div><p class="domain-description">The complete reviewed snapshot. Select a research domain to follow its path through the system.</p></div>
       <div class="capability-list">{features.map((feature, i) => <CapabilityRow feature={feature} expanded={i === 0}/>)}</div>
       <div class="detail-links"><a data-domain-link href={url('library/#foundations')}>Read Foundations <span aria-hidden="true">↗</span></a><button class="expand-scores" type="button" data-expand-scores aria-expanded="false" aria-controls={`${id}-features`}>Expand all scores</button></div>
       <p class="score-disclaimer">Scores are editorial judgements. <a href={url('status/#snapshot')}>About this snapshot ↗</a></p>
@@ -109,15 +91,14 @@ const architectureFocus: Record<string, string> = {
     ))}
     </>}
   </div>
-  <noscript><style is:inline>.layerplate .layer-tabs,.layerplate .show-all,.layerplate .expand-scores{display:none}.layerplate .layer{pointer-events:none}.with-capabilities [data-layer-detail]{display:none!important}.with-capabilities [data-all-heading],.with-capabilities [data-capability]{display:block!important}.with-capabilities .capability-kicker{display:none}</style><p class="layer-fallback">Explore all six layers in the <a href={url('library/')}>chapter index ↗</a>.</p></noscript>
+  <noscript><style is:inline>.layerplate .layer-tabs,.layerplate .show-all,.layerplate .expand-scores{display:none}.layerplate .layer{pointer-events:none}.with-capabilities [data-layer-detail]{display:none!important}.with-capabilities [data-all-heading],.with-capabilities [data-capability]{display:block!important}.with-capabilities .capability-kicker{display:none}</style><p class="layer-fallback">Explore all six research domains in the <a href={url('library/')}>chapter index ↗</a>.</p></noscript>
 </figure>
 
 <style>
   .layerplate{min-width:0;margin:0;position:relative}
   .plate-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--rule);font:11px var(--mono);color:var(--muted)}
-  .diagram-switch{display:inline-flex;padding:3px;gap:3px;border:1px solid var(--rule);border-radius:5px;background:var(--surface)}
-  .diagram-switch button{border:0;border-radius:3px;padding:7px 9px;background:transparent;font-size:10px;color:var(--muted);white-space:nowrap}
-  .diagram-switch button[aria-pressed="true"]{background:var(--tint);color:var(--ink);box-shadow:inset 0 -2px var(--blue)}
+  .wireframe-key{display:flex;align-items:center;gap:7px;font:9px var(--mono);color:var(--muted);white-space:nowrap}
+  .wireframe-key>span{font-size:16px;color:var(--blue)}
   .diagram-guide{font-size:11px;line-height:1.5;color:var(--muted);min-height:32px;margin:12px 0 0}
   .architecture-focus{display:block;color:var(--ink)}
   .layer-visual{min-width:0}
@@ -139,13 +120,18 @@ const architectureFocus: Record<string, string> = {
   .method-label{display:flex;align-items:center;gap:8px;writing-mode:vertical-rl;transform:rotate(180deg);font:11px var(--mono);padding:10px 4px;border-radius:3px}
   .method-rail.is-active .method-label{color:var(--ink);background:color-mix(in srgb,var(--domain) 15%,var(--surface))}
   .method-rail.is-active:after{border-width:2px}
-  .architecture-stack{width:70%;left:15%}
-  .architecture-layer{cursor:default;pointer-events:none}
-  .architecture-layer .layer-face{border-color:var(--rule);background:var(--surface)}
-  .architecture-layer .layer-edge{background:var(--rule)}
-  .architecture-layer.is-related .layer-face{border-color:var(--domain);background:color-mix(in srgb,var(--domain) 24%,var(--surface));box-shadow:0 1px 0 #ffffff45 inset,0 18px 28px -22px color-mix(in srgb,var(--domain) 60%,transparent)}
-  .architecture-layer.is-related .layer-edge{background:var(--domain)}
-  .architecture-layer .face-label{flex-direction:column;align-items:flex-start;gap:4px;left:15px;right:12px;bottom:12px}
+  .architecture-stack{width:70%;left:9%}
+  .architecture-layer{cursor:pointer}
+  .architecture-layer .layer-face{border-color:color-mix(in srgb,var(--muted) 65%,var(--rule));background:color-mix(in srgb,var(--surface) 94%,transparent);border-radius:3px;box-shadow:none}
+  .architecture-layer .layer-edge{background:transparent;border:1px solid var(--rule);border-top:0;height:5px}
+  .architecture-layer.is-related .layer-face{border-color:var(--domain);background:color-mix(in srgb,var(--domain) 7%,var(--surface));box-shadow:none}
+  .architecture-layer.is-related .layer-edge{border-color:var(--domain)}
+  .context-layer .layer-face{border-style:dashed}
+  .tier-domains{position:absolute;right:12px;top:13px;display:flex;gap:5px}
+  .tier-domains .layer-dot{width:5px;height:5px}
+  .wire-spine{position:absolute;bottom:0;width:0;height:164px;border-left:1px dashed var(--rule);transform:rotateX(-90deg);transform-origin:bottom;pointer-events:none}
+  .wire-spine-left{left:0}.wire-spine-right{right:0}
+  .architecture-layer .face-label{align-items:center;left:15px;right:12px;bottom:13px}
   .architecture-layer .face-label strong{font-size:14px}
   .architecture-layer .face-label>span{font-size:9px}
   .architecture-kind{position:absolute;left:15px;top:12px;font:9px var(--mono);text-transform:uppercase;color:var(--muted)}
@@ -202,11 +188,11 @@ const architectureFocus: Record<string, string> = {
   .layerplate:is(:hover,:focus-within) .stack-drift{animation-play-state:paused}
   @keyframes unstack{from{transform:translateZ(0) translateY(12px);opacity:.2}to{transform:translateZ(var(--lift));opacity:1}}
   @keyframes stack-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-  @media(max-width:1100px){.stack{width:64%;left:11%;top:156px}.architecture-stack{width:76%;left:12%}.layer-scene{height:347px}.face-label{left:13px;right:13px;gap:10px}.face-label strong{font-size:14px}}
+  @media(max-width:1100px){.stack{width:64%;left:11%;top:156px}.architecture-stack{width:72%;left:10%}.layer-scene{height:347px}.face-label{left:13px;right:13px;gap:10px}.face-label strong{font-size:14px}}
   @media screen and (min-width:801px) and (min-height:800px){.with-capabilities>.layer-map{position:sticky;top:110px}}
   @media(max-width:1200px){.with-capabilities{gap:28px}.with-capabilities .plate-head h2{font-size:24px}.capability-panel{padding:20px}}
   @media(max-width:800px){.with-capabilities{grid-template-columns:minmax(0,1fr);max-width:620px;margin:auto;gap:18px}.with-capabilities .diagram-notes{margin-bottom:0}.with-capabilities .layer-details{margin:0}}
-  @media(max-width:600px){.diagram-switch{width:100%}.diagram-switch button{flex:1;font-size:11px}.layer-scene{height:292px}.stack{width:64%;left:10.5%;height:132px;top:135px;transform:rotateX(48deg) rotateZ(-22deg)}.architecture-stack{width:76%;left:12%}.method-rail{top:8px;bottom:8px;width:32px}.method-label{font-size:10px}.layer-tabs{gap:4px;margin-top:8px}.layer-tabs button{font-size:11px;min-height:40px;padding:7px 6px;gap:6px}.face-label{bottom:10px;gap:9px}.face-label strong{font-size:13px}.face-label>span{font-size:9px}.detail-heading{font-size:9px}.layer-details{min-height:132px}.architecture-layer .face-label{left:11px;bottom:10px;gap:3px}.architecture-layer .face-label strong{font-size:12px}.architecture-layer .face-label>span{font-size:8px}.architecture-kind{font-size:8px;left:11px}}
+  @media(max-width:600px){.diagram-switch{width:100%}.diagram-switch button{flex:1;font-size:11px}.layer-scene{height:292px}.stack{width:64%;left:10.5%;height:132px;top:135px;transform:rotateX(48deg) rotateZ(-22deg)}.architecture-stack{width:72%;left:10%}.method-rail{top:8px;bottom:8px;width:32px}.method-label{font-size:10px}.layer-tabs{gap:4px;margin-top:8px}.layer-tabs button{font-size:11px;min-height:40px;padding:7px 6px;gap:6px}.face-label{bottom:10px;gap:9px}.face-label strong{font-size:13px}.face-label>span{font-size:9px}.detail-heading{font-size:9px}.layer-details{min-height:132px}.architecture-layer .face-label{left:11px;bottom:10px;gap:3px}.architecture-layer .face-label strong{font-size:12px}.architecture-layer .face-label>span{font-size:8px}.architecture-kind{font-size:8px;left:11px}}
   @media(max-width:420px){.capability-panel{padding:18px 16px}.capability-heading{gap:10px}.capability-heading h3{font-size:25px}.capability-kicker{font-size:9px}.show-all{font-size:10px}}
   @media(prefers-reduced-motion:reduce){.with-capabilities [data-layer-detail]{animation:none}}
   @media print{.with-capabilities{display:block}.with-capabilities>.layer-map{position:static}.with-capabilities>.layer-details{margin-top:20px}.diagram-switch,.show-all,.expand-scores{display:none}.with-capabilities [data-layer-detail]{display:none!important}.with-capabilities [data-all-heading],.with-capabilities :global([data-capability]){display:block!important}.with-capabilities .capability-kicker{display:none}}
@@ -219,8 +205,6 @@ const architectureFocus: Record<string, string> = {
     const tabs = [...plate.querySelectorAll<HTMLButtonElement>('[data-layer-tab]')];
     const panels = [...plate.querySelectorAll<HTMLElement>('[data-layer-detail]')];
     const tiers = [...plate.querySelectorAll<HTMLElement>('[data-tier]')];
-    const views = [...plate.querySelectorAll<HTMLButtonElement>('[data-layer-view]')];
-    const diagrams = [...plate.querySelectorAll<HTMLElement>('[data-layer-diagram]')];
     const expandedDetails = plate.classList.contains('with-capabilities');
     const features = [...plate.querySelectorAll<HTMLElement>('[data-capability]')];
     const allButton = plate.querySelector<HTMLButtonElement>('[data-show-all]');
@@ -254,7 +238,7 @@ const architectureFocus: Record<string, string> = {
       if (expandedDetails) {
         allButton!.setAttribute('aria-pressed', String(index < 0));
         plate.querySelector<HTMLElement>('[data-all-heading]')!.hidden = index >= 0;
-        plate.querySelector<HTMLElement>('[data-scope-label]')!.textContent = index < 0 ? 'DEVELOPMENT SNAPSHOT' : 'RESEARCH DOMAIN / ' + String(index + 1).padStart(2,'0');
+        plate.querySelector<HTMLElement>('[data-scope-label]')!.textContent = index < 0 ? 'REVIEWED SNAPSHOT' : 'RESEARCH DOMAIN / ' + String(index + 1).padStart(2,'0');
         features.forEach(feature => { feature.hidden = index >= 0 && !feature.dataset.capabilityLayers!.split(' ').includes(domain); });
         const count = features.filter(feature => !feature.hidden).length;
         plate.querySelector<HTMLElement>('.capability-panel')!.setAttribute('aria-label', index < 0 ? 'All capabilities' : domain + ' capabilities');
@@ -290,13 +274,6 @@ const architectureFocus: Record<string, string> = {
       const updateMotion = () => { motion.disabled = reduced.matches; motion.textContent = reduced.matches ? 'Reduced motion' : plate.hasAttribute('data-motion-paused') ? 'Resume motion' : 'Pause motion'; };
       reduced.addEventListener('change', updateMotion); updateMotion();
     }
-    plate.querySelector<HTMLElement>('[data-layer-view-controls]')!.hidden = false;
-    views.forEach(button => button.addEventListener('click', () => {
-      if (button.getAttribute('aria-pressed') === 'true') return;
-      views.forEach(view => view.setAttribute('aria-pressed', String(view === button)));
-      diagrams.forEach(diagram => { diagram.hidden = diagram.dataset.layerDiagram !== button.dataset.layerView; });
-      enter();
-    }));
     tabs.forEach((tab, i) => {
       tab.addEventListener('click', () => select(i, false, true));
       tab.addEventListener('keydown', (event) => {

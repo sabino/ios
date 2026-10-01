@@ -1,6 +1,6 @@
 {
   "updated": "2026-10-01",
-  "provenance": "This page reports the current state of the native-port development line, observed on the physical PinePhone. It extends beyond the fixed E01–E28 evidence ledger: entries marked with an evidence address are drawn from a published record; the rest are development-line observations awaiting a formal record. Scores are editorial judgements, not measurements.",
+  "provenance": "Edition 1.2, reviewed 1 October 2026 at source revision ec07dd0. Working means accepted within the stated physical trial; Partial retains a material acceptance limit. Entries link the relevant dated evidence. Later live-session work is outside this pinned snapshot. Scores are editorial judgements, not measurements.",
   "scale": {
     "functionality": "How complete the behaviour is for someone using the device.",
     "implementation": "How robust and general the underlying implementation is."
@@ -35,7 +35,7 @@
       "environments": [
         "Physical PinePhone"
       ],
-      "reach": "Boots to the home screen with working touch and camera. Telephony is not applicable — the hardware has no baseband, so the interface reports No Service.",
+      "reach": "The separate M68AP profile reaches its home screen with accepted touch, live Camera preview and saved VGA photos that reopen after a fresh boot. The PinePhone has an EG25-G modem; native telephony integration remains unaccepted.",
       "functionality": 4,
       "implementation": 3
     }
@@ -50,8 +50,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E17",
-          "note": "The original userspace reaches the lock screen and home screen on the real panel.",
+          "evidence": "E29",
+          "note": "N45 unlock and Settings interaction are accepted on the physical phone; the separate M68 home-screen result has its own record.",
           "layers": [
             "Foundations",
             "Machine"
@@ -66,7 +66,8 @@
           "note": "The M68AP build reaches its home screen on the device, from an isolated second system image.",
           "layers": [
             "Foundations"
-          ]
+          ],
+          "evidence": "E32"
         },
         {
           "feature": "Checked storage & persistence",
@@ -74,8 +75,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E13",
-          "note": "Bounded boots complete with a clean filesystem check and an unchanged root hash.",
+          "evidence": "E36",
+          "note": "Settings and two VGA JPEGs persist through checked clean reboots. Full data copies pass fsck; this does not establish sudden-power-loss durability.",
           "layers": [
             "Storage",
             "Method"
@@ -83,15 +84,16 @@
         },
         {
           "feature": "Unattended recovery",
-          "status": "Working",
-          "functionality": 5,
-          "implementation": 4,
-          "environment": "Physical PinePhone",
-          "note": "A panic or hang returns the phone to recovery on its own, so an experiment costs a reboot rather than a manual reset.",
+          "status": "Partial",
+          "functionality": 3,
+          "implementation": 3,
+          "environment": "PinePhone QEMU controls; physical clean reboot",
+          "note": "The watchdog passes deliberate panic and shutdown-stall controls in QEMU. Physical normal runs show petting and clean reboot; arbitrary hardware-hang recovery is unproven.",
           "layers": [
             "Machine",
             "Method"
-          ]
+          ],
+          "evidence": "E40"
         }
       ]
     },
@@ -132,7 +134,8 @@
           "note": "The Settings slider drives the panel; its minimum stays visible above the backlight's duty-cycle floor.",
           "layers": [
             "Graphics"
-          ]
+          ],
+          "evidence": "E29"
         }
       ]
     },
@@ -148,7 +151,8 @@
           "note": "Finger contacts from the panel's controller reach the UI through the original multitouch driver — tap, drag and slide-to-unlock.",
           "layers": [
             "Interaction"
-          ]
+          ],
+          "evidence": "E29"
         },
         {
           "feature": "Multitouch & pinch-zoom",
@@ -159,7 +163,8 @@
           "note": "Two simultaneous contacts reach the app; pinch-to-zoom works in Photos.",
           "layers": [
             "Interaction"
-          ]
+          ],
+          "evidence": "E29"
         },
         {
           "feature": "Physical buttons",
@@ -179,12 +184,13 @@
           "functionality": 4,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "note": "The stock screenshot path saves a TIFF to the camera roll, extractable as a lossless image.",
+          "note": "One M68 lock-screen TIFF saves and extracts to a pixel-identical PNG. A temporary pause was reported; capture latency and gallery visibility remain unmeasured.",
           "layers": [
             "Storage",
             "Graphics",
             "Interaction"
-          ]
+          ],
+          "evidence": "E33"
         }
       ]
     },
@@ -197,11 +203,12 @@
           "functionality": 4,
           "implementation": 3,
           "environment": "Physical PinePhone",
-          "note": "A live rear-camera preview renders inside the stock Camera app, upright and exposed. Capture runs near 30 fps; the software compositor displays fewer.",
+          "note": "Owner accepted upright, exposed preview. The reviewed baseline delivers 29.5 native frames/s and selects 7.9 distinct images/s; panel updates are a separate counter.",
           "layers": [
             "Graphics",
             "Interaction"
-          ]
+          ],
+          "evidence": "E35"
         },
         {
           "feature": "Photo capture & save",
@@ -209,11 +216,12 @@
           "functionality": 4,
           "implementation": 3,
           "environment": "Physical PinePhone",
-          "note": "The shutter encodes a real JPEG through the stock path and saves it; the photo survives a reboot and reopens from storage.",
+          "note": "Two genuine 640 × 480 JPEGs and thumbnails save; preview resumes. Both JPEGs keep their hashes and reopen after a fresh boot.",
           "layers": [
             "Storage",
             "Interaction"
-          ]
+          ],
+          "evidence": "E36"
         },
         {
           "feature": "Full-resolution stills",
@@ -221,10 +229,11 @@
           "functionality": 2,
           "implementation": 2,
           "environment": "Physical PinePhone",
-          "note": "Captures use a 640×480 sensor mode; the sensor's higher-resolution modes are not wired yet.",
+          "note": "Only genuine 640 × 480 sensor capture is accepted. Higher-resolution modes remain untested; VGA is not enlarged to claim a higher resolution.",
           "layers": [
             "Interaction"
-          ]
+          ],
+          "evidence": "E36"
         }
       ]
     },
@@ -237,8 +246,8 @@
           "functionality": 4,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E23",
-          "note": "Real charge and charging state publish through the original power-source class, read-only.",
+          "evidence": "E31",
+          "note": "Read-only physical AXP803 values publish through the original power-source service. Synthetic QEMU samples separately validate the original UI consumer.",
           "layers": [
             "Interaction"
           ]
@@ -249,8 +258,8 @@
           "functionality": 3,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E23",
-          "note": "Measured: laptop USB sustains idle; a bright screen draws from the battery at the default input limit.",
+          "evidence": "E31",
+          "note": "At the recorded 500 mA input limit, bright-lockscreen median battery balance was −55 mA; blanked idle was +166 mA. Heavy-use endurance is unproven.",
           "layers": [
             "Interaction"
           ]
@@ -289,10 +298,11 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "note": "A frequently trapped legacy atomic instruction is replaced in each process with a native equivalent; its trap rate falls by roughly 99%.",
+          "note": "One paired physical replay reduces mean atomic traps by 98.50–99.91%. Mean frame gaps do not improve consistently; a UI speed multiplier is not established.",
           "layers": [
             "Machine"
-          ]
+          ],
+          "evidence": "E39"
         }
       ]
     },
@@ -323,14 +333,15 @@
         },
         {
           "feature": "Telephony",
-          "status": "N/A",
+          "status": "Planned",
           "functionality": 0,
           "implementation": 0,
           "environment": "Physical PinePhone",
-          "note": "The hardware has no cellular baseband; the iPhone build reports No Service.",
+          "note": "The board includes an EG25-G modem. Its native telephony service path is not integrated or accepted; No Service does not mean absent hardware.",
           "layers": [
             "Interaction"
-          ]
+          ],
+          "evidence": "E32"
         }
       ]
     }
@@ -360,5 +371,6 @@
       "state": "planned",
       "note": "The destination: a different, newer ARMv7 core — closer to what the PinePhone's A53 runs natively."
     }
-  ]
+  ],
+  "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4"
 }

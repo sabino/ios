@@ -7,7 +7,9 @@
   "order": 17,
   "evidence": [
     "E20",
-    "E18"
+    "E18",
+    "E29",
+    "E33"
   ],
   "sources": [
     "S12",
@@ -16,11 +18,14 @@
   "related": [
     "display-blanking",
     "touch",
-    "power"
+    "power",
+    "native-iphone"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Power and volume come from different devices
 
@@ -49,3 +54,9 @@ These checks couple the new input behavior to already established storage and re
 The experiment did not validate a held Power key, whose PMIC behavior may independently turn the board off. It did not validate sustained volume-key auto-repeat, touchscreen events or a complete home-screen interaction. The panel response is the original setup display's wake/blank behavior, not deep suspend/resume. [E18](/ios/evidence/E18/)
 
 A later publication should add separate evidence for each expanded interaction. It should preserve the original meaning of this first result: a physical key, a correctly formed guest event, and a visible response through the original operating system's own input and display policy.
+
+## Reviewed advance: screenshot and brightness controls, 1 October 2026
+
+Later physical trials accepted the visible minimum of the Settings brightness slider while retaining complete Power blank/wake. A separate M68 run recorded one complete screenshot chord and saved a stock lock-screen TIFF. [E29](/ios/evidence/E29/) [E33](/ios/evidence/E33/)
+
+The temporary mappings remain profile-specific controls: Power serves sleep/wake, Volume Up serves Home, and Volume Down requests a screenshot. They do not establish audio-volume adjustment. The screenshot’s reported pause remains unmeasured, and its later reboot was host-requested rather than evidence that pressing the shortcut caused a crash.

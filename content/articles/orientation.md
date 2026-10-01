@@ -8,7 +8,11 @@
   "evidence": [
     "E01",
     "E27",
-    "E28"
+    "E28",
+    "E29",
+    "E32",
+    "E35",
+    "E36"
   ],
   "sources": [
     "S01",
@@ -18,11 +22,15 @@
   "related": [
     "three-machines",
     "source-archaeology",
-    "preservation-method"
+    "preservation-method",
+    "native-iphone",
+    "camera-capture"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## A system is more than a version label
 
@@ -42,9 +50,9 @@ The target kernel identifies itself as a 933-era XNU ARM build. The exact matchi
 
 This publication focuses on the third kind while describing evidence for the second. It distributes original prose, diagrams, structured summaries and the website. The experimental software artifacts and native-port implementation are outside its contents.
 
-## The accepted frontier
+## The 29 September frontier
 
-At the publication snapshot, the physical phone has executed original userspace, presented the original client's setup graphic, accepted physical button events through the guest HID path, and returned to recovery through a clean reboot path. Controlled power and filesystem experiments also passed their stated checks. These achievements support further interaction work.
+At the 29 September snapshot, the physical phone has executed original userspace, presented the original client's setup graphic, accepted physical button events through the guest HID path, and returned to recovery through a clean reboot path. Controlled power and filesystem experiments also passed their stated checks. These achievements support further interaction work.
 
 They do not establish a generally usable phone. Physical touch, a complete home-screen interaction, reliable application coverage, audio output, networking, telephony, comprehensive CPU compatibility and power-loss durability remain separate questions. The emulator reference already reaches interactive SpringBoard, but that result belongs to its own environment. [E28](/ios/evidence/E28/)
 
@@ -53,3 +61,11 @@ They do not establish a generally usable phone. Physical touch, a complete home-
 Begin with the three-machine distinction, then follow either the boot path, the pixel path, or the evidence-method tour. Each article links to numbered evidence records. Those records are curated reports from the private research corpus; they expose the method, environment, conclusion, limits and hashes of the supporting documents. They do not pretend that a public reader can reproduce the full firmware experiment using this website alone.
 
 Read “observed” as a statement about the recorded experiment. Read “inferred” as an explanation that still needs discriminating evidence. Read “open” as an intentionally preserved boundary. Those distinctions are part of the research result.
+
+## Reviewed advance: 1 October 2026
+
+Edition 1.2 extends the 29 September baseline with accepted physical interaction and Camera records. N45 unlock, taps, brightness and visible pinch are now documented; the separate M68AP profile reaches its home screen and responds in Settings and Photos. These are original userspace observations on the native PinePhone route. [E29](/ios/evidence/E29/) [E32](/ios/evidence/E32/)
+
+The M68 Camera also displays an accepted live preview and saves genuine VGA JPEGs that reopen after a fresh boot with identical hashes. The measured preview baseline selects about 7.9 distinct images per second despite nearly 30 native deliveries per second. Those limits remain part of the result. Audio playback, Wi-Fi, modem integration, full suspend, broad app coverage and a generally usable phone are still unestablished. [E35](/ios/evidence/E35/) [E36](/ios/evidence/E36/)
+
+New evidence records E29–E40 belong to the explicitly pinned October source revision. E01–E28 retain their earlier document identities and conclusions. Read the [second-profile chapter](/ios/articles/native-iphone/) for the revised frontier and the [capability explorer](/ios/status/) for a concise current-edition view.

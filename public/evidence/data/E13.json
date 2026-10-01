@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -136,6 +136,7 @@
         "content": "The first corrected 720-second phone run reached `BOOT_TIME` at 34 seconds,\nprinted 37 heartbeats with rising idle/WFI counters, and recorded zero queue\nwaits, overflow uses, failed request starts, CMD17/CMD24 failures, or error\ncompletions. The BSD reboot callback fired at 728 seconds, `MACH Reboot`\nfollowed at 731 seconds, and the phone returned to Jumpdrive through WDOG0\nwithout a manual reset. A full data copy through Jumpdrive UART before USB\nhost attach had its clean bit set and passed read-only fsck (exit 0); the\nroot hash remained\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nBattery changed from 31% / 3.754 V before boot to 27% / 3.740 V after\nrecovery, when Jumpdrive again reported charging. This is one of the two\nrequired consecutive clean runs. Its full data copy is the rollback for the\nsecond run.\n\n[…]\n\nThe second consecutive 720-second phone run used the same staged kernel,\nstorage, and timer hashes, with the first run's fsck-clean data volume left\nin place. The battery read 34% / 3.830 V and Charging in Jumpdrive at the\nrestored 500 mA USB input limit before boot. It reached `BOOT_TIME` at about\n70 seconds, printed 37 heartbeats with rising idle/WFI counters, and had no\nqueue waits, overflow uses, failed request starts, CMD17/CMD24 failures,\ndrain failures, or error completions. The BSD reboot callback fired at 728\nseconds and the phone returned to Jumpdrive through WDOG0 at 731 seconds.\nThe full 512 MiB data copy taken through Jumpdrive UART before USB host\nattach has SHA-256\n`d3016b5e1cda3e968528ad076ab7343f4c591abb34bd67ed48b6a9554f419137`,\nits clean bit is set, and read-only fsck exits 0. The root hash remains\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nJumpdrive then read 26% / 3.735 V, Charging. Thus two consecutive timed\nphone boots passed the storage integrity gate without a manual reset or\ndata repair. Both observed zero overflow uses, so the overflow path remains\nunexercised on physical hardware; its build and log-retention checks do not\nestablish behavior under actual queue saturation. The battery drop remains\na separate power problem.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

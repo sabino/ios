@@ -76,7 +76,8 @@ try {
   const interaction = await page.locator('[data-layer="4"] .face-label strong').boundingBox();
   expect(foundation.y, 'Foundations belongs at the base of the research map').toBeGreaterThan(interaction.y);
   expect(await page.locator('.method-rail').evaluate(el => !el.closest('.stack'))).toBe(true);
-  await page.locator('[data-layer-view="architecture"]').click();
+  await expect(page.locator('[data-layer-diagram]')).toHaveCount(1);
+  await expect(page.locator('[data-layer-view]')).toHaveCount(0);
   await expect(page.locator('[data-layerplate].is-entering')).toHaveCount(0);
   const tierPositions = [];
   for (const tier of ['hardware', 'kernel', 'services', 'apps']) tierPositions.push((await page.locator(`[data-tier="${tier}"] .face-label strong`).boundingBox()).y);
@@ -84,9 +85,9 @@ try {
   await page.locator('[data-layer-tab="1"]').click();
   await expect(page.locator('[data-tier].is-related')).toHaveCount(2);
   await expect(page.locator('[data-tier="kernel"]')).toHaveClass(/is-related/);
-  await page.locator('[data-layer-view="research"]').click();
+
   await page.locator('[data-layer-tab="0"]').click();
-  console.log('Research order, cross-domain Method and OS architecture passed.');
+  console.log('Unified wireframe order, cross-domain Method and research selection passed.');
   // Both arrows wrap; hidden content leaves the keyboard and accessibility tree.
   const boundsBefore = await hero.boundingBox();
   await page.locator('[data-hero-next]').click();

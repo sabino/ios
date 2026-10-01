@@ -1,3 +1,20 @@
+# Edition 1.2 and unified wireframe review
+
+Reviewed locally: 2026-10-01. Research revision `ec07dd0fedd12c0e00bd1052388235cbfda18de4`. This entry supersedes the earlier current-frontier and two-diagram presentation descriptions below. No deployment is recorded.
+
+- The atlas now contains 30 chapters, 40 evidence records, 72 exhibits, 56 excerpts and 21 public references. The [changelog](CHANGELOG.md) and [research reconciliation](OCTOBER_REVIEW.md) identify the accepted findings, retained limits and corrections.
+- All 14 new excerpts were checked against their full-source SHA-256 and exact selected JSON values or notebook text. The 28 historical record payloads compare unchanged with the preceding atlas commit after excluding their newly explicit source-revision field.
+- Three deliberately selected captures were reviewed for content and metadata and copied byte-for-byte. Both PNGs also compare pixel-for-pixel with their source TIFFs. The original JPEG retains its orientation; guest date and software make/model are qualified in its caption. No crop, retouch, raw run import, implementation import or generated evidence was used.
+- One animated wireframe combines the OS route and six research selections. Foundations is context below hardware; Method spans the stack. Machine highlights hardware/kernel, while other domains cross the relevant groups. The layout retains one feature list and normal page scrolling.
+- Production build: 83 pages, with all local links and assets checked. All seven unit checks pass, including per-record snapshots and physical evidence for Working capabilities.
+- Homepage interactions pass eight widths from 320–1440px and six sampled accessibility states, including arrows, touch gestures, keyboard, hover, pause and reduced motion. A narrow wireframe overhang found during review was fixed and the suite rerun successfully.
+- The broader site suite passes 22 sampled states, plus all 30 chapters at 360px without page overflow. It exercises navigation, search, appearance preferences, evidence filtering, graph drag/zoom/reset/structured/list modes, reduced motion and no-JavaScript reading.
+- The edition-specific review adds ten sampled accessibility states and five status widths. It checks all six capability filters, 22 unique entries, expanded scores, normal document scrolling, print, live reduced motion, no-JavaScript reading, all 12 new evidence pages, six new chapters, old/new record revisions, the expanded structured map and the camera JPEG's displayed orientation. No JavaScript errors or sampled axe WCAG A/AA violations were reported.
+
+The private research checkout and ongoing device work were left untouched. Later live-session performance reports remain outside this pinned edition until supported by a reviewed completed record. Automated checks are scoped checks, not accessibility certification or independent replication of the phone experiments.
+
+---
+
 # Status page design and architecture review
 
 Reviewed locally: 2026-10-01. This presentation supersedes the earlier side-panel layout below. No research record or deployment was added.

@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -75,6 +75,7 @@
         "content": "The first implementation completed reads synchronously. It read sectors 0–16 correctly, but the driver's next-chunk callback reentered the provider before prior frames unwound. The next request faulted at the kernel-stack boundary. Increasing transfer size would only change the depth, so the adapter instead queues successful completions on one preallocated XNU thread call. Each worker snapshots callback arguments before releasing the pending slot. Reentrant requests can queue the next callback without retaining the previous transfer stack.\n\n[…]\n\nThe unchanged one-sector request limit then completed 39 reads with no panic or Undefined Instruction exception. The 98 previously observed page-stepping Data Aborts remained; their cause is still unresolved.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }
