@@ -1,0 +1,364 @@
+{
+  "updated": "2026-10-01",
+  "provenance": "This page reports the current state of the native-port development line, observed on the physical PinePhone. It extends beyond the fixed E01–E28 evidence ledger: entries marked with an evidence address are drawn from a published record; the rest are development-line observations awaiting a formal record. Scores are editorial judgements, not measurements.",
+  "scale": {
+    "functionality": "How complete the behaviour is for someone using the device.",
+    "implementation": "How robust and general the underlying implementation is."
+  },
+  "statuses": {
+    "Working": "Observed working on the physical device.",
+    "Partial": "Works within stated limits.",
+    "Experimental": "Runs, but not yet dependable.",
+    "Planned": "Not yet brought up.",
+    "N/A": "Not applicable to this hardware."
+  },
+  "systems": [
+    {
+      "id": "n45",
+      "os": "iPhone OS 1.1.4",
+      "build": "4A102",
+      "variant": "N45AP · iPod touch userspace",
+      "environments": [
+        "Physical PinePhone",
+        "PinePhone QEMU",
+        "iPod reference"
+      ],
+      "reach": "Boots to SpringBoard and an interactive home screen. Settings changes persist across a clean reboot.",
+      "functionality": 5,
+      "implementation": 4
+    },
+    {
+      "id": "m68",
+      "os": "iPhone OS 1.1.4",
+      "build": "4A102",
+      "variant": "M68AP · iPhone (1,1) userspace",
+      "environments": [
+        "Physical PinePhone"
+      ],
+      "reach": "Boots to the home screen with working touch and camera. Telephony is not applicable — the hardware has no baseband, so the interface reports No Service.",
+      "functionality": 4,
+      "implementation": 3
+    }
+  ],
+  "domains": [
+    {
+      "name": "Boot & core",
+      "features": [
+        {
+          "feature": "Boot to SpringBoard",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E17",
+          "note": "The original userspace reaches the lock screen and home screen on the real panel.",
+          "layers": [
+            "Foundations",
+            "Machine"
+          ]
+        },
+        {
+          "feature": "iPhone userspace to home screen",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 3,
+          "environment": "Physical PinePhone",
+          "note": "The M68AP build reaches its home screen on the device, from an isolated second system image.",
+          "layers": [
+            "Foundations"
+          ]
+        },
+        {
+          "feature": "Checked storage & persistence",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E13",
+          "note": "Bounded boots complete with a clean filesystem check and an unchanged root hash.",
+          "layers": [
+            "Storage",
+            "Method"
+          ]
+        },
+        {
+          "feature": "Unattended recovery",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "A panic or hang returns the phone to recovery on its own, so an experiment costs a reboot rather than a manual reset.",
+          "layers": [
+            "Machine",
+            "Method"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Graphics",
+      "features": [
+        {
+          "feature": "Framebuffer to panel",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E17",
+          "note": "The original client's pixels reach the physical display.",
+          "layers": [
+            "Graphics"
+          ]
+        },
+        {
+          "feature": "Backlight fade & blanking",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E20",
+          "note": "A curved fade precedes blank; a Power tap restores the image.",
+          "layers": [
+            "Graphics",
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Brightness control",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "The Settings slider drives the panel; its minimum stays visible above the backlight's duty-cycle floor.",
+          "layers": [
+            "Graphics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Interaction",
+      "features": [
+        {
+          "feature": "Touch input",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "Finger contacts from the panel's controller reach the UI through the original multitouch driver — tap, drag and slide-to-unlock.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Multitouch & pinch-zoom",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "Two simultaneous contacts reach the app; pinch-to-zoom works in Photos.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Physical buttons",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E20",
+          "note": "Power and Home reach the original HID path.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Screenshots",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "The stock screenshot path saves a TIFF to the camera roll, extractable as a lossless image.",
+          "layers": [
+            "Storage",
+            "Graphics",
+            "Interaction"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Camera (M68AP)",
+      "features": [
+        {
+          "feature": "Live viewfinder",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 3,
+          "environment": "Physical PinePhone",
+          "note": "A live rear-camera preview renders inside the stock Camera app, upright and exposed. Capture runs near 30 fps; the software compositor displays fewer.",
+          "layers": [
+            "Graphics",
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Photo capture & save",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 3,
+          "environment": "Physical PinePhone",
+          "note": "The shutter encodes a real JPEG through the stock path and saves it; the photo survives a reboot and reopens from storage.",
+          "layers": [
+            "Storage",
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Full-resolution stills",
+          "status": "Partial",
+          "functionality": 2,
+          "implementation": 2,
+          "environment": "Physical PinePhone",
+          "note": "Captures use a 640×480 sensor mode; the sensor's higher-resolution modes are not wired yet.",
+          "layers": [
+            "Interaction"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Power",
+      "features": [
+        {
+          "feature": "Battery status",
+          "status": "Working",
+          "functionality": 4,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E23",
+          "note": "Real charge and charging state publish through the original power-source class, read-only.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Charge budget",
+          "status": "Partial",
+          "functionality": 3,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "evidence": "E23",
+          "note": "Measured: laptop USB sustains idle; a bright screen draws from the battery at the default input limit.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Sleep / suspend",
+          "status": "Planned",
+          "functionality": 0,
+          "implementation": 0,
+          "environment": "Physical PinePhone",
+          "note": "System suspend is not implemented.",
+          "layers": [
+            "Machine",
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "CPU frequency scaling",
+          "status": "Planned",
+          "functionality": 0,
+          "implementation": 1,
+          "environment": "Physical PinePhone",
+          "note": "The clock runs at its handoff frequency; a higher clock needs a regulator change that has not been made.",
+          "layers": [
+            "Machine"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "features": [
+        {
+          "feature": "Hot-trap removal",
+          "status": "Working",
+          "functionality": 5,
+          "implementation": 4,
+          "environment": "Physical PinePhone",
+          "note": "A frequently trapped legacy atomic instruction is replaced in each process with a native equivalent; its trap rate falls by roughly 99%.",
+          "layers": [
+            "Machine"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Not yet connected",
+      "features": [
+        {
+          "feature": "Audio output",
+          "status": "Planned",
+          "functionality": 0,
+          "implementation": 0,
+          "environment": "Physical PinePhone",
+          "note": "The audio codec path is not brought up.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Networking / Wi-Fi",
+          "status": "Planned",
+          "functionality": 0,
+          "implementation": 0,
+          "environment": "Physical PinePhone",
+          "note": "No network interface is connected.",
+          "layers": [
+            "Interaction"
+          ]
+        },
+        {
+          "feature": "Telephony",
+          "status": "N/A",
+          "functionality": 0,
+          "implementation": 0,
+          "environment": "Physical PinePhone",
+          "note": "The hardware has no cellular baseband; the iPhone build reports No Service.",
+          "layers": [
+            "Interaction"
+          ]
+        }
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "stage": "Running",
+      "os": "iPhone OS 1.1.4",
+      "chip": "S5L8900 · ARM11",
+      "targets": "iPod touch 1G · iPhone (1,1)",
+      "state": "done",
+      "note": "Boots natively to an interactive home screen on the PinePhone, with touch, camera, battery and screenshots."
+    },
+    {
+      "stage": "Next",
+      "os": "iPhone OS 2.x",
+      "chip": "S5L8900 · ARM11",
+      "targets": "App Store era, same silicon family",
+      "state": "planned",
+      "note": "Later userspaces on the same processor generation, once 1.x coverage is broad."
+    },
+    {
+      "stage": "Goal",
+      "os": "iPhone OS 3.x",
+      "chip": "S5L8920 · Cortex-A8",
+      "targets": "iPhone 3GS",
+      "state": "planned",
+      "note": "The destination: a different, newer ARMv7 core — closer to what the PinePhone's A53 runs natively."
+    }
+  ]
+}

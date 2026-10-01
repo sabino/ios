@@ -1,0 +1,332 @@
+---
+import {articles, sections, sectionDescriptions, url} from '../lib/content';
+import CapabilityRow from './CapabilityRow.astro';
+import caps from '../data/capabilities.json';
+const {id = 'atlas-layers', capabilities = false} = Astro.props;
+const features = caps.domains.flatMap(domain => domain.features.map(feature => ({...feature, category: domain.name})));
+const researchLayers = sections.filter(section => section !== 'Method');
+const architecture = [
+  {id: 'hardware', name: 'PinePhone hardware', kind: 'Physical board', detail: 'CPU · memory · devices', domains: ['Machine', 'Storage', 'Graphics', 'Interaction']},
+  {id: 'kernel', name: 'XNU kernel & drivers', kind: 'Kernel space', detail: 'Mach · BSD · I/O Kit', domains: ['Machine', 'Storage', 'Graphics', 'Interaction']},
+  {id: 'services', name: 'Services & frameworks', kind: 'User space', detail: 'Files · graphics · input · media', domains: ['Storage', 'Graphics', 'Interaction']},
+  {id: 'apps', name: 'SpringBoard & apps', kind: 'User space', detail: 'Original iPhone OS software', domains: ['Graphics', 'Interaction']},
+];
+const topics: Record<string, string> = {
+  Foundations: 'Software · machines · source',
+  Machine: 'Boot · memory · interrupts',
+  Storage: 'Discovery · requests · persistence',
+  Graphics: 'Surfaces · pixels · presentation',
+  Interaction: 'Input · media · power',
+  Method: 'Models · observation · evidence',
+};
+const architectureFocus: Record<string, string> = {
+  Foundations: 'Foundations: identify the hardware and software.',
+  Machine: 'Machine: hardware and the kernel.',
+  Storage: 'Storage: devices, the kernel and system services.',
+  Graphics: 'Graphics: from application pixels to the panel.',
+  Interaction: 'Interaction: device events, services and apps.',
+  Method: 'Method: evidence at every boundary.',
+};
+---
+<figure class:list={['layerplate', {'with-capabilities': capabilities}]} data-layerplate data-domain="Foundations" aria-labelledby={`${id}-caption`}>
+  <figcaption class="sr-only" id={`${id}-caption`}>{capabilities ? 'Explore the system and its capabilities' : 'Read the system in layers'}</figcaption>
+  <div class="layer-map">
+  <div class="plate-head">
+    {capabilities ? <h2>Explore the system</h2> : <span>Read the system in layers</span>}
+    <div class="diagram-switch" role="group" aria-label="Choose a diagram" data-layer-view-controls hidden>
+      <button type="button" data-layer-view="research" aria-pressed="true" aria-controls={`${id}-research`}>Research map</button>
+      <button type="button" data-layer-view="architecture" aria-pressed="false" aria-controls={`${id}-architecture`}>OS architecture</button>
+    </div>
+  </div>
+  <div class="layer-visual">
+    <div id={`${id}-research`} data-layer-diagram="research">
+      <p class="diagram-guide">Read from Foundations upward. Method connects every domain.</p>
+      <div class="layer-scene" aria-hidden="true">
+        <div class="stack-drift"><div class="stack research-stack">
+          {researchLayers.map((section, i) => (
+            <button type="button" class:list={['layer', {'is-active': i === 0}]} data-layer={i} data-domain={section} style={`--depth:${i};--order:${i};--lift:${i * 39}px`} tabindex="-1" aria-label={section}>
+              <span class="layer-face">
+                <span class="face-grid"></span><span class="face-mark">+</span>
+                <span class="face-label"><span>{String(i + 1).padStart(2, '0')}</span><strong>{section}</strong><span class="face-arrow">↗</span></span>
+              </span>
+              <span class="layer-edge"></span>
+            </button>
+          ))}
+        </div></div>
+        <button type="button" class="method-rail" data-layer="5" data-domain="Method" tabindex="-1" aria-label="Method applies across every research domain"><span class="method-label"><span class="layer-dot"></span>Method</span></button>
+      </div>
+    </div>
+    <div id={`${id}-architecture`} data-layer-diagram="architecture" hidden>
+      <p class="diagram-guide">Native PinePhone route · hardware below, applications above.<span class="architecture-focus" data-tier-summary>{architectureFocus.Foundations}</span></p>
+      <div class="layer-scene" aria-hidden="true">
+        <div class="stack-drift"><div class="stack architecture-stack">
+          {architecture.map((tier, i) => (
+            <div class="layer architecture-layer is-related" data-tier={tier.id} data-research-domains={tier.domains.join(' ')} style={`--order:${i};--lift:${i * 52}px`}>
+              <span class="layer-face"><span class="face-grid"></span><span class="architecture-kind">{tier.kind}</span><span class="face-label"><strong>{tier.name}</strong><span>{tier.detail}</span></span></span>
+              <span class="layer-edge"></span>
+            </div>
+          ))}
+        </div></div>
+      </div>
+      <ol class="sr-only" aria-label="Conceptual architecture from bottom to top">{architecture.map(tier => <li>{tier.name}. {tier.kind}: {tier.detail}.</li>)}</ol>
+    </div>
+    <div class="layer-tabs" role={capabilities ? 'group' : 'tablist'} aria-label="Explore the six research domains">
+      {sections.map((section, i) => (
+        <button type="button" id={`${id}-tab-${i}`} role={capabilities ? undefined : 'tab'} aria-selected={capabilities ? undefined : String(i === 0)} aria-pressed={capabilities ? String(i === 0) : undefined} aria-controls={capabilities ? `${id}-features` : `${id}-panel-${i}`} tabindex={capabilities || i === 0 ? 0 : -1} data-layer-tab={i} data-domain={section} data-architecture-note={architectureFocus[section]}>
+          <span class="layer-dot" aria-hidden="true"></span><span>{section}</span>
+        </button>
+      ))}
+    </div>
+    {capabilities && <button class="layer-motion" type="button" data-layer-motion aria-pressed="false" hidden>Pause motion</button>}
+    <details class="diagram-notes">
+      <summary>How the diagrams relate</summary>
+      <p>The research map is a reading sequence. Foundations identifies the software and the machines; Method tests the evidence throughout. Storage, Graphics and Interaction follow paths across the operating system.</p>
+      <p>The architecture view groups the native route into hardware, the adapted XNU kernel and drivers, system services and frameworks, and original userspace. Selecting a research domain highlights the parts it studies. These broad groups simplify relationships; they do not certify that a feature works.</p>
+      <p>XNU includes Mach, BSD and I/O Kit in its kernel environment. The atlas’s Foundations section concerns research context; Apple’s similarly named Foundation framework belongs to userspace.</p>
+      <p>Architecture references: <a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html">Apple’s kernel overview</a> and <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html">iOS framework layers</a>. For the project’s distinct execution environments, read <a href={url('articles/three-machines/')}>the three machines</a>.</p>
+    </details>
+  </div>
+  </div>
+  <div class="layer-details">
+    {capabilities ? <div class="capability-panel" id={`${id}-features`} role="region" aria-label="Capability details" tabindex="0">
+      <div class="capability-top"><span class="capability-kicker" data-scope-label>RESEARCH DOMAIN / 01</span><button type="button" class="show-all" data-show-all aria-pressed="false" aria-controls={`${id}-features`}>All {features.length} features <span aria-hidden="true">↗</span></button></div>
+      {sections.map((section, i) => <div data-layer-detail={i} hidden={i !== 0}>
+        <div class="capability-heading"><h3>{section}</h3><span class="capability-count"><span class="layer-dot" aria-hidden="true"></span>{features.filter(f => f.layers.includes(section)).length} related capabilities</span></div>
+        <p class="domain-description">{sectionDescriptions[section]}</p>
+      </div>)}
+      <div data-all-heading hidden><div class="capability-heading"><h3>All capabilities</h3><span class="capability-count">{features.length} features</span></div><p class="domain-description">The complete development snapshot. Select a research domain to follow its path through the system.</p></div>
+      <div class="capability-list">{features.map((feature, i) => <CapabilityRow feature={feature} expanded={i === 0}/>)}</div>
+      <div class="detail-links"><a data-domain-link href={url('library/#foundations')}>Read Foundations <span aria-hidden="true">↗</span></a><button class="expand-scores" type="button" data-expand-scores aria-expanded="false" aria-controls={`${id}-features`}>Expand all scores</button></div>
+      <p class="score-disclaimer">Scores are editorial judgements. <a href={url('status/#snapshot')}>About this snapshot ↗</a></p>
+      <p class="sr-only" role="status" data-capability-status></p>
+    </div> : <>
+    {sections.map((section, i) => (
+      <div id={`${id}-panel-${i}`} role="tabpanel" aria-labelledby={`${id}-tab-${i}`} data-layer-detail={i} data-domain={section} hidden={i !== 0}>
+        <div class="detail-heading"><span>{topics[section]}</span><span>{articles.filter(a => a.section === section).length} chapters</span></div>
+        <p>{sectionDescriptions[section]}</p>
+        <div class="detail-links"><a href={url('library/#' + section.toLowerCase())}>Read {section.toLowerCase()} <span aria-hidden="true">↗</span></a></div>
+      </div>
+    ))}
+    </>}
+  </div>
+  <noscript><style is:inline>.layerplate .layer-tabs,.layerplate .show-all,.layerplate .expand-scores{display:none}.layerplate .layer{pointer-events:none}.with-capabilities [data-layer-detail]{display:none!important}.with-capabilities [data-all-heading],.with-capabilities [data-capability]{display:block!important}.with-capabilities .capability-kicker{display:none}</style><p class="layer-fallback">Explore all six layers in the <a href={url('library/')}>chapter index ↗</a>.</p></noscript>
+</figure>
+
+<style>
+  .layerplate{min-width:0;margin:0;position:relative}
+  .plate-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--rule);font:11px var(--mono);color:var(--muted)}
+  .diagram-switch{display:inline-flex;padding:3px;gap:3px;border:1px solid var(--rule);border-radius:5px;background:var(--surface)}
+  .diagram-switch button{border:0;border-radius:3px;padding:7px 9px;background:transparent;font-size:10px;color:var(--muted);white-space:nowrap}
+  .diagram-switch button[aria-pressed="true"]{background:var(--tint);color:var(--ink);box-shadow:inset 0 -2px var(--blue)}
+  .diagram-guide{font-size:11px;line-height:1.5;color:var(--muted);min-height:32px;margin:12px 0 0}
+  .architecture-focus{display:block;color:var(--ink)}
+  .layer-visual{min-width:0}
+  .layer-scene{height:362px;position:relative;perspective:1600px;perspective-origin:50% 35%;isolation:isolate}
+  .stack-drift{position:absolute;inset:0;transform-style:preserve-3d}
+  .stack{position:absolute;width:62%;height:145px;left:12%;top:164px;transform-style:preserve-3d;transform:rotateX(52deg) rotateZ(-25deg)}
+  .layer{position:absolute;inset:0;padding:0;border:0;background:none;text-align:left;transform-style:preserve-3d;transform:translateZ(var(--lift));transition:transform .48s var(--spring);cursor:pointer}
+  .layer-face{position:absolute;inset:0;display:block;border:1px solid color-mix(in srgb,var(--domain) 78%,var(--ink));border-radius:7px;background:color-mix(in srgb,var(--domain) 23%,var(--surface));box-shadow:0 1px 0 #ffffff45 inset,0 18px 26px -22px #0b142780;overflow:hidden;transition:background .3s,box-shadow .3s}
+  .layer.is-active .layer-face{background:color-mix(in srgb,var(--domain) 38%,var(--surface));box-shadow:0 1px 0 #ffffff65 inset,0 16px 30px -18px color-mix(in srgb,var(--domain) 45%,transparent)}
+  .face-grid{position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,var(--domain) 16%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--domain) 16%,transparent) 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(#000,transparent 83%)}
+  .face-mark{position:absolute;top:12px;right:18px;color:var(--ink);font:16px var(--mono);opacity:.6}
+  .face-label{position:absolute;bottom:13px;left:18px;right:18px;display:flex;align-items:center;gap:14px;color:var(--ink);white-space:nowrap}
+  .face-label>span{font:10px var(--mono)}
+  .face-label strong{font-size:15px;font-weight:600;letter-spacing:-.025em}
+  .face-arrow{margin-left:auto}
+  .layer-edge{position:absolute;left:0;right:0;top:100%;height:7px;border-radius:0 0 4px 4px;background:var(--domain);transform:rotateX(-90deg);transform-origin:top}
+  .method-rail{position:absolute;right:0;top:12px;bottom:8px;width:38px;border:0;padding:0;background:none;display:flex;align-items:center;justify-content:flex-start;color:var(--muted)}
+  .method-rail:after{content:'';position:absolute;right:0;top:0;bottom:0;width:10px;border:1px solid var(--domain);border-left:0;border-radius:0 3px 3px 0}
+  .method-label{display:flex;align-items:center;gap:8px;writing-mode:vertical-rl;transform:rotate(180deg);font:11px var(--mono);padding:10px 4px;border-radius:3px}
+  .method-rail.is-active .method-label{color:var(--ink);background:color-mix(in srgb,var(--domain) 15%,var(--surface))}
+  .method-rail.is-active:after{border-width:2px}
+  .architecture-stack{width:70%;left:15%}
+  .architecture-layer{cursor:default;pointer-events:none}
+  .architecture-layer .layer-face{border-color:var(--rule);background:var(--surface)}
+  .architecture-layer .layer-edge{background:var(--rule)}
+  .architecture-layer.is-related .layer-face{border-color:var(--domain);background:color-mix(in srgb,var(--domain) 24%,var(--surface));box-shadow:0 1px 0 #ffffff45 inset,0 18px 28px -22px color-mix(in srgb,var(--domain) 60%,transparent)}
+  .architecture-layer.is-related .layer-edge{background:var(--domain)}
+  .architecture-layer .face-label{flex-direction:column;align-items:flex-start;gap:4px;left:15px;right:12px;bottom:12px}
+  .architecture-layer .face-label strong{font-size:14px}
+  .architecture-layer .face-label>span{font-size:9px}
+  .architecture-kind{position:absolute;left:15px;top:12px;font:9px var(--mono);text-transform:uppercase;color:var(--muted)}
+  .layer-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:4px 0 18px}
+  .layer-tabs button{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-height:38px;padding:7px 10px;background:transparent;border:1px solid transparent;border-radius:4px;font-size:12px;line-height:1.35;text-align:left}
+  .layer-tabs button:hover{background:var(--surface)}
+  .layer-tabs button:is([aria-selected="true"],[aria-pressed="true"]){border-color:color-mix(in srgb,var(--domain) 60%,var(--rule));background:color-mix(in srgb,var(--domain) 10%,var(--surface))}
+  .layer-dot{width:7px;height:7px;border-radius:50%;background:var(--domain);flex:none}
+  .layer-details{min-height:117px;padding-top:15px;border-top:1px solid var(--rule)}
+  .detail-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;color:var(--muted);font:10px/1.6 var(--mono)}
+  .detail-heading>span:last-child{white-space:nowrap}
+  .layer-details p{font-size:13px;line-height:1.6;margin:8px 0}
+  .layer-details a{font-size:12px;color:var(--blue);display:inline-flex;gap:12px;align-items:center}
+  .layer-details a:hover{text-decoration:underline;text-underline-offset:4px}
+  .detail-links{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .diagram-notes{font-size:11px;line-height:1.65;color:var(--muted);margin:8px 0 16px}
+  .diagram-notes summary{cursor:pointer;color:var(--blue);width:fit-content}
+  .diagram-notes p{margin:12px 0;max-width:65ch}
+  .diagram-notes a{text-decoration:underline;text-underline-offset:3px}
+  .layer-motion{float:right;background:transparent;border:0;padding:5px 0 5px 12px;color:var(--muted);font-size:10px}
+  .layer-motion:hover{color:var(--blue)}
+  [data-motion-paused] .stack-drift{animation-play-state:paused!important}
+  [data-motion-paused] .layer{animation:none!important}
+  .with-capabilities{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.08fr);gap:48px;align-items:start;scroll-margin-top:104px}
+  .with-capabilities[data-domain="All"]{--domain:var(--blue)}
+  .layer-map{min-width:0}
+  .with-capabilities .plate-head{border:0;padding:0;gap:12px}
+  .with-capabilities .plate-head h2{font:620 26px/1.2 var(--sans);letter-spacing:-.04em;color:var(--ink)}
+  .with-capabilities .diagram-guide{font-size:12px;margin-top:10px;min-height:36px}
+  .with-capabilities .layer-tabs{margin-top:10px}
+  .with-capabilities .layer-tabs button{border-color:var(--rule);background:var(--surface);min-height:42px}
+  .with-capabilities .layer-tabs button[aria-pressed="true"]{border-color:var(--domain);background:color-mix(in srgb,var(--domain) 8%,var(--surface))}
+  .with-capabilities>.layer-details{min-height:0;padding:0;border:0}
+  .capability-panel{min-width:0;border:1px solid color-mix(in srgb,var(--domain) 32%,var(--rule));border-top:3px solid var(--domain);border-radius:5px;padding:22px 24px 18px;background:color-mix(in srgb,var(--domain) 3%,var(--surface));transition:border-color .25s,background .25s}
+  .capability-panel:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+  .capability-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+  .capability-kicker{font:10px/1.5 var(--mono);color:var(--muted)}
+  .capability-heading{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .capability-heading h3{font-size:28px;letter-spacing:-.035em;margin:0;line-height:1.2}
+  .capability-count{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}
+  .capability-panel .domain-description{font-size:13px;line-height:1.7;margin:0}
+  .show-all,.expand-scores{background:transparent;border:0;color:var(--blue);font-size:11px;line-height:1.5;padding:5px 0;white-space:nowrap}
+  .show-all span{margin-left:8px}.show-all[aria-pressed="true"]{color:var(--muted)}
+  .show-all:hover,.expand-scores:hover{text-decoration:underline;text-underline-offset:4px}
+  .capability-list{display:block}
+  .with-capabilities .detail-links{padding-top:18px;gap:10px}
+  .with-capabilities .score-disclaimer{font-size:10px;line-height:1.7;margin:12px 0 0;color:var(--muted)}
+  .score-disclaimer a{font-size:10px;display:inline;text-decoration:underline;text-underline-offset:3px}
+  .with-capabilities .layer-fallback{grid-column:1 / -1}
+  @keyframes detail-in{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .layer-fallback{font-size:13px}.layer-fallback a{text-decoration:underline}
+  .is-entering .layer{animation:unstack .9s var(--ease-out) both;animation-delay:calc(var(--order)*70ms)}
+  .in-view .stack-drift{animation:stack-float 8s ease-in-out 1.4s infinite}
+  .layerplate:is(:hover,:focus-within) .stack-drift{animation-play-state:paused}
+  @keyframes unstack{from{transform:translateZ(0) translateY(12px);opacity:.2}to{transform:translateZ(var(--lift));opacity:1}}
+  @keyframes stack-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @media(max-width:1100px){.stack{width:64%;left:11%;top:156px}.architecture-stack{width:76%;left:12%}.layer-scene{height:347px}.face-label{left:13px;right:13px;gap:10px}.face-label strong{font-size:14px}}
+  @media screen and (min-width:801px) and (min-height:800px){.with-capabilities>.layer-map{position:sticky;top:110px}}
+  @media(max-width:1200px){.with-capabilities{gap:28px}.with-capabilities .plate-head h2{font-size:24px}.capability-panel{padding:20px}}
+  @media(max-width:800px){.with-capabilities{grid-template-columns:minmax(0,1fr);max-width:620px;margin:auto;gap:18px}.with-capabilities .diagram-notes{margin-bottom:0}.with-capabilities .layer-details{margin:0}}
+  @media(max-width:600px){.diagram-switch{width:100%}.diagram-switch button{flex:1;font-size:11px}.layer-scene{height:292px}.stack{width:64%;left:10.5%;height:132px;top:135px;transform:rotateX(48deg) rotateZ(-22deg)}.architecture-stack{width:76%;left:12%}.method-rail{top:8px;bottom:8px;width:32px}.method-label{font-size:10px}.layer-tabs{gap:4px;margin-top:8px}.layer-tabs button{font-size:11px;min-height:40px;padding:7px 6px;gap:6px}.face-label{bottom:10px;gap:9px}.face-label strong{font-size:13px}.face-label>span{font-size:9px}.detail-heading{font-size:9px}.layer-details{min-height:132px}.architecture-layer .face-label{left:11px;bottom:10px;gap:3px}.architecture-layer .face-label strong{font-size:12px}.architecture-layer .face-label>span{font-size:8px}.architecture-kind{font-size:8px;left:11px}}
+  @media(max-width:420px){.capability-panel{padding:18px 16px}.capability-heading{gap:10px}.capability-heading h3{font-size:25px}.capability-kicker{font-size:9px}.show-all{font-size:10px}}
+  @media(prefers-reduced-motion:reduce){.with-capabilities [data-layer-detail]{animation:none}}
+  @media print{.with-capabilities{display:block}.with-capabilities>.layer-map{position:static}.with-capabilities>.layer-details{margin-top:20px}.diagram-switch,.show-all,.expand-scores{display:none}.with-capabilities [data-layer-detail]{display:none!important}.with-capabilities [data-all-heading],.with-capabilities :global([data-capability]){display:block!important}.with-capabilities .capability-kicker{display:none}}
+  @media(prefers-reduced-motion:reduce){.is-entering .layer,.in-view .stack-drift{animation:none}.layer{transition:none}}
+</style>
+
+<script>
+  for (const plate of document.querySelectorAll<HTMLElement>('[data-layerplate]')) {
+    const layers = [...plate.querySelectorAll<HTMLElement>('[data-layer]')];
+    const tabs = [...plate.querySelectorAll<HTMLButtonElement>('[data-layer-tab]')];
+    const panels = [...plate.querySelectorAll<HTMLElement>('[data-layer-detail]')];
+    const tiers = [...plate.querySelectorAll<HTMLElement>('[data-tier]')];
+    const views = [...plate.querySelectorAll<HTMLButtonElement>('[data-layer-view]')];
+    const diagrams = [...plate.querySelectorAll<HTMLElement>('[data-layer-diagram]')];
+    const expandedDetails = plate.classList.contains('with-capabilities');
+    const features = [...plate.querySelectorAll<HTMLElement>('[data-capability]')];
+    const allButton = plate.querySelector<HTMLButtonElement>('[data-show-all]');
+    const scoresButton = plate.querySelector<HTMLButtonElement>('[data-expand-scores]');
+    const updateScoresButton = () => {
+      if (!scoresButton) return;
+      const expanded = features.filter(feature => !feature.hidden).every(feature => feature.querySelector<HTMLDetailsElement>('details')!.open);
+      scoresButton.setAttribute('aria-expanded', String(expanded));
+      scoresButton.textContent = expanded ? 'Collapse all scores' : 'Expand all scores';
+    };
+    let selected = 0;
+    let entryTimer: number | undefined;
+    const enter = () => {
+      window.clearTimeout(entryTimer);
+      plate.classList.remove('is-entering');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      void plate.offsetWidth;
+      plate.classList.add('is-entering');
+      entryTimer = window.setTimeout(() => plate.classList.remove('is-entering'), 1400);
+    };
+    const select = (index: number, focus = false, align = false) => {
+      const showPanelStart = align && expandedDetails && selected !== index && plate.getBoundingClientRect().top < 80;
+      selected = index;
+      const domain = index < 0 ? 'All' : tabs[index].dataset.domain!;
+      plate.dataset.domain = domain;
+      plate.querySelector<HTMLElement>('[data-tier-summary]')!.textContent = index < 0 ? 'All research domains, from hardware to applications.' : tabs[index].dataset.architectureNote!;
+      layers.forEach(layer => layer.classList.toggle('is-active', Number(layer.dataset.layer) === index));
+      tiers.forEach(tier => tier.classList.toggle('is-related', index < 0 || domain === 'Foundations' || domain === 'Method' || tier.dataset.researchDomains?.split(' ').includes(domain)));
+      tabs.forEach((tab, i) => { tab.setAttribute(expandedDetails ? 'aria-pressed' : 'aria-selected', String(i === index)); tab.tabIndex = expandedDetails || i === Math.max(0,index) ? 0 : -1; });
+      panels.forEach((panel, i) => { panel.hidden = i !== index; });
+      if (expandedDetails) {
+        allButton!.setAttribute('aria-pressed', String(index < 0));
+        plate.querySelector<HTMLElement>('[data-all-heading]')!.hidden = index >= 0;
+        plate.querySelector<HTMLElement>('[data-scope-label]')!.textContent = index < 0 ? 'DEVELOPMENT SNAPSHOT' : 'RESEARCH DOMAIN / ' + String(index + 1).padStart(2,'0');
+        features.forEach(feature => { feature.hidden = index >= 0 && !feature.dataset.capabilityLayers!.split(' ').includes(domain); });
+        const count = features.filter(feature => !feature.hidden).length;
+        plate.querySelector<HTMLElement>('.capability-panel')!.setAttribute('aria-label', index < 0 ? 'All capabilities' : domain + ' capabilities');
+        plate.querySelector<HTMLElement>('[data-capability-status]')!.textContent = count + (index < 0 ? ' capabilities shown.' : ' capabilities related to ' + domain + '.');
+        const link = plate.querySelector<HTMLAnchorElement>('[data-domain-link]')!;
+        link.href = link.href.split('#')[0] + (index < 0 ? '' : '#' + domain.toLowerCase());
+        link.textContent = (index < 0 ? 'Browse research chapters' : 'Read ' + domain) + ' ↗';
+        updateScoresButton();
+      }
+      if (focus && index >= 0) tabs[index].focus({preventScroll: true});
+      if (showPanelStart) window.scrollTo({top: window.scrollY + plate.getBoundingClientRect().top - 96, behavior: 'instant'});
+    };
+    allButton?.addEventListener('click', () => select(-1, false, true));
+    scoresButton?.addEventListener('click', () => {
+      const expand = scoresButton.getAttribute('aria-expanded') !== 'true';
+      features.filter(feature => !feature.hidden).forEach(feature => { feature.querySelector<HTMLDetailsElement>('details')!.open = expand; });
+      updateScoresButton();
+    });
+    features.forEach(feature => feature.querySelector('details')!.addEventListener('toggle', updateScoresButton));
+    if (expandedDetails) {
+      select(location.hash === '#feature-matrix' ? -1 : 0);
+      window.addEventListener('hashchange', () => { if (location.hash === '#feature-matrix') select(-1); });
+    }
+    const motion = plate.querySelector<HTMLButtonElement>('[data-layer-motion]');
+    if (motion) {
+      motion.hidden = false;
+      motion.addEventListener('click', () => {
+        const paused = plate.toggleAttribute('data-motion-paused');
+        motion.setAttribute('aria-pressed', String(paused));
+        motion.textContent = paused ? 'Resume motion' : 'Pause motion';
+      });
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const updateMotion = () => { motion.disabled = reduced.matches; motion.textContent = reduced.matches ? 'Reduced motion' : plate.hasAttribute('data-motion-paused') ? 'Resume motion' : 'Pause motion'; };
+      reduced.addEventListener('change', updateMotion); updateMotion();
+    }
+    plate.querySelector<HTMLElement>('[data-layer-view-controls]')!.hidden = false;
+    views.forEach(button => button.addEventListener('click', () => {
+      if (button.getAttribute('aria-pressed') === 'true') return;
+      views.forEach(view => view.setAttribute('aria-pressed', String(view === button)));
+      diagrams.forEach(diagram => { diagram.hidden = diagram.dataset.layerDiagram !== button.dataset.layerView; });
+      enter();
+    }));
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i, false, true));
+      tab.addEventListener('keydown', (event) => {
+        const next = event.key === 'ArrowRight' || event.key === 'ArrowDown' ? (i + 1) % tabs.length
+          : event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? (i + tabs.length - 1) % tabs.length
+          : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+        if (next < 0) return;
+        event.preventDefault(); event.stopPropagation(); select(next, true, true);
+      });
+    });
+    layers.forEach(layer => {
+      const index = Number(layer.dataset.layer);
+      layer.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse' && !expandedDetails && !plate.contains(document.activeElement)) select(index);
+      });
+      layer.addEventListener('click', () => select(index, false, true));
+    });
+    let inViewport = false;
+    const updateVisibility = () => {
+      const active = inViewport && !plate.closest<HTMLElement>('[data-hero-slide]')?.inert;
+      plate.classList.toggle('in-view', active);
+      if (active && !plate.dataset.entered) {
+        plate.dataset.entered = 'true'; enter();
+      }
+    };
+    const observer = new IntersectionObserver((entries) => {
+      inViewport = entries[0].isIntersecting;
+      updateVisibility();
+    }, {threshold: .1});
+    plate.closest('[data-hero-slide]')?.addEventListener('atlas:hero-visibility', updateVisibility);
+    observer.observe(plate);
+  }
+</script>

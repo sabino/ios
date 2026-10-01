@@ -1,3 +1,39 @@
+# Status page design and architecture review
+
+Reviewed locally: 2026-10-01. This presentation supersedes the earlier side-panel layout below. No research record or deployment was added.
+
+- The compact overview leads into one capability explorer. Its 22 feature entries are rendered once and filtered by research domain; “All 22 features” restores the complete list. Feature descriptions, limits, categories (including Camera M68AP scope), environments and evidence addresses stay visible. Scores and longer evidence references expand in place. The page uses normal document scrolling, including for the longest domain.
+- An imagegen target guided two implementation and screenshot review passes. Working targets and screenshots remain in the ignored `.dream-loop/` directory and are not research exhibits or public assets. The design preserves the atlas typography and domain colors. The generated image's invented links and build labels were not adopted.
+- Foundations sits at the bottom of the five research plates. Method is a bracket spanning the domains. The separate OS view places hardware below XNU and drivers, then services/frameworks and applications. The explanatory disclosure cites Apple's kernel and framework documentation and distinguishes the research categories from literal OS layers.
+- Design decisions draw on [progressive disclosure](https://www.nngroup.com/articles/progressive-disclosure/), [visual hierarchy](https://www.nngroup.com/articles/principles-visual-design/), [appropriate disclosure use](https://www.nngroup.com/articles/accordions-on-desktop/), [keyboard tab behavior](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) and [reflow](https://www.w3.org/WAI/WCAG21/Understanding/reflow). These are design applications, not results from a user study.
+- The production build passes for 65 pages and all local links/assets; all six unit checks pass. The status review checks all six domain mappings, 22 unique entries, rendered diagram click targets, both diagram orders at six widths (320–1440px), five light/dark accessibility states, keyboard controls, expanded scores, motion preferences, print, no-JavaScript reading and legacy anchors. It reports no JavaScript errors or sampled axe WCAG A/AA violations.
+- The homepage hero suite passes eight widths and six accessibility states, including its arrows, touch gestures, keyboard navigation, hover, pause and research/OS views. The broader site suite passes 22 sampled page states and navigation, search, concept-map, appearance and responsive-reading checks without JavaScript errors or sampled axe violations. Automated checks are scoped checks, not accessibility certification.
+
+---
+
+# Status layer explorer review
+
+Reviewed locally: 2026-10-01. Presentation and capability categorization only; no new research record or deployment.
+
+- Selecting an atlas layer shows the related matrix entries beside the animated stack. Both views share the feature renderer and capability data, including status, notes, environment, scores and evidence links. Entries may relate to more than one layer; observations without evidence addresses are marked as awaiting a record.
+- The desktop panel keeps a stable height across selections and scrolls internally. It moves below the diagram on smaller screens. Keyboard selection and scrolling, touch selection, matching domain colors, chapter links, evidence links and the full matrix link were checked. The full matrix remains readable without JavaScript.
+- `npm run build` passes for 65 pages and `npm test` passes all six checks. Status layouts were checked from 320 to 1440px, with light/dark accessibility checks at 320, 390 and 1440px. All six layer selections were compared with the matrix. Reduced motion and print layout were checked. The existing homepage hero suite also passes its eight viewport widths and six accessibility states.
+
+---
+
+# Homepage interaction review
+
+Reviewed locally: 2026-10-01. Presentation changes only; no new research record or deployment.
+
+- The opening hero contains six animated layers drawn from the same section names, descriptions, chapter counts and color tokens as the atlas. The second slide presents “What runs,” with controls on both sides, keyboard navigation and touch gestures.
+- Both illustrations appear near the top on phones. Hidden slides are inert, ambient motion can be paused, reduced motion is respected, and both stories remain readable without JavaScript.
+- Device frames are original CSS illustrations using the reviewed E28 reference capture. They are labeled as illustrations, not photographs or evidence of a physical run. The unused draft capture is excluded from public assets. The fixed evidence ledger remains distinct from development-line observations.
+- `npm run build` passes for 65 pages; `npm test` passes all six checks. The existing browser suite passes 22 sampled page states with no JavaScript errors or axe WCAG A/AA violations. The hero suite passes eight widths from 320 to 1440px, six accessibility states, rendered layer hit tests, both side arrows, keyboard controls, motion preferences, no-JavaScript reading and touch navigation.
+
+Run `npm run test:hero` with `ATLAS_CDP` pointing to a dedicated QA browser; `ATLAS_URL` and `ATLAS_QA_DIR` may override the preview address and artifact directory.
+
+---
+
 # Connected reading publication review
 
 Reviewed: 2026-09-29. Presentation and navigation update; research snapshot unchanged.
