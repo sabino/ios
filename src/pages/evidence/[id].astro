@@ -13,7 +13,7 @@ const env=envKey(record.environment);const pad=(n:number)=>String(n).padStart(2,
 const returns=Object.fromEntries(backlinks.map(a=>[a.slug,{title:a.title,label:`Chapter ${pad(a.order)}`,href:url(`articles/${a.slug}/`)}]));
 ---
 <Base title={`${record.id}: ${record.title}`} description={record.observation}>
-  <div class="article-topline record-topline" data-env={env}><a href={url('evidence/')}>← Evidence ledger</a><a class="return-link" href={url('library/')} data-return hidden><span aria-hidden="true">←</span><span data-return-label></span></a><span>{record.id} / {record.exhibits.length} EXHIBITS</span></div>
+  <div class="article-topline record-topline" data-env={env}><a href={url('evidence/?focus='+record.id)}>← Evidence Atlas</a><a class="return-link" href={url('library/')} data-return hidden><span aria-hidden="true">←</span><span data-return-label></span></a><span>{record.id} / {record.exhibits.length} EXHIBITS</span></div>
   <header class="record-heading"><div class="evidence-label" data-env={env}><span class="env-chip"><Fragment set:html={glyph(record.environment)}/>{record.environment}</span><span class="env-note">{environmentNotes[record.environment]}</span></div><h1>{record.title}</h1><p>{record.observation}</p><div class="record-actions"><a class="button primary" href="#exhibits">Inspect the evidence ↓</a><a href={url(`evidence/data/${record.id}.json`)} download>Download record · JSON ↗</a></div></header>
   <div class="record-layout">
     <aside class="record-sidebar">

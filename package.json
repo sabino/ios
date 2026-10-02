@@ -11,7 +11,11 @@
     "check": "node scripts/validate-content.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node scripts/browser-check.mjs",
-    "test:hero": "node scripts/hero-check.mjs"
+    "test:hero": "node scripts/hero-check.mjs",
+    "test:status": "node scripts/status-check.mjs",
+    "test:evidence": "node scripts/evidence-check.mjs",
+    "test:reading": "node scripts/reading-paths-check.mjs",
+    "test:focus": "node scripts/status-focus-check.mjs"
   },
   "dependencies": {
     "@fontsource-variable/schibsted-grotesk": "5.3.0",

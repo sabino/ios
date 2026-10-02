@@ -1,0 +1,111 @@
+---
+const {id, footer = false} = Astro.props;
+---
+{!footer ? <div class="status-focus" data-status-focus-panel hidden>
+  <div class="focus-top"><span data-focus-label>WORKING FOCUS</span><span data-focus-position>1 / 14</span><button type="button" data-focus-restore>Restore overview <span aria-hidden="true">↗</span></button></div>
+  <h3 data-focus-title>Live viewfinder</h3>
+  <div class="focus-navigation">
+    <button type="button" data-focus-step="-1" aria-label="Previous capability">‹</button>
+    <label class="sr-only" for={`${id}-focus-choice`}>Choose a capability</label><select id={`${id}-focus-choice`} data-focus-choice></select>
+    <button type="button" data-focus-step="1" aria-label="Next capability">›</button>
+  </div>
+</div> : <div class="focus-footer" data-status-focus-footer hidden><button type="button" data-focus-all aria-expanded="false">Show all 14</button><p>Ratings apply to the selected capability. Connections guide reading across boundaries.</p></div>}
+<script>
+  for(const plate of document.querySelectorAll<HTMLElement>('.with-capabilities')){
+    const rows=[...plate.querySelectorAll<HTMLElement>('[data-capability]')];
+    const triggers=[...document.querySelectorAll<HTMLButtonElement>('[data-status-trigger]')];
+    const panel=plate.querySelector<HTMLElement>('[data-status-focus-panel]')!;
+    const footer=plate.querySelector<HTMLElement>('[data-status-focus-footer]')!;
+    const choice=plate.querySelector<HTMLSelectElement>('[data-focus-choice]')!;
+    const all=plate.querySelector<HTMLButtonElement>('[data-focus-all]')!;
+    const svg=plate.querySelector<SVGSVGElement>('[data-focus-connectors]')!;
+    const callout=plate.querySelector<HTMLElement>('[data-focus-callout]')!;
+    const jump=plate.querySelector<HTMLButtonElement>('[data-focus-jump]')!;
+    const tiles=[...plate.querySelectorAll<HTMLElement>('[data-component]')];
+    const tiers=[...plate.querySelectorAll<HTMLElement>('[data-tier]')];
+    const domains=[...plate.querySelectorAll<HTMLButtonElement>('[data-layer-tab]')];
+    const motion=matchMedia('(prefers-reduced-motion: reduce)');
+    const preferred:Record<string,string>={Working:'Live viewfinder',Partial:'Full-resolution stills',Planned:'Audio output'};
+    let status='',cohort:HTMLElement[]=[],position=0,showAll=false,previousHash='',previousPanelLabel='';
+    let before:Map<HTMLElement,{hidden:boolean;open:boolean}>|undefined;
+    let domainState:string[]=[];
+    let frame=0,timer:ReturnType<typeof setTimeout>|undefined;
+    const stop=()=>{cancelAnimationFrame(frame);clearTimeout(timer);plate.classList.remove('lens-changing');};
+    const draw=()=>{
+      if(!status)return;const bounds=svg.getBoundingClientRect();if(!bounds.width)return;
+      svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
+      const linked=tiles.filter(tile=>tile.classList.contains('lens-component')).map(tile=>{const r=tile.getBoundingClientRect();return{x:(r.left+r.right)/2-bounds.left,top:r.top-bounds.top,bottom:r.bottom-bounds.top};}).sort((a,b)=>a.top-b.top);
+      svg.replaceChildren();
+      for(let i=0;i<linked.length-1;i++){
+        const a=linked[i],b=linked[i+1];const ay=a.bottom-2,by=b.top+2;
+        if(by<=ay)continue;const mid=(ay+by)/2;
+        const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',`M${a.x} ${ay} C${a.x} ${mid},${b.x} ${mid},${b.x} ${by}`);svg.append(path);
+        for(const [x,y] of [[a.x,ay],[b.x,by]]){const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',String(x));dot.setAttribute('cy',String(y));dot.setAttribute('r','3');svg.append(dot);}
+      }
+    };
+    const track=()=>{
+      cancelAnimationFrame(frame);draw();if(motion.matches||plate.hasAttribute('data-motion-paused'))return;
+      const until=performance.now()+1100;
+      const tick=()=>{draw();if(performance.now()<until)frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);
+    };
+    const transition=()=>{
+      stop();track();if(motion.matches||plate.hasAttribute('data-motion-paused'))return;
+      plate.classList.add('lens-changing');
+      timer=setTimeout(()=>{plate.classList.remove('lens-changing');draw();},1150);
+    };
+    const clear=()=>{
+      if(!status)return;stop();status='';delete plate.dataset.statusLens;delete plate.dataset.focusAll;
+      panel.hidden=true;footer.hidden=true;callout.hidden=true;jump.hidden=true;svg.setAttribute('hidden','');
+      tiles.forEach(tile=>tile.classList.remove('lens-component'));tiers.forEach(tier=>tier.classList.remove('lens-linked'));
+      triggers.forEach(button=>button.setAttribute('aria-pressed','false'));
+      domains.forEach((button,index)=>button.setAttribute('aria-pressed',domainState[index]));
+      plate.querySelector('.capability-panel')!.setAttribute('aria-label',previousPanelLabel);
+      before?.forEach((state,row)=>{row.hidden=state.hidden;row.querySelector<HTMLDetailsElement>('details')!.open=state.open;});before=undefined;
+    };
+    const choose=(index:number,record=true,animate=true)=>{
+      position=(index+cohort.length)%cohort.length;const current=cohort[position];
+      choice.value=current.dataset.capabilityKey!;
+      plate.dataset.focusAll=String(showAll);rows.forEach(row=>row.hidden=showAll?!cohort.includes(row):row!==current);
+      current.querySelector<HTMLDetailsElement>('details')!.open=true;
+      plate.querySelector<HTMLElement>('[data-focus-title]')!.textContent=showAll?`${status} capabilities`:current.dataset.capability!;
+      plate.querySelector<HTMLElement>('[data-focus-position]')!.textContent=`${position+1} / ${cohort.length}`;
+      plate.querySelector('.capability-panel')!.setAttribute('aria-label',showAll?`${status} capabilities`:`${status} capability: ${current.dataset.capability}`);
+      const links=current.dataset.componentFocus!.split('|');
+      tiles.forEach(tile=>tile.classList.toggle('lens-component',links.includes(tile.dataset.component!)));
+      tiers.forEach(tier=>tier.classList.toggle('lens-linked',links.some(link=>link.startsWith(tier.dataset.tier+':'))));
+      callout.querySelector<HTMLElement>('[data-focus-callout-title]')!.textContent=current.dataset.capability!;callout.title=current.dataset.capability!;
+      callout.querySelector<HTMLElement>('[data-focus-callout-level]')!.textContent=`Implementation ${current.dataset.implementation}/5`;
+      jump.querySelector<HTMLElement>('[data-focus-mobile-title]')!.textContent=current.dataset.capability!;
+      jump.querySelector<HTMLElement>('[data-focus-mobile-level]')!.textContent=`Implementation ${current.dataset.implementation}/5 ↓`;
+      plate.querySelector<HTMLElement>('[data-capability-status]')!.textContent=`${status}, capability ${position+1} of ${cohort.length}: ${current.dataset.capability}. Functionality ${current.dataset.functionality} and implementation ${current.dataset.implementation} out of 5.`;
+      all.textContent=showAll?'Show selected capability':`Show all ${cohort.length}`;all.setAttribute('aria-expanded',String(showAll));
+      const hash=`#status-${status.toLowerCase()}/${current.dataset.capabilityKey}`;
+      const permalink=plate.querySelector<HTMLAnchorElement>('[data-scope-permalink]')!;permalink.href=permalink.href.split('#')[0]+hash;
+      if(record&&location.hash!==hash)history.pushState(null,'',hash);
+      if(animate)transition();else requestAnimationFrame(draw);
+    };
+    const activate=(next:string,key?:string,record=true,animate=true)=>{
+      if(!before){previousHash=location.hash;previousPanelLabel=plate.querySelector('.capability-panel')!.getAttribute('aria-label')!;domainState=domains.map(button=>button.getAttribute('aria-pressed')!);before=new Map(rows.map(row=>[row,{hidden:row.hidden,open:row.querySelector<HTMLDetailsElement>('details')!.open}]));}
+      status=next;showAll=false;plate.dataset.statusLens=status;panel.hidden=false;footer.hidden=false;callout.hidden=false;jump.hidden=false;svg.removeAttribute('hidden');
+      cohort=rows.filter(row=>row.dataset.featureStatus===status);const lead=cohort.find(row=>row.dataset.capability===preferred[status]);if(lead)cohort=[lead,...cohort.filter(row=>row!==lead)];
+      choice.replaceChildren(...cohort.map(row=>new Option(row.dataset.capability!,row.dataset.capabilityKey!)));
+      triggers.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.statusTrigger===status)));
+      domains.forEach(button=>button.setAttribute('aria-pressed','false'));
+      plate.querySelector<HTMLElement>('[data-focus-label]')!.textContent=`${status.toUpperCase()} FOCUS`;
+      choose(Math.max(0,cohort.findIndex(row=>row.dataset.capabilityKey===key)),record,animate);
+    };
+    const restore=()=>{const hash=previousHash.startsWith('#status-')?'#foundations':previousHash;clear();history.pushState(null,'',hash||location.pathname);plate.dispatchEvent(new CustomEvent('atlas:restore-status-overview',{detail:{hash}}));};
+    triggers.forEach(button=>{button.disabled=false;button.addEventListener('click',()=>{if(status===button.dataset.statusTrigger)restore();else activate(button.dataset.statusTrigger!);});});
+    plate.querySelector('[data-focus-restore]')!.addEventListener('click',restore);
+    plate.querySelectorAll<HTMLButtonElement>('[data-focus-step]').forEach(button=>button.addEventListener('click',()=>{showAll=false;choose(position+Number(button.dataset.focusStep));}));
+    choice.addEventListener('change',()=>{showAll=false;choose(cohort.findIndex(row=>row.dataset.capabilityKey===choice.value));});
+    all.addEventListener('click',()=>{showAll=!showAll;choose(position,false,false);});
+    jump.addEventListener('click',()=>{const detail=plate.querySelector<HTMLElement>('.capability-panel')!;detail.scrollIntoView({behavior:motion.matches?'instant':'smooth',block:'start'});detail.focus({preventScroll:true});});
+    plate.addEventListener('atlas:clear-status-focus',clear);
+    window.addEventListener('keydown',event=>{if(status&&event.key==='Escape'&&!event.defaultPrevented&&!document.querySelector('dialog[open]')){event.preventDefault();const trigger=triggers.find(button=>button.dataset.statusTrigger===status);restore();trigger?.focus({preventScroll:true});}});
+    const restoreHash=()=>{const [,value,key]=location.hash.match(/^#status-(working|partial|planned)(?:\/([^/]+))?$/)||[];if(value)activate(value[0].toUpperCase()+value.slice(1),key,false,false);else if(status)clear();};
+    requestAnimationFrame(restoreHash);window.addEventListener('hashchange',restoreHash);window.addEventListener('popstate',restoreHash);
+    new ResizeObserver(()=>{if(status)track();}).observe(plate.querySelector('.layer-scene')!);
+    motion.addEventListener('change',()=>{if(motion.matches)stop();if(status)requestAnimationFrame(draw);});
+  }
+</script>

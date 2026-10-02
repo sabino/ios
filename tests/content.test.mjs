@@ -19,3 +19,13 @@ test('record snapshots remain explicit and working capabilities cite physical ac
   if(f.status==='Working')assert.equal(evidence.find(e=>e.id===f.evidence)?.environment,'Physical PinePhone',f.feature);
  }
 });
+
+test('evidence arrangement covers every stable record once and uses the established categories',()=>{
+ const layout=data('evidence-layout'),categories=new Set(articles.map(a=>a.section));
+ assert.deepEqual(Object.keys(layout).sort(),evidence.map(e=>e.id).sort());
+ for(const [id,entry] of Object.entries(layout)){
+  assert.ok(categories.has(entry.domain),id);
+  assert.ok(entry.label.length>2&&entry.label.length<=28,id);
+ }
+ for(const event of data('timeline'))assert.ok(event.date<=evidence.find(e=>e.id===event.evidence).reviewedOn,event.evidence+' report must not follow its review');
+});

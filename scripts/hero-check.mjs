@@ -16,6 +16,7 @@ page.on('response', response => {
   if (response.url().startsWith(base) && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
 });
 const hero = page.locator('[data-home-hero]');
+const slideTitles = ['Read the system', 'What runs', 'Live camera', 'Saved photos'];
 const selectedSlide = () => page.locator('[data-hero-slide][aria-hidden="false"]');
 async function go() {
   await page.goto(base);
@@ -32,6 +33,7 @@ async function audit(name) {
 try {
   await go();
   await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'Read the system');
+  expect(await page.locator('[data-hero-slide]').evaluateAll(slides => slides.map(slide => slide.getAttribute('data-slide-title')))).toEqual(slideTitles);
   await expect(page.locator('[data-layerplate]')).toBeInViewport();
   const sections = await page.locator('.domain-row h3').allTextContents();
   expect(await page.locator('[data-layer-tab]').allTextContents()).toEqual(sections);
@@ -57,7 +59,7 @@ try {
   await expect(page.locator('[data-layer-tab="5"]')).toBeFocused();
   await page.locator('[data-hero-go="0"]').focus();
   await page.locator('[data-hero-motion]').click();
-  // Use rendered label coordinates: CDP content quads omit part of nested 3D projection.
+  // Use the rendered callout labels to exercise the actual layer hit targets.
   // Finish focus-triggered smooth scrolling before measuring screen coordinates.
   await page.evaluate(() => window.scrollTo({top: 0, behavior: 'instant'}));
   for (let index = 0; index < sections.length; index++) {
@@ -95,10 +97,14 @@ try {
   await expect(page.locator('[data-hero-slide]').first()).toHaveAttribute('inert', '');
   await expect(selectedSlide().getByRole('link', {name: 'See what runs'})).toHaveAttribute('href', '/ios/status/');
   expect((await hero.boundingBox()).height).toBeCloseTo(boundsBefore.height, 0);
+  for (const title of slideTitles.slice(2)) {
+    await page.locator('[data-hero-next]').click();
+    await expect(selectedSlide()).toHaveAttribute('data-slide-title', title);
+  }
   await page.locator('[data-hero-next]').click();
   await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'Read the system');
   await page.locator('[data-hero-prev]').click();
-  await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'What runs');
+  await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'Saved photos');
   await page.locator('[data-hero-prev]').press('ArrowRight');
   await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'Read the system');
   await page.locator('[data-hero-motion]').click();
@@ -119,7 +125,7 @@ try {
     await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'What runs');
     await page.locator('[data-hero-prev]').click();
     await expect(selectedSlide()).toHaveAttribute('data-slide-title', 'Read the system');
-    for (const slide of [0, 1]) {
+    for (const slide of slideTitles.keys()) {
       await page.locator(`[data-hero-go="${slide}"]`).click();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Overflow at ${width}, slide ${slide}`).toBe(true);
       if (slide === 0) {
@@ -127,7 +133,7 @@ try {
           const activeScene = el.querySelector('[data-layer-diagram]:not([hidden]) .layer-scene');
           const scene = activeScene.getBoundingClientRect();
           const tabs = el.querySelector('.layer-tabs').getBoundingClientRect();
-          const faces = [...activeScene.querySelectorAll('.layer')].map(layer => layer.getBoundingClientRect());
+          const faces = [...activeScene.querySelectorAll('.layer, .layer-face')].map(layer => layer.getBoundingClientRect());
           return {top: Math.min(...faces.map(b => b.top)), bottom: Math.max(...faces.map(b => b.bottom)), left: Math.min(...faces.map(b => b.left)), right: Math.max(...faces.map(b => b.right)), sceneTop: scene.top, sceneLeft: scene.left, sceneRight: scene.right, tabsTop: tabs.top};
         });
         layouts.push({width, ...geometry});
@@ -145,26 +151,30 @@ try {
   await page.setViewportSize({width: 1440, height: 900});
   await go();
   await page.locator('select[data-appearance]').selectOption('dark');
-  for (const slide of [0, 1]) {
+  for (const slide of slideTitles.keys()) {
     await page.locator(`[data-hero-go="${slide}"]`).click();
     await audit(`1440-${slide}-dark`);
     await page.screenshot({path: `${out}/dark-${slide}.png`, animations: 'disabled'});
   }
-  // Preference can change while the page is open; both slides must become static.
+  // Preference can change while the page is open; every slide must become static.
   await page.emulateMedia({reducedMotion: 'reduce'});
-  for (const slide of [0, 1]) {
+  for (const slide of slideTitles.keys()) {
     await page.locator(`[data-hero-go="${slide}"]`).click();
     expect(await hero.evaluate(el => el.getAnimations({subtree: true}).filter(a => a.playState === 'running').length)).toBe(0);
   }
   await page.emulateMedia({reducedMotion: 'no-preference'});
   await page.locator('[data-hero-motion]').click();
   await expect(page.locator('[data-hero-motion]')).toHaveAttribute('aria-pressed', 'true');
-  // Without JS, both stories and navigation destinations remain readable.
+  await page.emulateMedia({media: 'print'});
+  await expect(page.locator('[data-hero-slide]:visible')).toHaveCount(4);
+  await page.emulateMedia({media: 'screen'});
+  // Without JS, all stories and navigation destinations remain readable.
   const staticContext = await browser.newContext({javaScriptEnabled: false, viewport: {width: 390, height: 844}});
   const staticPage = await staticContext.newPage();
   await staticPage.goto(base);
   await expect(staticPage.getByRole('heading', {name: 'iPhone OS, under the surface.'})).toBeVisible();
   await expect(staticPage.getByRole('link', {name: 'See what runs'})).toBeVisible();
+  await expect(staticPage.locator('[data-hero-slide]:visible')).toHaveCount(4);
   expect(await staticPage.locator('[data-layerplate]').evaluate(el => getComputedStyle(el.querySelector('.layer')).opacity)).toBe('1');
   expect(await staticPage.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await staticContext.close();
