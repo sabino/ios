@@ -1,0 +1,18 @@
+E29 / 19-validation-report.md
+Source SHA-256: 56055d800464c58ad272c902906f47653f8ff573e8d9e321326e43c4cc2475d6
+Locator: lines 934–946
+Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages.
+
+
+The brightness revision maps the slider to the device-tree visible minimum
+while retaining complete blanking. QEMU verified original brightness writes
+and a clean reboot. The touch revision assigns distinct stable finger
+identities, fixing a collision in the original HID child-event table.
+All 30 CTests and 447 Python tests pass. The combined build passed a QEMU
+boot and clean reboot, but its headless tree disables Z2; a separate SPI2
+tree repeats an early null abort. Physical trial 18 received explicit user confirmation of the visible minimum,
+Power blank/wake and pinch enlargement. It completed a clean UART reboot;
+the full data copy matched its UART hash, retained the clean bit, passed
+fsck and confirmed an unchanged root. Automatic extraction recovered six
+valid screenshots, including two from that trial. No PMIC configuration,
+CPU clock or root-volume change was made.

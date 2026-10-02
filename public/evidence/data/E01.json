@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -101,6 +101,7 @@
         "content": "| Product | Apple archive | Size (bytes) | SHA-256 |\n| --- | --- | ---: | --- |\n| iPhone1,1 / M68AP | [iPhone 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPhone/061-4313.20080226.Sw39i/iPhone1,1_1.1.4_4A102_Restore.ipsw) | 169,946,442 | `25fa72bc07e1879646a690e49090ff376904128cfa333b606a19337d4d02b586` |\n| iPod1,1 / N45AP comparison | [iPod 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPod/SBML/osx/bundles/061-4312.20080226.Btu45/iPod1,1_1.1.4_4A102_Restore.ipsw) | 173,519,589 | `9c3808664b6aee7ca90b53fab575db0f7a57a82ec842dfd8a78c6ca3e296aa94` |\n\n[…]\n\n| Component | Observed comparison |\n| --- | --- |\n| `kernelcache.release.s5l8900xrb` | Byte identical, 3,356,266 bytes, SHA-256 `b468dee8f4a1441932bb7c027f30912198d68c1c17d87a3bbc2b33329ce82d4c` |\n| `022-3896-4.dmg`, `022-3900-4.dmg` | Byte identical across archives; their roles have not been established here |\n| Normal-boot `iBoot`, `LLB`, `DeviceTree` | Different board-named members and different hashes |\n| DFU `iBEC`, `iBSS` | Different board-named members and different hashes |\n| Primary root DMG | iPhone `022-3894-4.dmg`: 128,495,616 bytes; iPod `022-3893-4.dmg`: 132,075,520 bytes; different hashes and both begin with an `encrcdsa` encrypted-DMG header |\n| Common display/recovery IMG2 resources and WTF DFU | Byte identical in the compared archives |",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

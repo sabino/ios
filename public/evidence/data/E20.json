@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -145,6 +145,7 @@
         "content": "The event callback calls the inherited\n`dispatchKeyboardEvent` with Consumer page `0x0c`: usage `0x30` for Power\n(the iPod hold/sleep-wake button) and usage `0x40` for either Volume key\n(the iPod menu/Home button). These usages and the user-client path were\nchecked against the original 4A102 binary and SpringBoard's HID filter.\n\n[…]\n\nThe LRADC at `0x01c21800` is polled with its IRQ disabled.\nThe live Jumpdrive tree declares Volume Up at 200 mV and Down at 400 mV on\nchannel 0, supplied by the 3 V ALDO3 rail. The A64's two-thirds reference\ngives expected six-bit codes near 6 and 13, with bounded ranges on either\nside of their midpoint.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

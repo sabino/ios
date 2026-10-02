@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -126,6 +126,7 @@
         "content": "{\n  \"volume.volume_type\": \"HFSX\",\n  \"volume.volume_bytes\": 293588992,\n  \"volume.volume_block_size\": 4096,\n  \"volume.volume_total_blocks\": 71677,\n  \"volume.first_lba\": 2048,\n  \"volume.last_lba\": 575463,\n  \"executed.hfs_completed_sector_reads\": 80,\n  \"executed.real_vfs_mountroot_return\": 0,\n  \"executed.mount_list_nonnull\": true,\n  \"executed.mount_memory_filesystem_string\": \"hfs\",\n  \"executed.mount_memory_source_string\": \"root_device\",\n  \"executed.root_vnode_installed\": false,\n  \"executed.secure_root_request_pending\": true,\n  \"executed.secure_root_completion_observed\": false,\n  \"executed.userspace_booted\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

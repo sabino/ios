@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -135,6 +135,7 @@
         "content": "{\n  \"first_visible_run.user_observation\": \"Colored quadrants, then iTunes graphic; backlight stayed on while graphic blinked to black and reappeared, then black\",\n  \"first_visible_run.pattern_seconds\": 8.0,\n  \"first_visible_run.client_frame_seconds\": 51.5,\n  \"first_visible_run.data_fsck_exit_after\": 0,\n  \"no_clear_phone_run.visual_result\": \"Unobserved; user missed the boot\",\n  \"no_clear_change.behavior\": \"On the 720x1440 live scanout, clear once before the first surface copy and again only after an explicit background fill; preserve the preceding frame during ordinary swaps\",\n  \"no_clear_change.qemu_screen_identical_to_prior\": true\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

@@ -33,5 +33,12 @@
  ["Timebase","The units and counter used to represent time. A stale frequency declaration can change the real duration of delays and timeouts.","time-and-interrupts"],
  ["VBlank","The display's vertical blank interval. A software notification or completed memory copy is not automatically evidence of physical VBlank synchronization.","presentation"],
  ["WFI","Wait For Interrupt. Time spent waiting is evidence about CPU activity, not a complete measurement of board power or charging.","power"],
- ["XNU","The kernel family underlying the target software. This research studies the measured 933-era ARM binary and native adaptations, not a recovered complete source tree.","source-archaeology"]
+ ["XNU","The kernel family underlying the target software. This research studies the measured 933-era ARM binary and native adaptations, not a recovered complete source tree.","source-archaeology"],
+ ["OV5640","The PinePhone rear image sensor. Its available modes are separate from the VGA mode accepted in this native port.","camera-capture"],
+ ["UYVY","Packed 4:2:2 YUV: two luma samples share chroma in a four-byte pixel pair.","camera-capture"],
+ ["Image retirement","The point at which the renderer no longer owns an image and its storage can safely be reused.","frame-retirement"],
+ ["Producer reserve","Capacity kept available for fresh input while other surfaces remain retained downstream.","frame-retirement"],
+ ["Distinct image rate","The rate of newly selected camera images, separate from delivery or repeated display updates.","camera-preview"],
+ ["IOPMPowerSource","The original power-source service consumed by userspace; synthetic consumer validation and physical battery measurement are separate evidence.","power"],
+ ["EG25-G","The Quectel cellular modem physically present in the original PinePhone. Its integration with this native userspace is unaccepted.","native-iphone"]
 ]

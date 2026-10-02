@@ -1,0 +1,19 @@
+E32 / pinephone-m68ap-physical-2026-10-01.json
+Source SHA-256: d8866c747ad49d89208117f638b615e4b715ab35ad5b8aa7a6d1458068240b6e
+Locator: $.environment; $.user_observations.home_screen_unlock; $.user_observations.settings_touch; $.user_observations.photos_touch; $.saved_screenshots; $.panic_count; $.integrity.complete_read_only_copies; $.integrity.root_unchanged; $.integrity.n45_root_data_and_gpt_unchanged; $.integrity.data_clean_bit; $.integrity.fsck_exit; $.n45_preserved
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "environment": "physical PinePhone, separate M68AP 4A102 profile",
+  "user_observations.home_screen_unlock": true,
+  "user_observations.settings_touch": true,
+  "user_observations.photos_touch": true,
+  "saved_screenshots": 0,
+  "panic_count": 0,
+  "integrity.complete_read_only_copies": true,
+  "integrity.root_unchanged": true,
+  "integrity.n45_root_data_and_gpt_unchanged": true,
+  "integrity.data_clean_bit": true,
+  "integrity.fsck_exit": 0,
+  "n45_preserved": true
+}

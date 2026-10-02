@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E35",
+    "title": "The stock Camera displays an accepted live preview",
+    "environment": "Physical PinePhone",
+    "method": "Owner preview acceptance, native delivery counters, memory guards and restoration checks",
+    "observation": "The seventh physical app trial delivered 1,561 frames without bridge failure. The owner accepted the upright, correctly exposed live viewfinder. Native delivery measured 29.507 frames/s; distinct renderer-selected images measured 7.904/s.",
+    "limits": "The native delivery counter is not the rate of distinct displayed images. Renderer selection is itself not an independently measured panel presentation rate. This trial did not save still photographs. Single-core operation, one bounded scene and the stated build limit the result.",
+    "records": [
+      {
+        "document": "pinephone-camera-app-bridge-2026-10-01.json",
+        "sha256": "969791c7dee10048c2a40b418ad54fbf0b0386feb2de0f671c12745b1e5aca5c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "The stock Camera displays an accepted live preview",
+        "columns": [
+          "Acceptance",
+          "Observed result"
+        ],
+        "rows": [
+          [
+            "Owner viewfinder check",
+            "Live, upright and exposed"
+          ],
+          [
+            "Native delivery",
+            "1,561 frames; 0 bridge failures; 29.507/s"
+          ],
+          [
+            "Distinct renderer selection",
+            "7.904 images/s"
+          ],
+          [
+            "Shutdown and storage",
+            "Memory guards pass; clean reboot; eight hashes unchanged"
+          ]
+        ],
+        "interpretation": "App-visible preview closes a different boundary from raw capture. Keep delivery, image selection and physical presentation as separate metrics.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-app-bridge-2026-10-01.json",
+        "sha256": "969791c7dee10048c2a40b418ad54fbf0b0386feb2de0f671c12745b1e5aca5c",
+        "locator": "$.physical_app_preview_proven; $.physical_boot_trial_7.visible_preview_confirmed; $.physical_boot_trial_7.orientation_confirmed; $.physical_boot_trial_7.exposure_confirmed; $.physical_boot_trial_7.frames_delivered; $.physical_boot_trial_7.bridge_failures; $.physical_boot_trial_7.memory_guard_passed; $.physical_boot_trial_7.clean_reboot; $.physical_boot_trial_7.all_eight_hashes_unchanged; $.physical_boot_trial_7.still_capture_supported; $.physical_boot_trial_7.performance.native.fps; $.physical_boot_trial_7.performance.renderer.fps; $.physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter",
+        "format": "json",
+        "content": "{\n  \"physical_app_preview_proven\": true,\n  \"physical_boot_trial_7.visible_preview_confirmed\": true,\n  \"physical_boot_trial_7.orientation_confirmed\": true,\n  \"physical_boot_trial_7.exposure_confirmed\": true,\n  \"physical_boot_trial_7.frames_delivered\": 1561,\n  \"physical_boot_trial_7.bridge_failures\": 0,\n  \"physical_boot_trial_7.memory_guard_passed\": true,\n  \"physical_boot_trial_7.clean_reboot\": true,\n  \"physical_boot_trial_7.all_eight_hashes_unchanged\": true,\n  \"physical_boot_trial_7.still_capture_supported\": false,\n  \"physical_boot_trial_7.performance.native.fps\": 29.506986448974043,\n  \"physical_boot_trial_7.performance.renderer.fps\": 7.904454835192702,\n  \"physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter\": false\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

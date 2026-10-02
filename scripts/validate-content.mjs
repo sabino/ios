@@ -18,6 +18,6 @@ for(const e of evidence){
  for(const x of e.exhibits.filter(x=>x.kind==='image')){const bytes=readFileSync('public/'+x.src.slice('/ios/'.length));if(createHash('sha256').update(bytes).digest('hex')!==x.sha256)throw Error(`${e.id}: capture hash mismatch`);}
 }
 writeFileSync('public/atlas.json',JSON.stringify({schemaVersion:2,publication,articles,evidence,sources,corrections:data('corrections'),glossary:data('glossary'),reading:data('reading'),timeline:data('timeline')},null,2)+'\n');
-const routes=['','library/','map/','timeline/','evidence/','method/','sources/','glossary/',...['boot','pixels','method'].map(s=>`tours/${s}/`),...articles.map(a=>`articles/${a.slug}/`),...evidence.map(e=>`evidence/${e.id}/`)];
+const routes=['','status/','library/','map/','timeline/','evidence/','method/','sources/','glossary/',...['boot','pixels','method'].map(s=>`tours/${s}/`),...articles.map(a=>`articles/${a.slug}/`),...evidence.map(e=>`evidence/${e.id}/`)];
 writeFileSync('public/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(r=>`<url><loc>https://sabino.pro/ios/${r}</loc><lastmod>${publication.date}</lastmod></url>`).join('')}</urlset>\n`);
 console.log(`Validated ${articles.length} chapters, ${evidence.length} evidence records, ${sources.length} sources; generated public indexes.`);

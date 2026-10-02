@@ -112,14 +112,6 @@ strong{font-weight:650}
 .domain-count{font-family:var(--mono);font-size:11px;color:var(--muted)}
 .domain-count span{margin-left:13px;color:var(--blue);font-size:16px}
 .domain-row:hover{color:var(--blue)}
-.tour-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.tour{border-top:2px solid var(--ink);padding:20px 0 0}
-.tour-index{font-family:var(--mono);font-size:11px;display:flex;justify-content:space-between;color:var(--muted)}
-.tour svg{width:100%;height:90px;color:var(--blue);margin:18px 0}
-.tour h3{font-size:25px;margin-bottom:13px}
-.tour p{font-size:13px;line-height:1.8;color:var(--muted);max-width:34ch}
-.tour>.text-link{margin-top:9px}
-.tour:hover h3{color:var(--blue)}
 .correction-feature{margin:80px 0;display:grid;grid-template-columns:1fr 1fr;gap:22px 80px;padding:48px 52px;background:var(--plate);color:#f2f6fc;border-radius:4px}
 .correction-feature>.section-number{grid-column:1/-1;color:#a6bad5}
 .correction-feature h2{font-size:clamp(30px,3vw,44px);max-width:17ch}
@@ -413,8 +405,6 @@ strong{font-weight:650}
 .domain-row{grid-template-columns:25px 130px 1fr}
 .domain-count{grid-column:3}
 .domain-row{padding:21px 0;gap:9px 18px}
-.tour-grid{gap:22px}
-.tour h3{font-size:21px}
 .correction-feature{gap:25px;padding:36px}
 .library-section{grid-template-columns:200px 1fr;gap:30px}
 .article-heading{margin-left:0;max-width:760px}
@@ -447,7 +437,7 @@ strong{font-weight:650}
 
 @media(max-width:600px){html{scroll-padding-top:90px}
 .site-main{padding:0 22px}
-.site-header{padding:0 20px;gap:10px}
+.site-header{padding:0 22px;gap:10px}
 .brand{font-size:14px;gap:9px}
 .brand svg{width:27px;height:27px}
 .brand-sub{font-size:11px}
@@ -485,11 +475,6 @@ strong{font-weight:650}
 .domain-row h3{font-size:21px}
 .domain-row p{grid-column:2/-1;grid-row:2;font-size:12px}
 .domain-count{grid-column:3;grid-row:1;font-size:11px}
-.tour-grid{grid-template-columns:1fr;gap:34px}
-.tour{position:relative}
-.tour h3{font-size:25px}
-.tour svg{height:67px;margin:11px 0}
-.tour p{max-width:44ch}
 .correction-feature{grid-template-columns:1fr;padding:28px 24px;gap:18px;margin:48px 0}
 .correction-feature h2{font-size:31px}
 .correction-feature p{font-size:13px}

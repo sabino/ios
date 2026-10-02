@@ -47,5 +47,61 @@
     "evidence": "E20",
     "chapter": "buttons",
     "description": "Three physical Power down/up pairs traverse the original HID path. Visible setup imagery returns after blanking. Volume edges are mapped to Home in these experiments; this does not establish guest volume adjustment or physical touch."
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Separate two contacts from one visible pinch",
+    "evidence": "E29",
+    "chapter": "touch",
+    "description": "The long packet trace did not establish pinch. A later finger-identity trial accepted visible Photos enlargement and brightness, with clean storage checks."
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Measure battery balance during native execution",
+    "evidence": "E31",
+    "chapter": "power",
+    "description": "The initial bright screen drew from the battery while blanked idle replenished it; original consumer wiring is separately checked with synthetic QEMU samples."
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Reduce atomic traps, retain uncertain UI benefit",
+    "evidence": "E39",
+    "chapter": "measuring-performance",
+    "description": "Mean trap rates fell 98.50–99.91% in one paired replay; frame gaps did not improve consistently."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Accept a separate physical iPhone home screen",
+    "evidence": "E32",
+    "chapter": "native-iphone",
+    "description": "M68 unlock, Settings and Photos touch pass alongside clean reboot and unchanged reference volumes."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Recover a stock native screenshot",
+    "evidence": "E33",
+    "chapter": "native-iphone",
+    "description": "One 320 × 480 M68 lock-screen TIFF becomes a pixel-identical PNG; the reported pause remains unmeasured."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Cross from a dark raw frame to live Camera preview",
+    "evidence": "E35",
+    "chapter": "camera-preview",
+    "description": "The raw transfer and owner-accepted viewfinder are separate records. Native delivery is about 29.5/s; distinct selection is about 7.9/s."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Save real VGA photos and reopen them after reboot",
+    "evidence": "E36",
+    "chapter": "camera-stills",
+    "description": "Two JPEGs keep their hashes across a fresh boot, with accepted gallery display and full data-volume checks."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Reproduce the image-retirement bottleneck in isolation",
+    "evidence": "E38",
+    "chapter": "frame-retirement",
+    "description": "Original ARM bookkeeping with synthetic images identifies capacity and producer reserve as separate constraints; physical comparison remains pending."
   }
 ]

@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -100,6 +100,7 @@
         "content": "The read helper selects GPIO bank 7, bit 1: it reads a word at `0x3e400004 + 7 * 0x20 = 0x3e4000e4` and tests mask `0x2`. A zero result takes the branch to the radio-present message at `0x18000ed4`; a nonzero result prints that no radio board was detected.\n\n[…]\n\nThe pinned QEMU `hw/arm/ipod_touch_gpio.c` handles only offset `0x2c4` in its read callback and returns zero for every other GPIO offset. Its write callback ignores all writes. Thus the read at offset `0xe4` supplies the low bit value that this iBEC interprets as an installed radio board. This explains the existing console observation without implying a working baseband.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

@@ -90,7 +90,8 @@
         "content": "| Product | Apple archive | Size (bytes) | SHA-256 |\n| --- | --- | ---: | --- |\n| iPhone1,1 / M68AP | [iPhone 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPhone/061-4313.20080226.Sw39i/iPhone1,1_1.1.4_4A102_Restore.ipsw) | 169,946,442 | `25fa72bc07e1879646a690e49090ff376904128cfa333b606a19337d4d02b586` |\n| iPod1,1 / N45AP comparison | [iPod 1.1.4 / 4A102 IPSW](https://secure-appldnld.apple.com/iPod/SBML/osx/bundles/061-4312.20080226.Btu45/iPod1,1_1.1.4_4A102_Restore.ipsw) | 173,519,589 | `9c3808664b6aee7ca90b53fab575db0f7a57a82ec842dfd8a78c6ca3e296aa94` |\n\n[…]\n\n| Component | Observed comparison |\n| --- | --- |\n| `kernelcache.release.s5l8900xrb` | Byte identical, 3,356,266 bytes, SHA-256 `b468dee8f4a1441932bb7c027f30912198d68c1c17d87a3bbc2b33329ce82d4c` |\n| `022-3896-4.dmg`, `022-3900-4.dmg` | Byte identical across archives; their roles have not been established here |\n| Normal-boot `iBoot`, `LLB`, `DeviceTree` | Different board-named members and different hashes |\n| DFU `iBEC`, `iBSS` | Different board-named members and different hashes |\n| Primary root DMG | iPhone `022-3894-4.dmg`: 128,495,616 bytes; iPod `022-3893-4.dmg`: 132,075,520 bytes; different hashes and both begin with an `encrcdsa` encrypted-DMG header |\n| Common display/recovery IMG2 resources and WTF DFU | Byte identical in the compared archives |",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E02",
@@ -190,7 +191,8 @@
         "content": "{\n  \"archived_n45ap.nodes\": 73,\n  \"archived_n45ap.cpu_timebase_hz\": 0,\n  \"live_n45ap.nodes\": 73,\n  \"live_n45ap.cpu_timebase_hz\": 6000000,\n  \"live_n45ap.cpu_fixed_hz\": 24000000,\n  \"live_n45ap.cpu_clock_hz\": 412000000,\n  \"live_n45ap.cpu_bus_hz\": 103000000,\n  \"live_n45ap.cpu_peripheral_hz\": 51500000,\n  \"live_n45ap.cpu_memory_hz\": 137333333,\n  \"archived_m68ap.live_tree_captured\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E03",
@@ -318,7 +320,8 @@
         "content": "{\n  \"reference_handoff.breakpoint_pc\": \"0x080607ec\",\n  \"reference_handoff.r0\": \"0x0866c000\",\n  \"reference_handoff.cpsr\": \"0x1d3\",\n  \"reference_handoff.ttbr0\": \"0x180fc000\",\n  \"reference_handoff.sctlr\": \"0xc50878\",\n  \"reference_handoff.device_tree_virtual\": \"0xc0664000\",\n  \"reference_handoff.device_tree_length\": 32040,\n  \"pinephone_qemu_entry.apple_memory_span\": \"0x50000000..0x57400000\",\n  \"pinephone_qemu_entry.kernel_entry_phys\": \"0x500607ec\",\n  \"pinephone_qemu_entry.arm_init_virtual\": \"0xc01a27bc\",\n  \"pinephone_qemu_entry.ppmr_read_undefined\": true,\n  \"pinephone_qemu_entry.secondary_abort_dfsr\": \"0x5\",\n  \"pinephone_qemu_entry.secondary_abort_dfar\": \"0x30\",\n  \"kernel_booted\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E04",
@@ -440,7 +443,8 @@
         "content": "{\n  \"memory_map.qemu_backed_ram\": \"0x40000000..0x60000000 (half-open, 512 MiB)\",\n  \"memory_map.fault_virtual_address\": \"0x40000054\",\n  \"memory_map.commpage_physical_page\": \"0x5096a000\",\n  \"stage029_fault\": {\n    \"pc\": \"0xc0064284\",\n    \"function\": \"_commpage_set_timestamp\",\n    \"dfar\": \"0x40000054\",\n    \"dfsr\": \"0x6\",\n    \"active_ttbr\": \"0x506e0000\",\n    \"l1_descriptor\": \"0x50989001\",\n    \"l2_descriptor\": \"0x5096a02e\",\n    \"sctlr\": \"0x30d0382d\",\n    \"interpretation\": \"SCTLR.AFE=1 treats clear PTE AP[0] as a level-2 access-flag fault\"\n  },\n  \"stage030_control.pte_values_unchanged\": true,\n  \"stage030_control.commpage_virtual_read_passed\": true,\n  \"stage030_control.extended_observation_seconds\": 40.12,\n  \"stage030_control.synchronous_faults_in_extended_trace\": 0,\n  \"stage030_control.physical_phone_tested_with_afe_clear\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E05",
@@ -531,7 +535,8 @@
         "content": "{\n  \"diagnostic.progress_rows\": {\n    \"cache_clean_entry\": [\n      144,\n      159\n    ],\n    \"cache_clean_return\": [\n      176,\n      191\n    ],\n    \"tlb_flush_entry\": [\n      208,\n      223\n    ],\n    \"tlb_flush_return\": [\n      240,\n      255\n    ],\n    \"pmap_return\": [\n      336,\n      351\n    ]\n  },\n  \"diagnostic.qemu_all_markers\": true,\n  \"physical_observation.all_nine_markers_observed\": true,\n  \"physical_observation.original_pmap_map_bd_return_supported\": true,\n  \"physical_observation.original_console_text_observed\": false,\n  \"physical_observation.camera_progress_frame_24_sha256\": \"6b54c58715ed2fb2098f2fe512677d1606eb886eb1e546280f13cdf7ad12ceef\"\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E06",
@@ -693,7 +698,8 @@
         "content": "AppleHV SWP: result=1 pc=2fe25724 op=e1002091 addr=2fe3c788 width=4 old=0",
         "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E07",
@@ -792,7 +798,8 @@
         "content": "{\n  \"clock.prior_hz\": 62500000,\n  \"clock.corrected_hz\": 24000000,\n  \"clock.prior_uart_interval_seconds\": 3.014805055,\n  \"clock.corrected_uart_interval_seconds\": 1.010080943,\n  \"clock.host_arrival_timing_not_cpu_stopwatch\": true,\n  \"clock.tree_changed_byte_offsets\": [\n    3288,\n    3289,\n    3290,\n    3291\n  ]\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E08",
@@ -906,7 +913,8 @@
         "content": "{\n  \"mechanism\": \"The nonsecure timer callback was installed, then the original ml_install_interrupt_handler path overwrote CPU+0xa4 with the legacy SGI1-only callback. An isolated private kernel binding selects the source-built combined callback instead.\",\n  \"run.seconds\": 12.13,\n  \"run.active_irq_callback\": \"0xc06d0438\",\n  \"run.timer_irq_count\": 51,\n  \"run.timer_clock_return_count\": 51,\n  \"run.last_interrupt_id\": 30,\n  \"run.sgi1_delivery_observed\": false,\n  \"run.next_frontier\": {\n    \"driver\": \"AppleS5L8900XEdgeIC\",\n    \"virtual_abort_address\": \"0xef6a9000\",\n    \"physical_mmio_address\": \"0x02a02000\"\n  }\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E09",
@@ -993,7 +1001,8 @@
         "content": "{\n  \"positive.checks.completed_reads\": 39,\n  \"positive.checks.class_registered\": true,\n  \"positive.checks.driver_started\": true,\n  \"positive.checks.gpt_started\": true,\n  \"positive.checks.synthetic_partition_registered\": true,\n  \"positive.checks.fdisk_fallback_boot_device_seen\": false,\n  \"negative.checks.completed_reads\": 7,\n  \"negative.checks.class_registered\": true,\n  \"negative.checks.driver_started\": true,\n  \"negative.checks.gpt_started\": false,\n  \"negative.checks.synthetic_partition_registered\": false,\n  \"negative.checks.fdisk_fallback_boot_device_seen\": true,\n  \"positive.exception_counts\": {\n    \"6 [FIQ]\": 1201,\n    \"5 [IRQ]\": 286,\n    \"4 [Data Abort]\": 98,\n    \"1 [Undefined Instruction]\": 0\n  },\n  \"negative.exception_counts\": {\n    \"6 [FIQ]\": 1197,\n    \"5 [IRQ]\": 256,\n    \"4 [Data Abort]\": 98,\n    \"1 [Undefined Instruction]\": 0\n  }\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E10",
@@ -1135,7 +1144,8 @@
         "content": "BRIDGE_TARGET=0x11223344\nBRIDGE_PARAMETER=0x55667788\nBRIDGE_STATUS=0x89abcdef\nBRIDGE_ACTUAL_LO=0x9abcdef0\nBRIDGE_ACTUAL_HI=0x12345678\nBRIDGE_R9=0x13579bdf\nBRIDGE_VALUES_OK=0x00000001\nBRIDGE_R9_PRESERVED=0x00000001\nTHUMB_TARGET=0x11223344\nTHUMB_PARAMETER=0x55667788\nTHUMB_STATUS=0x89abcdef\nTHUMB_ACTUAL_LO=0x9abcdef0\nTHUMB_ACTUAL_HI=0x12345678\nTHUMB_R9=0x0badc0de\nTHUMB_VALUES_OK=0x00000001\nTHUMB_R9_PRESERVED=0x00000001\nNULL_ACTION_NOOP=0x00000001\nEABI_DIRECT_ACTUAL_LO=0xdeadbeef\nEABI_DIRECT_ACTUAL_HI=0x9abcdef0\nEABI_NEGATIVE_MISMATCH=0x00000001\nA32_STORAGE_ABI_PASS",
         "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E11",
@@ -1202,7 +1212,8 @@
         "content": "The first implementation completed reads synchronously. It read sectors 0–16 correctly, but the driver's next-chunk callback reentered the provider before prior frames unwound. The next request faulted at the kernel-stack boundary. Increasing transfer size would only change the depth, so the adapter instead queues successful completions on one preallocated XNU thread call. Each worker snapshots callback arguments before releasing the pending slot. Reentrant requests can queue the next callback without retaining the previous transfer stack.\n\n[…]\n\nThe unchanged one-sector request limit then completed 39 reads with no panic or Undefined Instruction exception. The 98 previously observed page-stepping Data Aborts remained; their cause is still unresolved.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E12",
@@ -1320,7 +1331,8 @@
         "content": "{\n  \"volume.volume_type\": \"HFSX\",\n  \"volume.volume_bytes\": 293588992,\n  \"volume.volume_block_size\": 4096,\n  \"volume.volume_total_blocks\": 71677,\n  \"volume.first_lba\": 2048,\n  \"volume.last_lba\": 575463,\n  \"executed.hfs_completed_sector_reads\": 80,\n  \"executed.real_vfs_mountroot_return\": 0,\n  \"executed.mount_list_nonnull\": true,\n  \"executed.mount_memory_filesystem_string\": \"hfs\",\n  \"executed.mount_memory_source_string\": \"root_device\",\n  \"executed.root_vnode_installed\": false,\n  \"executed.secure_root_request_pending\": true,\n  \"executed.secure_root_completion_observed\": false,\n  \"executed.userspace_booted\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E13",
@@ -1448,7 +1460,8 @@
         "content": "The first corrected 720-second phone run reached `BOOT_TIME` at 34 seconds,\nprinted 37 heartbeats with rising idle/WFI counters, and recorded zero queue\nwaits, overflow uses, failed request starts, CMD17/CMD24 failures, or error\ncompletions. The BSD reboot callback fired at 728 seconds, `MACH Reboot`\nfollowed at 731 seconds, and the phone returned to Jumpdrive through WDOG0\nwithout a manual reset. A full data copy through Jumpdrive UART before USB\nhost attach had its clean bit set and passed read-only fsck (exit 0); the\nroot hash remained\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nBattery changed from 31% / 3.754 V before boot to 27% / 3.740 V after\nrecovery, when Jumpdrive again reported charging. This is one of the two\nrequired consecutive clean runs. Its full data copy is the rollback for the\nsecond run.\n\n[…]\n\nThe second consecutive 720-second phone run used the same staged kernel,\nstorage, and timer hashes, with the first run's fsck-clean data volume left\nin place. The battery read 34% / 3.830 V and Charging in Jumpdrive at the\nrestored 500 mA USB input limit before boot. It reached `BOOT_TIME` at about\n70 seconds, printed 37 heartbeats with rising idle/WFI counters, and had no\nqueue waits, overflow uses, failed request starts, CMD17/CMD24 failures,\ndrain failures, or error completions. The BSD reboot callback fired at 728\nseconds and the phone returned to Jumpdrive through WDOG0 at 731 seconds.\nThe full 512 MiB data copy taken through Jumpdrive UART before USB host\nattach has SHA-256\n`d3016b5e1cda3e968528ad076ab7343f4c591abb34bd67ed48b6a9554f419137`,\nits clean bit is set, and read-only fsck exits 0. The root hash remains\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nJumpdrive then read 26% / 3.735 V, Charging. Thus two consecutive timed\nphone boots passed the storage integrity gate without a manual reset or\ndata repair. Both observed zero overflow uses, so the overflow path remains\nunexercised on physical hardware; its build and log-retention checks do not\nestablish behavior under actual queue saturation. The battery drop remains\na separate power problem.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E14",
@@ -1560,7 +1573,8 @@
         "content": "A follow-up removed the two pre-existing data-volume fsck warnings on an\n**offline, disposable data copy**. `fsck_hfs -dfy` changed only data-volume\nsectors 2, 98384 and 1048574; the catalog-sector changes set the two\n`HasFolderCount` flags. Read-only `fsck_hfs -dfn` then exited 0. No root\nimage, phone partition or backup was repaired. The same QEMU partition-level\nroot read-only patch and data-only storage guard booted this repaired input.\nThe first guest wrote the exact 47-byte `START`/`OK` marker, returned zero\nfrom `sync(2)`, and reset via the guest watchdog without QMP at 15.5 seconds.\nThe root hash remained unchanged, and data fsck exited 0 after the reset.\n\nA fresh QEMU process then used that data with the readback-job root. It\ncreated a 47-byte readback file whose bytes exactly match both the persisted\nmarker and the original guest output. Its root hash remained unchanged, and\ndata fsck again exited 0, including the bitmap, catalog and volume-header\nchecks. This second run did **not** print `BOOT_TIME` during its 50-second\nwindow, although it mounted both volumes and completed the readback job; the\nprior pair reached `BOOT_TIME` with the same readback root and an unrepaired\ndata input. The clean-data pair therefore proves QEMU data write, sync,\nguest reboot and fresh-process readback with fsck exit 0, but not a reliable\nsecond normal boot or physical durability.\n\n[…]\n\nThe same job on a fresh card with the watchdog-enabled kernel caused QEMU to\nexit on the guest's request after 51.01 seconds, without a QMP or host reset.\nThe data header retained its clean-unmount bit (`0x80000100`), full read-only\nfsck exited 0, and both the original marker and guest readback contained the\nsame 47 bytes (SHA-256\n`4f319ed2db04f95950946175d8b4736c254db39fcbddb3a5c985d23f977a5853`).\nThe root partition hash did not change during the guest run. A third fresh\nQEMU process, using that card's data and the original readback root, mounted\ndata and reached `BOOT_TIME` at 77.83 seconds. Its root also stayed unchanged\nand data fsck exited 0. That third process was stopped by the host at 90\nseconds, leaving the data clean-unmount bit clear again (`0x80000000`). Thus\nguest sync/readback/watchdog reboot produced a clean HFS volume that booted\nagain; a host stop still leaves the older guest's next mount vulnerable to\nthe dirty-header failure above. These runs touched no physical phone media.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E15",
@@ -1688,7 +1702,8 @@
         "content": "| Region | Half-open physical range | Ownership |\n| --- | --- | --- |\n| Modeled RAM | `0x40000000–0x60000000` | QEMU's 512 MiB RAM |\n| XNU advertised memory | `0x50000000–0x57400000` | Includes staged kernel; first-free boundary is `0x506c0000` |\n| Native scanout | `0x57e00000–0x57e96000` | Existing 320×480 framebuffer |\n| Separate default surface (later correction) | `0x57f00000–0x57f96000` | CPU-rendered CoreSurface backing |\n| Relocated graphics pool | `0x58000000–0x58c00000` | Reserved for original CoreSurface allocations |\n\n[…]\n\nThe previous adapter used scanout RAM as the default CoreSurface backing.\nCopying another surface into scanout therefore overwrote the default source,\nand returning to the default surface skipped copying. The source now requires\na distinct, page-aligned default allocation with validated nonoverlapping\n32-bit ranges, and copies every selected non-null surface. A host regression\nexecutes setup and A → B → A presentation, checking whole-frame equality and\nunchanged default-source contents alongside one-shot console ownership.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E16",
@@ -1818,7 +1833,8 @@
         "content": "FRAME {\"sequence\": 1, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc05a3900\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-00-seq1.ppm\", \"scanout\": \"frame-00-seq1-scanout.raw\", \"default\": \"frame-00-seq1-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 3, \"selected_surface\": \"0xc1050100\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc057c700\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-02-seq3.ppm\", \"scanout\": \"frame-02-seq3-scanout.raw\", \"default\": \"frame-02-seq3-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 5, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc2b26d00\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-04-seq5.ppm\", \"scanout\": \"frame-04-seq5-scanout.raw\", \"default\": \"frame-04-seq5-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}\nFRAME {\"sequence\": 8, \"selected_surface\": \"0xc05a3700\", \"default_surface\": \"0xc05a3700\", \"swap\": \"0xc2b26d00\", \"self\": \"0xc05a0c00\", \"screen\": \"frame-07-seq8.ppm\", \"scanout\": \"frame-07-seq8-scanout.raw\", \"default\": \"frame-07-seq8-default.raw\", \"power_fields\": {\"0x1c0\": \"0x1\", \"0x1c4\": \"0x1\", \"0x1c8\": \"0x1\", \"0x1cc\": \"0x1\"}}",
         "note": "Selected original capture lines. NUL padding and line endings normalized; no values reconstructed. Omitted lines are not displayed. The full capture is private."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E17",
@@ -1945,7 +1961,8 @@
         "content": "{\n  \"first_visible_run.user_observation\": \"Colored quadrants, then iTunes graphic; backlight stayed on while graphic blinked to black and reappeared, then black\",\n  \"first_visible_run.pattern_seconds\": 8.0,\n  \"first_visible_run.client_frame_seconds\": 51.5,\n  \"first_visible_run.data_fsck_exit_after\": 0,\n  \"no_clear_phone_run.visual_result\": \"Unobserved; user missed the boot\",\n  \"no_clear_change.behavior\": \"On the 720x1440 live scanout, clear once before the first surface copy and again only after an explicit background fill; preserve the preceding frame during ordinary swaps\",\n  \"no_clear_change.qemu_screen_identical_to_prior\": true\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E18",
@@ -2082,7 +2099,8 @@
         "content": "{\n  \"caller_trace.caller\": \"SpringBoard SBAwayController dimTimerFired -> relockForButtonPress:afterCall: -> dimScreen: -> LayerKit LKPurpleServerSetScreenBlanked(1)\",\n  \"caller_trace.visible_sequence\": 16,\n  \"caller_trace.null_sequence\": 17,\n  \"caller_trace.request_to_null_seconds\": 0.521213,\n  \"caller_trace.in_flight_visible_swaps_after_request\": 2\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E19",
@@ -2164,7 +2182,8 @@
         "content": "The main thread waits in HID session initialization during application\nstartup. The same worker whose kernel stack reaches AppleISL29003 has this\nuser call chain: HID session thread, service-set traversal, service\nregistration, ALS state setup, HID service open, IOKit connection method,\nMach message. Exact library analysis shows the worker signals readiness\nonly after these registration calls return. Its kernel-side sensor call\nis blocked on a shared legacy IIC controller queue. Other kernel threads\nalso wait on that controller; this does not identify a sensor register\nfailure or prove that this particular transfer reached hardware.\n\n[…]\n\nAfter the same 90-second observation window:\n\n- SpringBoard has seven threads, compared with five in the baseline.\n- Its main thread has left the HID readiness wait and reached\n  GraphicsServices' event loop inside UIKit application run.\n- The HID worker has passed registration/signaling and reached its own\n  CoreFoundation run loop.\n- The unsupported AppleISL service is absent; the buttons HID client still\n  attaches. Other legacy IIC clients are not established as working.\n- Both observed run-loop threads wait for Mach messages, which is expected\n  at an idle snapshot. This does not prove input delivery or responsiveness.\n- Captured display pixels remain XNU verbose text. No native graphical\n  session, touchscreen or app interaction is demonstrated.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E20",
@@ -2301,7 +2320,8 @@
         "content": "The event callback calls the inherited\n`dispatchKeyboardEvent` with Consumer page `0x0c`: usage `0x30` for Power\n(the iPod hold/sleep-wake button) and usage `0x40` for either Volume key\n(the iPod menu/Home button). These usages and the user-client path were\nchecked against the original 4A102 binary and SpringBoard's HID filter.\n\n[…]\n\nThe LRADC at `0x01c21800` is polled with its IRQ disabled.\nThe live Jumpdrive tree declares Volume Up at 200 mV and Down at 400 mV on\nchannel 0, supplied by the 3 V ALDO3 rail. The A64's two-thirds reference\ngives expected six-bit codes near 6 and 13, with bounded ranges on either\nside of their midpoint.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E21",
@@ -2414,7 +2434,8 @@
         "content": "{\n  \"absolute_pointer_convenience_dispatch\": {\n    \"kernel_address\": \"0xc0367e52\",\n    \"instruction\": \"bx lr\",\n    \"touch_delivery_proven\": false\n  },\n  \"original_multitouch_user_client_memory_types_seen\": [\n    0,\n    16\n  ],\n  \"original_user_client_queue_type\": 0,\n  \"original_user_client_queue_descriptor_offset\": \"0x8c\",\n  \"original_user_client_queue_object_offset\": \"0x88\",\n  \"original_touch_userland_path\": [\n    \"AppleMultitouchSPI IOService\",\n    \"MultitouchDriverUserClient memory type 0 IODataQueue\",\n    \"MultitouchSupport raw packet parser and contact callback\",\n    \"MultitouchHID.plugin digitizer HID event conversion\"\n  ],\n  \"ipod_qemu_one_contact_header_bytes\": 24,\n  \"ipod_qemu_one_contact_record_bytes\": 28,\n  \"ipod_qemu_down_and_release_vectors_dynamically_observed\": false,\n  \"original_touch_pipeline_dynamically_verified\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E22",
@@ -2557,7 +2578,8 @@
         "content": "The private 4A102 kernel analysis identifies an initial 44,100 Hz,\ntwo-channel, 16-bit linear PCM output: 4 bytes per frame, a 65,536-byte\nbuffer (16,384 frames), and a 512-frame safety offset. The original status\ndescriptor requests 24 bytes. Its first two 64-bit fields hold completed\nframes and a completion timestamp; the third changes on stream startup.\nThe original completion path advances frames from reported completed bytes.\nThese facts guide the adapter, but the final callback ABI,\n\n[…]\n\nIts type-0 connection registers\na notification port and maps status memory type 0 (at least 24 bytes) plus\nPCM memory type `0x10000000 + stream ID`. Selectors 0 and 1 start and stop\nthe stream.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E23",
@@ -2661,7 +2683,8 @@
         "content": "{\n  \"xnu_without_off_state.pmic_reg00\": \"0xa3\",\n  \"xnu_without_off_state.pmic_reg01\": \"0x30\",\n  \"xnu_without_off_state.pmic_reg2f\": \"0x10\",\n  \"short_off_state_probe.pmic_reg00_at_5_and_45_seconds\": \"0xfb\",\n  \"short_off_state_probe.pmic_reg01_at_5_and_45_seconds\": \"0x70\",\n  \"short_off_state_probe.pmic_reg2f_at_5_and_45_seconds\": \"0x30\",\n  \"phone_720_second_trial.battery_before_percent\": 29,\n  \"phone_720_second_trial.battery_after_percent\": 31,\n  \"phone_720_second_trial.battery_before_uv\": 3747000,\n  \"phone_720_second_trial.battery_after_uv\": 3756000,\n  \"phone_720_second_trial.pmic_reg00_at_600_seconds\": \"0xff\",\n  \"known_good_data_control.battery_before_percent\": 31,\n  \"known_good_data_control.battery_after_percent\": 33\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E24",
@@ -2743,7 +2766,8 @@
         "content": "{\n  \"phone_720_second_trial.boot_time_seen\": false,\n  \"phone_720_second_trial.hid_attach_seen\": true,\n  \"phone_720_second_trial.power_client_attach_count\": 13,\n  \"phone_720_second_trial.heartbeat_samples\": 37,\n  \"phone_720_second_trial.heartbeat_idle_pc_samples\": 32,\n  \"known_good_data_control.boot_time_seconds\": 29.5,\n  \"known_good_data_control.hid_attach_seen\": true,\n  \"known_good_data_control.power_client_attach_count\": 13,\n  \"known_good_data_control.heartbeat_samples\": 37,\n  \"known_good_data_control.heartbeat_idle_pc_samples\": 34,\n  \"known_good_data_control.run_tmp_sbshutdowncookie_data_ark_identical_to_missing_marker_image\": true,\n  \"known_good_data_control.only_extracted_file_delta\": \"logs/BTServer/stderr\",\n  \"qemu_postrun_data_repeat.hid_attach_seen\": false\n}",
         "note": "Selected fields transcribed verbatim. Dotted keys identify their original JSON paths; unselected fields are omitted."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E25",
@@ -2836,7 +2860,8 @@
         "content": "The phone Apple tree originally exposed `uart0` at the real A64 UART0 MMIO\naddress `0x01c28000` as `uart,s5l8900x`. AppleS5L8900XSerial attached in the\nfirst physical UART-command trial. Its Samsung UCON register at offset 4\noverlaps A64 UART IER. The first trial stopped printing after host RX and did\nnot reach either command acknowledgement or the five-minute fallback. The\nlive A64 UART0 interrupt is GIC SPI 32.\n\n[…]\n\nThe corrected five-minute physical gate captured\n`spi32_before=00000001 after=00000000 ier=00000001`: masking was actually\nneeded on the phone. A harmless RX byte did not stop the idle or UART\nheartbeats. The full token was accepted, `MACH Reboot` appeared, and\nJumpdrive returned six seconds after the host request. The subsequent full\n512 MiB data copy had its HFS clean bit set and passed `fsck_hfs -dfn` with\nexit 0; the root partition SHA-256 remained\n`a2a4776df7602d41cd6e83e7b873ae4cfc0db30cff87303b6d608e520c01e17c`.\nUART0 IER still read 1 in that gate because U-Boot had left it enabled.\n\n[…]\n\nIts first phone\nrun logged `spi32_before=00000001 after=00000000 ier=00000000` at listener\nstartup. Ten subsequent UART heartbeats retained `ier=00000000 spi32=0\nremask=0` beyond the old three-minute cutoff. The host requested a reboot,\nand Jumpdrive returned about six seconds later. Its complete post-run data\ncopy had the clean bit set and passed fsck with exit 0; the root hash was\nunchanged.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E26",
@@ -2928,7 +2953,8 @@
         "content": "The read helper selects GPIO bank 7, bit 1: it reads a word at `0x3e400004 + 7 * 0x20 = 0x3e4000e4` and tests mask `0x2`. A zero result takes the branch to the radio-present message at `0x18000ed4`; a nonzero result prints that no radio board was detected.\n\n[…]\n\nThe pinned QEMU `hw/arm/ipod_touch_gpio.c` handles only offset `0x2c4` in its read callback and returns zero for every other GPIO offset. Its write callback ignores all writes. Thus the read at offset `0xe4` supplies the low bit value that this iBEC interprets as an installed radio board. This explains the existing console observation without implying a working baseband.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E27",
@@ -3015,7 +3041,8 @@
         "content": "| Apple tag | Pinned commit | `MasterVersion` | ARM implementation |\n| --- | --- | --- | --- |\n| [`xnu-792.6.22`](https://github.com/apple-oss-distributions/xnu/tree/xnu-792.6.22) | `a4e089e7e528cbf0904e4c5fbe13f6ae65a00d1d` | `8.3.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |\n| [`xnu-1228`](https://github.com/apple-oss-distributions/xnu/tree/xnu-1228) | `e13b1fa57645afc8a7b2e7d868fe9845c6b08c40` | `9.0.0` | No `osfmk/arm`, `pexpert/arm`, or `osfmk/conf/files.arm` |\n\n[…]\n\nThe earliest official Apple XNU tag found in this survey with both real `osfmk/arm` and `pexpert/arm` implementation trees is [`xnu-4570.1.46`](https://github.com/apple-oss-distributions/xnu/tree/xnu-4570.1.46), commit `76e12aa3ea3036173a61fa1081c3be890e626e79`. It includes [`config/MASTER.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/config/MASTER.arm), [`osfmk/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/osfmk/conf/files.arm), [`pexpert/conf/files.arm`](https://github.com/apple-oss-distributions/xnu/blob/xnu-4570.1.46/pexpert/conf/files.arm), and the ARM make fragments. This is a genuine ARM32 source/build structure, but much later than 933.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   },
   {
     "id": "E28",
@@ -3112,6 +3139,884 @@
         "format": "text",
         "content": "Run 048 sent values within 0–32,767; the guest read touch start, move, end and full-end frames, and the captured screen changed from the dialog to the full SpringBoard icon grid. The touchscreen's Y-velocity calculation also now uses the Y displacement. These results establish one working tap, not keyboard editing or all gestures.\n\n[…]\n\nRun 051 reached the dialog and dismissed it by touch, with 800 accepted 3D renders, zero 3D or 2D rejections, zero graphics recovery messages and no panic through 73 seconds. This is a bounded observation; longer uptime remains to be checked.\n\n[…]\n\nThe user's subsequent visible 4A102 session reached Settings, Calculator, Safari's keyboard and Notes, with changing degrees of responsiveness and visual artifacts. In the final recorded run, Notes reached a pending 2D graphics hang, then QEMU aborted when an idle zero byte reached the multitouch SPI command decoder. These are two distinct failures; the graphics hang remains unexplained.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
+      }
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
+  },
+  {
+    "id": "E29",
+    "title": "Physical touch reaches gestures and visible controls",
+    "environment": "Physical PinePhone",
+    "method": "UART contact counts, owner interaction, native screenshots and full post-run storage checks",
+    "observation": "The N45AP physical route supports unlock, Settings taps, visible pinch enlargement and brightness adjustment. The accepted finger-identity trial submitted 439 frames, including 123 with two active contacts, and completed a clean reboot.",
+    "limits": "The earlier 1,476-frame run proves two-contact delivery but did not establish visible pinch. The later owner-confirmed gesture is separate acceptance. One offline Photos fixture is not general gesture or app coverage. The headless QEMU tree disables touch; its passing boot is not touch evidence.",
+    "records": [
+      {
+        "document": "85-pinephone-touch-gate0.md",
+        "sha256": "a10d0580a232d413f37a59d79379814e2915a82131062b0b6b0bd241c747aa0c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      },
+      {
+        "document": "19-validation-report.md",
+        "sha256": "56055d800464c58ad272c902906f47653f8ff573e8d9e321326e43c4cc2475d6",
+        "access": "Private project record; only the selected excerpt is distributed"
+      },
+      {
+        "document": "report.json",
+        "sha256": "f772ab4dd28860b5efdadd6b6fd5f6cba72380183cf97a5cd8370d49922901c7",
+        "access": "Private extraction manifest; selected fields and the reviewed PNG are distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Physical touch reaches gestures and visible controls",
+        "columns": [
+          "Trial",
+          "Observation",
+          "Boundary"
+        ],
+        "rows": [
+          [
+            "Long interaction",
+            "1,476 frames; 470 with two active IDs",
+            "Visible pinch still unconfirmed"
+          ],
+          [
+            "Finger-identity trial 18",
+            "439 frames; 123 with two active contacts",
+            "Owner confirmed Photos enlargement"
+          ],
+          [
+            "Settings and storage",
+            "Visible brightness minimum; full blank/wake; clean fsck",
+            "Root hash unchanged; controlled reboot"
+          ]
+        ],
+        "interpretation": "Contact transport, interpreted finger identity and visible app response are separate checks. The later trial adds the visible gesture result to the earlier packet counts.",
+        "sourceIds": [
+          "touch-trials",
+          "brightness-trial"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "N45 home screen captured on the native phone",
+        "src": "/ios/evidence/images/E29-native-home.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc",
+        "originalDocument": "mobile-IMG_0005.png",
+        "originalSha256": "a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc",
+        "cropBounds": null,
+        "caption": "A stock screenshot extracted after physical trial 18. Its icon grid is evidence of this device run, separate from the iPod QEMU reference. A still image alone cannot prove the accepted gesture.",
+        "alt": "Native N45 home screen with stock application icons.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "touch-trials",
+          "screen-identity"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "touch-trials",
+        "document": "85-pinephone-touch-gate0.md",
+        "sha256": "a10d0580a232d413f37a59d79379814e2915a82131062b0b6b0bd241c747aa0c",
+        "locator": "lines 580–595; lines 671–679",
+        "format": "text",
+        "content": "The physical interactive window lasted about 12 minutes after client attach.\nThe user reported that the tests performed worked, but could not establish\nvisible pinch-to-zoom. UART recorded 1,476 submitted frames: 488 contained\ntwo contact records and 470 had two simultaneously active IDs. The median\ninterval within contact sequences was 46 ms; delays ranged from 45 to 247 ms\nwhen intervals of 250 ms or more were excluded. This proves two-contact\ndelivery and real timing, not visual acceptance of a pinch gesture.\nThe saved SpringBoard preferences retain `SBAutoLockTime = -1` and\n`SBAutoDimTime = -1` before and after the run.\n\nThe clean UART reboot was requested at 780 seconds and Jumpdrive returned\nat about 800 seconds, with no panic, full queue or failed-request marker.\nThe post-run 512 MiB data copy has SHA-256\n`5232beedca22b3211dc847011e3926fea974addbad9889086557104ce918d47a`,\nthe clean bit set and `fsck_hfs -dfn` exit 0. The root hash is unchanged.\nJumpdrive reported 37% battery before and after, charging on laptop USB.\n\n[…]\n\nPhysical trial 18 used the finger-identity revision alongside the brightness\nminimum adjustment. The user confirmed that spreading two fingers enlarged\nthe grid in Photos. Before clean shutdown, UART recorded 439 submitted\nframes including 123 with two active contacts. This is visible pinch\nacceptance, beyond packet-count evidence. All 30 CTests and 447 Python tests\npass; the private input image fits at 27,272 of 27,648 bytes. The combined\nheadless QEMU build also completed a clean reboot. The full 512 MiB post-run data copy matched the UART SHA-256\n`da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7`,\nretained the clean data bit and passed fsck. The root hash remained unchanged.",
+        "note": "Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages."
+      },
+      {
+        "id": "brightness-trial",
+        "document": "19-validation-report.md",
+        "sha256": "56055d800464c58ad272c902906f47653f8ff573e8d9e321326e43c4cc2475d6",
+        "locator": "lines 934–946",
+        "format": "text",
+        "content": "\nThe brightness revision maps the slider to the device-tree visible minimum\nwhile retaining complete blanking. QEMU verified original brightness writes\nand a clean reboot. The touch revision assigns distinct stable finger\nidentities, fixing a collision in the original HID child-event table.\nAll 30 CTests and 447 Python tests pass. The combined build passed a QEMU\nboot and clean reboot, but its headless tree disables Z2; a separate SPI2\ntree repeats an early null abort. Physical trial 18 received explicit user confirmation of the visible minimum,\nPower blank/wake and pinch enlargement. It completed a clean UART reboot;\nthe full data copy matched its UART hash, retained the clean bit, passed\nfsck and confirmed an unchanged root. Automatic extraction recovered six\nvalid screenshots, including two from that trial. No PMIC configuration,\nCPU clock or root-volume change was made.",
+        "note": "Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages."
+      },
+      {
+        "id": "screen-identity",
+        "document": "report.json",
+        "sha256": "f772ab4dd28860b5efdadd6b6fd5f6cba72380183cf97a5cd8370d49922901c7",
+        "locator": "$.source_sha256; $.screenshots[4]; $.source_unchanged; $.device_written",
+        "format": "json",
+        "content": "{\n  \"source_sha256\": \"da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7\",\n  \"screenshots[4]\": {\n    \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0005.TIF\",\n    \"tiff\": \"mobile-IMG_0005.tif\",\n    \"png\": \"mobile-IMG_0005.png\",\n    \"width\": 320,\n    \"height\": 480,\n    \"tiff_sha256\": \"b13ebba6d911ee14d62fbee810e630abc6e9c7f0cdef7178d46596f3e188d0c4\",\n    \"png_sha256\": \"a8b42665fd82e6de215fbe72fbb7d07e548e7929efb94085cb39b775bcd38dcc\"\n  },\n  \"source_unchanged\": true,\n  \"device_written\": false\n}",
+        "note": "Selected extraction-manifest fields. The parent volume digest agrees with the trial-18 notebook; the PNG identity matches the published capture."
+      }
+    ]
+  },
+  {
+    "id": "E30",
+    "title": "Original power consumer accepts synthetic battery states",
+    "environment": "PinePhone QEMU",
+    "method": "Original SpringBoard consumer observations against controlled power-source samples",
+    "observation": "Original userspace consumed charging, unplugged discharge and externally powered full-battery states from the power-source service in QEMU.",
+    "limits": "These are synthetic battery samples. They validate consumer wiring, not physical battery capacity, charging current or a sustainable power budget.",
+    "records": [
+      {
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Original power consumer accepts synthetic battery states",
+        "columns": [
+          "Controlled sample",
+          "Capacity",
+          "Charging / external"
+        ],
+        "rows": [
+          [
+            "Charging",
+            "37%",
+            "1 / 1"
+          ],
+          [
+            "Unplugged",
+            "36%",
+            "0 / 0"
+          ],
+          [
+            "Full",
+            "100%",
+            "0 / 1"
+          ]
+        ],
+        "interpretation": "A changing original consumer distinguishes a working service contract from merely publishing a similarly named object. Physical power is reviewed separately in E31.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "locator": "$.consumer_validation.synthetic_qemu_samples; $.consumer_validation.valid_original_code_observations[0].pct; $.consumer_validation.valid_original_code_observations[0].charging; $.consumer_validation.valid_original_code_observations[0].external; $.consumer_validation.valid_original_code_observations[3].pct; $.consumer_validation.valid_original_code_observations[3].charging; $.consumer_validation.valid_original_code_observations[3].external; $.consumer_validation.valid_original_code_observations[4].pct; $.consumer_validation.valid_original_code_observations[4].charging; $.consumer_validation.valid_original_code_observations[4].external",
+        "format": "json",
+        "content": "{\n  \"consumer_validation.synthetic_qemu_samples\": true,\n  \"consumer_validation.valid_original_code_observations.0.pct\": 37,\n  \"consumer_validation.valid_original_code_observations.0.charging\": 1,\n  \"consumer_validation.valid_original_code_observations.0.external\": 1,\n  \"consumer_validation.valid_original_code_observations.3.pct\": 36,\n  \"consumer_validation.valid_original_code_observations.3.charging\": 0,\n  \"consumer_validation.valid_original_code_observations.3.external\": 0,\n  \"consumer_validation.valid_original_code_observations.4.pct\": 100,\n  \"consumer_validation.valid_original_code_observations.4.charging\": 0,\n  \"consumer_validation.valid_original_code_observations.4.external\": 1\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E31",
+    "title": "USB power balance changes with the workload",
+    "environment": "Physical PinePhone",
+    "method": "Read-only AXP803 samples grouped by observed display state",
+    "observation": "At the recorded 500 mA nominal USB input limit, the initial bright lock screen drew a median 55 mA from the battery. Blanked idle supplied a median 166 mA to the battery; brief wake windows had a positive median balance. The original power-source service also published real battery state.",
+    "limits": "These are battery-side net measurements from bounded windows, not USB input current or whole-system watts. Continuous heavy UI use, battery life, native thermal monitoring and system suspend are unvalidated. PMIC configuration and CPU clocks were unchanged.",
+    "records": [
+      {
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "USB power balance changes with the workload",
+        "columns": [
+          "Window",
+          "Samples",
+          "Median net battery current",
+          "Median net battery power"
+        ],
+        "rows": [
+          [
+            "Initial bright lock screen",
+            "13",
+            "−55 mA",
+            "−207 mW"
+          ],
+          [
+            "Brief full-brightness wakes",
+            "12",
+            "+29.5 mA",
+            "+111 mW"
+          ],
+          [
+            "Blanked idle",
+            "64",
+            "+166 mA",
+            "+630 mW"
+          ]
+        ],
+        "interpretation": "Positive values charge the battery. A USB cable or charging icon does not imply a positive battery balance during every workload.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-native-battery-power-2026-09-30.json",
+        "sha256": "5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c",
+        "locator": "$.nominal_vbus_limit_ma; $.power_units; $.physical_power_groups; $.native_temperature_available; $.pmic_configuration_writes; $.cpu_clock_changes; $.usb_conclusion; $.production_physical_run.panic_count",
+        "format": "json",
+        "content": "{\n  \"nominal_vbus_limit_ma\": 500,\n  \"power_units\": \"battery-side net mW; positive charges battery\",\n  \"physical_power_groups\": {\n    \"bright_lock\": {\n      \"samples\": 13,\n      \"ms_range\": [\n        40832,\n        57630\n      ],\n      \"net_ma_range\": [\n        -59,\n        -40\n      ],\n      \"median_net_ma\": -55,\n      \"median_battery_mw\": -206.965\n    },\n    \"wake_full_brightness\": {\n      \"samples\": 12,\n      \"ms_range\": [\n        95147,\n        163902\n      ],\n      \"net_ma_range\": [\n        26,\n        105\n      ],\n      \"median_net_ma\": 29.5,\n      \"median_battery_mw\": 111.362\n    },\n    \"blank_idle\": {\n      \"samples\": 64,\n      \"ms_range\": [\n        80133,\n        193386\n      ],\n      \"net_ma_range\": [\n        78,\n        169\n      ],\n      \"median_net_ma\": 166.0,\n      \"median_battery_mw\": 630.385\n    }\n  },\n  \"native_temperature_available\": false,\n  \"pmic_configuration_writes\": false,\n  \"cpu_clock_changes\": false,\n  \"usb_conclusion\": \"USB sustained dimmed idle and the two short wake animations; full-brightness initial lockscreen discharged at a median 55 mA. Continuous heavier UI load is not proven sustainable.\",\n  \"production_physical_run.panic_count\": 0\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E32",
+    "title": "Separate iPhone userspace reaches a physical home screen",
+    "environment": "Physical PinePhone",
+    "method": "Owner-confirmed M68AP interaction and post-run integrity checks",
+    "observation": "The separate M68AP 4A102 research profile unlocked to its home screen, accepted Settings and Photos touch, and returned through clean reboot. Its root and the N45 reference volumes remained unchanged.",
+    "limits": "This is a prepared local preservation profile, not a retail activation result or a complete iPhone port. No cellular service is established. This first home-screen run saved no screenshot; later screenshot and Camera records are separate milestones.",
+    "records": [
+      {
+        "document": "pinephone-m68ap-physical-2026-10-01.json",
+        "sha256": "d8866c747ad49d89208117f638b615e4b715ab35ad5b8aa7a6d1458068240b6e",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Separate iPhone userspace reaches a physical home screen",
+        "columns": [
+          "Gate",
+          "Accepted observation"
+        ],
+        "rows": [
+          [
+            "User interaction",
+            "Home unlock; Settings and Photos touch"
+          ],
+          [
+            "Reboot and filesystem",
+            "Clean bit set; read-only fsck exit 0"
+          ],
+          [
+            "Profile isolation",
+            "M68 root unchanged; N45 root/data and partition table unchanged"
+          ],
+          [
+            "Limit",
+            "No cellular-service acceptance; no screenshot in this run"
+          ]
+        ],
+        "interpretation": "The second userspace profile adds app and integration questions without turning the iPod reference or the physical device into a fully supported phone.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-m68ap-physical-2026-10-01.json",
+        "sha256": "d8866c747ad49d89208117f638b615e4b715ab35ad5b8aa7a6d1458068240b6e",
+        "locator": "$.environment; $.user_observations.home_screen_unlock; $.user_observations.settings_touch; $.user_observations.photos_touch; $.saved_screenshots; $.panic_count; $.integrity.complete_read_only_copies; $.integrity.root_unchanged; $.integrity.n45_root_data_and_gpt_unchanged; $.integrity.data_clean_bit; $.integrity.fsck_exit; $.n45_preserved",
+        "format": "json",
+        "content": "{\n  \"environment\": \"physical PinePhone, separate M68AP 4A102 profile\",\n  \"user_observations.home_screen_unlock\": true,\n  \"user_observations.settings_touch\": true,\n  \"user_observations.photos_touch\": true,\n  \"saved_screenshots\": 0,\n  \"panic_count\": 0,\n  \"integrity.complete_read_only_copies\": true,\n  \"integrity.root_unchanged\": true,\n  \"integrity.n45_root_data_and_gpt_unchanged\": true,\n  \"integrity.data_clean_bit\": true,\n  \"integrity.fsck_exit\": 0,\n  \"n45_preserved\": true\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E33",
+    "title": "A stock M68 screenshot survives extraction unchanged",
+    "environment": "Physical PinePhone",
+    "method": "Original TIFF save, recovery extraction and decoded-pixel comparison",
+    "observation": "One physical M68AP lock-screen screenshot was saved as a 320 × 480 TIFF. Its automatically extracted PNG matches the TIFF pixels exactly; protected storage regions and post-run filesystem checks passed.",
+    "limits": "One captured chord and one lock-screen TIFF are established. The owner reported a temporary pause, but duration and cause were not measured. A later reboot was host-requested. This record does not establish screenshot gallery visibility, capture latency or a Camera photograph.",
+    "records": [
+      {
+        "document": "pinephone-m68ap-screenshot-2026-10-01.json",
+        "sha256": "ef83af2306e1f358bb88d1f61a3f59e563e7c2107d4ad355f1af2c8d3dd328eb",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "A stock M68 screenshot survives extraction unchanged",
+        "columns": [
+          "Artifact or control",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Original TIFF / extracted PNG",
+            "320 × 480; decoded pixels equal"
+          ],
+          [
+            "Capture event",
+            "One complete recorded chord; one saved image"
+          ],
+          [
+            "Storage",
+            "Nine protected regions unchanged; fsck exit 0"
+          ],
+          [
+            "Timing",
+            "Pause reported; capture latency unmeasured"
+          ]
+        ],
+        "interpretation": "This is a screen capture produced on the physical native device, not a photograph of the panel or an emulator capture. The guest clock is not the experiment date.",
+        "sourceIds": [
+          "receipt"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "M68 lock-screen screenshot",
+        "src": "/ios/evidence/images/E33-native-m68-lock.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02",
+        "originalDocument": "mobile-IMG_0001.png",
+        "originalSha256": "08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02",
+        "cropBounds": null,
+        "caption": "The saved TIFF was converted to this pixel-identical PNG. No Service and the displayed date belong to the guest interface; neither establishes radio behavior or the actual experiment date.",
+        "alt": "M68 lock screen with a charging battery and No Service status.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "receipt"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-m68ap-screenshot-2026-10-01.json",
+        "sha256": "ef83af2306e1f358bb88d1f61a3f59e563e7c2107d4ad355f1af2c8d3dd328eb",
+        "locator": "$.result; $.screenshots; $.screenshot_pixel_checks; $.valid_saved_tiff_count; $.automatic_png_extraction_passed; $.interaction.uart_complete_screenshot_chords; $.interaction.pause_duration_measured; $.interaction.capture_latency_measured; $.interaction.reboot_was_host_requested; $.storage.all_nine_protected_regions_unchanged; $.storage.data_copy_fsck_exit",
+        "format": "json",
+        "content": "{\n  \"result\": \"physical_stock_screenshot_accepted\",\n  \"screenshots\": [\n    {\n      \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0001.TIF\",\n      \"tiff\": \"mobile-IMG_0001.tif\",\n      \"png\": \"mobile-IMG_0001.png\",\n      \"width\": 320,\n      \"height\": 480,\n      \"tiff_sha256\": \"e2b7b8a6a1e0df17c4a1285460f0fc8421ca771f1fc1d15b2a1c955bcd35e580\",\n      \"png_sha256\": \"08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02\"\n    }\n  ],\n  \"screenshot_pixel_checks\": [\n    {\n      \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0001.TIF\",\n      \"rgb_sha256\": \"944c16048f6473ec0c301f062693773cbd1a44790cbb25634e6b6ce16503f102\",\n      \"png_matches_tiff_pixels\": true,\n      \"nonflat\": true\n    }\n  ],\n  \"valid_saved_tiff_count\": 1,\n  \"automatic_png_extraction_passed\": true,\n  \"interaction.uart_complete_screenshot_chords\": 1,\n  \"interaction.pause_duration_measured\": false,\n  \"interaction.capture_latency_measured\": false,\n  \"interaction.reboot_was_host_requested\": true,\n  \"storage.all_nine_protected_regions_unchanged\": true,\n  \"storage.data_copy_fsck_exit\": 0\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E34",
+    "title": "The first native camera frame is real but very dark",
+    "environment": "Physical PinePhone",
+    "method": "OV5640 sensor capture into guarded DRAM and post-run hash controls",
+    "observation": "A genuine 640 × 480 UYVY frame replaced the prefilled capture buffer with no unchanged sentinel rows and intact guards. Its luma ranged from 2 to 6; test-pattern mode was disabled.",
+    "limits": "This initial single-frame checkpoint establishes DMA capture, not usable exposure, recognizable scene content, Camera preview or JPEG saving. The later preview and saved-photo milestones have their own records. No new post-run fsck was executed in this read-only trial; prior fsck plus byte-identical data hashes supplied its cleanliness control.",
+    "records": [
+      {
+        "document": "pinephone-camera-capture-2026-10-01.json",
+        "sha256": "ae2c92ec412c131ea6d74bd90af9b9215de01eab1b87067135e461fe26b4e518",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "The first native camera frame is real but very dark",
+        "columns": [
+          "Boundary",
+          "Recorded value"
+        ],
+        "rows": [
+          [
+            "Sensor buffer",
+            "640 × 480 UYVY; 1,280-byte stride"
+          ],
+          [
+            "Capture validity",
+            "0 unchanged sentinel rows; guards intact"
+          ],
+          [
+            "Image usefulness",
+            "Luma 2–6; very dark"
+          ],
+          [
+            "Storage control",
+            "Eight hashes unchanged; no guest writes"
+          ]
+        ],
+        "interpretation": "Buffer replacement proves a transfer occurred. Scene quality and application integration require further observations.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-capture-2026-10-01.json",
+        "sha256": "ae2c92ec412c131ea6d74bd90af9b9215de01eab1b87067135e461fe26b4e518",
+        "locator": "$.result; $.mode.width; $.mode.height; $.mode.stride; $.mode.format; $.mode.sensor_test_pattern_enabled; $.frame.accepted; $.frame.luma_min; $.frame.luma_max; $.frame.luma_mean_milli; $.frame.unchanged_poison_rows; $.frame.guards_intact; $.frame.startup_frame_done_discarded; $.storage.all_eight_hashes_unchanged_during_trial; $.storage.post_run_fsck_executed; $.excluded",
+        "format": "json",
+        "content": "{\n  \"result\": \"physical_capture_accepted\",\n  \"mode.width\": 640,\n  \"mode.height\": 480,\n  \"mode.stride\": 1280,\n  \"mode.format\": \"UYVY\",\n  \"mode.sensor_test_pattern_enabled\": false,\n  \"frame.accepted\": true,\n  \"frame.luma_min\": 2,\n  \"frame.luma_max\": 6,\n  \"frame.luma_mean_milli\": 3982,\n  \"frame.unchanged_poison_rows\": 0,\n  \"frame.guards_intact\": true,\n  \"frame.startup_frame_done_discarded\": 1,\n  \"storage.all_eight_hashes_unchanged_during_trial\": true,\n  \"storage.post_run_fsck_executed\": false,\n  \"excluded\": [\n    \"display\",\n    \"BGRA conversion\",\n    \"Camera app\",\n    \"LKImageQueue bridge\"\n  ]\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E35",
+    "title": "The stock Camera displays an accepted live preview",
+    "environment": "Physical PinePhone",
+    "method": "Owner preview acceptance, native delivery counters, memory guards and restoration checks",
+    "observation": "The seventh physical app trial delivered 1,561 frames without bridge failure. The owner accepted the upright, correctly exposed live viewfinder. Native delivery measured 29.507 frames/s; distinct renderer-selected images measured 7.904/s.",
+    "limits": "The native delivery counter is not the rate of distinct displayed images. Renderer selection is itself not an independently measured panel presentation rate. This trial did not save still photographs. Single-core operation, one bounded scene and the stated build limit the result.",
+    "records": [
+      {
+        "document": "pinephone-camera-app-bridge-2026-10-01.json",
+        "sha256": "969791c7dee10048c2a40b418ad54fbf0b0386feb2de0f671c12745b1e5aca5c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "The stock Camera displays an accepted live preview",
+        "columns": [
+          "Acceptance",
+          "Observed result"
+        ],
+        "rows": [
+          [
+            "Owner viewfinder check",
+            "Live, upright and exposed"
+          ],
+          [
+            "Native delivery",
+            "1,561 frames; 0 bridge failures; 29.507/s"
+          ],
+          [
+            "Distinct renderer selection",
+            "7.904 images/s"
+          ],
+          [
+            "Shutdown and storage",
+            "Memory guards pass; clean reboot; eight hashes unchanged"
+          ]
+        ],
+        "interpretation": "App-visible preview closes a different boundary from raw capture. Keep delivery, image selection and physical presentation as separate metrics.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-app-bridge-2026-10-01.json",
+        "sha256": "969791c7dee10048c2a40b418ad54fbf0b0386feb2de0f671c12745b1e5aca5c",
+        "locator": "$.physical_app_preview_proven; $.physical_boot_trial_7.visible_preview_confirmed; $.physical_boot_trial_7.orientation_confirmed; $.physical_boot_trial_7.exposure_confirmed; $.physical_boot_trial_7.frames_delivered; $.physical_boot_trial_7.bridge_failures; $.physical_boot_trial_7.memory_guard_passed; $.physical_boot_trial_7.clean_reboot; $.physical_boot_trial_7.all_eight_hashes_unchanged; $.physical_boot_trial_7.still_capture_supported; $.physical_boot_trial_7.performance.native.fps; $.physical_boot_trial_7.performance.renderer.fps; $.physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter",
+        "format": "json",
+        "content": "{\n  \"physical_app_preview_proven\": true,\n  \"physical_boot_trial_7.visible_preview_confirmed\": true,\n  \"physical_boot_trial_7.orientation_confirmed\": true,\n  \"physical_boot_trial_7.exposure_confirmed\": true,\n  \"physical_boot_trial_7.frames_delivered\": 1561,\n  \"physical_boot_trial_7.bridge_failures\": 0,\n  \"physical_boot_trial_7.memory_guard_passed\": true,\n  \"physical_boot_trial_7.clean_reboot\": true,\n  \"physical_boot_trial_7.all_eight_hashes_unchanged\": true,\n  \"physical_boot_trial_7.still_capture_supported\": false,\n  \"physical_boot_trial_7.performance.native.fps\": 29.506986448974043,\n  \"physical_boot_trial_7.performance.renderer.fps\": 7.904454835192702,\n  \"physical_boot_trial_7.performance.renderer.physical_panel_presentation_proven_by_counter\": false\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E36",
+    "title": "Two camera JPEGs survive a fresh boot",
+    "environment": "Physical PinePhone",
+    "method": "Stock software JPEG save, thumbnail checks, fresh-boot gallery acceptance and hash comparison",
+    "observation": "The accepted physical still trial saved two genuine 640 × 480 JPEGs and thumbnails, then resumed preview. After a fresh boot with no new capture, both JPEGs were byte-identical and the owner accepted their display in the gallery. Full 512 MiB data copies passed filesystem checks in both runs.",
+    "limits": "The sensor pixels are VGA, not upscaled or full-resolution OV5640 output. The first image initially appeared black on the device despite decoding correctly; both reopened after reboot, and the transient display cause remains unclassified. Two photos and one fresh-boot follow-up do not establish long-term durability or power-loss safety.",
+    "records": [
+      {
+        "document": "pinephone-camera-still-saving-2026-10-01.json",
+        "sha256": "6c1ce9c13b96f21bcd8f8c1884ceb3f42ec968cdf38fa51b72d56a9ca6611dbe",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Two camera JPEGs survive a fresh boot",
+        "columns": [
+          "Gate",
+          "Capture run",
+          "Fresh-boot run"
+        ],
+        "rows": [
+          [
+            "JPEG count",
+            "2 valid VGA files",
+            "Same 2; no new still requests"
+          ],
+          [
+            "Content identity",
+            "Hashes recorded",
+            "Both byte-identical"
+          ],
+          [
+            "Visible behavior",
+            "Preview resumed; second photo visible",
+            "Both photos reopened; owner accepted"
+          ],
+          [
+            "Data volume",
+            "Full 512 MiB copy; clean bit; fsck 0",
+            "Full 512 MiB copy; clean bit; fsck 0"
+          ],
+          [
+            "Protected regions",
+            "9 unchanged",
+            "9 unchanged"
+          ]
+        ],
+        "interpretation": "Save completion, file decoding, gallery display and post-reboot identity are distinct acceptance steps. The retained failed trials explain why a shutter callback alone was insufficient.",
+        "sourceIds": [
+          "receipt"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "A real VGA photograph saved by the stock Camera",
+        "src": "/ios/evidence/images/E36-camera-vga.jpg",
+        "width": 480,
+        "height": 640,
+        "sha256": "3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01",
+        "originalDocument": "mobile-100APPLE-IMG_0002.JPG",
+        "originalSha256": "3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01",
+        "cropBounds": null,
+        "caption": "The second accepted JPEG shows a small robot model. Its encoded pixels are 640 × 480, displayed upright as 480 × 640 by the original EXIF orientation. The stock Apple/iPhone metadata names the software profile, not the physical camera. The guest timestamp is not a trustworthy capture date.",
+        "alt": "VGA photograph of a blue and white robot model, captured with the PinePhone rear sensor.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "receipt"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-still-saving-2026-10-01.json",
+        "sha256": "6c1ce9c13b96f21bcd8f8c1884ceb3f42ec968cdf38fa51b72d56a9ca6611dbe",
+        "locator": "$.status; $.candidate.single_core; $.candidate.sensor_frame; $.candidate.upscaling; $.jpeg_saved; $.gallery_accepted; $.fresh_boot_persistence_accepted; $.physical_runs[3].valid_jpeg_count; $.physical_runs[3].preview_resumed; $.physical_runs[3].data_fsck_exit; $.physical_runs[3].data_clean_bit; $.physical_runs[3].all_nine_protected_regions_unchanged; $.physical_runs[3].photos[0].sha256; $.physical_runs[3].photos[1].sha256; $.physical_runs[3].photos[1].encoded_size; $.physical_runs[3].photos[1].exif_orientation; $.physical_runs[4].fresh_boot; $.physical_runs[4].new_still_requests_observed; $.physical_runs[4].both_original_jpegs_byte_identical; $.physical_runs[4].data_fsck_exit; $.physical_runs[4].data_clean_bit; $.physical_runs[4].all_nine_protected_regions_unchanged; $.acceptance",
+        "format": "json",
+        "content": "{\n  \"status\": \"accepted-vga-jpeg-gallery-and-fresh-boot-persistence\",\n  \"candidate.single_core\": true,\n  \"candidate.sensor_frame\": [\n    640,\n    480\n  ],\n  \"candidate.upscaling\": false,\n  \"jpeg_saved\": true,\n  \"gallery_accepted\": true,\n  \"fresh_boot_persistence_accepted\": true,\n  \"physical_runs.3.valid_jpeg_count\": 2,\n  \"physical_runs.3.preview_resumed\": true,\n  \"physical_runs.3.data_fsck_exit\": 0,\n  \"physical_runs.3.data_clean_bit\": true,\n  \"physical_runs.3.all_nine_protected_regions_unchanged\": true,\n  \"physical_runs.3.photos.0.sha256\": \"caa09e2b70c1f9b989f08e4224a383473bba124dc17370c70388c2e423c1aa79\",\n  \"physical_runs.3.photos.1.sha256\": \"3d05f47667aa4df22eeb42211d196a6fdf795812bde736117b85452ea5e21a01\",\n  \"physical_runs.3.photos.1.encoded_size\": [\n    640,\n    480\n  ],\n  \"physical_runs.3.photos.1.exif_orientation\": 6,\n  \"physical_runs.4.fresh_boot\": true,\n  \"physical_runs.4.new_still_requests_observed\": 0,\n  \"physical_runs.4.both_original_jpegs_byte_identical\": true,\n  \"physical_runs.4.data_fsck_exit\": 0,\n  \"physical_runs.4.data_clean_bit\": true,\n  \"physical_runs.4.all_nine_protected_regions_unchanged\": true,\n  \"acceptance\": {\n    \"sensor_jpeg_and_thumbnail\": true,\n    \"orientation_and_color\": true,\n    \"preview_resumes\": true,\n    \"stock_gallery_owner_accepted\": true,\n    \"fresh_boot_both_jpeg_hashes_identical\": true,\n    \"full_data_copy_and_fsck\": true,\n    \"nine_protected_regions_unchanged\": true,\n    \"single_core\": true,\n    \"owner_feedback_before_each_shutdown\": true\n  }\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E37",
+    "title": "Thirty updates do not mean thirty camera images",
+    "environment": "Physical PinePhone",
+    "method": "Counter analysis of the accepted preview baseline",
+    "observation": "The baseline accepted 417 submissions and dropped 1,138 of 1,555, a 73.18% admission-drop rate. The renderer selected 414 distinct images at 7.904/s while the panel-update counter reported 30.263/s.",
+    "limits": "These are counters from one recorded window. They do not directly measure physical scanout timing or end-to-end camera latency. The source revision contains a larger-queue candidate, but its physical performance comparison was still pending at this publication snapshot.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Thirty updates do not mean thirty camera images",
+        "columns": [
+          "Metric",
+          "Rate or count",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "Native delivery",
+            "29.507/s",
+            "New frames reach the bridge"
+          ],
+          [
+            "Panel updates",
+            "30.263/s",
+            "Updates may reuse a camera image"
+          ],
+          [
+            "Distinct renderer selection",
+            "7.904/s",
+            "414 distinct images in the traced window"
+          ],
+          [
+            "Queue admission",
+            "417 accepted / 1,138 dropped",
+            "73.18% of submissions dropped"
+          ],
+          [
+            "Reuse",
+            "3.843 render uses per selected image",
+            "One image can contribute repeatedly"
+          ]
+        ],
+        "interpretation": "Different counters describe different pipeline boundaries. The trace supports investigating queue retirement; it does not establish a 30 fps viewfinder.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "locator": "$.status; $.physical_baseline.native.fps; $.physical_baseline.panel_update_fps; $.physical_baseline.panel_updates_are_distinct_camera_images; $.physical_baseline.renderer; $.physical_baseline.submitted; $.physical_baseline.dropped_percent; $.physical_baseline.mean_render_uses_per_selected_image; $.source_findings.camera_queue_capacity; $.source_findings.default_display_page_count",
+        "format": "json",
+        "content": "{\n  \"status\": \"queue-retirement-bottleneck-reproduced-physical-controlled-comparison-pending\",\n  \"physical_baseline.native.fps\": 29.506986448974043,\n  \"physical_baseline.panel_update_fps\": 30.26346628130443,\n  \"physical_baseline.panel_updates_are_distinct_camera_images\": false,\n  \"physical_baseline.renderer\": {\n    \"accepted\": 417,\n    \"dropped\": 1138,\n    \"released\": 415,\n    \"distinct_selected\": 414,\n    \"render_calls\": 1591,\n    \"not_rendered\": 1,\n    \"unknown\": 0,\n    \"error\": \"00000000\",\n    \"first_time\": 102.01022616666667,\n    \"last_time\": 154.25924379166668,\n    \"fps\": 7.904454835192702,\n    \"physical_panel_presentation_proven_by_counter\": false\n  },\n  \"physical_baseline.submitted\": 1555,\n  \"physical_baseline.dropped_percent\": 73.18327974276528,\n  \"physical_baseline.mean_render_uses_per_selected_image\": 3.842995169082126,\n  \"source_findings.camera_queue_capacity\": 2,\n  \"source_findings.default_display_page_count\": 3\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E38",
+    "title": "An isolated queue replay reproduces the bottleneck",
+    "environment": "Synthetic probe",
+    "method": "Execution of original ARM queue and display bookkeeping with synthetic image identities and stubbed services",
+    "observation": "A 400-frame isolated replay reproduced 7.58–9.92 distinct selections/s with two queue entries and three display pages. Six entries admitted all 400 at about 29.5/s in those modeled scenarios. A generated helper control also showed why one of six input surfaces must remain available to the producer.",
+    "limits": "The replay executes bookkeeping, not the sensor, pixel renderer, kernel scheduler or physical display. It does not prove the phone has exactly one frame of timestamp lag. The larger-queue candidate passed host, ARM and QEMU controls at this revision; a physical comparison was pending.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "An isolated queue replay reproduces the bottleneck",
+        "columns": [
+          "Isolated scenario",
+          "Accepted / 400",
+          "Distinct selection rate"
+        ],
+        "rows": [
+          [
+            "2 entries; 3 pages; no lag",
+            "135",
+            "9.915/s"
+          ],
+          [
+            "2 entries; 3 pages; 33.333 ms lag",
+            "103",
+            "7.584/s"
+          ],
+          [
+            "6 entries; 3 pages; no lag",
+            "400",
+            "29.452/s"
+          ],
+          [
+            "6 entries; 3 pages; 33.333 ms lag",
+            "400",
+            "29.452/s"
+          ]
+        ],
+        "interpretation": "The replay supplies a discriminating control for capacity and retirement. Keeping a producer reserve avoids confusing greater retention with forward progress. These values are synthetic, not measured phone improvements.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "locator": "$.isolated_arm_replay.passed; $.isolated_arm_replay.original_queue_and_display_bookkeeping_executed; $.isolated_arm_replay.synthetic_bitmap_ids; $.isolated_arm_replay.pixels_kernel_sensor_and_physical_display_modeled; $.isolated_arm_replay.scenario_frames; $.isolated_arm_replay.scenarios[0]; $.isolated_arm_replay.scenarios[2]; $.isolated_arm_replay.scenarios[3]; $.isolated_arm_replay.scenarios[5]; $.implementation_candidate.status; $.implementation_candidate.configured_max_in_flight; $.implementation_candidate.preserve_completed_update_checks; $.implementation_candidate.host_tests; $.implementation_candidate.generated_helper_arm_probe.unreserved_control.client_starved; $.implementation_candidate.generated_helper_arm_probe.pixels_and_hardware_modeled",
+        "format": "json",
+        "content": "{\n  \"isolated_arm_replay.passed\": true,\n  \"isolated_arm_replay.original_queue_and_display_bookkeeping_executed\": true,\n  \"isolated_arm_replay.synthetic_bitmap_ids\": true,\n  \"isolated_arm_replay.pixels_kernel_sensor_and_physical_display_modeled\": false,\n  \"isolated_arm_replay.scenario_frames\": 400,\n  \"isolated_arm_replay.scenarios.0\": {\n    \"capacity\": 2,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 0,\n    \"accepted\": 135,\n    \"dropped\": 265,\n    \"distinct_fps\": 9.91516988189436,\n    \"render_uses\": 416,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.2\": {\n    \"capacity\": 2,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 33.333,\n    \"accepted\": 103,\n    \"dropped\": 297,\n    \"distinct_fps\": 7.584455923078752,\n    \"render_uses\": 415,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.3\": {\n    \"capacity\": 6,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 0,\n    \"accepted\": 400,\n    \"dropped\": 0,\n    \"distinct_fps\": 29.451519624976765,\n    \"render_uses\": 416,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"isolated_arm_replay.scenarios.5\": {\n    \"capacity\": 6,\n    \"display_pages\": 3,\n    \"render_timestamp_lag_ms\": 33.333,\n    \"accepted\": 400,\n    \"dropped\": 0,\n    \"distinct_fps\": 29.451519624976733,\n    \"render_uses\": 415,\n    \"fence_age_histogram\": {\n      \"1\": 3,\n      \"3\": 413\n    }\n  },\n  \"implementation_candidate.status\": \"host-cpu-qemu-passed-physical-comparison-pending\",\n  \"implementation_candidate.configured_max_in_flight\": 5,\n  \"implementation_candidate.preserve_completed_update_checks\": true,\n  \"implementation_candidate.host_tests\": {\n    \"ctest_passed\": 45,\n    \"python_passed\": 466,\n    \"focused_asan_ubsan_passed\": true\n  },\n  \"implementation_candidate.generated_helper_arm_probe.unreserved_control.client_starved\": 394,\n  \"implementation_candidate.generated_helper_arm_probe.pixels_and_hardware_modeled\": false\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E39",
+    "title": "Fewer atomic traps do not yet establish a faster UI",
+    "environment": "Physical PinePhone",
+    "method": "One paired OFF/ON physical interaction replay with original userspace",
+    "observation": "The paired replay reduced mean legacy atomic trap rates by 98.50–99.91% across four interaction windows. Mean frame gaps improved in two windows and worsened in two, so a consistent UI speedup was not established.",
+    "limits": "One pair is not a randomized performance study. Frame gaps include intentional pauses and are not app-open latency or animation FPS. Some UART gap rows were damaged; startup slowdown, contention and SMP behavior remain open.",
+    "records": [
+      {
+        "document": "pinephone-spinlock-launch-ui-2026-09-30.json",
+        "sha256": "6e916ccd0007472c10a78495dd58956fb0d5ebb2223f7480af1914cd635fb7bc",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Fewer atomic traps do not yet establish a faster UI",
+        "columns": [
+          "Window",
+          "Mean trap reduction",
+          "Mean frame-gap change"
+        ],
+        "rows": [
+          [
+            "Unlock",
+            "99.91%",
+            "−5.96%"
+          ],
+          [
+            "Settings",
+            "99.86%",
+            "−1.83%"
+          ],
+          [
+            "List scrolling",
+            "98.50%",
+            "+0.16%"
+          ],
+          [
+            "Photos",
+            "99.91%",
+            "+5.29%"
+          ]
+        ],
+        "interpretation": "Removing the measured instruction hotspot is a validated local improvement. A whole-application speed claim needs its own matched latency measurement.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-spinlock-launch-ui-2026-09-30.json",
+        "sha256": "6e916ccd0007472c10a78495dd58956fb0d5ebb2223f7480af1914cd635fb7bc",
+        "locator": "$.status; $.paired_comparison.mean_swp_reduction_percent_by_phase; $.paired_comparison.differences.unlock.gap.mean_ms.percent; $.paired_comparison.differences.settings.gap.mean_ms.percent; $.paired_comparison.differences.scrolling.gap.mean_ms.percent; $.paired_comparison.differences.photos.gap.mean_ms.percent; $.paired_comparison.consistent_mean_frame_gap_improvement_established; $.paired_comparison.matched_app_open_latency_or_fps_speedup_established; $.remaining",
+        "format": "json",
+        "content": "{\n  \"status\": \"physical-paired-ui-timing-complete-startup-diagnosis-pending\",\n  \"paired_comparison.mean_swp_reduction_percent_by_phase\": {\n    \"unlock\": 99.90593588578048,\n    \"settings\": 99.85799092280575,\n    \"scrolling\": 98.49897095058576,\n    \"photos\": 99.91445544417667\n  },\n  \"paired_comparison.differences.unlock.gap.mean_ms.percent\": -5.958275207932562,\n  \"paired_comparison.differences.settings.gap.mean_ms.percent\": -1.8338722337736701,\n  \"paired_comparison.differences.scrolling.gap.mean_ms.percent\": 0.15748845061918093,\n  \"paired_comparison.differences.photos.gap.mean_ms.percent\": 5.294143547655161,\n  \"paired_comparison.consistent_mean_frame_gap_improvement_established\": false,\n  \"paired_comparison.matched_app_open_latency_or_fps_speedup_established\": false,\n  \"remaining\": [\n    \"One OFF/ON pair sharply reduces traps but does not establish consistent UI timing improvement.\",\n    \"User-reported cold-start slowdown remains unresolved.\",\n    \"Frame gaps include intentional pauses and do not measure app-open latency or animation FPS.\",\n    \"UART interleaving damages 12 OFF and 8 ON gap rows; phase-crossing buckets are excluded.\",\n    \"Order/cache controls, forced live contention and SMP acceptance remain pending.\",\n    \"Heartbeat top-PC absence does not prove zero hot-lock traps at every instant.\",\n    \"QEMU fresh-seed reset and SPI2 touch-tree abort remain open; QEMU controls do not establish physical replay.\"\n  ]\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  },
+  {
+    "id": "E40",
+    "title": "Watchdog controls and clean reboot have different reach",
+    "environment": "PinePhone QEMU",
+    "method": "Deliberate emulator panic/shutdown stalls, compared with recorded physical normal-operation checks",
+    "observation": "The production watchdog has deliberate panic and stalled-shutdown controls in QEMU. Physical normal runs record IRQ petting and a clean BSD/Mach return to recovery.",
+    "limits": "The physical normal-run evidence is not a controlled physical hang or panic test. These controls do not establish recovery from every hardware stall, safe sudden power loss, thermal supervision or automatic battery protection.",
+    "records": [
+      {
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "1eb50bcd77b7bc17cf51584405843c6c5d5791827d00414508d5a35cba345f7c",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Watchdog controls and clean reboot have different reach",
+        "columns": [
+          "Environment",
+          "Observation",
+          "Limit"
+        ],
+        "rows": [
+          [
+            "PinePhone QEMU",
+            "Deliberate panic and shutdown-stall controls",
+            "Model behavior only"
+          ],
+          [
+            "Physical PinePhone",
+            "Normal IRQ petting; clean BSD/Mach reboot",
+            "No general hardware-hang guarantee"
+          ],
+          [
+            "Supervision",
+            "Watchdog reset mechanism",
+            "No automatic battery or temperature supervisor"
+          ]
+        ],
+        "interpretation": "A fallback watchdog and an orderly filesystem shutdown address different failures. The capability page qualifies unattended recovery accordingly.",
+        "sourceIds": [
+          "notebook"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "notebook",
+        "document": "83-pinephone-uart-clean-reboot.md",
+        "sha256": "1eb50bcd77b7bc17cf51584405843c6c5d5791827d00414508d5a35cba345f7c",
+        "locator": "lines 97–103, ending with the sentence about Jumpdrive",
+        "format": "text",
+        "content": "The accepted native input module arms A64 WDOG0 for the verified 16-second\nreset interval. Its timer-IRQ hook reloads the watchdog during normal running;\nBSD shutdown status stops reloads so a stuck shutdown can return to recovery.\nThe panic path likewise stops normal petting. This is stall/panic recovery,\nnot thermal or battery supervision. QEMU controls exercise deliberate panic\nand shutdown stalls; physical normal runs record live IRQ petting and clean\nBSD/Mach reboot to Jumpdrive.",
+        "note": "Exact selected sentences; implementation file references after this passage are omitted."
       }
     ]
   }

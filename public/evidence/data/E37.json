@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E37",
+    "title": "Thirty updates do not mean thirty camera images",
+    "environment": "Physical PinePhone",
+    "method": "Counter analysis of the accepted preview baseline",
+    "observation": "The baseline accepted 417 submissions and dropped 1,138 of 1,555, a 73.18% admission-drop rate. The renderer selected 414 distinct images at 7.904/s while the panel-update counter reported 30.263/s.",
+    "limits": "These are counters from one recorded window. They do not directly measure physical scanout timing or end-to-end camera latency. The source revision contains a larger-queue candidate, but its physical performance comparison was still pending at this publication snapshot.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Thirty updates do not mean thirty camera images",
+        "columns": [
+          "Metric",
+          "Rate or count",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "Native delivery",
+            "29.507/s",
+            "New frames reach the bridge"
+          ],
+          [
+            "Panel updates",
+            "30.263/s",
+            "Updates may reuse a camera image"
+          ],
+          [
+            "Distinct renderer selection",
+            "7.904/s",
+            "414 distinct images in the traced window"
+          ],
+          [
+            "Queue admission",
+            "417 accepted / 1,138 dropped",
+            "73.18% of submissions dropped"
+          ],
+          [
+            "Reuse",
+            "3.843 render uses per selected image",
+            "One image can contribute repeatedly"
+          ]
+        ],
+        "interpretation": "Different counters describe different pipeline boundaries. The trace supports investigating queue retirement; it does not establish a 30 fps viewfinder.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f",
+        "locator": "$.status; $.physical_baseline.native.fps; $.physical_baseline.panel_update_fps; $.physical_baseline.panel_updates_are_distinct_camera_images; $.physical_baseline.renderer; $.physical_baseline.submitted; $.physical_baseline.dropped_percent; $.physical_baseline.mean_render_uses_per_selected_image; $.source_findings.camera_queue_capacity; $.source_findings.default_display_page_count",
+        "format": "json",
+        "content": "{\n  \"status\": \"queue-retirement-bottleneck-reproduced-physical-controlled-comparison-pending\",\n  \"physical_baseline.native.fps\": 29.506986448974043,\n  \"physical_baseline.panel_update_fps\": 30.26346628130443,\n  \"physical_baseline.panel_updates_are_distinct_camera_images\": false,\n  \"physical_baseline.renderer\": {\n    \"accepted\": 417,\n    \"dropped\": 1138,\n    \"released\": 415,\n    \"distinct_selected\": 414,\n    \"render_calls\": 1591,\n    \"not_rendered\": 1,\n    \"unknown\": 0,\n    \"error\": \"00000000\",\n    \"first_time\": 102.01022616666667,\n    \"last_time\": 154.25924379166668,\n    \"fps\": 7.904454835192702,\n    \"physical_panel_presentation_proven_by_counter\": false\n  },\n  \"physical_baseline.submitted\": 1555,\n  \"physical_baseline.dropped_percent\": 73.18327974276528,\n  \"physical_baseline.mean_render_uses_per_selected_image\": 3.842995169082126,\n  \"source_findings.camera_queue_capacity\": 2,\n  \"source_findings.default_display_page_count\": 3\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

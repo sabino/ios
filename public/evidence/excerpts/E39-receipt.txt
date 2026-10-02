@@ -1,0 +1,29 @@
+E39 / pinephone-spinlock-launch-ui-2026-09-30.json
+Source SHA-256: 6e916ccd0007472c10a78495dd58956fb0d5ebb2223f7480af1914cd635fb7bc
+Locator: $.status; $.paired_comparison.mean_swp_reduction_percent_by_phase; $.paired_comparison.differences.unlock.gap.mean_ms.percent; $.paired_comparison.differences.settings.gap.mean_ms.percent; $.paired_comparison.differences.scrolling.gap.mean_ms.percent; $.paired_comparison.differences.photos.gap.mean_ms.percent; $.paired_comparison.consistent_mean_frame_gap_improvement_established; $.paired_comparison.matched_app_open_latency_or_fps_speedup_established; $.remaining
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "status": "physical-paired-ui-timing-complete-startup-diagnosis-pending",
+  "paired_comparison.mean_swp_reduction_percent_by_phase": {
+    "unlock": 99.90593588578048,
+    "settings": 99.85799092280575,
+    "scrolling": 98.49897095058576,
+    "photos": 99.91445544417667
+  },
+  "paired_comparison.differences.unlock.gap.mean_ms.percent": -5.958275207932562,
+  "paired_comparison.differences.settings.gap.mean_ms.percent": -1.8338722337736701,
+  "paired_comparison.differences.scrolling.gap.mean_ms.percent": 0.15748845061918093,
+  "paired_comparison.differences.photos.gap.mean_ms.percent": 5.294143547655161,
+  "paired_comparison.consistent_mean_frame_gap_improvement_established": false,
+  "paired_comparison.matched_app_open_latency_or_fps_speedup_established": false,
+  "remaining": [
+    "One OFF/ON pair sharply reduces traps but does not establish consistent UI timing improvement.",
+    "User-reported cold-start slowdown remains unresolved.",
+    "Frame gaps include intentional pauses and do not measure app-open latency or animation FPS.",
+    "UART interleaving damages 12 OFF and 8 ON gap rows; phase-crossing buckets are excluded.",
+    "Order/cache controls, forced live contention and SMP acceptance remain pending.",
+    "Heartbeat top-PC absence does not prove zero hot-lock traps at every instant.",
+    "QEMU fresh-seed reset and SPI2 touch-tree abort remain open; QEMU controls do not establish physical replay."
+  ]
+}

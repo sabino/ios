@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E32",
+    "title": "Separate iPhone userspace reaches a physical home screen",
+    "environment": "Physical PinePhone",
+    "method": "Owner-confirmed M68AP interaction and post-run integrity checks",
+    "observation": "The separate M68AP 4A102 research profile unlocked to its home screen, accepted Settings and Photos touch, and returned through clean reboot. Its root and the N45 reference volumes remained unchanged.",
+    "limits": "This is a prepared local preservation profile, not a retail activation result or a complete iPhone port. No cellular service is established. This first home-screen run saved no screenshot; later screenshot and Camera records are separate milestones.",
+    "records": [
+      {
+        "document": "pinephone-m68ap-physical-2026-10-01.json",
+        "sha256": "d8866c747ad49d89208117f638b615e4b715ab35ad5b8aa7a6d1458068240b6e",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "Separate iPhone userspace reaches a physical home screen",
+        "columns": [
+          "Gate",
+          "Accepted observation"
+        ],
+        "rows": [
+          [
+            "User interaction",
+            "Home unlock; Settings and Photos touch"
+          ],
+          [
+            "Reboot and filesystem",
+            "Clean bit set; read-only fsck exit 0"
+          ],
+          [
+            "Profile isolation",
+            "M68 root unchanged; N45 root/data and partition table unchanged"
+          ],
+          [
+            "Limit",
+            "No cellular-service acceptance; no screenshot in this run"
+          ]
+        ],
+        "interpretation": "The second userspace profile adds app and integration questions without turning the iPod reference or the physical device into a fully supported phone.",
+        "sourceIds": [
+          "receipt"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-m68ap-physical-2026-10-01.json",
+        "sha256": "d8866c747ad49d89208117f638b615e4b715ab35ad5b8aa7a6d1458068240b6e",
+        "locator": "$.environment; $.user_observations.home_screen_unlock; $.user_observations.settings_touch; $.user_observations.photos_touch; $.saved_screenshots; $.panic_count; $.integrity.complete_read_only_copies; $.integrity.root_unchanged; $.integrity.n45_root_data_and_gpt_unchanged; $.integrity.data_clean_bit; $.integrity.fsck_exit; $.n45_preserved",
+        "format": "json",
+        "content": "{\n  \"environment\": \"physical PinePhone, separate M68AP 4A102 profile\",\n  \"user_observations.home_screen_unlock\": true,\n  \"user_observations.settings_touch\": true,\n  \"user_observations.photos_touch\": true,\n  \"saved_screenshots\": 0,\n  \"panic_count\": 0,\n  \"integrity.complete_read_only_copies\": true,\n  \"integrity.root_unchanged\": true,\n  \"integrity.n45_root_data_and_gpt_unchanged\": true,\n  \"integrity.data_clean_bit\": true,\n  \"integrity.fsck_exit\": 0,\n  \"n45_preserved\": true\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

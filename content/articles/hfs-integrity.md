@@ -9,7 +9,10 @@
     "E12",
     "E13",
     "E14",
-    "E25"
+    "E25",
+    "E29",
+    "E36",
+    "E40"
   ],
   "sources": [
     "S05"
@@ -17,11 +20,14 @@
   "related": [
     "async-storage",
     "observability",
-    "preservation-method"
+    "preservation-method",
+    "camera-stills"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Begin with a precise persistence claim
 
@@ -77,3 +83,11 @@ The root-mount record describes a 293,588,992-byte HFSX volume with 4,096-byte a
 ```
 
 These two independent units—filesystem blocks and disk sectors—describe the same extent in [E12](/ios/evidence/E12/#volume-geometry). They do not establish that a later write is persistent. The [physical run table](/ios/evidence/E13/#consecutive-runs) and [47-byte readback sequence](/ios/evidence/E14/#persistence-stages) supply separate liveness and integrity receipts. Keep the disk extent, mounted object and backing file identities distinct.
+
+## Reviewed advance: settings and photographs, 1 October 2026
+
+The physical interaction record retains Auto-Lock preferences across a clean reboot. The later Camera record goes further: two VGA JPEGs and thumbnails were saved, then the same JPEG hashes were recovered after a fresh boot with no new still requests. The owner accepted their display in the gallery. [E29](/ios/evidence/E29/) [E36](/ios/evidence/E36/)
+
+Both still-saving runs produced full 512 MiB data copies, clean bits and read-only fsck exit 0, with nine protected regions unchanged. This is an exercised application-persistence path, beyond a changed sector or mounted volume. It remains bounded to orderly reboot; it does not establish arbitrary power-loss durability.
+
+The production watchdog also has deliberate emulator panic and shutdown-stall controls. Physical normal petting and clean reboot do not prove recovery from every physical hang. Keep orderly unmount, filesystem validation and fallback reset as separate properties. [E40](/ios/evidence/E40/)

@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -136,6 +136,7 @@
         "content": "| Region | Half-open physical range | Ownership |\n| --- | --- | --- |\n| Modeled RAM | `0x40000000–0x60000000` | QEMU's 512 MiB RAM |\n| XNU advertised memory | `0x50000000–0x57400000` | Includes staged kernel; first-free boundary is `0x506c0000` |\n| Native scanout | `0x57e00000–0x57e96000` | Existing 320×480 framebuffer |\n| Separate default surface (later correction) | `0x57f00000–0x57f96000` | CPU-rendered CoreSurface backing |\n| Relocated graphics pool | `0x58000000–0x58c00000` | Reserved for original CoreSurface allocations |\n\n[…]\n\nThe previous adapter used scanout RAM as the default CoreSurface backing.\nCopying another surface into scanout therefore overwrote the default source,\nand returning to the default surface skipped copying. The source now requires\na distinct, page-aligned default allocation with validated nonoverlapping\n32-bit ranges, and copies every selected non-null surface. A host regression\nexecutes setup and A → B → A presentation, checking whole-frame equality and\nunchanged default-source contents alongside one-shot console ownership.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

@@ -2,9 +2,9 @@
   "schemaVersion": 2,
   "publication": {
     "title": "iPhone OS Research Atlas",
-    "edition": "1.1",
-    "date": "2026-09-29",
-    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
     "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
     "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
     "independentReproduction": false,
@@ -120,6 +120,7 @@
         "content": "A follow-up removed the two pre-existing data-volume fsck warnings on an\n**offline, disposable data copy**. `fsck_hfs -dfy` changed only data-volume\nsectors 2, 98384 and 1048574; the catalog-sector changes set the two\n`HasFolderCount` flags. Read-only `fsck_hfs -dfn` then exited 0. No root\nimage, phone partition or backup was repaired. The same QEMU partition-level\nroot read-only patch and data-only storage guard booted this repaired input.\nThe first guest wrote the exact 47-byte `START`/`OK` marker, returned zero\nfrom `sync(2)`, and reset via the guest watchdog without QMP at 15.5 seconds.\nThe root hash remained unchanged, and data fsck exited 0 after the reset.\n\nA fresh QEMU process then used that data with the readback-job root. It\ncreated a 47-byte readback file whose bytes exactly match both the persisted\nmarker and the original guest output. Its root hash remained unchanged, and\ndata fsck again exited 0, including the bitmap, catalog and volume-header\nchecks. This second run did **not** print `BOOT_TIME` during its 50-second\nwindow, although it mounted both volumes and completed the readback job; the\nprior pair reached `BOOT_TIME` with the same readback root and an unrepaired\ndata input. The clean-data pair therefore proves QEMU data write, sync,\nguest reboot and fresh-process readback with fsck exit 0, but not a reliable\nsecond normal boot or physical durability.\n\n[…]\n\nThe same job on a fresh card with the watchdog-enabled kernel caused QEMU to\nexit on the guest's request after 51.01 seconds, without a QMP or host reset.\nThe data header retained its clean-unmount bit (`0x80000100`), full read-only\nfsck exited 0, and both the original marker and guest readback contained the\nsame 47 bytes (SHA-256\n`4f319ed2db04f95950946175d8b4736c254db39fcbddb3a5c985d23f977a5853`).\nThe root partition hash did not change during the guest run. A third fresh\nQEMU process, using that card's data and the original readback root, mounted\ndata and reached `BOOT_TIME` at 77.83 seconds. Its root also stayed unchanged\nand data fsck exited 0. That third process was stopped by the host at 90\nseconds, leaving the data clean-unmount bit clear again (`0x80000000`). Thus\nguest sync/readback/watchdog reboot produced a clean HFS volume that booted\nagain; a host stop still leaves the older guest's next mount vulnerable to\nthe dirty-header failure above. These runs touched no physical phone media.",
         "note": "Exact selected notebook passages. Ellipses mark omitted material; source line numbers refer to the reviewed document."
       }
-    ]
+    ],
+    "sourceRevision": "a87a56a30513fb600a61758541465e613f0d8813"
   }
 }

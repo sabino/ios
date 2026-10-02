@@ -124,5 +124,26 @@
     "url": "https://github.com/Egonex-AI/Understand-Anything",
     "kind": "Publication inspiration",
     "scope": "Inspired the linked concept map and guided reading paths. No upstream application code is incorporated."
+  },
+  {
+    "id": "S19",
+    "title": "Linux OV5640 sensor driver, v6.18",
+    "url": "https://github.com/torvalds/linux/blob/v6.18/drivers/media/i2c/ov5640.c",
+    "kind": "Kernel source",
+    "scope": "Pinned public sensor-mode and output-format context. It does not establish operation of the native iPhone OS port."
+  },
+  {
+    "id": "S20",
+    "title": "V4L2 packed YUV pixel formats",
+    "url": "https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/pixfmt-packed-yuv.html",
+    "kind": "Kernel documentation",
+    "scope": "Byte arrangement and subsampling terminology for UYVY and related formats; accessed 1 October 2026."
+  },
+  {
+    "id": "S21",
+    "title": "Apple kernel architecture overview",
+    "url": "https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html",
+    "kind": "Apple documentation archive",
+    "scope": "Mach, BSD, I/O Kit and kernel/userspace context. The broad diagram is not an exact source or runtime graph of the target 933-era ARM build."
   }
 ]

@@ -1,0 +1,76 @@
+---
+import ArchitectureIcon from './ArchitectureIcon.astro';
+import {url} from '../lib/content';
+const {kind} = Astro.props;
+const camera = kind === 'camera';
+const stages = [
+  {name: 'OV5640', detail: 'Sensor capture', icon: 'camera', article: 'camera-capture'},
+  {name: 'Native bridge', detail: 'Pixels & surfaces', icon: 'layers', article: 'camera-preview'},
+  {name: 'Camera', detail: 'Image ownership', icon: 'app', article: 'frame-retirement'},
+  {name: 'Panel', detail: 'Visible images', icon: 'display', article: 'presentation'},
+];
+---
+<div class:list={['research-story', camera ? 'camera-story' : 'photo-story']} data-domain={camera ? 'Interaction' : 'Storage'}>
+  <div class="story-top"><span>{camera ? 'THE CAMERA PATH' : 'A PHOTOGRAPH THAT SURVIVED'}</span><span>Physical PinePhone</span></div>
+  {camera ? <>
+    <div class="camera-path" aria-label="Explore four stages of the camera path">
+      {stages.map((stage, i) => <a class="path-step" href={url(`articles/${stage.article}/`)}>
+        <span class="step-number">0{i + 1}</span><span class="step-icon"><ArchitectureIcon name={stage.icon}/></span>
+        <span class="step-copy"><strong>{stage.name}</strong><span>{stage.detail}</span></span><span class="step-arrow" aria-hidden="true">↗</span>
+      </a>)}
+    </div>
+    <div class="camera-counters" aria-label="Two distinct measurements from the reviewed physical baseline">
+      <div><span>Delivered frames</span><strong>29.5<small>/s</small></strong><p>Native frame deliveries</p></div>
+      <div><span>Distinct images</span><strong>7.9<small>/s</small></strong><p>Different images selected</p></div>
+    </div>
+    <p class="story-note">Two counters from one reviewed physical trial; each measures a different stage. <a href={url('evidence/E37/')}>Read the measurement · E37 ↗</a></p>
+  </> : <>
+    <div class="photo-proof">
+      <figure class="saved-photo">
+        <img src={url('evidence/images/E36-camera-vga.jpg')} width="480" height="640" alt="One of the reviewed VGA photographs saved by the original Camera app: a robot model on a desk." loading="lazy" decoding="async"/>
+        <figcaption>One original JPEG · E36</figcaption>
+      </figure>
+      <ol class="proof-steps" aria-label="The accepted saved-photo sequence">
+        <li><span aria-hidden="true">01</span><div><strong>Capture & save</strong><p>Two VGA JPEGs and their thumbnails.</p></div></li>
+        <li><span aria-hidden="true">02</span><div><strong>Clean reboot</strong><p>Checked storage; matching file hashes.</p></div></li>
+        <li><span aria-hidden="true">03</span><div><strong>Open in Photos</strong><p>Both images reopened after a fresh boot.</p></div></li>
+      </ol>
+    </div>
+    <p class="story-note">Original photograph, with its stored orientation preserved. Acceptance covers two VGA images. <a href={url('evidence/E36/')}>Inspect the evidence · E36 ↗</a></p>
+  </>}
+</div>
+<style>
+  .research-story{min-width:0;width:100%;max-width:700px;margin:auto}
+  .story-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--rule);font:10px/1.6 var(--mono);color:var(--muted)}
+  .story-top>span:first-child{color:var(--ink)}
+  .camera-path{position:relative;display:grid;gap:16px;padding:30px 0}
+  .camera-path:before{content:'';position:absolute;left:65px;top:60px;bottom:60px;width:1px;background:var(--domain)}
+  .path-step{position:relative;display:flex;align-items:center;gap:20px;padding:15px 20px;border:1px solid var(--rule);border-radius:5px;background:var(--surface);box-shadow:0 10px 16px -15px #172b4950;transition:border-color .2s,transform .2s}
+  .path-step:hover{border-color:var(--domain);transform:translateX(4px)}
+  .step-number{font:10px var(--mono);color:var(--muted)}
+  .step-icon{width:42px;height:42px;color:var(--domain);flex:none}
+  .step-copy{display:flex;flex-direction:column;gap:2px}
+  .step-copy strong{font-size:17px;font-weight:580;letter-spacing:-.025em}
+  .step-copy>span{font-size:12px;color:var(--muted)}
+  .step-arrow{margin-left:auto;color:var(--blue)}
+  .camera-counters{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--rule);padding:22px 0;margin-bottom:20px}
+  .camera-counters>div+div{border-left:1px solid var(--rule);padding-left:28px}
+  .camera-counters>div>span{font-size:12px;color:var(--muted)}
+  .camera-counters strong{display:block;font:580 clamp(40px,4vw,64px)/1.2 var(--sans);letter-spacing:-.045em;margin:8px 0}
+  .camera-counters small{font-size:20px;margin-left:5px;font-weight:400;color:var(--muted)}
+  .camera-counters p{font-size:11px;color:var(--muted);margin:0}
+  .story-note{font-size:11px;line-height:1.8;color:var(--muted);margin:0}
+  .story-note a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;display:block;margin-top:4px}
+  .photo-proof{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center;padding:42px 0}
+  .saved-photo{margin:0;padding:10px 10px 0;background:var(--surface);border:1px solid var(--rule);box-shadow:0 20px 35px -26px #172b4970;align-self:start}
+  .saved-photo img{width:100%;height:auto;display:block;aspect-ratio:3/4;object-fit:contain;background:var(--bg)}
+  .saved-photo figcaption{font:9px/1.7 var(--mono);color:var(--muted);padding:12px 0}
+  .proof-steps{display:grid;gap:30px;list-style:none;padding:0;margin:0}
+  .proof-steps li{display:flex;gap:12px}
+  .proof-steps li>span{font:10px var(--mono);color:color-mix(in srgb,var(--domain) 65%,var(--ink));padding-top:4px}
+  .proof-steps strong{font-size:14px;line-height:1.4;font-weight:600}
+  .proof-steps p{font-size:12px;line-height:1.7;color:var(--muted);margin:6px 0 0}
+  @media(max-width:1100px){.photo-proof{gap:20px}.proof-steps{gap:20px}.proof-steps li{gap:8px}.proof-steps p{font-size:11px}}
+  @media(max-width:600px){.story-top{font-size:9px}.camera-path{gap:11px;padding:22px 0}.path-step{padding:12px 14px;gap:14px}.step-icon{width:32px;height:32px}.step-copy strong{font-size:15px}.step-copy>span{font-size:11px}.camera-counters{padding:17px 0}.camera-counters>div+div{padding-left:20px}.camera-counters strong{font-size:43px}.photo-proof{padding:25px 0;gap:16px}.saved-photo{padding:7px 7px 0}.saved-photo figcaption{font-size:8px;padding:9px 0}.proof-steps strong{font-size:12px}.proof-steps li>span{font-size:9px}.proof-steps p{font-size:11px}.story-note{font-size:10px}}
+  @media(prefers-reduced-motion:reduce){.path-step{transition:none}.path-step:hover{transform:none}}
+</style>

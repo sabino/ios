@@ -1,0 +1,52 @@
+.status-focus .focus-top{display:flex;align-items:center;gap:12px;margin:0 0 17px;font:10px var(--mono);color:var(--muted)}
+.focus-top>[data-focus-label]{color:var(--ink);padding:3px 5px;background:color-mix(in srgb,var(--lens-color) 12%,transparent)}
+.focus-top>[data-focus-position]{margin-left:auto;white-space:nowrap}
+.focus-top button{border:0;padding:4px 0;background:none;color:var(--blue);font:11px var(--sans);white-space:nowrap}
+.focus-top button:hover{text-decoration:underline;text-underline-offset:3px}
+.status-focus h3{font-size:28px;line-height:1.2;letter-spacing:-.035em;margin:0 0 20px}
+.focus-navigation{display:grid;grid-template-columns:36px minmax(0,1fr) 36px;gap:8px;margin:0 0 18px}
+.focus-navigation button,.focus-navigation select{border:1px solid var(--rule);background:var(--surface);border-radius:3px;min-height:42px;color:var(--ink)}
+.focus-navigation button{font-size:24px;line-height:1}
+.focus-navigation select{width:100%;min-width:0;font-size:12px;padding:8px}
+.focus-navigation button:hover{border-color:var(--lens-color);background:color-mix(in srgb,var(--lens-color) 8%,var(--surface))}
+.focus-footer{border-top:1px solid var(--rule);padding-top:17px}
+.focus-footer button{padding:5px 0;border:0;background:none;color:var(--blue);font-size:12px;min-height:32px}
+.focus-footer button::before{content:'▸';margin-right:8px}.focus-footer button[aria-expanded="true"]::before{content:'▾'}
+.focus-footer p{font-size:11px!important;line-height:1.7!important;margin:15px 0 0!important;color:var(--muted)}
+.with-capabilities[data-status-lens="Working"]{--lens-color:#199b73}.with-capabilities[data-status-lens="Partial"]{--lens-color:#b29512}.with-capabilities[data-status-lens="Planned"]{--lens-color:var(--blue)}
+.with-capabilities[data-status-lens] .capability-panel{border-top-color:var(--lens-color)}
+.with-capabilities .capability-panel{scroll-margin-top:104px}
+.with-capabilities[data-status-lens] .capability-top,.with-capabilities[data-status-lens] [data-layer-detail],.with-capabilities[data-status-lens] [data-all-heading],.with-capabilities[data-status-lens] .area-controls,.with-capabilities[data-status-lens] .detail-links,.with-capabilities[data-status-lens] .score-disclaimer{display:none!important}
+.with-capabilities[data-status-lens] .stack-drift{animation:none!important}
+.with-capabilities[data-status-lens] .layer-scene{height:calc(var(--step)*4 + 210px)}
+.with-capabilities[data-status-lens] .layer{animation:none!important;transform:translateY(calc((var(--level) - 2)*9px));transition:transform .85s cubic-bezier(.2,.8,.2,1)}
+.with-capabilities[data-status-lens] .layer-face{transform:matrix(1,-.1,.56,.68,0,0);transition:transform .85s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.with-capabilities[data-status-lens] .layer:not(.lens-linked) .layer-face{opacity:.48}
+.with-capabilities[data-status-lens] .layer.lens-linked .layer-face{opacity:1;box-shadow:0 3px 0 color-mix(in srgb,var(--tint) 20%,var(--surface)),0 4px 0 color-mix(in srgb,var(--tint) 50%,var(--rule)),0 14px 26px -18px var(--lens-color)}
+.with-capabilities[data-status-lens] .component-tile{transition:opacity .45s,border-color .45s,box-shadow .45s,background .45s}
+.with-capabilities[data-status-lens] .component-tile:not(.lens-component){opacity:.58}
+.with-capabilities[data-status-lens] .component-tile.lens-component{opacity:1;border-color:var(--lens-color);background:color-mix(in srgb,var(--lens-color) 7%,var(--surface));box-shadow:0 3px 0 color-mix(in srgb,var(--lens-color) 20%,var(--surface)),0 4px 0 color-mix(in srgb,var(--lens-color) 45%,var(--rule)),0 3px 18px -4px color-mix(in srgb,var(--lens-color) 28%,transparent)}
+.lens-connectors{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:12;overflow:visible;fill:none;stroke:var(--lens-color);stroke-width:1.6;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--lens-color) 26%,transparent))}
+.lens-connectors path{stroke-dasharray:3 5;animation:lens-flow 2.4s linear infinite}.lens-connectors circle{fill:var(--lens-color);stroke:var(--surface);stroke-width:1.2}
+.lens-callout{position:absolute;right:20%;top:-40px;z-index:15;max-width:230px;padding:9px 12px;background:var(--surface);border:1px solid color-mix(in srgb,var(--lens-color) 45%,var(--rule));border-radius:4px;box-shadow:0 5px 16px -11px var(--lens-color);pointer-events:none}
+.lens-callout strong{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4;font-weight:600}.lens-callout strong:before{content:'';display:inline-block;width:6px;height:6px;background:var(--lens-color);border-radius:50%;margin-right:7px}
+.lens-callout span{display:block;font:10px/1.6 var(--mono);color:var(--muted);padding-left:13px}
+.with-capabilities[data-status-lens][data-focus-all="false"] .capability-row h4{display:none}
+.with-capabilities[data-status-lens][data-focus-all="false"] .feature-scores summary{display:none}
+.with-capabilities[data-status-lens][data-focus-all="false"] .scores{display:grid;grid-template-columns:minmax(0,1fr);justify-content:stretch;gap:18px;border-width:1px 0;border-radius:0;padding:20px 0;background:none}
+.with-capabilities[data-status-lens][data-focus-all="false"] .score{display:grid;grid-template-columns:96px minmax(0,1fr) 30px;gap:10px}
+.with-capabilities[data-status-lens][data-focus-all="false"] .score-label{font-size:12px;color:var(--ink);font-weight:550}
+.with-capabilities[data-status-lens][data-focus-all="false"] .dots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.with-capabilities[data-status-lens][data-focus-all="false"] .dots i{width:100%;height:13px;border-radius:2px;border-color:var(--rule)}
+.with-capabilities[data-status-lens][data-focus-all="false"] .dots i.on{background:var(--lens-color);border-color:var(--lens-color)}
+.score-number{font:12px var(--mono);color:var(--ink);text-align:right}
+.focus-mobile{display:none}
+@media(max-width:1000px){.focus-mobile:not([hidden]){display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;margin:12px 0 0;min-height:44px;border:1px solid color-mix(in srgb,var(--lens-color) 40%,var(--rule));border-radius:3px;background:var(--surface);text-align:left;padding:9px 12px;color:var(--ink);font-size:12px}.focus-mobile span:last-child{font:10px var(--mono);color:var(--muted);white-space:nowrap}}
+.lens-changing .capability-list{animation:lens-detail-in .5s ease both}
+@keyframes lens-flow{to{stroke-dashoffset:-32}}@keyframes lens-detail-in{from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:none}}
+.with-capabilities[data-motion-paused] .lens-connectors path,.with-capabilities:not(.in-view) .lens-connectors path{animation-play-state:paused}
+.with-capabilities[data-motion-paused] .layer,.with-capabilities[data-motion-paused] .layer-face,.with-capabilities[data-motion-paused] .component-tile{transition:none!important}
+@container(max-width:500px){.lens-callout{display:none}.focus-top{flex-wrap:wrap}.focus-top button{margin-left:auto}}
+@media(max-width:420px){.status-focus h3{font-size:25px}.status-focus .focus-top{gap:8px;font-size:9px}.focus-top button{font-size:10px}.focus-navigation{gap:6px;grid-template-columns:32px minmax(0,1fr) 32px}.focus-navigation select{font-size:11px}.with-capabilities[data-status-lens][data-focus-all="false"] .score{grid-template-columns:82px minmax(0,1fr) 28px;gap:7px}.with-capabilities[data-status-lens][data-focus-all="false"] .score-label{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.with-capabilities[data-status-lens] .layer,.with-capabilities[data-status-lens] .layer-face,.with-capabilities[data-status-lens] .component-tile{transition:none!important}.lens-connectors path,.lens-changing .capability-list{animation:none!important}}
+@media print{.status-focus,.focus-footer,.lens-callout,.lens-connectors{display:none!important}.with-capabilities[data-status-lens] .capability-row h4,.with-capabilities[data-status-lens] [data-all-heading],.with-capabilities[data-status-lens] .score-disclaimer{display:block!important}.with-capabilities[data-status-lens] .layer{transform:none!important}.with-capabilities[data-status-lens] .layer-face{transform:matrix(1,-.22,.68,.55,0,0)!important}.with-capabilities[data-status-lens] .layer-face,.with-capabilities[data-status-lens] .component-tile{opacity:1!important}}

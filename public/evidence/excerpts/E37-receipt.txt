@@ -1,0 +1,30 @@
+E37 / pinephone-camera-render-rate-2026-10-01.json
+Source SHA-256: 3a037275b68df5d7276860c0a7a0bbd4ebab2d33c288a15d95bd880db3de134f
+Locator: $.status; $.physical_baseline.native.fps; $.physical_baseline.panel_update_fps; $.physical_baseline.panel_updates_are_distinct_camera_images; $.physical_baseline.renderer; $.physical_baseline.submitted; $.physical_baseline.dropped_percent; $.physical_baseline.mean_render_uses_per_selected_image; $.source_findings.camera_queue_capacity; $.source_findings.default_display_page_count
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "status": "queue-retirement-bottleneck-reproduced-physical-controlled-comparison-pending",
+  "physical_baseline.native.fps": 29.506986448974043,
+  "physical_baseline.panel_update_fps": 30.26346628130443,
+  "physical_baseline.panel_updates_are_distinct_camera_images": false,
+  "physical_baseline.renderer": {
+    "accepted": 417,
+    "dropped": 1138,
+    "released": 415,
+    "distinct_selected": 414,
+    "render_calls": 1591,
+    "not_rendered": 1,
+    "unknown": 0,
+    "error": "00000000",
+    "first_time": 102.01022616666667,
+    "last_time": 154.25924379166668,
+    "fps": 7.904454835192702,
+    "physical_panel_presentation_proven_by_counter": false
+  },
+  "physical_baseline.submitted": 1555,
+  "physical_baseline.dropped_percent": 73.18327974276528,
+  "physical_baseline.mean_render_uses_per_selected_image": 3.842995169082126,
+  "source_findings.camera_queue_capacity": 2,
+  "source_findings.default_display_page_count": 3
+}

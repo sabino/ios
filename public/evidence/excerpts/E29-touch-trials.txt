@@ -1,0 +1,33 @@
+E29 / 85-pinephone-touch-gate0.md
+Source SHA-256: a10d0580a232d413f37a59d79379814e2915a82131062b0b6b0bd241c747aa0c
+Locator: lines 580–595; lines 671–679
+Exact selected notebook lines at the reviewed revision. Ellipses mark omitted passages.
+
+The physical interactive window lasted about 12 minutes after client attach.
+The user reported that the tests performed worked, but could not establish
+visible pinch-to-zoom. UART recorded 1,476 submitted frames: 488 contained
+two contact records and 470 had two simultaneously active IDs. The median
+interval within contact sequences was 46 ms; delays ranged from 45 to 247 ms
+when intervals of 250 ms or more were excluded. This proves two-contact
+delivery and real timing, not visual acceptance of a pinch gesture.
+The saved SpringBoard preferences retain `SBAutoLockTime = -1` and
+`SBAutoDimTime = -1` before and after the run.
+
+The clean UART reboot was requested at 780 seconds and Jumpdrive returned
+at about 800 seconds, with no panic, full queue or failed-request marker.
+The post-run 512 MiB data copy has SHA-256
+`5232beedca22b3211dc847011e3926fea974addbad9889086557104ce918d47a`,
+the clean bit set and `fsck_hfs -dfn` exit 0. The root hash is unchanged.
+Jumpdrive reported 37% battery before and after, charging on laptop USB.
+
+[…]
+
+Physical trial 18 used the finger-identity revision alongside the brightness
+minimum adjustment. The user confirmed that spreading two fingers enlarged
+the grid in Photos. Before clean shutdown, UART recorded 439 submitted
+frames including 123 with two active contacts. This is visible pinch
+acceptance, beyond packet-count evidence. All 30 CTests and 447 Python tests
+pass; the private input image fits at 27,272 of 27,648 bytes. The combined
+headless QEMU build also completed a clean reboot. The full 512 MiB post-run data copy matched the UART SHA-256
+`da79d8ea036df8039e45c28400d5cf82dc3c77de1ac19fbff1f857aac0b85ff7`,
+retained the clean data bit and passed fsck. The root hash remained unchanged.

@@ -1,0 +1,38 @@
+---
+import {tours,url} from '../lib/content';
+import '../styles/reading-paths.css';
+const descriptions=[
+  'Follow the contracts from CPU state to a running system.',
+  'From shared pixels to the panel, live Camera and saved photographs.',
+  'Ask, compare, and revise the explanation around what was observed.',
+];
+---
+<section class="home-section tours-section" id="reading-paths" aria-labelledby="reading-paths-title">
+  <div class="section-heading"><div><span class="section-number">03 — READING PATHS</span><h2 id="reading-paths-title">Choose a way in.</h2></div><p>Three ways to follow the connected ideas.</p></div>
+  <div class="reading-path-grid">
+    {tours.map((tour,i)=><article class="reading-path" data-reading-path={tour.id}>
+      <a class="reading-art" data-art-link href={url(`tours/${tour.id}/`)} aria-label={`Follow ${tour.title}`}>
+        <div class="reading-hover" aria-hidden="true">
+        <div class="reading-art-motion">
+          <img src={url(`illustrations/reading-paths/${tour.id}.webp`)} width="1000" height="667" alt="" loading="lazy" decoding="async"/>
+          {i<2&&<div class="reading-cube" data-cube={tour.id}><i class="cube-top"/><i class="cube-left"/><i class="cube-right"/></div>}
+          {i===2&&<span class="reading-comparison-light"/>}
+        </div>
+        </div>
+      </a>
+      <div class="reading-path-index"><span>PATH {String(i+1).padStart(2,'0')}</span><span>{tour.slugs.length} stops</span></div>
+      <h3>{tour.title}</h3>
+      <p>{descriptions[i]}</p>
+      <a class="text-link reading-path-follow" href={url(`tours/${tour.id}/`)}>Follow this path <span aria-hidden="true">→</span></a>
+    </article>)}
+  </div>
+</section>
+<script>
+  const paths=[...document.querySelectorAll<HTMLElement>('[data-reading-path]')];
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    (entry.target as HTMLElement).dataset.inView=String(entry.isIntersecting);
+  }),{threshold:.15});
+  paths.forEach(path=>observer.observe(path));
+  const visibility=()=>paths.forEach(path=>path.dataset.pageVisible=String(!document.hidden));
+  visibility();document.addEventListener('visibilitychange',visibility);
+</script>

@@ -10,7 +10,11 @@
     "E16",
     "E20",
     "E24",
-    "E27"
+    "E27",
+    "E34",
+    "E36",
+    "E38",
+    "E39"
   ],
   "sources": [
     "S18"
@@ -18,11 +22,15 @@
   "related": [
     "orientation",
     "observability",
-    "source-archaeology"
+    "source-archaeology",
+    "camera-stills",
+    "measuring-performance"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## Treat a claim as structured data
 
@@ -59,3 +67,9 @@ The first edition has a fixed source revision and date. In-progress work after t
 The original source survey is a good example: “not found in these inspected releases” can be updated if new material appears, without pretending the earlier scoped observation was universal. [E27](/ios/evidence/E27/)
 
 Preservation succeeds when the next researcher inherits both the useful result and the information needed to question it. A polished presentation should make that discipline easier to follow, not smooth away the uncertainty.
+
+## Reviewed advance: preserve the unsuccessful boundary, 1 October 2026
+
+The camera sequence supplies another reason to retain intermediate failures. A very dark first DMA frame proved capture but not useful exposure. Later app-visible preview and post-reboot JPEG persistence closed different boundaries. The saved-photo record retains the first image’s transient black display even though both files reopened after reboot. [E34](/ios/evidence/E34/) [E36](/ios/evidence/E36/)
+
+Performance evidence also resists a single success label. An isolated queue replay is synthetic even when it executes original ARM bookkeeping. A physical atomic-hotspot fix can remove nearly all measured trap overhead without producing a consistent UI timing improvement. Naming those limits makes the accepted findings more useful. [E38](/ios/evidence/E38/) [E39](/ios/evidence/E39/)

@@ -7,7 +7,9 @@
   "order": 13,
   "evidence": [
     "E15",
-    "E16"
+    "E16",
+    "E37",
+    "E38"
   ],
   "sources": [
     "S07"
@@ -15,11 +17,15 @@
   "related": [
     "mmu-and-caches",
     "graphics-stack",
-    "presentation"
+    "presentation",
+    "frame-retirement",
+    "camera-preview"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-01"
 }
 ---
+
+> **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
 ## The console concealed an allocation problem
 
@@ -71,3 +77,9 @@ sequence 5: A / setup
 ```
 
 The [captured image and pointer table](/ios/evidence/E16/#surface-swaps) retain those pairings. These are capture-local kernel object addresses, not stable allocation identifiers across boots.
+
+## Reviewed advance: camera-image retirement, 1 October 2026
+
+The Camera path adds a new ownership boundary. A selected camera image remains retained until the renderer’s completion state permits release. In the measured baseline, two image-queue entries coexist with three display pages; repeated selection refreshes last use while page reuse advances completion. [E37](/ios/evidence/E37/)
+
+An isolated ARM replay reproduces the resulting admission pressure. Larger capacity removes drops in selected modeled scenarios, but retaining every input surface can starve the producer. The candidate keeps one of six surfaces available while preserving retirement checks. Its physical comparison was still pending at the pinned revision. Synthetic throughput is not a measured phone improvement. [E38](/ios/evidence/E38/)

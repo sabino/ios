@@ -7,7 +7,7 @@
   "three-machines": {
     "next": "boot-handoff",
     "why": "What state crosses from the loader into the original kernel?",
-    "open": "The reference icon grid cannot establish the native board\u2019s peripheral behavior."
+    "open": "The reference icon grid cannot establish the native board’s peripheral behavior."
   },
   "boot-handoff": {
     "next": "device-tree",
@@ -87,7 +87,7 @@
   "touch": {
     "next": "audio",
     "why": "How can another service affect readiness before useful output exists?",
-    "open": "The concrete touch frontier is descriptor, memory mapping and queue delivery; no physical touch result is claimed."
+    "open": "Specific physical gestures pass; general keyboard, gesture and app coverage remain open."
   },
   "audio": {
     "next": "power",
@@ -97,7 +97,7 @@
   "power": {
     "next": "emulator-fidelity",
     "why": "Which of those peripheral assumptions can the emulator actually model?",
-    "open": "Bracketed battery readings are not a continuous current trace; reproduce the physical conditions before generalizing."
+    "open": "Native samples distinguish workload-dependent battery balance; heavy-use endurance, thermal monitoring and suspend remain open."
   },
   "emulator-fidelity": {
     "next": "observability",
@@ -115,8 +115,38 @@
     "open": "Later source explains concepts but cannot replace the missing matching ARM implementation."
   },
   "preservation-method": {
-    "next": "orientation",
-    "why": "Revisit the system with the evidence ledger open beside it.",
-    "open": "Future work should add a dated record, retain the previous limit and state the new acceptance condition."
+    "next": "native-iphone",
+    "why": "How did later physical interaction and Camera records extend the earlier frontier?",
+    "open": "New findings need new dated evidence rather than silent replacement of the earlier snapshot."
+  },
+  "native-iphone": {
+    "next": "camera-capture",
+    "why": "What distinguishes sensor capture from an app-visible image?",
+    "open": "A home screen does not establish cellular service or broad app coverage."
+  },
+  "camera-capture": {
+    "next": "camera-preview",
+    "why": "How do captured frames become a visible viewfinder?",
+    "open": "A VGA transfer does not validate higher-resolution modes or useful exposure."
+  },
+  "camera-preview": {
+    "next": "frame-retirement",
+    "why": "Why are many delivered images never selected?",
+    "open": "Native delivery, image selection and panel updates count different work."
+  },
+  "frame-retirement": {
+    "next": "camera-stills",
+    "why": "When has a shutter event produced a durable photograph?",
+    "open": "The larger-queue physical comparison was pending at the pinned revision."
+  },
+  "camera-stills": {
+    "next": "measuring-performance",
+    "why": "Which metric supports a responsiveness claim?",
+    "open": "Two saved photos and one clean reboot do not establish power-loss durability."
+  },
+  "measuring-performance": {
+    "next": "preservation-method",
+    "why": "How should a new result preserve the earlier evidence?",
+    "open": "One OFF/ON pair and an isolated replay do not establish a general speed multiplier."
   }
 }

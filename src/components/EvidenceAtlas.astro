@@ -1,0 +1,67 @@
+---
+import {atlasRecords, reviewGroups, reviewLabel, historyGroups} from '../lib/evidence-atlas-data';
+import {sections, environments, envKey, url} from '../lib/content';
+import {glyph} from '../lib/evidence-cards';
+import '../styles/evidence-atlas.css';
+const initial = atlasRecords.find(e=>e.id==='E35') || atlasRecords[0];
+const related = initial.related.slice(0,6).map(r=>({...r,record:atlasRecords.find(e=>e.id===r.id)!}));
+const clientRecords = atlasRecords.map(({id,title,label,domain,environment,observation,limits,reviewedOn,sourceRevision,href,search,related,chapters,milestones})=>({id,title,label,domain,environment,observation,limits,reviewedOn,sourceRevision,href,search,related,chapters,milestones}));
+---
+<section class="evidence-atlas" data-evidence-atlas aria-label="Explore the evidence">
+  <div class="ea-toolbar" data-ea-controls hidden>
+    <label class="ea-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><span class="sr-only">Search evidence records</span><input type="search" data-ea-search placeholder="Search records, claims, chapters…" autocomplete="off"/></label>
+    <label class="ea-select"><span class="sr-only">Evidence environment</span><select data-ea-env><option value="">All environments</option>{environments.map(env=><option>{env}</option>)}</select></label>
+    <label class="ea-select ea-review-select"><span class="sr-only">Review snapshot</span><select data-ea-review><option value="">All reviews</option>{reviewGroups.map(g=><option value={g.key}>{reviewLabel(g.date)} · {g.revision.slice(0,7)}</option>)}</select></label>
+    <div class="ea-views" role="group" aria-label="Evidence view"><button type="button" data-ea-view="atlas" aria-pressed="true">Atlas</button><button type="button" data-ea-view="ledger" aria-pressed="false">Ledger</button></div>
+  </div>
+  <nav class="ea-history" aria-label="Dated research milestones">
+    <div class="ea-history-head"><h2>Research history</h2><p>{historyGroups.reduce((n,group)=>n+group.events.length,0)} dated milestones · reports, not review dates</p><a href={url('timeline/')}>Full chronology ↗</a></div>
+    <div class="ea-history-rail">{historyGroups.map(group=>{const first=atlasRecords.find(e=>e.id===group.events[0].evidence)!;return <a href={url('timeline/#day-'+group.date)} data-ea-day={group.date} data-ea-day-focus={first.id} data-domain={first.domain} aria-label={reviewLabel(group.date)+': '+group.events.length+' research milestone'+(group.events.length===1?'':'s')}><i aria-hidden="true"/><time datetime={group.date}>{reviewLabel(group.date).replace(' 2026','')}</time><span>{group.events.length} {group.events.length===1?'milestone':'milestones'}</span></a>;})}</div>
+    <div class="ea-history-context" data-ea-history-context><span class="mono">01 Oct 2026</span><div>{historyGroups.at(-1)!.events.map(event=>{const record=atlasRecords.find(e=>e.id===event.evidence)!;return <a href={record.href} data-ea-history-record={record.id} data-domain={record.domain}><span class="mono">{record.id}</span>{record.label}</a>;})}</div></div>
+  </nav>
+  <div class="ea-domains" role="group" aria-label="Filter by research category">
+    <button type="button" data-ea-domain="" aria-pressed="true" class="ea-all" disabled>All {atlasRecords.length}</button>
+    {sections.map(domain=><button type="button" data-ea-domain={domain} data-domain={domain} aria-pressed="false" disabled><i aria-hidden="true"/><span>{domain}</span><span class="ea-domain-count">{atlasRecords.filter(e=>e.domain===domain).length}</span></button>)}
+  </div>
+  <div class="ea-key"><p><span class="mono" data-ea-count role="status">{atlasRecords.length} records · {reviewGroups.length} reviewed snapshots</span><span class="ea-key-note">Color = reading category · shape = environment</span></p><button type="button" class="ea-reset" data-ea-reset hidden>Clear filters ↺</button></div>
+  <p class="sr-only" role="status" data-ea-announcement></p>
+  <div class="ea-content">
+    <div class="ea-collection">
+      <div class="ea-chart" data-ea-chart>
+        <svg class="ea-routes" data-ea-routes aria-hidden="true"></svg>
+        {reviewGroups.map((group,i)=><section class="ea-edition" data-ea-edition={group.key} aria-labelledby={'review-'+i}>
+          <header class="ea-edition-head"><i class="ea-milestone" aria-hidden="true"/><h2 id={'review-'+i}><time datetime={group.date}>{reviewLabel(group.date)}</time><code>{group.revision.slice(0,7)}</code></h2><p>{group.records.length} records <span>· reviewed source snapshot</span></p></header>
+          <div class="ea-lanes">
+            {sections.map(domain=>{const records=group.records.filter(e=>e.domain===domain);return <section class="ea-lane" data-domain={domain} aria-label={domain}>
+              <h3><i aria-hidden="true"/>{domain}<span data-ea-lane-count>{records.length}</span></h3>
+              <div class="ea-lane-cells">{records.map(e=><a class:list={['ea-tile',{'is-selected':e.id===initial.id}]} data-ea-tile={e.id} data-domain={e.domain} data-env={envKey(e.environment)} href={e.href} aria-current={e.id===initial.id?'true':undefined} aria-label={e.id+': '+e.title+'. '+e.environment+'. Reviewed '+e.reviewedOn+'.'} title={e.title+' · '+e.environment}><span class="ea-tile-top"><span class="mono">{e.id}</span><Fragment set:html={glyph(e.environment)}/></span><strong>{e.label}</strong><span class="ea-tile-mark" aria-hidden="true">↗</span></a>)}</div>
+            </section>;})}
+          </div>
+        </section>)}
+      </div>
+      <div class="ea-empty" data-ea-empty hidden><h2>No matching records.</h2><p>Try a shorter phrase or another environment.</p><button type="button" data-ea-clear class="button primary">Show all evidence →</button></div>
+      <div class="ea-ledger" data-ea-ledger>
+        <h2 class="sr-only">Full evidence ledger</h2>
+        {atlasRecords.map(e=><a class="ea-ledger-row" data-ea-row={e.id} data-domain={e.domain} data-env={envKey(e.environment)} href={e.href}><span class="ea-ledger-id mono"><Fragment set:html={glyph(e.environment)}/>{e.id}</span><div><span class="ea-ledger-category"><i class="domain-dot" aria-hidden="true"/>{e.domain}</span><h3>{e.title}</h3><p>{e.observation}</p><span class="ea-ledger-sources">{e.exhibits.length} exhibits · {e.excerpts.length} source excerpts</span></div><div class="ea-ledger-meta"><span>{e.environment}</span><time datetime={e.reviewedOn}>{reviewLabel(e.reviewedOn)}</time><span>Inspect record ↗</span></div></a>)}
+      </div>
+      <div class="ea-environments" aria-label="Environment legend">{environments.map(env=><span data-env={envKey(env)}><Fragment set:html={glyph(env)}/>{env}</span>)}</div>
+      <p class="ea-chart-note">The vertical spine marks reviewed source snapshots. Solid branches organize categories; dashed links connect records cited together in a chapter. They establish neither causality nor experiment order. Each record has one category here and may inform several research paths.</p>
+    </div>
+    <aside class="ea-detail" data-ea-detail data-domain={initial.domain} aria-labelledby="ea-detail-title" tabindex="-1">
+      <div class="ea-detail-top"><span class="mono" data-ea-detail-id>{initial.id} / {initial.domain}</span><div data-ea-controls hidden><button type="button" data-ea-step="-1" aria-label="Previous visible record">←</button><button type="button" data-ea-step="1" aria-label="Next visible record">→</button></div></div>
+      <div data-ea-detail-body>
+        <h2 id="ea-detail-title">{initial.label}</h2>
+        <p class="ea-detail-environment" data-env={envKey(initial.environment)}><Fragment set:html={glyph(initial.environment)}/><span>{initial.environment}</span></p>
+        <section class="ea-detail-observation"><h3>Observation</h3><p>{initial.observation}</p></section>
+        <details class="ea-detail-limits"><summary>Scope and limits</summary><p>{initial.limits}</p><dl><dt>Review</dt><dd>{reviewLabel(initial.reviewedOn)}</dd><dt>Source snapshot</dt><dd><code>{initial.sourceRevision.slice(0,7)}</code></dd></dl></details>
+        <section class="ea-detail-related"><h3>Cited alongside</h3><p>{initial.related.length} records share a chapter. Showing the {related.length} most frequent connections.</p><div>{related.map(({record,via})=><a href={record.href} data-ea-related={record.id} data-domain={record.domain} title={via.length+' shared chapters'}><span class="mono">{record.id}</span><span>{record.label}</span></a>)}</div></section>
+        <details class="ea-detail-chapters"><summary>Used in {initial.chapters.length} chapters</summary><ul>{initial.chapters.map(a=><li><a href={a.href} data-domain={a.section}><i class="domain-dot" aria-hidden="true"/>{a.title}</a></li>)}</ul></details>
+        <div class="ea-detail-actions"><a class="button primary" data-ea-open href={initial.href}>Inspect {initial.id} ↗</a><a class="ea-permalink" data-ea-permalink href={url('evidence/?focus='+initial.id)} aria-label={'Link to '+initial.id+' in the atlas'}>#</a></div>
+      </div>
+      <p class="ea-detail-disclaimer">Curated reports of private experiments. Not independent public reproductions.</p>
+    </aside>
+  </div>
+  <a class="ea-mobile-selection" href="#ea-detail-title" data-ea-mobile hidden><span class="mono">{initial.id}</span><span>{initial.label}</span><strong>Details ↓</strong></a>
+  <script type="application/json" id="evidence-atlas-data" set:html={JSON.stringify(clientRecords).replace(/</g,'\\u003c')}/>
+</section>
+<script src="../lib/evidence-atlas.ts"></script>

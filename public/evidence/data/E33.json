@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "1.2",
+    "date": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "scope": "iPhone OS 1.1.4, build 4A102; original iPod reference and native PinePhone research",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT"
+  },
+  "record": {
+    "id": "E33",
+    "title": "A stock M68 screenshot survives extraction unchanged",
+    "environment": "Physical PinePhone",
+    "method": "Original TIFF save, recovery extraction and decoded-pixel comparison",
+    "observation": "One physical M68AP lock-screen screenshot was saved as a 320 × 480 TIFF. Its automatically extracted PNG matches the TIFF pixels exactly; protected storage regions and post-run filesystem checks passed.",
+    "limits": "One captured chord and one lock-screen TIFF are established. The owner reported a temporary pause, but duration and cause were not measured. A later reboot was host-requested. This record does not establish screenshot gallery visibility, capture latency or a Camera photograph.",
+    "records": [
+      {
+        "document": "pinephone-m68ap-screenshot-2026-10-01.json",
+        "sha256": "ef83af2306e1f358bb88d1f61a3f59e563e7c2107d4ad355f1af2c8d3dd328eb",
+        "access": "Private project record; only the selected excerpt is distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Documented observation",
+    "reviewedOn": "2026-10-01",
+    "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4",
+    "exhibits": [
+      {
+        "id": "acceptance",
+        "kind": "table",
+        "title": "A stock M68 screenshot survives extraction unchanged",
+        "columns": [
+          "Artifact or control",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Original TIFF / extracted PNG",
+            "320 × 480; decoded pixels equal"
+          ],
+          [
+            "Capture event",
+            "One complete recorded chord; one saved image"
+          ],
+          [
+            "Storage",
+            "Nine protected regions unchanged; fsck exit 0"
+          ],
+          [
+            "Timing",
+            "Pause reported; capture latency unmeasured"
+          ]
+        ],
+        "interpretation": "This is a screen capture produced on the physical native device, not a photograph of the panel or an emulator capture. The guest clock is not the experiment date.",
+        "sourceIds": [
+          "receipt"
+        ]
+      },
+      {
+        "id": "capture",
+        "kind": "image",
+        "title": "M68 lock-screen screenshot",
+        "src": "/ios/evidence/images/E33-native-m68-lock.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02",
+        "originalDocument": "mobile-IMG_0001.png",
+        "originalSha256": "08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02",
+        "cropBounds": null,
+        "caption": "The saved TIFF was converted to this pixel-identical PNG. No Service and the displayed date belong to the guest interface; neither establishes radio behavior or the actual experiment date.",
+        "alt": "M68 lock screen with a charging battery and No Service status.",
+        "interpretation": "Original capture bytes, copied unchanged after visual and metadata review. No crop, retouch, enhancement or generated pixels. The image illustrates only this named experiment.",
+        "sourceIds": [
+          "receipt"
+        ],
+        "rights": "Research capture; depicted Apple interface and third-party subject retain their original rights."
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "receipt",
+        "document": "pinephone-m68ap-screenshot-2026-10-01.json",
+        "sha256": "ef83af2306e1f358bb88d1f61a3f59e563e7c2107d4ad355f1af2c8d3dd328eb",
+        "locator": "$.result; $.screenshots; $.screenshot_pixel_checks; $.valid_saved_tiff_count; $.automatic_png_extraction_passed; $.interaction.uart_complete_screenshot_chords; $.interaction.pause_duration_measured; $.interaction.capture_latency_measured; $.interaction.reboot_was_host_requested; $.storage.all_nine_protected_regions_unchanged; $.storage.data_copy_fsck_exit",
+        "format": "json",
+        "content": "{\n  \"result\": \"physical_stock_screenshot_accepted\",\n  \"screenshots\": [\n    {\n      \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0001.TIF\",\n      \"tiff\": \"mobile-IMG_0001.tif\",\n      \"png\": \"mobile-IMG_0001.png\",\n      \"width\": 320,\n      \"height\": 480,\n      \"tiff_sha256\": \"e2b7b8a6a1e0df17c4a1285460f0fc8421ca771f1fc1d15b2a1c955bcd35e580\",\n      \"png_sha256\": \"08882b534d21cb9a4c4007dbc7a0be50372d2374922548842de9ec90562b0d02\"\n    }\n  ],\n  \"screenshot_pixel_checks\": [\n    {\n      \"guest_path\": \"mobile/Media/DCIM/999APPLE/IMG_0001.TIF\",\n      \"rgb_sha256\": \"944c16048f6473ec0c301f062693773cbd1a44790cbb25634e6b6ce16503f102\",\n      \"png_matches_tiff_pixels\": true,\n      \"nonflat\": true\n    }\n  ],\n  \"valid_saved_tiff_count\": 1,\n  \"automatic_png_extraction_passed\": true,\n  \"interaction.uart_complete_screenshot_chords\": 1,\n  \"interaction.pause_duration_measured\": false,\n  \"interaction.capture_latency_measured\": false,\n  \"interaction.reboot_was_host_requested\": true,\n  \"storage.all_nine_protected_regions_unchanged\": true,\n  \"storage.data_copy_fsck_exit\": 0\n}",
+        "note": "Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted."
+      }
+    ]
+  }
+}

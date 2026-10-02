@@ -1,0 +1,55 @@
+E31 / pinephone-native-battery-power-2026-09-30.json
+Source SHA-256: 5845ab77c30855e28710fa41b9fc47163aea60e9b116daf7323c637e26e9b89c
+Locator: $.nominal_vbus_limit_ma; $.power_units; $.physical_power_groups; $.native_temperature_available; $.pmic_configuration_writes; $.cpu_clock_changes; $.usb_conclusion; $.production_physical_run.panic_count
+Selected values copied from the pinned JSON record. Dotted keys give their original paths; other fields are omitted.
+
+{
+  "nominal_vbus_limit_ma": 500,
+  "power_units": "battery-side net mW; positive charges battery",
+  "physical_power_groups": {
+    "bright_lock": {
+      "samples": 13,
+      "ms_range": [
+        40832,
+        57630
+      ],
+      "net_ma_range": [
+        -59,
+        -40
+      ],
+      "median_net_ma": -55,
+      "median_battery_mw": -206.965
+    },
+    "wake_full_brightness": {
+      "samples": 12,
+      "ms_range": [
+        95147,
+        163902
+      ],
+      "net_ma_range": [
+        26,
+        105
+      ],
+      "median_net_ma": 29.5,
+      "median_battery_mw": 111.362
+    },
+    "blank_idle": {
+      "samples": 64,
+      "ms_range": [
+        80133,
+        193386
+      ],
+      "net_ma_range": [
+        78,
+        169
+      ],
+      "median_net_ma": 166.0,
+      "median_battery_mw": 630.385
+    }
+  },
+  "native_temperature_available": false,
+  "pmic_configuration_writes": false,
+  "cpu_clock_changes": false,
+  "usb_conclusion": "USB sustained dimmed idle and the two short wake animations; full-brightness initial lockscreen discharged at a median 55 mA. Continuous heavier UI load is not proven sustainable.",
+  "production_physical_run.panic_count": 0
+}

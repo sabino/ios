@@ -19,7 +19,7 @@ The displayed map treats those relationships as undirected reading connections. 
 
 Evidence records contain `id`, `title`, `environment`, `method`, `observation`, `limits`, `status`, review date, optional recorded values, and private document identities. Recorded values always inherit the experimental scope of the record. Qualify estimates and separate repeated observations from a single run.
 
-The structured `atlas.json` export has `schemaVersion: 1`, edition metadata, full original chapter text, evidence, sources, corrections and glossary. It preserves the public editorial layer in an ordinary portable format. Generated search and sitemap files are rebuilt from the same source.
+The structured `atlas.json` export has `schemaVersion: 2`, edition metadata, full original chapter text, evidence, sources, corrections and glossary. It preserves the public editorial layer in an ordinary portable format. Generated search and sitemap files are rebuilt from the same source.
 
 ## Source handling
 
@@ -42,7 +42,7 @@ Do not copy a whole directory from the private project. Work from a deliberately
 
 When a hypothesis changes, preserve the earlier interpretation, the discriminating test and the replacement explanation in the correction ledger. Avoid silently polishing the history into a sequence of obvious successes. If the observation itself is invalidated, mark or withdraw the record and explain why.
 
-A substantive evidence update requires a new pinned revision, explicit review dates and a changelog entry identifying affected records. Existing stable record IDs should not be reassigned to unrelated claims. Keep the initial edition recoverable through Git history and a release tag when issued.
+A substantive evidence update requires a new pinned revision, explicit review dates and a changelog entry identifying affected records. Existing stable record IDs should not be reassigned to unrelated claims. Each evidence record carries its own `sourceRevision`; retained records must not inherit the newest edition revision in place of the snapshot actually reviewed. Keep the initial edition recoverable through Git history and a release tag when issued.
 
 ## Review gates
 
