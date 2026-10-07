@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E54",
+    "title": "Listener timing is later than host preflight",
+    "environment": "Physical PinePhone",
+    "method": "Bounded periodic process/socket snapshots, stock logs and host ordering",
+    "observation": "A later diagnostic first positively samples the stock TCP listener 41.237 seconds after daemon startup. Host usbmux preflight starts at attach before that listener is observed. lockdownd stays alive; CommCenter genuinely checks in and reaches CFRunLoop.",
+    "limits": "The first sample is not exact bind time, and the creation-to-activation interval is not isolated RSA cost. Pairing and two-boot identity stability remain pending. The original runner and whole-capture gates are false despite scoped diagnostic/recovery success.",
+    "records": [
+      {
+        "document": "pinephone-lockdownd-combined-physical-2026-10-07.json",
+        "sha256": "e69249449da88cebf053953f97b9342d7d3efc3f4efd506d45fc0b8b813708f3",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-lockdownd-startup-static.md",
+        "sha256": "420f1bbf0e5b32518773d7e1c91e5619fb50350fc53ba956bbb95eee99d69512",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "pinephone-usb-kernel-snapshot-2026-10-07.json",
+        "sha256": "f52bad46c0d0e10bc49e399af49eab171de2425342227a777e055ca8bd87037a",
+        "access": "Private earlier snapshot record; selected negative result only"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; scoped diagnostic passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A later diagnostic first positively samples the stock TCP listener 41.237 seconds after daemon startup. Host usbmux preflight starts at attach before that listener is observed. lockdownd stays alive; CommCenter genuinely checks in and reaches CFRunLoop."
+          ],
+          [
+            "Acceptance limit",
+            "The first sample is not exact bind time, and the creation-to-activation interval is not isolated RSA cost. Pairing and two-boot identity stability remain pending. The original runner and whole-capture gates are false despite scoped diagnostic/recovery success."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-lockdownd-combined-physical-2026-10-07.json",
+        "sha256": "e69249449da88cebf053953f97b9342d7d3efc3f4efd506d45fc0b8b813708f3",
+        "locator": "JSON pointers: /diagnostic_and_recovery_passed, /original_runner_passed, /enumeration_seconds, /automatic_jumpdrive_seconds, /periodic/captured_samples, /interpretation/timing_limit, /interpretation/host_ordering, /not_accepted, /original_runner_limits, /safety/region_count, /safety/staged_files_verified, /safety/protected_regions_byte_identical, /safety/fat_fsck_exit, /verification/fresh_strict_114_regression_passed",
+        "format": "json",
+        "content": "{\n  \"/diagnostic_and_recovery_passed\": true,\n  \"/original_runner_passed\": false,\n  \"/enumeration_seconds\": 83.705,\n  \"/automatic_jumpdrive_seconds\": 248.893,\n  \"/periodic/captured_samples\": 25,\n  \"/interpretation/timing_limit\": \"listener first positively sampled 41.237s after daemon startup, not exact bind time; 12s creation-to-activation interval is not isolated RSA cost\",\n  \"/interpretation/host_ordering\": \"usbmuxd v2.0 connects at attach, before listener; initial preflight fails; no usable idevice_id listing in this trial\",\n  \"/not_accepted\": [\n    \"local pairing\",\n    \"ideviceinfo\",\n    \"idevicesyslog\",\n    \"AFC\",\n    \"actual stock UDID across two boots\",\n    \"phone-side listener gate (next candidate)\"\n  ],\n  \"/original_runner_limits\": [\n    \"whole usbmon ownership/completeness false: 15 unknown events and three missing completion identities\",\n    \"early reset/SETUP marker excluded by bounded head trace; not a claim that enumeration lacks real control transfers\"\n  ],\n  \"/safety/region_count\": 12,\n  \"/safety/staged_files_verified\": 793,\n  \"/safety/protected_regions_byte_identical\": true,\n  \"/safety/fat_fsck_exit\": 0,\n  \"/verification/fresh_strict_114_regression_passed\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "earlier-recovery-failure",
+        "document": "pinephone-usb-kernel-snapshot-2026-10-07.json",
+        "sha256": "f52bad46c0d0e10bc49e399af49eab171de2425342227a777e055ca8bd87037a",
+        "locator": "JSON pointers: /physical_capture/original_hardware_report_passed, /physical_capture/automatic_jumpdrive_recovery_observed, /physical_capture/parent_deadline_seconds, /physical_capture/whole_capture_complete",
+        "format": "json",
+        "content": "{\n  \"/physical_capture/original_hardware_report_passed\": false,\n  \"/physical_capture/automatic_jumpdrive_recovery_observed\": false,\n  \"/physical_capture/parent_deadline_seconds\": 230.059,\n  \"/physical_capture/whole_capture_complete\": false\n}",
+        "note": "Exact selected fields from the earlier failed snapshot. The later diagnostic and owner recovery do not erase this failure."
+      }
+    ]
+  }
+}

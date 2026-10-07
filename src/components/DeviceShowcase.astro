@@ -1,16 +1,16 @@
 ---
-// Original CSS device frames; the reviewed E28 reference capture is reused
-// as an illustration, never as evidence of a physical PinePhone run.
+// Original illustrative device frames. Genuine QEMU pixels stay labeled by substrate.
 import {url} from '../lib/content';
 const {variant = 'full'} = Astro.props;
-const shot = url('evidence/images/E28-reference-home.png');
+const referenceShot = url('evidence/images/E28-reference-home.png');
+const shot = url('evidence/images/E43-313-lock-qemu.png');
 ---
 <div class={'showcase showcase--' + variant} data-showcase>
   <div class="showcase-head"><span>THE SOFTWARE</span><span aria-hidden="true">→</span><span>THE NATIVE TARGET</span></div>
   <div class="stage">
     <figure class="device slab-device ipod" style="--i:0">
       <div class="device-bob"><div class="slab" data-tilt>
-        <div class="screen"><img src={shot} alt="Reviewed iPod reference home screen, E28" width="320" height="480" loading="eager" decoding="async"/></div>
+        <div class="screen"><img src={referenceShot} alt="Reviewed 4A102 iPod reference home screen, E28" width="320" height="480" loading="eager" decoding="async"/></div>
         <span class="home-btn" aria-hidden="true"></span>
       </div></div>
       <figcaption><strong>iPod touch</strong><span class="mono">N45AP · 1.1.4</span></figcaption>
@@ -18,20 +18,20 @@ const shot = url('evidence/images/E28-reference-home.png');
     <figure class="device pinephone hero-device" style="--i:1">
       <div class="device-bob"><div class="pp-body" data-tilt>
         <span class="pp-ear" aria-hidden="true"></span><span class="pp-cam" aria-hidden="true"></span>
-        <div class="pp-screen"><div class="pp-fit"><img src={shot} alt="Reference interface illustrated at 2× scale within the PinePhone panel" width="320" height="480" loading="eager" decoding="async"/></div></div>
+        <div class="pp-screen"><div class="pp-fit"><img src={shot} alt="7E18 QEMU lock screen illustrated at 2× scale within the PinePhone panel" width="320" height="480" loading="eager" decoding="async"/></div></div>
       </div></div>
-      <figcaption><strong>PinePhone</strong><span class="mono">A64 · native target</span></figcaption>
+      <figcaption><strong>PinePhone</strong><span class="mono">A64 · 3.1.3 native</span></figcaption>
     </figure>
     <figure class="device slab-device iphone" style="--i:2">
       <div class="device-bob"><div class="slab" data-tilt>
         <span class="earpiece" aria-hidden="true"></span>
-        <div class="screen"><img src={shot} alt="Reference interface in an illustrative iPhone frame" width="320" height="480" loading="eager" decoding="async"/></div>
+        <div class="screen"><img src={shot} alt="7E18 QEMU lock screen in an illustrative original iPhone frame" width="320" height="480" loading="eager" decoding="async"/></div>
         <span class="home-btn" aria-hidden="true"></span>
       </div></div>
-      <figcaption><strong>iPhone</strong><span class="mono">M68AP · 1.1.4</span></figcaption>
+      <figcaption><strong>iPhone</strong><span class="mono">M68AP · 3.1.3</span></figcaption>
     </figure>
   </div>
-  <p class="showcase-note">Illustrative device frames · <a href={url('evidence/E28/#reference-home')}>reference screen E28 ↗</a><span>320 × 480 interface · 2× scale on a 720 × 1440 panel</span></p>
+  <p class="showcase-note">Illustrative frames · genuine <a href={url('evidence/E28/#reference-home')}>4A102 reference ↗</a> and <a href={url('evidence/E43/')}>7E18 QEMU pixels ↗</a><span>QEMU images do not prove physical behavior · <a href={url('evidence/E51/')}>owner acceptance E51 ↗</a></span></p>
 </div>
 
 <style>

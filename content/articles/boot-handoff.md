@@ -8,7 +8,12 @@
   "evidence": [
     "E02",
     "E03",
-    "E05"
+    "E05",
+    "E43",
+    "E46",
+    "E48",
+    "E49",
+    "E61"
   ],
   "sources": [
     "S07",
@@ -20,9 +25,11 @@
     "mmu-and-caches",
     "three-machines"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## A declared entry point is incomplete
 
@@ -59,3 +66,8 @@ This experiment illustrates why a diagnostic should state both its success and i
 On the real phone, a display initializer had already configured the panel before XNU took control. The scanout buffer had to survive memory initialization and cache transitions. Physical progress markers later established return from a mapping routine after an A53 range-clean adaptation. That result belongs to the memory-transition boundary and does not retroactively prove every earlier boot stage. [E05](/ios/evidence/E05/)
 
 The transferable lesson is to capture and validate the complete handoff contract: state, ownership, lifetime and provenance. A correct entry address is only one field in that contract.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The current 7E18 route boots without SD through the existing eMMC Tow-Boot, pre-XNU NuttX panel initialization and selector. Resident EL2 compatibility/reset is a separate lifetime. Jumpdrive is the recovery OS entered after reset. One drained direct WDOG0 confirmation reaches new SPL after 1.084 s and the ordinary selector, while repeated ordinary restart acceptance remains open. The loader comparison records inherited regulator differences; it is not permission to overwrite all shared clock or power state. [E43](/ios/evidence/E43/) [E46](/ios/evidence/E46/) [E48](/ios/evidence/E48/) [E49](/ios/evidence/E49/) [E61](/ios/evidence/E61/)

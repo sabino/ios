@@ -1,0 +1,31 @@
+E54 / pinephone-lockdownd-combined-physical-2026-10-07.json
+Source SHA-256: e69249449da88cebf053953f97b9342d7d3efc3f4efd506d45fc0b8b813708f3
+Locator: JSON pointers: /diagnostic_and_recovery_passed, /original_runner_passed, /enumeration_seconds, /automatic_jumpdrive_seconds, /periodic/captured_samples, /interpretation/timing_limit, /interpretation/host_ordering, /not_accepted, /original_runner_limits, /safety/region_count, /safety/staged_files_verified, /safety/protected_regions_byte_identical, /safety/fat_fsck_exit, /verification/fresh_strict_114_regression_passed
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/diagnostic_and_recovery_passed": true,
+  "/original_runner_passed": false,
+  "/enumeration_seconds": 83.705,
+  "/automatic_jumpdrive_seconds": 248.893,
+  "/periodic/captured_samples": 25,
+  "/interpretation/timing_limit": "listener first positively sampled 41.237s after daemon startup, not exact bind time; 12s creation-to-activation interval is not isolated RSA cost",
+  "/interpretation/host_ordering": "usbmuxd v2.0 connects at attach, before listener; initial preflight fails; no usable idevice_id listing in this trial",
+  "/not_accepted": [
+    "local pairing",
+    "ideviceinfo",
+    "idevicesyslog",
+    "AFC",
+    "actual stock UDID across two boots",
+    "phone-side listener gate (next candidate)"
+  ],
+  "/original_runner_limits": [
+    "whole usbmon ownership/completeness false: 15 unknown events and three missing completion identities",
+    "early reset/SETUP marker excluded by bounded head trace; not a claim that enumeration lacks real control transfers"
+  ],
+  "/safety/region_count": 12,
+  "/safety/staged_files_verified": 793,
+  "/safety/protected_regions_byte_identical": true,
+  "/safety/fat_fsck_exit": 0,
+  "/verification/fresh_strict_114_regression_passed": true
+}

@@ -122,7 +122,7 @@
   "native-iphone": {
     "next": "camera-capture",
     "why": "What distinguishes sensor capture from an app-visible image?",
-    "open": "A home screen does not establish cellular service or broad app coverage."
+    "open": "The primary 7E18 workflow is owner accepted; ordinary restart, USB services, networking and broader app coverage retain separate gates."
   },
   "camera-capture": {
     "next": "camera-preview",
@@ -137,12 +137,12 @@
   "frame-retirement": {
     "next": "camera-stills",
     "why": "When has a shutter event produced a durable photograph?",
-    "open": "The larger-queue physical comparison was pending at the pinned revision."
+    "open": "The larger legacy queue now has one physical comparison; broad repetition and 7E18 rate measurement remain pending."
   },
   "camera-stills": {
     "next": "measuring-performance",
     "why": "Which metric supports a responsiveness claim?",
-    "open": "Two saved photos and one clean reboot do not establish power-loss durability."
+    "open": "7E18 saves a resampled still and reopens a new photo after cold power-on; higher-detail acquisition and power-loss durability remain open."
   },
   "measuring-performance": {
     "next": "preservation-method",

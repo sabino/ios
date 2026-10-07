@@ -1,0 +1,17 @@
+E52 / pinephone-usb-underrun-2026-10-07.json
+Source SHA-256: f3d32b5300b392b720bad4aa500939e8f717558e65266a0e3786250faa527c79
+Locator: JSON pointers: /enumeration_acceptance_pass, /physical_result/host_enumerated, /physical_result/stock_host_mux_v2_handshake_pass, /physical_result/stock_mux_reads, /physical_result/stock_mux_writes, /physical_result/stock_mux_io_errors, /physical_result/info_or_pair_attempted, /physical_result/whole_usbmon_observation_complete, /physical_result/finite_trial_cleanup_result, /physical_result/cleanup_success_not_claimed
+Exact selected fields from the later physical trial. The older enumeration record remains false and is retained below.
+
+{
+  "/enumeration_acceptance_pass": true,
+  "/physical_result/host_enumerated": true,
+  "/physical_result/stock_host_mux_v2_handshake_pass": true,
+  "/physical_result/stock_mux_reads": 3,
+  "/physical_result/stock_mux_writes": 3,
+  "/physical_result/stock_mux_io_errors": 0,
+  "/physical_result/info_or_pair_attempted": false,
+  "/physical_result/whole_usbmon_observation_complete": false,
+  "/physical_result/finite_trial_cleanup_result": -2,
+  "/physical_result/cleanup_success_not_claimed": true
+}

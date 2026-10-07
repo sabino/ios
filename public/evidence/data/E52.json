@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E52",
+    "title": "USB enumeration is a protocol gate",
+    "environment": "Physical PinePhone",
+    "method": "Host enumeration and native stock-family traces",
+    "observation": "A later native MUSB trial stays host-enumerated through stock IOUSBDeviceFamily and passes the stock usbmux v2 handshake with three reads, three writes and zero mux I/O errors. The earlier enumeration record remains a retained failure.",
+    "limits": "Pairing, ideviceinfo, syslog, AFC and repeated replug acceptance remain pending. Whole usbmon completeness is false. Finite cleanup returns BUSY (-2), retains prerequisites until reset and is not claimed as successful teardown.",
+    "records": [
+      {
+        "document": "pinephone-usb-underrun-2026-10-07.json",
+        "sha256": "f3d32b5300b392b720bad4aa500939e8f717558e65266a0e3786250faa527c79",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "pinephone-usb-enumeration-2026-10-07.json",
+        "sha256": "e4ea9f0d694c136ff5164f7d4f52639fa79637b2c475addac775ba164f1f2025",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "112-iphone313-usb-device-mode.md",
+        "sha256": "32c5c039ff0fa50abd7eeeba3f99feff74a3fbaa8eea69211f31dd3e02609053",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "7e18-usb-configuration-mux-gates.md",
+        "sha256": "9770ca4823df7d82517e92c7dde76d6942bae00ebb05629b039b3597a19501ff",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; enumeration gate passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A later native MUSB trial stays host-enumerated through stock IOUSBDeviceFamily and passes the stock usbmux v2 handshake with three reads, three writes and zero mux I/O errors. The earlier enumeration record remains a retained failure."
+          ],
+          [
+            "Acceptance limit",
+            "Pairing, ideviceinfo, syslog, AFC and repeated replug acceptance remain pending. Whole usbmon completeness is false. Finite cleanup returns BUSY (-2), retains prerequisites until reset and is not claimed as successful teardown."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "passed-mux",
+          "earlier-gates"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "passed-mux",
+        "document": "pinephone-usb-underrun-2026-10-07.json",
+        "sha256": "f3d32b5300b392b720bad4aa500939e8f717558e65266a0e3786250faa527c79",
+        "locator": "JSON pointers: /enumeration_acceptance_pass, /physical_result/host_enumerated, /physical_result/stock_host_mux_v2_handshake_pass, /physical_result/stock_mux_reads, /physical_result/stock_mux_writes, /physical_result/stock_mux_io_errors, /physical_result/info_or_pair_attempted, /physical_result/whole_usbmon_observation_complete, /physical_result/finite_trial_cleanup_result, /physical_result/cleanup_success_not_claimed",
+        "format": "json",
+        "content": "{\n  \"/enumeration_acceptance_pass\": true,\n  \"/physical_result/host_enumerated\": true,\n  \"/physical_result/stock_host_mux_v2_handshake_pass\": true,\n  \"/physical_result/stock_mux_reads\": 3,\n  \"/physical_result/stock_mux_writes\": 3,\n  \"/physical_result/stock_mux_io_errors\": 0,\n  \"/physical_result/info_or_pair_attempted\": false,\n  \"/physical_result/whole_usbmon_observation_complete\": false,\n  \"/physical_result/finite_trial_cleanup_result\": -2,\n  \"/physical_result/cleanup_success_not_claimed\": true\n}",
+        "note": "Exact selected fields from the later physical trial. The older enumeration record remains false and is retained below."
+      },
+      {
+        "id": "earlier-gates",
+        "document": "pinephone-usb-enumeration-2026-10-07.json",
+        "sha256": "e4ea9f0d694c136ff5164f7d4f52639fa79637b2c475addac775ba164f1f2025",
+        "locator": "JSON pointers: /enumeration_proven, /pairing_proven, /ideviceinfo_proven, /syslog_proven, /AFC_proven",
+        "format": "json",
+        "content": "{\n  \"/enumeration_proven\": false,\n  \"/pairing_proven\": false,\n  \"/ideviceinfo_proven\": false,\n  \"/syslog_proven\": false,\n  \"/AFC_proven\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

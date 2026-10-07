@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import ledger from '../data/claims.json';
+import {url} from '../lib/content';
+import '../styles/publication.css';
+---
+<Base title="Claims and their evidence" description="Trace the publication's bounded claims to their source basenames, SHA-256, locators, observation methods and acceptance limits.">
+<header class="page-heading"><span class="section-number">CLAIM → SOURCE → EVIDENCE CLASS</span><h1>Claims and<br/>their evidence.</h1><p>{ledger.claims.length} bounded claims. Substrate, method and acceptance are separate fields. Private-source hashes identify the reviewed material; they do not establish independent reproduction.</p><div class="hero-actions"><a class="button primary" href={url('claims.json')} download>Download ledger ↓</a><a class="text-link" href={url('paper/')}>Read the argument →</a></div><p class="mono">Edition {ledger.edition} · {ledger.date} · source {ledger.sourceRevision.slice(0,7)}</p></header>
+<div class="claim-list">{ledger.claims.map(claim=><article class="claim-record" id={claim.id}>
+  <header><span class="evidence-id">{claim.id}</span><div><h2>{claim.claim}</h2><p class="claim-class">{claim.evidenceClass.substrate} · {claim.evidenceClass.status}</p></div></header>
+  <dl><dt>Method</dt><dd>{claim.evidenceClass.method}</dd><dt>Limit</dt><dd>{claim.limits}</dd><dt>Evidence</dt><dd>{claim.evidence.map(id=><a href={url('evidence/'+id+'/')}>{id} ↗</a>)}</dd><dt>Snapshot</dt><dd><code class="long-hash">{claim.sourceRevision}</code></dd></dl>
+  <details><summary>Source identities and exact locators</summary><div>{claim.sources.map(source=><section class="claim-source"><h3>{source.document}</h3><code class="long-hash">{source.sha256}</code><p>{source.access}</p>{claim.sourceLocators.filter(s=>s.document===source.document).map(s=><p><strong>Locator:</strong> {s.locator}</p>)}</section>)}</div></details>
+</article>)}</div>
+</Base>

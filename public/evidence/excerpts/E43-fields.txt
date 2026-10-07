@@ -1,0 +1,40 @@
+E43 / pinephone-iphone313-stage4-selector-2026-10-03.json
+Source SHA-256: 0cb493dd7b69841af42c48068f843f8b36286b20765f69be6bd53bc81965a68b
+Locator: JSON pointers: /acceptance, /selector_physical_run/markers_seconds, /qemu_ui/queued_frames
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/acceptance": {
+    "qemu_english_lock_screen": true,
+    "qemu_slider_transition": true,
+    "qemu_home_screen": true,
+    "physical_panel_pipeline": true,
+    "physical_home_original_hid_path": true,
+    "physical_touch_original_z2_path": true,
+    "physical_gt917s_ready": true,
+    "physical_contacts_were_synthetic": true,
+    "human_finger_observed": false,
+    "panel_photograph_captured": false,
+    "selector_backend_physical_execution": true,
+    "selector_default_route": "iphone313 after 12 seconds",
+    "selector_manual_volume_power_observed": false,
+    "watchdog_jumpdrive_recovery": true,
+    "fatal_panic": false
+  },
+  "/selector_physical_run/markers_seconds": {
+    "router": 5.511,
+    "menu_load": 5.517,
+    "fit_loaded": 5.554,
+    "fit_kernel_hash": 5.608,
+    "menu_start": 6.587,
+    "choice_3": 18.636,
+    "route_313": 21.16,
+    "profile_recovery": 21.178,
+    "profile_loaded": 22.054,
+    "display": 23.687,
+    "launchd": 44.974,
+    "recovery_pending": 204.703,
+    "jumpdrive": 204.703
+  },
+  "/qemu_ui/queued_frames": 14
+}

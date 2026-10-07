@@ -9,7 +9,11 @@
     "E26",
     "E07",
     "E03",
-    "E28"
+    "E28",
+    "E42",
+    "E49",
+    "E58",
+    "E63"
   ],
   "sources": [
     "S01",
@@ -20,9 +24,11 @@
     "observability",
     "preservation-method"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## A false radio was the warning
 
@@ -64,3 +70,8 @@ bool bit_is_clear = (register_value & 0x2) == 0;
 ```
 
 An unimplemented read that returns zero makes this expression true. That can select a device-present branch even though the model has no such device. The nonzero alternative in the [truth table](/ios/evidence/E26/#truth-table) is static reasoning, not a measured alternate run. QEMU describes its [virt board as a generic virtual platform](https://www.qemu.org/docs/master/system/arm/virt.html); board-specific behavior still needs explicit modeling.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Physical HCR SWIO readback, eMMC mapping attributes and inherited camera regulator state show why QEMU is a gate rather than a hardware oracle. Each correction retains its discriminating control and limit. The later 10B500 diskless QEMU experiment reaches CPUIdle and two-input dispatch but no accepted normal banner, root or userspace; it must not be described as a physical iOS 6 port. [E42](/ios/evidence/E42/) [E49](/ios/evidence/E49/) [E58](/ios/evidence/E58/) [E63](/ios/evidence/E63/)

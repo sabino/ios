@@ -1,13 +1,151 @@
 [
- {"belief":"A missing BOOT_TIME line means boot stalled.","test":"Compare later service milestones and runtime-state files across matched physical runs.","result":"The later milestones matched even when the console marker did not. A logging-route race is plausible but untraced.","replacement":"Use independent progress and response evidence; keep QEMU runs that lacked later milestones unresolved.","evidence":["E24"]},
- {"belief":"The submitted surfaces are zero, so a renderer is missing.","test":"Present a known pattern and validate the descriptor read path before classifying the original source.","result":"The early read route was ineffective. A mapped-descriptor capture subsequently showed original-client setup pixels.","replacement":"Verify the observer and transfer length before drawing conclusions about the source. General GPU coverage remains open.","evidence":["E16","E17"]},
- {"belief":"The radio-present message establishes a modeled radio.","test":"Compare the guest detection predicate with the model's actual register responses.","result":"An unsupported input defaulted to zero, satisfying the presence predicate despite the absence of a radio model.","replacement":"A log message proves a code path. It does not prove the hardware capability named by that path.","evidence":["E26"]},
- {"belief":"A backed physical address rules out a translation problem.","test":"Walk the active descriptors and inspect the fault class and interpretation controls.","result":"The A53 access-flag interpretation rejected a legacy descriptor even though its physical target was backed RAM.","replacement":"Translation, permissions and interpretation must agree before an access is valid.","evidence":["E04"]},
- {"belief":"MACH Reboot means the device reset cleanly.","test":"Observe return to recovery and check the complete post-run data image.","result":"An earlier printed marker preceded an integration failure. Corrected trials independently established actual recovery return.","replacement":"Require the state transition and its postconditions, not merely the log before it.","evidence":["E13","E25"]},
- {"belief":"A black screen is necessarily a display-driver failure.","test":"Inspect selected surfaces and backing bytes, then trace the original client's blank request.","result":"One QEMU transition was explicitly requested by SpringBoard's dimming path while prior pixels remained intact.","replacement":"Separate intentional black, failed presentation, backlight policy and system liveness. Attribute each physical case with its own evidence.","evidence":["E18","E20"]},
- {"belief":"A quiet CPU and a recovery charging label settle the power question.","test":"Measure the USB input state during XNU and compare battery readings over a controlled interval.","result":"The accepted USB-controller state yielded usable input and net battery gain in the measured configuration.","replacement":"Measure the energy path in the target state; idle residency and charging are independent observations.","evidence":["E23"]},
- {"belief":"Two contact records prove a working pinch gesture.","test":"Compare the original consumer identities with owner-visible Photos behavior.","result":"Two active records collided on one interpreted finger identity; distinct stable identities enabled visible enlargement.","replacement":"Packet count, identity semantics and visible gesture acceptance need separate checks.","evidence":["E29"]},
- {"belief":"Thirty display updates per second mean a thirty-frame camera viewfinder.","test":"Count native delivery, accepted submissions and distinct selected images separately.","result":"The baseline reported about 30.3 panel updates but 7.9 distinct selected images per second.","replacement":"Name the boundary each rate measures and retain repeated-image use in the interpretation.","evidence":["E35","E37"]},
- {"belief":"A roughly 99% fall in atomic traps establishes a comparable UI speedup.","test":"Run the same physical interaction sequence with the hotspot change off and on.","result":"Traps fell sharply; mean frame gaps improved in two windows and worsened in two.","replacement":"Report the local overhead improvement; leave application latency and consistent UI benefit unresolved.","evidence":["E39"]},
- {"belief":"The PinePhone cannot provide telephony because it has no baseband.","test":"Check the board specification and the profile acceptance boundary.","result":"The original PinePhone includes an EG25-G modem. Native telephony integration is unaccepted.","replacement":"Classify telephony as planned integration, not absent hardware. A No Service label is not a hardware inventory.","evidence":["E32"]}
+  {
+    "belief": "A missing BOOT_TIME line means boot stalled.",
+    "test": "Compare later service milestones and runtime-state files across matched physical runs.",
+    "result": "The later milestones matched even when the console marker did not. A logging-route race is plausible but untraced.",
+    "replacement": "Use independent progress and response evidence; keep QEMU runs that lacked later milestones unresolved.",
+    "evidence": [
+      "E24"
+    ]
+  },
+  {
+    "belief": "The submitted surfaces are zero, so a renderer is missing.",
+    "test": "Present a known pattern and validate the descriptor read path before classifying the original source.",
+    "result": "The early read route was ineffective. A mapped-descriptor capture subsequently showed original-client setup pixels.",
+    "replacement": "Verify the observer and transfer length before drawing conclusions about the source. General GPU coverage remains open.",
+    "evidence": [
+      "E16",
+      "E17"
+    ]
+  },
+  {
+    "belief": "The radio-present message establishes a modeled radio.",
+    "test": "Compare the guest detection predicate with the model's actual register responses.",
+    "result": "An unsupported input defaulted to zero, satisfying the presence predicate despite the absence of a radio model.",
+    "replacement": "A log message proves a code path. It does not prove the hardware capability named by that path.",
+    "evidence": [
+      "E26"
+    ]
+  },
+  {
+    "belief": "A backed physical address rules out a translation problem.",
+    "test": "Walk the active descriptors and inspect the fault class and interpretation controls.",
+    "result": "The A53 access-flag interpretation rejected a legacy descriptor even though its physical target was backed RAM.",
+    "replacement": "Translation, permissions and interpretation must agree before an access is valid.",
+    "evidence": [
+      "E04"
+    ]
+  },
+  {
+    "belief": "MACH Reboot means the device reset cleanly.",
+    "test": "Observe return to recovery and check the complete post-run data image.",
+    "result": "An earlier printed marker preceded an integration failure. Corrected trials independently established actual recovery return.",
+    "replacement": "Require the state transition and its postconditions, not merely the log before it.",
+    "evidence": [
+      "E13",
+      "E25"
+    ]
+  },
+  {
+    "belief": "A black screen is necessarily a display-driver failure.",
+    "test": "Inspect selected surfaces and backing bytes, then trace the original client's blank request.",
+    "result": "One QEMU transition was explicitly requested by SpringBoard's dimming path while prior pixels remained intact.",
+    "replacement": "Separate intentional black, failed presentation, backlight policy and system liveness. Attribute each physical case with its own evidence.",
+    "evidence": [
+      "E18",
+      "E20"
+    ]
+  },
+  {
+    "belief": "A quiet CPU and a recovery charging label settle the power question.",
+    "test": "Measure the USB input state during XNU and compare battery readings over a controlled interval.",
+    "result": "The accepted USB-controller state yielded usable input and net battery gain in the measured configuration.",
+    "replacement": "Measure the energy path in the target state; idle residency and charging are independent observations.",
+    "evidence": [
+      "E23"
+    ]
+  },
+  {
+    "belief": "Two contact records prove a working pinch gesture.",
+    "test": "Compare the original consumer identities with owner-visible Photos behavior.",
+    "result": "Two active records collided on one interpreted finger identity; distinct stable identities enabled visible enlargement.",
+    "replacement": "Packet count, identity semantics and visible gesture acceptance need separate checks.",
+    "evidence": [
+      "E29"
+    ]
+  },
+  {
+    "belief": "Thirty display updates per second mean a thirty-frame camera viewfinder.",
+    "test": "Count native delivery, accepted submissions and distinct selected images separately.",
+    "result": "The baseline reported about 30.3 panel updates but 7.9 distinct selected images per second.",
+    "replacement": "Name the boundary each rate measures and retain repeated-image use in the interpretation.",
+    "evidence": [
+      "E35",
+      "E37"
+    ]
+  },
+  {
+    "belief": "A roughly 99% fall in atomic traps establishes a comparable UI speedup.",
+    "test": "Run the same physical interaction sequence with the hotspot change off and on.",
+    "result": "Traps fell sharply; mean frame gaps improved in two windows and worsened in two.",
+    "replacement": "Report the local overhead improvement; leave application latency and consistent UI benefit unresolved.",
+    "evidence": [
+      "E39"
+    ]
+  },
+  {
+    "belief": "The PinePhone cannot provide telephony because it has no baseband.",
+    "test": "Check the board specification and the profile acceptance boundary.",
+    "result": "The original PinePhone includes an EG25-G modem. Native telephony integration is unaccepted.",
+    "replacement": "Classify telephony as planned integration, not absent hardware. A No Service label is not a hardware inventory.",
+    "evidence": [
+      "E32"
+    ]
+  },
+  {
+    "belief": "A 1600 × 1200 JPEG establishes 1600 × 1200 sensor detail.",
+    "test": "Compare actual acquisition and stock destination geometry in the accepted 7E18 route.",
+    "result": "The source capture is 640 × 480; still output is resampled.",
+    "replacement": "Distinguish output dimensions from acquired detail; keep genuine higher-detail modes pending.",
+    "evidence": [
+      "E44"
+    ]
+  },
+  {
+    "belief": "A fixed 30-second USB delay is sufficient for normal pairing.",
+    "test": "Execute the measured soft-connect delay and compare complete mux frames, then sample daemon/socket readiness separately.",
+    "result": "The delayed trial still receives ECONNREFUSED/RST. A later diagnostic first samples the listener 41.237 s after startup, after host preflight.",
+    "replacement": "Retain the failed candidate and new readiness-ordering explanation. First sample is not exact bind time; pairing and the next listener gate remain pending.",
+    "evidence": [
+      "E53",
+      "E54"
+    ]
+  },
+  {
+    "belief": "A physical regulator starts in the same state under every loader.",
+    "test": "Run the identical pre-XNU snapshot through SD U-Boot and eMMC Tow-Boot.",
+    "result": "The comparison reports inherited differences, including an already enabled supported analog camera rail; dynamic conditions also differ.",
+    "replacement": "Verify and adopt supported owned state, preserve unowned masks and do not treat programmed selectors as voltage measurements.",
+    "evidence": [
+      "E49"
+    ]
+  },
+  {
+    "belief": "An idle 12.7 ms presentation mean establishes animation performance.",
+    "test": "Count changes and separate work, gap and diagnostic logging samples.",
+    "result": "The later 64-presentation interval has zero sampled changes; the log has one much larger sample.",
+    "replacement": "Report idle elapsed timing and instrument scope. Moving UI, pure compositor time and 7E18 Camera FPS remain unmeasured.",
+    "evidence": [
+      "E50"
+    ]
+  },
+  {
+    "belief": "Scoped diagnostic success means the original whole-run checker passed.",
+    "test": "Inspect original runner limits and negative earlier capture/recovery fields.",
+    "result": "The listener diagnostic/recovery passes while original capture completeness remains false; an earlier snapshot return also failed.",
+    "replacement": "Publish both verdicts with their scope, rather than upgrading incomplete capture or erasing failed recovery.",
+    "evidence": [
+      "E54"
+    ]
+  }
 ]

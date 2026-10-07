@@ -9,13 +9,14 @@ const out = process.env.ATLAS_QA_DIR || 'test-results/status';
 mkdirSync(out, {recursive: true});
 const source = JSON.parse(readFileSync('src/data/capabilities.json', 'utf8')).domains.flatMap(d => d.features);
 const domains = ['Foundations', 'Machine', 'Storage', 'Graphics', 'Interaction', 'Method'];
-const inputNames = ['Touch input', 'Multitouch & pinch-zoom', 'Physical buttons'];
+const inputNames = ['Touch input', 'Multitouch & pinch-zoom', 'Physical buttons', 'Raw accelerometer samples', 'English locale & time zone'];
+const interactionCount=source.filter(f=>f.layers.includes('Interaction')).length;
 const areas = {
   input: inputNames,
   camera: ['Live viewfinder', 'Photo capture & save', 'Full-resolution stills'],
-  power: ['Battery status', 'Charge budget', 'Sleep / suspend'],
+  power: ['Battery status', 'Charge budget', 'Sleep / suspend', 'Complete power-off', 'Ordinary restart'],
   display: ['Backlight fade & blanking', 'Screenshots'],
-  connections: ['Audio output', 'Networking / Wi-Fi', 'Telephony'],
+  connections: ['Audio output', 'Networking / Wi-Fi', 'Telephony', 'USB device enumeration', 'USB pairing & services'],
 };
 const browser = await chromium.connectOverCDP(endpoint);
 const context = await browser.newContext({viewport: {width: 1440, height: 1080}, reducedMotion: 'reduce'});
@@ -37,9 +38,9 @@ async function audit(name) {
 }
 try {
   await go('status/#interaction');
-  await expect(visible()).toHaveCount(3);
+  await expect(visible()).toHaveCount(inputNames.length);
   expect(await names()).toEqual(inputNames);
-  await expect(page.locator('[data-area-summary]')).toHaveText('3 of 14 shown');
+  await expect(page.locator('[data-area-summary]')).toHaveText(`${inputNames.length} of ${interactionCount} shown`);
   const compactHeight = await page.locator('.capability-panel').evaluate(el => el.clientHeight);
   for (const [area, expected] of Object.entries(areas)) {
     await page.locator(`[data-cap-area="${area}"]`).click();
@@ -48,7 +49,7 @@ try {
     await expect(page.locator('[data-scope-permalink]')).toHaveAttribute('href', new RegExp(`/ios/status/#interaction/${area}$`));
   }
   await page.locator('[data-cap-area="all"]').click();
-  await expect(visible()).toHaveCount(14);
+  await expect(visible()).toHaveCount(interactionCount);
   expect(await names()).toEqual(source.filter(f => f.layers.includes('Interaction')).map(f => f.feature));
   const fullHeight = await page.locator('.capability-panel').evaluate(el => el.clientHeight);
   expect(compactHeight).toBeLessThan(fullHeight / 2);
@@ -85,10 +86,10 @@ try {
   await expect(page.locator('[data-layer-tab="1"]')).toBeFocused();
   await expect(page.locator('[data-layer-tab="1"]')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('[data-show-all]').click();
-  await expect(visible()).toHaveCount(22);
-  expect(new Set(await names()).size).toBe(22);
+  await expect(visible()).toHaveCount(source.length);
+  expect(new Set(await names()).size).toBe(source.length);
   await page.locator('[data-expand-scores]').click();
-  await expect(page.locator('[data-capability] details[open]')).toHaveCount(22);
+  await expect(page.locator('[data-capability] details[open]')).toHaveCount(source.length);
   await audit('all-expanded');
 
   for (const [index, tier] of ['context', 'hardware', 'kernel', 'services', 'apps'].entries()) {
@@ -99,7 +100,7 @@ try {
   await go('status/#method');
   await expect(page.locator('[data-layer-tab="5"]')).toHaveAttribute('aria-pressed', 'true');
   await go('status/#feature-matrix');
-  await expect(visible()).toHaveCount(22);
+  await expect(visible()).toHaveCount(source.length);
   await go('status/#interaction');
 
   for (const appearance of ['light', 'dark']) {
@@ -135,7 +136,7 @@ try {
     if (width === 390) { await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'})); await page.screenshot({path: `${out}/interaction-mobile.png`, fullPage: true}); }
   }
   await page.emulateMedia({media: 'print'});
-  await expect(visible()).toHaveCount(22);
+  await expect(visible()).toHaveCount(source.length);
   await page.emulateMedia({media: 'screen', reducedMotion: 'no-preference'});
   await page.locator('[data-layer-motion]').click();
   await expect(page.locator('[data-layerplate]')).toHaveAttribute('data-motion-paused', '');
@@ -151,10 +152,10 @@ try {
   const staticContext = await browser.newContext({javaScriptEnabled: false, viewport: {width: 390, height: 844}});
   const staticPage = await staticContext.newPage();
   await staticPage.goto(base + 'status/');
-  await expect(staticPage.locator('[data-capability]:visible')).toHaveCount(22);
+  await expect(staticPage.locator('[data-capability]:visible')).toHaveCount(source.length);
   await staticContext.close();
   expect(errors).toEqual([]); expect(audits.flatMap(a => a.violations)).toEqual([]);
-  writeFileSync(`${out}/results.json`, JSON.stringify({errors, audits, layouts, compactHeight, fullHeight, uniqueCapabilities: 22, interactions: 'area groups, direct URLs, Back/Forward, reload, diagram anchors, shared colors, keyboard, print, no-JS, reduced motion'}, null, 2));
+  writeFileSync(`${out}/results.json`, JSON.stringify({errors, audits, layouts, compactHeight, fullHeight, uniqueCapabilities: source.length, interactions: 'area groups, direct URLs, Back/Forward, reload, diagram anchors, shared colors, keyboard, print, no-JS, reduced motion'}, null, 2));
   console.log(JSON.stringify({result: 'passed', audits: audits.length, layouts: layouts.length, errors}));
 } finally {
   await context.close();

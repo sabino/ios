@@ -8,7 +8,10 @@
   "evidence": [
     "E01",
     "E10",
-    "E27"
+    "E27",
+    "E41",
+    "E57",
+    "E58"
   ],
   "sources": [
     "S03",
@@ -21,9 +24,11 @@
     "storage-abi",
     "preservation-method"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## Begin with the target's own identity
 
@@ -60,3 +65,8 @@ The same distinction applies to upstream demonstrations. An author's successful 
 Pin the source revision, record what was inspected, identify the question it answered and state what remains unverified. A negative finding should include its search scope. An interface inference should have a path to a discriminating test.
 
 This approach keeps source archaeology productive without allowing familiar code to substitute for the actual legacy system under study. It also makes the publication maintainable: a newly found source tree can extend or revise a specific survey result instead of forcing readers to reinterpret every earlier claim.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The inspected software now includes XNU 933.0.0.211 and 1357.5.30, with shared hardware algorithms but exact-build binding data. The offline future-target ranking favors 3GS 6.1.6 ahead of 10.3.4 and 12.5.7; inspected page granules and software-renderer branches are static facts, not accepted ports. The separate partial 10B500 runtime reaches a genuine missing clock-gate dependency. [E41](/ios/evidence/E41/) [E57](/ios/evidence/E57/) [E58](/ios/evidence/E58/)

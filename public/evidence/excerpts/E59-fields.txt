@@ -1,0 +1,16 @@
+E59 / pinephone-camera-render-rate-2026-10-01.json
+Source SHA-256: dfe73976cafdfb35ef86a2ed6a986b3cbd18f199a3012aa11597568705cc1032
+Locator: JSON pointers: /controlled_phone_comparison/phone13/queue_capacity, /controlled_phone_comparison/phone13/native/fps, /controlled_phone_comparison/phone13/renderer/fps, /controlled_phone_comparison/phone13/panel_update_fps, /controlled_phone_comparison/phone14/queue_capacity, /controlled_phone_comparison/phone14/native/fps, /controlled_phone_comparison/phone14/renderer/fps, /controlled_phone_comparison/phone14/panel_update_fps, /controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/controlled_phone_comparison/phone13/queue_capacity": 2,
+  "/controlled_phone_comparison/phone13/native/fps": 29.62068367524263,
+  "/controlled_phone_comparison/phone13/renderer/fps": 7.893102602295655,
+  "/controlled_phone_comparison/phone13/panel_update_fps": 30.210111872728284,
+  "/controlled_phone_comparison/phone14/queue_capacity": 6,
+  "/controlled_phone_comparison/phone14/native/fps": 26.278742656491378,
+  "/controlled_phone_comparison/phone14/renderer/fps": 16.519793155036343,
+  "/controlled_phone_comparison/phone14/panel_update_fps": 30.54386549735618,
+  "/controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter": false
+}

@@ -9,7 +9,11 @@
     "E09",
     "E12",
     "E19",
-    "E22"
+    "E22",
+    "E41",
+    "E43",
+    "E44",
+    "E52"
   ],
   "sources": [
     "S05",
@@ -20,9 +24,11 @@
     "hid-dependencies",
     "audio"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## Publication is only one step
 
@@ -53,3 +59,8 @@ The original HFS mount returned successfully before the root vnode was installed
 An audio publication experiment similarly let the original client enumerate and map an output and allowed mediaserverd to advance. It did not produce sound. [E22](/ios/evidence/E22/)
 
 The practical lesson is to name the observed edge in the service graph: constructed, registered, matched, opened, mapped, submitted, completed or visibly consumed. “The driver works” hides those boundaries and makes later evidence difficult to compare.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The newer 7E18 build reuses hardware algorithms behind independently measured service layouts. Stock display, H1ISP/IOSurface and AppleJPEGDriver consumers now have accepted physical use. USB function publication and host enumeration advance separate gates; neither makes lockdownd pairing or full controller teardown accepted. Provider discovery still needs an honest lifetime and completion contract. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E44](/ios/evidence/E44/) [E52](/ios/evidence/E52/)

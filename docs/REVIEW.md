@@ -1,3 +1,5 @@
+The current edition's content, provenance and browser review is recorded in [PAPER_REVIEW.md](PAPER_REVIEW.md). The dated entries below retain earlier publication and design snapshots.
+
 # Alignment and capability focus review
 
 Reviewed locally: 2026-10-01. Presentation and navigation only; the research edition, capability ratings, notes, evidence records and captures remain unchanged. No deployment is recorded. This entry supersedes the noninteractive reading-artwork description below.

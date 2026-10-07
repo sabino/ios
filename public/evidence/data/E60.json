@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E60",
+    "title": "Quiet EP0 advances beyond the address fault",
+    "environment": "Physical PinePhone",
+    "method": "Matched quiet control and bounded host/device events",
+    "observation": "Suppressing synchronous hot-path UART prints permits verified FADDR application 1.136083 ms after the status command and an addressed 18-byte descriptor. Configuration then fails at a guard seeing stale DATAEND.",
+    "limits": "This supports logging as a latency contributor, not the only cause. It does not measure status-IRQ-to-FADDR latency or individual wire ACKs. Later protocol gates supersede this earlier fault.",
+    "records": [
+      {
+        "document": "pinephone-usb-quiet-2026-10-07.json",
+        "sha256": "ee60a1feffd6f6cce5a3bf23baf65df9151db223f063efa97ad1099fd700fab3",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-usb-quiet-findings.md",
+        "sha256": "0860c884de6d0854b1a114813fbcc7a4ac7bdc4ed33b79ec6adb8733ae8f4383",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "7e18-usb-ep0-status-diagnosis.md",
+        "sha256": "1db4b2e5da9cd41fc5483d3c02a40340fc142ae6a610fdbf14d0785a1e67f818",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Negative physical result; addressed descriptor passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "Suppressing synchronous hot-path UART prints permits verified FADDR application 1.136083 ms after the status command and an addressed 18-byte descriptor. Configuration then fails at a guard seeing stale DATAEND."
+          ],
+          [
+            "Acceptance limit",
+            "This supports logging as a latency contributor, not the only cause. It does not measure status-IRQ-to-FADDR latency or individual wire ACKs. Later protocol gates supersede this earlier fault."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-usb-quiet-2026-10-07.json",
+        "sha256": "ee60a1feffd6f6cce5a3bf23baf65df9151db223f063efa97ad1099fd700fab3",
+        "locator": "JSON pointers: /physical_trial/status_command_to_verified_faddr_ns, /physical_trial/stock_address_dispatch_ns, /physical_trial/addressed_device_descriptor_bytes, /physical_trial/host_enumerated, /physical_trial/first_fatal_fault/reason, /physical_trial/first_fatal_fault/configuration_fifo_bytes",
+        "format": "json",
+        "content": "{\n  \"/physical_trial/status_command_to_verified_faddr_ns\": 1136083,\n  \"/physical_trial/stock_address_dispatch_ns\": 8917,\n  \"/physical_trial/addressed_device_descriptor_bytes\": 18,\n  \"/physical_trial/host_enumerated\": false,\n  \"/physical_trial/first_fatal_fault/reason\": \"RXPKTRDY plus stale DATAEND rejected by strict dispatch-time held-SETUP abort guard\",\n  \"/physical_trial/first_fatal_fault/configuration_fifo_bytes\": 0\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

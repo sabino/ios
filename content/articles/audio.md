@@ -7,7 +7,9 @@
   "order": 19,
   "evidence": [
     "E22",
-    "E19"
+    "E19",
+    "E41",
+    "E51"
   ],
   "sources": [
     "S04"
@@ -17,9 +19,11 @@
     "hid-dependencies",
     "time-and-interrupts"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## The media service expected an output device
 
@@ -56,3 +60,8 @@ A useful investigation therefore captures the waiting original client and its de
 The next meaningful playback claim would require original-client start/stop, coherent shared timestamps, a timed consumer, sample delivery, underrun behavior and reopen. A physical result would additionally need codec, routing and output evidence.
 
 Until those gates pass, the accurate statement is that compatible publication cleared a measured media startup fault. That finding is useful on its own, and remains useful precisely because it does not claim sound that was never observed.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The current 7E18 stock media service path supports accepted Camera use, but the PinePhone audio codec/DMA output path is still unaccepted. A published audio service or valid media-server object does not imply audible playback. The next-target study also cannot inherit output acceptance from its static dependency inspection. [E41](/ios/evidence/E41/) [E51](/ios/evidence/E51/)

@@ -1,0 +1,13 @@
+E62 / pinephone-private-timezone.json
+Source SHA-256: 0e7dc6d512e7c01d3dc4ef4270f406b7676b921203bdf0d0303305bbad7458f0
+Locator: JSON pointers: /timezone_configuration_passed, /physical_private_data_install_passed, /physical_recovery_passed, /owner_visible_clock_accepted, /overall_timezone_user_acceptance_complete, /owner_selected_timezone
+Exact selected JSON values. No time-zone file, private-data image or identifier is distributed.
+
+{
+  "/timezone_configuration_passed": true,
+  "/physical_private_data_install_passed": true,
+  "/physical_recovery_passed": true,
+  "/owner_visible_clock_accepted": false,
+  "/overall_timezone_user_acceptance_complete": false,
+  "/owner_selected_timezone": "America/Sao_Paulo"
+}

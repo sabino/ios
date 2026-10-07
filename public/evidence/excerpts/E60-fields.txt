@@ -1,0 +1,13 @@
+E60 / pinephone-usb-quiet-2026-10-07.json
+Source SHA-256: ee60a1feffd6f6cce5a3bf23baf65df9151db223f063efa97ad1099fd700fab3
+Locator: JSON pointers: /physical_trial/status_command_to_verified_faddr_ns, /physical_trial/stock_address_dispatch_ns, /physical_trial/addressed_device_descriptor_bytes, /physical_trial/host_enumerated, /physical_trial/first_fatal_fault/reason, /physical_trial/first_fatal_fault/configuration_fifo_bytes
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical_trial/status_command_to_verified_faddr_ns": 1136083,
+  "/physical_trial/stock_address_dispatch_ns": 8917,
+  "/physical_trial/addressed_device_descriptor_bytes": 18,
+  "/physical_trial/host_enumerated": false,
+  "/physical_trial/first_fatal_fault/reason": "RXPKTRDY plus stale DATAEND rejected by strict dispatch-time held-SETUP abort guard",
+  "/physical_trial/first_fatal_fault/configuration_fifo_bytes": 0
+}

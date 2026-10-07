@@ -13,7 +13,11 @@
     "E29",
     "E32",
     "E35",
-    "E38"
+    "E38",
+    "E41",
+    "E43",
+    "E51",
+    "E58"
   ],
   "sources": [
     "S01",
@@ -27,9 +31,11 @@
     "native-iphone",
     "camera-preview"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -76,3 +82,8 @@ The physical route now has accepted N45 gestures and an independently prepared M
 A fourth label is useful for the camera-performance work: an isolated ARM replay executes original queue bookkeeping with synthetic image identities and stubbed services. It is classified as a synthetic probe, not as a complete emulator boot or a physical camera. Its near-30 image-selection rate belongs only to the modeled scenarios. [E38](/ios/evidence/E38/)
 
 The native route continues to execute adapted XNU directly on the A64. Linux recovery is a separate staging and inspection environment; it is not the host underneath the accepted native userspace. The wireframe groups the board, kernel, services and applications without inserting a Linux or hypervisor layer into this path.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The three substrates now encompass two accepted historical builds. 7E18 lock/home captures in E43 belong to QEMU, and that record’s physical slider replay used synthetic contacts. Human 7E18 touch and Camera use are accepted separately in E51. A later diskless 10B500 QEMU experiment reaches two-input dispatch and CPUIdle, then a clock-gate panic; it is not a third physical port. The preserved 4A102 records keep their earlier revisions and limits. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E51](/ios/evidence/E51/) [E58](/ios/evidence/E58/)

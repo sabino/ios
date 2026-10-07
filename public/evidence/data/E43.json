@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E43",
+    "title": "English UI and a physical selector",
+    "environment": "Physical PinePhone",
+    "method": "Separate QEMU frame replay and physical UART/consumer-delivery capture",
+    "observation": "The October 3 selector defaults to 3.1.3 after 12 seconds. Physical display, Home and Z2 consumer paths execute; the injected slider contacts are synthetic. English lock/home captures belong to QEMU.",
+    "limits": "The original run has no panel photograph or human-finger observation. Later owner acceptance is recorded separately. Marker times are buffered host receipts.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-stage4-selector-2026-10-03.json",
+        "sha256": "0cb493dd7b69841af42c48068f843f8b36286b20765f69be6bd53bc81965a68b",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "108-iphone313-display-compositor.md",
+        "sha256": "352b00761c9dfdf756438be361c83b2967b77db97f2ffba779ee02278aa4ffe5",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "109-iphone313-stage4-and-selector.md",
+        "sha256": "c4de65bb273f6de88f8622a4819218db886baf9b8e3c88c93d28286f2a6e6c0d",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "before-slide.png",
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      },
+      {
+        "document": "after-slide-home.png",
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The October 3 selector defaults to 3.1.3 after 12 seconds. Physical display, Home and Z2 consumer paths execute; the injected slider contacts are synthetic. English lock/home captures belong to QEMU."
+          ],
+          [
+            "Acceptance limit",
+            "The original run has no panel photograph or human-finger observation. Later owner acceptance is recorded separately. Marker times are buffered host receipts."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      },
+      {
+        "id": "e43-313-lock-qemu",
+        "kind": "image",
+        "title": "7E18 English lock screen in QEMU",
+        "src": "/ios/evidence/images/E43-313-lock-qemu.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "alt": "Actual QEMU 3.1.3 lock-screen capture showing the English slider",
+        "caption": "7E18 in the partial PinePhone QEMU model, before synthetic unlock. Guest pixels, not a physical panel photograph. The cellular label is not evidence of connectivity.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "7E18 in the partial PinePhone QEMU model, before synthetic unlock. Guest pixels, not a physical panel photograph. The cellular label is not evidence of connectivity.",
+        "sourceIds": [
+          "e43-313-lock-qemu"
+        ],
+        "original": {
+          "basename": "before-slide.png",
+          "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      },
+      {
+        "id": "e43-313-home-qemu",
+        "kind": "image",
+        "title": "7E18 home screen after replay",
+        "src": "/ios/evidence/images/E43-313-home-qemu.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "alt": "Actual QEMU 3.1.3 home screen with the stock Edit Home Screen instruction overlay",
+        "caption": "7E18 after the synthetic slide/Home replay in QEMU. The original instruction overlay is retained. This does not establish human touch acceptance.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "7E18 after the synthetic slide/Home replay in QEMU. The original instruction overlay is retained. This does not establish human touch acceptance.",
+        "sourceIds": [
+          "e43-313-home-qemu"
+        ],
+        "original": {
+          "basename": "after-slide-home.png",
+          "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-stage4-selector-2026-10-03.json",
+        "sha256": "0cb493dd7b69841af42c48068f843f8b36286b20765f69be6bd53bc81965a68b",
+        "locator": "JSON pointers: /acceptance, /selector_physical_run/markers_seconds, /qemu_ui/queued_frames",
+        "format": "json",
+        "content": "{\n  \"/acceptance\": {\n    \"qemu_english_lock_screen\": true,\n    \"qemu_slider_transition\": true,\n    \"qemu_home_screen\": true,\n    \"physical_panel_pipeline\": true,\n    \"physical_home_original_hid_path\": true,\n    \"physical_touch_original_z2_path\": true,\n    \"physical_gt917s_ready\": true,\n    \"physical_contacts_were_synthetic\": true,\n    \"human_finger_observed\": false,\n    \"panel_photograph_captured\": false,\n    \"selector_backend_physical_execution\": true,\n    \"selector_default_route\": \"iphone313 after 12 seconds\",\n    \"selector_manual_volume_power_observed\": false,\n    \"watchdog_jumpdrive_recovery\": true,\n    \"fatal_panic\": false\n  },\n  \"/selector_physical_run/markers_seconds\": {\n    \"router\": 5.511,\n    \"menu_load\": 5.517,\n    \"fit_loaded\": 5.554,\n    \"fit_kernel_hash\": 5.608,\n    \"menu_start\": 6.587,\n    \"choice_3\": 18.636,\n    \"route_313\": 21.16,\n    \"profile_recovery\": 21.178,\n    \"profile_loaded\": 22.054,\n    \"display\": 23.687,\n    \"launchd\": 44.974,\n    \"recovery_pending\": 204.703,\n    \"jumpdrive\": 204.703\n  },\n  \"/qemu_ui/queued_frames\": 14\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "e43-313-lock-qemu",
+        "document": "before-slide.png",
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      },
+      {
+        "id": "e43-313-home-qemu",
+        "document": "after-slide-home.png",
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      }
+    ]
+  }
+}

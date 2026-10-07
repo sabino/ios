@@ -12,7 +12,14 @@
     "E29",
     "E32",
     "E35",
-    "E36"
+    "E36",
+    "E41",
+    "E43",
+    "E44",
+    "E51",
+    "E52",
+    "E54",
+    "E62"
   ],
   "sources": [
     "S01",
@@ -26,9 +33,11 @@
     "native-iphone",
     "camera-capture"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -69,3 +78,8 @@ Edition 1.2 extends the 29 September baseline with accepted physical interaction
 The M68 Camera also displays an accepted live preview and saves genuine VGA JPEGs that reopen after a fresh boot with identical hashes. The measured preview baseline selects about 7.9 distinct images per second despite nearly 30 native deliveries per second. Those limits remain part of the result. Audio playback, Wi-Fi, modem integration, full suspend, broad app coverage and a generally usable phone are still unestablished. [E35](/ios/evidence/E35/) [E36](/ios/evidence/E36/)
 
 New evidence records E29–E40 belong to the explicitly pinned October source revision. E01–E28 retain their earlier document identities and conclusions. Read the [second-profile chapter](/ios/articles/native-iphone/) for the revised frontier and the [capability explorer](/ios/status/) for a concise current-edition view.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+This edition covers both 1.1.4 / 4A102 and 3.1.3 / 7E18. The current primary profile is 7E18 on the physical PinePhone, with owner-accepted touch, battery indication, stock Camera/Photos, complete Power-slider halt and reopening a new photo after cold power-on. The first successful 3.1.3 Camera hand test lacks concurrent UART and no pre-reboot JPEG hash supports byte identity; the later daily trial supplies separate continuous-capture acceptance. USB enumeration and mux handshake pass finite trials, while ordinary pairing, rotation and repeated ordinary restart remain pending. Time-zone configuration passes, but its owner-visible clock check remains separate. Read the [systems paper](/ios/paper/) for the current argument and the [edition note](/ios/edition/) for the fixed snapshot. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E44](/ios/evidence/E44/) [E51](/ios/evidence/E51/) [E52](/ios/evidence/E52/) [E54](/ios/evidence/E54/) [E62](/ios/evidence/E62/)

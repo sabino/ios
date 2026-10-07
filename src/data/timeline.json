@@ -103,5 +103,93 @@
     "evidence": "E38",
     "chapter": "frame-retirement",
     "description": "Original ARM bookkeeping with synthetic images identifies capacity and producer reserve as separate constraints; physical comparison remains pending."
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Measure the larger legacy Camera queue",
+    "description": "One physical two/six-slot comparison separates native delivery, distinct selection and panel update counters.",
+    "chapter": "frame-retirement",
+    "evidence": "E59",
+    "commit": "2cd7963"
+  },
+  {
+    "date": "2026-10-02",
+    "title": "Share adapters across 4A102 and 7E18",
+    "description": "Kernel-hash-selected bindings carry independent newer storage/AES and service contracts.",
+    "chapter": "source-archaeology",
+    "evidence": "E41",
+    "commit": "1258eb0"
+  },
+  {
+    "date": "2026-10-03",
+    "title": "Reach 3.1.3 UI and the physical selector",
+    "description": "English UI is captured in QEMU; the physical display/input replay uses synthetic contacts.",
+    "chapter": "native-iphone",
+    "evidence": "E43",
+    "commit": "fc8269d"
+  },
+  {
+    "date": "2026-10-04",
+    "title": "Accept the clean stock 3.1.3 Camera route",
+    "description": "Owner accepts preview, shutter, thumbnail and Photos; initial UART and pre-reboot hash gaps remain explicit.",
+    "chapter": "camera-stills",
+    "evidence": "E44",
+    "commit": "c408727"
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Drain before native power-off and reset",
+    "description": "Clean halt is accepted; one direct EL2→WDOG0 confirmation reaches the selector. Ordinary repeatability stays pending.",
+    "chapter": "power",
+    "evidence": "E46",
+    "commit": "8760690"
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Boot and recover without an SD card",
+    "description": "The existing eMMC bootloader reaches selector/Jumpdrive; a pre-XNU RTC-only stall has bounded recovery.",
+    "chapter": "boot-handoff",
+    "evidence": "E48",
+    "commit": "ea66db4"
+  },
+  {
+    "date": "2026-10-07",
+    "title": "Accept the daily cold-power-cycle workflow",
+    "description": "Real touch, Camera/Photos and complete halt are hand-tested; the new photograph opens after cold power-on.",
+    "chapter": "native-iphone",
+    "evidence": "E51",
+    "commit": "0daf16b"
+  },
+  {
+    "date": "2026-10-07",
+    "title": "Measure finite raw sensor samples",
+    "description": "100 real samples and bounded restoration do not establish stock rotation or client lifetime.",
+    "chapter": "hid-dependencies",
+    "evidence": "E55",
+    "commit": "7b1f989"
+  },
+  {
+    "date": "2026-10-07",
+    "title": "Separate idle timing from animation",
+    "description": "A 64-presentation zero-change interval measures elapsed display work without a cache/clock change.",
+    "chapter": "measuring-performance",
+    "evidence": "E50",
+    "commit": "1b759d0"
+  },
+  {
+    "date": "2026-10-07",
+    "title": "Advance USB to listener readiness",
+    "description": "Enumeration and mux pass; a later sampled listener follows initial host preflight. Ordinary pairing remains pending.",
+    "chapter": "observability",
+    "evidence": "E54",
+    "commit": "15b3a95"
+  },
+  {
+    "date": "2026-10-07",
+    "title": "Rank future targets without claiming ports",
+    "description": "The offline ranking and partial 10B500 QEMU clock-gate frontier retain separate acceptance classes.",
+    "chapter": "source-archaeology",
+    "evidence": "E57",
+    "commit": "ffe171b"
   }
 ]

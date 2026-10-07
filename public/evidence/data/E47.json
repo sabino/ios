@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E47",
+    "title": "Grow boot space without moving OS windows",
+    "environment": "Physical PinePhone",
+    "method": "Reviewed bounded GPT/FAT writes and full protected readback",
+    "observation": "AHVBOOT grows to 1 GiB; reserved GPT entries protect the isolated OS windows. Six GPT sectors are written, and all 215 staged files retain their contents, paths and DOS attributes.",
+    "limits": "This is one reviewed migration, not a general repartitioning tool or sudden-power-loss test. Reserved OS windows are not free gaps.",
+    "records": [
+      {
+        "document": "pinephone-ahvboot-growth-2026-10-06.json",
+        "sha256": "e31ff4982adaeb9b6f1dac34af81752ecbe554d256bc2c3e3b48cb0e0ea77868",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "118-ahvboot-growth-review.md",
+        "sha256": "288ffcb6f58993c2a82ed3e81eb1fbf906cc41fdddcf7225e9d59ec009db698a",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "AHVBOOT grows to 1 GiB; reserved GPT entries protect the isolated OS windows. Six GPT sectors are written, and all 215 staged files retain their contents, paths and DOS attributes."
+          ],
+          [
+            "Acceptance limit",
+            "This is one reviewed migration, not a general repartitioning tool or sudden-power-loss test. Reserved OS windows are not free gaps."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-ahvboot-growth-2026-10-06.json",
+        "sha256": "e31ff4982adaeb9b6f1dac34af81752ecbe554d256bc2c3e3b48cb0e0ea77868",
+        "locator": "JSON pointers: /migration_installed, /os_payload_writes, /microsd_writes, /ahvboot/sectors, /ahvboot/file_count, /ahvboot/all_file_contents_paths_and_dos_attributes_preserved, /ahvboot/fsck_exit, /gpt/sector_write_count, /gpt/bootloader_unchanged",
+        "format": "json",
+        "content": "{\n  \"/migration_installed\": true,\n  \"/os_payload_writes\": false,\n  \"/microsd_writes\": false,\n  \"/ahvboot/sectors\": 2097152,\n  \"/ahvboot/file_count\": 215,\n  \"/ahvboot/all_file_contents_paths_and_dos_attributes_preserved\": true,\n  \"/ahvboot/fsck_exit\": 0,\n  \"/gpt/sector_write_count\": 6,\n  \"/gpt/bootloader_unchanged\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

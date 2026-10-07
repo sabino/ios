@@ -1,0 +1,13 @@
+E61 / pinephone-selector-damage-build-2026-10-05.json
+Source SHA-256: 39f919ff8892fd399e3d36ee1e877d9b345460b202e4ee13a263402ea0aa6000
+Locator: JSON pointers: /hardware_executed, /installed, /owner_visual_acceptance, /owner_buttons_acceptance, /default_presents, /default_waits
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/hardware_executed": true,
+  "/installed": true,
+  "/owner_visual_acceptance": true,
+  "/owner_buttons_acceptance": true,
+  "/default_presents": 13,
+  "/default_waits": 750
+}

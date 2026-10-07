@@ -4019,5 +4019,1617 @@
         "note": "Exact selected sentences; implementation file references after this passage are omitted."
       }
     ]
+  },
+  {
+    "id": "E41",
+    "title": "One adapter, two exact-build contracts",
+    "environment": "Static inspection",
+    "method": "Committed binding schema and isolated storage/AES gates",
+    "observation": "4A102 and 7E18 select separate measured bindings by original kernel SHA-256 while retaining shared hardware adapter code. Explicit-key AES and stock integrity policy remain distinct contracts.",
+    "limits": "This is a binding and software-gate result. It does not establish physical UI acceptance or a general ABI across releases.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-storage-2026-10-02.json",
+        "sha256": "c94b3e08981d052457c4084905bdc22d65119c19e501994da1637d196970267f",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "103-iphone-3.1.3-and-boot-selector.md",
+        "sha256": "3b785b5f1900fb62dbe3d2a014ad142d96de977fa040061b4edcf57d570a4541",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "104-iphone-3.1.3-qemu-entry.md",
+        "sha256": "5d5ff30d7edd6534cd3b37b420a0f963a242c2c60ecc3a6d64a7e113227261ff",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "105-iphone313-native-storage.md",
+        "sha256": "72cfa948bbf3fd68ac6cbade4094299ba117ae08827c5749a13b76ddb880f596",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "115-7e18-native-driver-regions.md",
+        "sha256": "8a99b9f138867fd5da991b93a1400621a0e86abefd1cbef13d56bbbb385415ed",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "4A102 and 7E18 select separate measured bindings by original kernel SHA-256 while retaining shared hardware adapter code. Explicit-key AES and stock integrity policy remain distinct contracts."
+          ],
+          [
+            "Acceptance limit",
+            "This is a binding and software-gate result. It does not establish physical UI acceptance or a general ABI across releases."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-storage-2026-10-02.json",
+        "sha256": "c94b3e08981d052457c4084905bdc22d65119c19e501994da1637d196970267f",
+        "locator": "JSON pointers: /shared_abi/selection, /shared_abi/separate_os_driver_fork_added, /shared_abi/legacy_bootstrap_abi_preserved, /shared_abi/aes_explicit_keys_only, /shared_abi/uid_gid_selectors_rejected, /shared_abi/file_integrity_or_security_policy_checks_changed",
+        "format": "json",
+        "content": "{\n  \"/shared_abi/selection\": \"exact original kernel SHA-256, optional matching build name\",\n  \"/shared_abi/separate_os_driver_fork_added\": false,\n  \"/shared_abi/legacy_bootstrap_abi_preserved\": true,\n  \"/shared_abi/aes_explicit_keys_only\": true,\n  \"/shared_abi/uid_gid_selectors_rejected\": true,\n  \"/shared_abi/file_integrity_or_security_policy_checks_changed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E42",
+    "title": "Userspace before a visible display",
+    "environment": "PinePhone QEMU",
+    "method": "Stock startup and preserved assertion in a partial board model",
+    "observation": "7E18 executes dyld, launchd and original SpringBoard startup; the headless gate retains the missing-window-server assertion. The later physical entry separately accounts for A53 SWIO and linked SWP dependencies.",
+    "limits": "This early QEMU gate is not a sustained graphical session. Physical entry does not inherit every QEMU result.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-userspace-2026-10-02.json",
+        "sha256": "188d75da97f8dc949a0e4c9044592263c3edaff2c1c354c54748af1dbba95954",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "106-iphone313-headless-userspace.md",
+        "sha256": "d54f777f046429431e293e7a5c064ec1e1132aaeb106813eb604db30c8b540a0",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "107-iphone313-physical-userspace.md",
+        "sha256": "b85c26dd803867710a51e7f1c27404e937fabcef75dc3556f94132db48a7e125",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "7E18 executes dyld, launchd and original SpringBoard startup; the headless gate retains the missing-window-server assertion. The later physical entry separately accounts for A53 SWIO and linked SWP dependencies."
+          ],
+          [
+            "Acceptance limit",
+            "This early QEMU gate is not a sustained graphical session. Physical entry does not inherit every QEMU result."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-userspace-2026-10-02.json",
+        "sha256": "188d75da97f8dc949a0e4c9044592263c3edaff2c1c354c54748af1dbba95954",
+        "locator": "JSON pointers: /physical_executed, /userspace/dyld_and_cache_execution, /userspace/launchd_and_launchctl_execution, /userspace/trigger_assertion, /userspace/rendered_home_screen, /userspace/assertion_preserved",
+        "format": "json",
+        "content": "{\n  \"/physical_executed\": false,\n  \"/userspace/dyld_and_cache_execution\": true,\n  \"/userspace/launchd_and_launchctl_execution\": true,\n  \"/userspace/trigger_assertion\": \"No window server display found\",\n  \"/userspace/rendered_home_screen\": false,\n  \"/userspace/assertion_preserved\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E43",
+    "title": "English UI and a physical selector",
+    "environment": "Physical PinePhone",
+    "method": "Separate QEMU frame replay and physical UART/consumer-delivery capture",
+    "observation": "The October 3 selector defaults to 3.1.3 after 12 seconds. Physical display, Home and Z2 consumer paths execute; the injected slider contacts are synthetic. English lock/home captures belong to QEMU.",
+    "limits": "The original run has no panel photograph or human-finger observation. Later owner acceptance is recorded separately. Marker times are buffered host receipts.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-stage4-selector-2026-10-03.json",
+        "sha256": "0cb493dd7b69841af42c48068f843f8b36286b20765f69be6bd53bc81965a68b",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "108-iphone313-display-compositor.md",
+        "sha256": "352b00761c9dfdf756438be361c83b2967b77db97f2ffba779ee02278aa4ffe5",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "109-iphone313-stage4-and-selector.md",
+        "sha256": "c4de65bb273f6de88f8622a4819218db886baf9b8e3c88c93d28286f2a6e6c0d",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "before-slide.png",
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      },
+      {
+        "document": "after-slide-home.png",
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The October 3 selector defaults to 3.1.3 after 12 seconds. Physical display, Home and Z2 consumer paths execute; the injected slider contacts are synthetic. English lock/home captures belong to QEMU."
+          ],
+          [
+            "Acceptance limit",
+            "The original run has no panel photograph or human-finger observation. Later owner acceptance is recorded separately. Marker times are buffered host receipts."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      },
+      {
+        "id": "e43-313-lock-qemu",
+        "kind": "image",
+        "title": "7E18 English lock screen in QEMU",
+        "src": "/ios/evidence/images/E43-313-lock-qemu.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "alt": "Actual QEMU 3.1.3 lock-screen capture showing the English slider",
+        "caption": "7E18 in the partial PinePhone QEMU model, before synthetic unlock. Guest pixels, not a physical panel photograph. The cellular label is not evidence of connectivity.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "7E18 in the partial PinePhone QEMU model, before synthetic unlock. Guest pixels, not a physical panel photograph. The cellular label is not evidence of connectivity.",
+        "sourceIds": [
+          "e43-313-lock-qemu"
+        ],
+        "original": {
+          "basename": "before-slide.png",
+          "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      },
+      {
+        "id": "e43-313-home-qemu",
+        "kind": "image",
+        "title": "7E18 home screen after replay",
+        "src": "/ios/evidence/images/E43-313-home-qemu.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "alt": "Actual QEMU 3.1.3 home screen with the stock Edit Home Screen instruction overlay",
+        "caption": "7E18 after the synthetic slide/Home replay in QEMU. The original instruction overlay is retained. This does not establish human touch acceptance.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "7E18 after the synthetic slide/Home replay in QEMU. The original instruction overlay is retained. This does not establish human touch acceptance.",
+        "sourceIds": [
+          "e43-313-home-qemu"
+        ],
+        "original": {
+          "basename": "after-slide-home.png",
+          "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-stage4-selector-2026-10-03.json",
+        "sha256": "0cb493dd7b69841af42c48068f843f8b36286b20765f69be6bd53bc81965a68b",
+        "locator": "JSON pointers: /acceptance, /selector_physical_run/markers_seconds, /qemu_ui/queued_frames",
+        "format": "json",
+        "content": "{\n  \"/acceptance\": {\n    \"qemu_english_lock_screen\": true,\n    \"qemu_slider_transition\": true,\n    \"qemu_home_screen\": true,\n    \"physical_panel_pipeline\": true,\n    \"physical_home_original_hid_path\": true,\n    \"physical_touch_original_z2_path\": true,\n    \"physical_gt917s_ready\": true,\n    \"physical_contacts_were_synthetic\": true,\n    \"human_finger_observed\": false,\n    \"panel_photograph_captured\": false,\n    \"selector_backend_physical_execution\": true,\n    \"selector_default_route\": \"iphone313 after 12 seconds\",\n    \"selector_manual_volume_power_observed\": false,\n    \"watchdog_jumpdrive_recovery\": true,\n    \"fatal_panic\": false\n  },\n  \"/selector_physical_run/markers_seconds\": {\n    \"router\": 5.511,\n    \"menu_load\": 5.517,\n    \"fit_loaded\": 5.554,\n    \"fit_kernel_hash\": 5.608,\n    \"menu_start\": 6.587,\n    \"choice_3\": 18.636,\n    \"route_313\": 21.16,\n    \"profile_recovery\": 21.178,\n    \"profile_loaded\": 22.054,\n    \"display\": 23.687,\n    \"launchd\": 44.974,\n    \"recovery_pending\": 204.703,\n    \"jumpdrive\": 204.703\n  },\n  \"/qemu_ui/queued_frames\": 14\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "e43-313-lock-qemu",
+        "document": "before-slide.png",
+        "sha256": "986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      },
+      {
+        "id": "e43-313-home-qemu",
+        "document": "after-slide-home.png",
+        "sha256": "19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      }
+    ]
+  },
+  {
+    "id": "E44",
+    "title": "Stock 3.1.3 Camera with a kernel JPEG provider",
+    "environment": "Physical PinePhone",
+    "method": "Owner hand test, separate storage readback and clean-design inspection",
+    "observation": "The accepted clean route keeps Apple userland text unchanged and serves stock H1ISP/IOSurface and AppleJPEGDriver clients. Preview, shutter, thumbnail, Photos and reboot persistence are owner accepted. Sensor acquisition is 640 × 480; 1600 × 1200 output is resampled.",
+    "limits": "The first successful hand test lacks concurrent UART; no pre-reboot JPEG digest exists for a byte-identical persistence claim. Higher-detail sensor modes and measured 3.1.3 preview throughput remain unaccepted.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-camera-2026-10-04.json",
+        "sha256": "c157d61c0a6322b332b9fb56c274f3b369f499d6d319746f808e6c50d8d1eb6d",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "110-iphone313-camera-port.md",
+        "sha256": "b6b0c718769b991ded8b7f28bc73cdd56beb55bb4abe3b472cb59dc423b608a1",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "IMG_0003.PNG",
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The accepted clean route keeps Apple userland text unchanged and serves stock H1ISP/IOSurface and AppleJPEGDriver clients. Preview, shutter, thumbnail, Photos and reboot persistence are owner accepted. Sensor acquisition is 640 × 480; 1600 × 1200 output is resampled."
+          ],
+          [
+            "Acceptance limit",
+            "The first successful hand test lacks concurrent UART; no pre-reboot JPEG digest exists for a byte-identical persistence claim. Higher-detail sensor modes and measured 3.1.3 preview throughput remain unaccepted."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      },
+      {
+        "id": "e44-313-camera-stock",
+        "kind": "image",
+        "title": "Stock Camera screenshot recovered from the phone",
+        "src": "/ios/evidence/images/E44-313-camera-stock.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "alt": "Unmodified stock Camera screenshot saved on the physical PinePhone, showing an upright robot model and thumbnail",
+        "caption": "Stock 7E18 Camera screenshot recovered from physical private-data storage. It shows upright preview and thumbnail, not a measured frame rate or native 1600 × 1200 sensor detail. The first hand-test UART gap remains explicit.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "Stock 7E18 Camera screenshot recovered from physical private-data storage. It shows upright preview and thumbnail, not a measured frame rate or native 1600 × 1200 sensor detail. The first hand-test UART gap remains explicit.",
+        "sourceIds": [
+          "e44-313-camera-stock"
+        ],
+        "original": {
+          "basename": "IMG_0003.PNG",
+          "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-camera-2026-10-04.json",
+        "sha256": "c157d61c0a6322b332b9fb56c274f3b369f499d6d319746f808e6c50d8d1eb6d",
+        "locator": "JSON pointers: /clean_design/apple_userland_words_modified, /clean_design/signature_checks_modified, /clean_design/actual_capture, /clean_design/preview, /clean_design/still, /owner_acceptance/preview, /owner_acceptance/shutter, /owner_acceptance/thumbnail, /owner_acceptance/photo_opened_in_Photos, /owner_acceptance/photo_survives_reboot, /owner_acceptance/successful_test_UART_available, /persistence_test/pre_reboot_extracted_JPEG_hash_available",
+        "format": "json",
+        "content": "{\n  \"/clean_design/apple_userland_words_modified\": 0,\n  \"/clean_design/signature_checks_modified\": false,\n  \"/clean_design/actual_capture\": [\n    640,\n    480,\n    \"UYVY-full-range\"\n  ],\n  \"/clean_design/preview\": [\n    400,\n    304,\n    \"YUYV-video-range\"\n  ],\n  \"/clean_design/still\": [\n    1600,\n    1200,\n    \"YUYV-video-range-resampled\"\n  ],\n  \"/owner_acceptance/preview\": true,\n  \"/owner_acceptance/shutter\": true,\n  \"/owner_acceptance/thumbnail\": true,\n  \"/owner_acceptance/photo_opened_in_Photos\": true,\n  \"/owner_acceptance/photo_survives_reboot\": true,\n  \"/owner_acceptance/successful_test_UART_available\": false,\n  \"/persistence_test/pre_reboot_extracted_JPEG_hash_available\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "e44-313-camera-stock",
+        "document": "IMG_0003.PNG",
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed physical-device screenshot capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      }
+    ]
+  },
+  {
+    "id": "E45",
+    "title": "Clean stock Power-slider halt",
+    "environment": "Physical PinePhone",
+    "method": "Owner hand test with continuous UART and protected-region recovery",
+    "observation": "Two recorded halt sequences restore camera state and complete native storage drain before PMIC power-off. The owner accepts the Power-slider route.",
+    "limits": "This halt result does not establish ordinary restart, full suspend or power-loss durability.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-halt-2026-10-04.json",
+        "sha256": "bdd087009030f99804136b0124144ee4dc70430f0acad0f893d7112215359b18",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "111-iphone313-native-halt.md",
+        "sha256": "18df6d53479d3a4f32c17d0e23926070bab2db570ff37961ab8d1c8ea11311f4",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "Two recorded halt sequences restore camera state and complete native storage drain before PMIC power-off. The owner accepts the Power-slider route."
+          ],
+          [
+            "Acceptance limit",
+            "This halt result does not establish ordinary restart, full suspend or power-loss durability."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-halt-2026-10-04.json",
+        "sha256": "bdd087009030f99804136b0124144ee4dc70430f0acad0f893d7112215359b18",
+        "locator": "JSON pointers: /physical/clean_poweroff_observed, /physical/owner_poweroff_acceptance, /physical/halt_sequences_observed, /physical/final_storage_drain_error, /physical/panic_count, /physical/cs_invalid_page_count",
+        "format": "json",
+        "content": "{\n  \"/physical/clean_poweroff_observed\": true,\n  \"/physical/owner_poweroff_acceptance\": true,\n  \"/physical/halt_sequences_observed\": 2,\n  \"/physical/final_storage_drain_error\": 0,\n  \"/physical/panic_count\": 0,\n  \"/physical/cs_invalid_page_count\": 0\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E46",
+    "title": "Direct EL2 reset avoids the firmware stall",
+    "environment": "Physical PinePhone",
+    "method": "Ordered UART milestones and post-run integrity",
+    "observation": "One physical confirmation drains storage, enters qualified EL2 reset, reaches a new SPL after 1.084 seconds and shows the ordinary selector. The final reset uses WDOG0 and does not call TF-A reset.",
+    "limits": "One confirmation is not repeated ordinary-restart hand acceptance. The older HVC/PSCI firmware stall is retained. Normal runtime watchdogs remain disabled.",
+    "records": [
+      {
+        "document": "pinephone-direct-el2-reset-2026-10-05.json",
+        "sha256": "e8b4eb9f1f57ff9c7844e214236109ca6e2b9fe6dd20414e2e2dd5256a67b1b6",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "113-pinephone-restart-and-boot-space.md",
+        "sha256": "465acbe915f0c0bcbee877f574a19256eee3d5598e46af4953d03f48b963c897",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "One physical confirmation drains storage, enters qualified EL2 reset, reaches a new SPL after 1.084 seconds and shows the ordinary selector. The final reset uses WDOG0 and does not call TF-A reset."
+          ],
+          [
+            "Acceptance limit",
+            "One confirmation is not repeated ordinary-restart hand acceptance. The older HVC/PSCI firmware stall is retained. Normal runtime watchdogs remain disabled."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-direct-el2-reset-2026-10-05.json",
+        "sha256": "e8b4eb9f1f57ff9c7844e214236109ca6e2b9fe6dd20414e2e2dd5256a67b1b6",
+        "locator": "JSON pointers: /physical_confirmation/passed, /physical_confirmation/el2_to_spl_seconds, /physical_confirmation/ordinary_selector_observed, /physical_confirmation/firmware_reset_called, /physical_confirmation/runtime_watchdog, /physical_confirmation/physical_reset_required",
+        "format": "json",
+        "content": "{\n  \"/physical_confirmation/passed\": true,\n  \"/physical_confirmation/el2_to_spl_seconds\": 1.084,\n  \"/physical_confirmation/ordinary_selector_observed\": true,\n  \"/physical_confirmation/firmware_reset_called\": false,\n  \"/physical_confirmation/runtime_watchdog\": false,\n  \"/physical_confirmation/physical_reset_required\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E47",
+    "title": "Grow boot space without moving OS windows",
+    "environment": "Physical PinePhone",
+    "method": "Reviewed bounded GPT/FAT writes and full protected readback",
+    "observation": "AHVBOOT grows to 1 GiB; reserved GPT entries protect the isolated OS windows. Six GPT sectors are written, and all 215 staged files retain their contents, paths and DOS attributes.",
+    "limits": "This is one reviewed migration, not a general repartitioning tool or sudden-power-loss test. Reserved OS windows are not free gaps.",
+    "records": [
+      {
+        "document": "pinephone-ahvboot-growth-2026-10-06.json",
+        "sha256": "e31ff4982adaeb9b6f1dac34af81752ecbe554d256bc2c3e3b48cb0e0ea77868",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "118-ahvboot-growth-review.md",
+        "sha256": "288ffcb6f58993c2a82ed3e81eb1fbf906cc41fdddcf7225e9d59ec009db698a",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "AHVBOOT grows to 1 GiB; reserved GPT entries protect the isolated OS windows. Six GPT sectors are written, and all 215 staged files retain their contents, paths and DOS attributes."
+          ],
+          [
+            "Acceptance limit",
+            "This is one reviewed migration, not a general repartitioning tool or sudden-power-loss test. Reserved OS windows are not free gaps."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-ahvboot-growth-2026-10-06.json",
+        "sha256": "e31ff4982adaeb9b6f1dac34af81752ecbe554d256bc2c3e3b48cb0e0ea77868",
+        "locator": "JSON pointers: /migration_installed, /os_payload_writes, /microsd_writes, /ahvboot/sectors, /ahvboot/file_count, /ahvboot/all_file_contents_paths_and_dos_attributes_preserved, /ahvboot/fsck_exit, /gpt/sector_write_count, /gpt/bootloader_unchanged",
+        "format": "json",
+        "content": "{\n  \"/migration_installed\": true,\n  \"/os_payload_writes\": false,\n  \"/microsd_writes\": false,\n  \"/ahvboot/sectors\": 2097152,\n  \"/ahvboot/file_count\": 215,\n  \"/ahvboot/all_file_contents_paths_and_dos_attributes_preserved\": true,\n  \"/ahvboot/fsck_exit\": 0,\n  \"/gpt/sector_write_count\": 6,\n  \"/gpt/bootloader_unchanged\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E48",
+    "title": "SD-free boot and RTC-only recovery",
+    "environment": "Physical PinePhone",
+    "method": "Cold eMMC boot and deliberate early-stall recovery",
+    "observation": "Tow-Boot from the eMMC hardware boot area reaches the selector and Jumpdrive without an SD card. A deliberately stalled pre-XNU trial reaches watchdog reset after 14.336 seconds and Jumpdrive after 23.287 seconds.",
+    "limits": "The RTC-only stall trial never starts XNU. It proves that recovery route, not recovery from arbitrary hangs. Absent SD intervals are not re-read.",
+    "records": [
+      {
+        "document": "pinephone-emmc-boot-2026-10-06.json",
+        "sha256": "c54dad828f94124c105f6c1fe245e9f3b99139d19ff1b2c9ad5736ce7c890c02",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "117-trial-boot-watchdog.md",
+        "sha256": "e927352a4a569e8e52c55e6434ccb35ba723397cb8e745b4342904c440b1e57a",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "119-pinephone-emmc-boot.md",
+        "sha256": "a10513df83508a15e05523df568306c2879aa5cbda3626adc1150a114f735151",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "Tow-Boot from the eMMC hardware boot area reaches the selector and Jumpdrive without an SD card. A deliberately stalled pre-XNU trial reaches watchdog reset after 14.336 seconds and Jumpdrive after 23.287 seconds."
+          ],
+          [
+            "Acceptance limit",
+            "The RTC-only stall trial never starts XNU. It proves that recovery route, not recovery from arbitrary hangs. Absent SD intervals are not re-read."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-emmc-boot-2026-10-06.json",
+        "sha256": "c54dad828f94124c105f6c1fe245e9f3b99139d19ff1b2c9ad5736ce7c890c02",
+        "locator": "JSON pointers: /bootloader_written, /sd_free_recovery/regions, /sd_free_recovery/files, /sd_free_recovery/sd_present, /sd_free_recovery/protected_payloads_byte_identical, /rtc_only_trial/watchdog_reset_after_entry_seconds, /rtc_only_trial/jumpdrive_after_entry_seconds, /rtc_only_trial/xnu_started",
+        "format": "json",
+        "content": "{\n  \"/bootloader_written\": false,\n  \"/sd_free_recovery/regions\": 12,\n  \"/sd_free_recovery/files\": 218,\n  \"/sd_free_recovery/sd_present\": false,\n  \"/sd_free_recovery/protected_payloads_byte_identical\": true,\n  \"/rtc_only_trial/watchdog_reset_after_entry_seconds\": 14.336,\n  \"/rtc_only_trial/jumpdrive_after_entry_seconds\": 23.287,\n  \"/rtc_only_trial/xnu_started\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E49",
+    "title": "Inherited regulator state changes admission",
+    "environment": "Physical PinePhone",
+    "method": "Identical pre-XNU snapshot program through two loaders; register readback",
+    "observation": "The Tow-Boot and SD U-Boot handoffs differ in 26 reported records. The 7E18 camera policy verifies and adopts the already enabled 2.8 V analog rail and preserves unowned fields, rather than requiring an all-off baseline.",
+    "limits": "Programmed selectors are not measured voltages. Battery state and SD presence differ; not every observed difference is caused solely by the loader. Legacy camera admission remains separate.",
+    "records": [
+      {
+        "document": "pinephone-firmware-handoff-diff-2026-10-07.json",
+        "sha256": "3e73450d9bbc46d6183d415cd150c89a83ee00d92d55e2f2a353b237722707ab",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "120-pinephone-firmware-handoff.md",
+        "sha256": "bebf785cb4f6430295fddf7ba8d4a660853f7262ce833245fcce39e02dd6171f",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The Tow-Boot and SD U-Boot handoffs differ in 26 reported records. The 7E18 camera policy verifies and adopts the already enabled 2.8 V analog rail and preserves unowned fields, rather than requiring an all-off baseline."
+          ],
+          [
+            "Acceptance limit",
+            "Programmed selectors are not measured voltages. Battery state and SD presence differ; not every observed difference is caused solely by the loader. Legacy camera admission remains separate."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-firmware-handoff-diff-2026-10-07.json",
+        "sha256": "3e73450d9bbc46d6183d415cd150c89a83ee00d92d55e2f2a353b237722707ab",
+        "locator": "JSON pointers: /probe_image_identical, /changed_record_count, /probe_limits, /bootloader_written, /cpu_clock_or_voltage_changed",
+        "format": "json",
+        "content": "{\n  \"/probe_image_identical\": true,\n  \"/changed_record_count\": 26,\n  \"/probe_limits\": [\n    \"Programmed selectors are not voltage measurements.\",\n    \"Five parent-gated/reset inner display words are unavailable under both loaders.\",\n    \"Prior Jumpdrive state and SD presence are recorded; dynamic source/ADC/pad values cannot be attributed solely to the loader.\",\n    \"RSB interface mode/address assignment is the only PMIC configuration write in either probe.\",\n    \"No new runtime driver change follows the comparison; USB enumeration, stock rotation, vibration and Wi-Fi have not been accepted.\",\n    \"Exact 4A102 Camera bindings retain their stricter rail policy; daily legacy eMMC Camera admission needs separate qualification.\"\n  ],\n  \"/bootloader_written\": false,\n  \"/cpu_clock_or_voltage_changed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E50",
+    "title": "Idle display elapsed-time baseline",
+    "environment": "Physical PinePhone",
+    "method": "Opt-in 24 MHz counter instrumentation; 64-presentation interval",
+    "observation": "The later interval from presentation 64 to 128 records 64 source frames, zero sampled changes and mean total elapsed cost 12.6937 ms. Source work averages 4.7924 ms and expansion 7.8142 ms.",
+    "limits": "This is idle elapsed time, not animation FPS, a pure compositor CPU benchmark or a full scanout-latency measurement. Logging has one 72.3972 ms sample. Cache and clock policy are unchanged.",
+    "records": [
+      {
+        "document": "pinephone-display-timing-2026-10-07.json",
+        "sha256": "47078abd485bac2f736d853dada1cfd112bc474088c520cf3f3b0f0d17e0abf6",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-graphics-cache-policy.md",
+        "sha256": "a7e1f372fde4dbb3ad37c5c47e255c55955bbfd16653feb4dcd3cf8b48786f41",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The later interval from presentation 64 to 128 records 64 source frames, zero sampled changes and mean total elapsed cost 12.6937 ms. Source work averages 4.7924 ms and expansion 7.8142 ms."
+          ],
+          [
+            "Acceptance limit",
+            "This is idle elapsed time, not animation FPS, a pure compositor CPU benchmark or a full scanout-latency measurement. Logging has one 72.3972 ms sample. Cache and clock policy are unchanged."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-display-timing-2026-10-07.json",
+        "sha256": "47078abd485bac2f736d853dada1cfd112bc474088c520cf3f3b0f0d17e0abf6",
+        "locator": "JSON pointers: /physical_followup/later64_frame_interval, /physical_followup/cache_policy_changed, /physical_followup/cpu_clock_changed, /physical_followup/owner_visual_acceptance",
+        "format": "json",
+        "content": "{\n  \"/physical_followup/later64_frame_interval\": {\n    \"from_frame_exclusive\": 64,\n    \"to_frame_inclusive\": 128,\n    \"source_frames\": 64,\n    \"sampled_changes\": 0,\n    \"metrics\": {\n      \"total\": {\n        \"samples\": 64,\n        \"sum_ticks\": 19497559,\n        \"mean_ms\": 12.693723307291666\n      },\n      \"source\": {\n        \"samples\": 64,\n        \"sum_ticks\": 7361130,\n        \"mean_ms\": 4.79240234375\n      },\n      \"expand\": {\n        \"samples\": 64,\n        \"sum_ticks\": 12002657,\n        \"mean_ms\": 7.814229817708333\n      },\n      \"sync\": {\n        \"samples\": 64,\n        \"sum_ticks\": 632,\n        \"mean_ms\": 0.00041145833333333334\n      },\n      \"complete\": {\n        \"samples\": 64,\n        \"sum_ticks\": 58703,\n        \"mean_ms\": 0.038218098958333335\n      },\n      \"gap\": {\n        \"samples\": 64,\n        \"sum_ticks\": 19758738,\n        \"mean_ms\": 12.86376171875\n      },\n      \"log\": {\n        \"samples\": 1,\n        \"sum_ticks\": 1737533,\n        \"mean_ms\": 72.39720833333334\n      }\n    }\n  },\n  \"/physical_followup/cache_policy_changed\": false,\n  \"/physical_followup/cpu_clock_changed\": false,\n  \"/physical_followup/owner_visual_acceptance\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E51",
+    "title": "3.1.3 daily use after cold power-on",
+    "environment": "Physical PinePhone",
+    "method": "Owner hand test, continuous UART, decoded media and complete available-region readback",
+    "observation": "On October 7 the owner accepts battery/charging indication, unlock/touch, Power blank/wake, upright Camera preview, shutter, thumbnail, Photos, complete power-off staying off for 30 seconds and reopening the same new photo after cold power-on.",
+    "limits": "Ordinary stock restart, legacy daily hand checks, USB pairing and stock rotation remain unaccepted by this trial. This does not measure battery endurance or image quality.",
+    "records": [
+      {
+        "document": "pinephone-owner313-daily-2026-10-07.json",
+        "sha256": "f7d30073cb25e6df5a59168b6f1dcad4382bf40d532c43c1397fe4a909b325ca",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "daily-profiles-20261007.md",
+        "sha256": "191eea47117312a8f9a6a9e03df04d09b3ad5c90faa2a69723e663ca299fcf1b",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "On October 7 the owner accepts battery/charging indication, unlock/touch, Power blank/wake, upright Camera preview, shutter, thumbnail, Photos, complete power-off staying off for 30 seconds and reopening the same new photo after cold power-on."
+          ],
+          [
+            "Acceptance limit",
+            "Ordinary stock restart, legacy daily hand checks, USB pairing and stock rotation remain unaccepted by this trial. This does not measure battery endurance or image quality."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-owner313-daily-2026-10-07.json",
+        "sha256": "f7d30073cb25e6df5a59168b6f1dcad4382bf40d532c43c1397fe4a909b325ca",
+        "locator": "JSON pointers: /passed, /owner_hand_test, /apple_userland_text_changes, /accepted_checks, /not_accepted, /recovery/all_12_available_intervals_read, /recovery/boot_files_verified, /recovery/sd_present, /recovery/fresh_hfs_checks/root/fsck_exit, /recovery/fresh_hfs_checks/data/fsck_exit",
+        "format": "json",
+        "content": "{\n  \"/passed\": true,\n  \"/owner_hand_test\": true,\n  \"/apple_userland_text_changes\": 0,\n  \"/accepted_checks\": [\n    \"battery_level_and_charging_icon\",\n    \"slide_to_unlock_and_touch\",\n    \"power_sleep_wake\",\n    \"live_upright_camera_preview\",\n    \"shutter\",\n    \"thumbnail\",\n    \"new_photo_in_Photos\",\n    \"power_slider_complete_poweroff_stays_off_30_seconds\",\n    \"same_new_photo_reopened_after_clean_power_cycle\"\n  ],\n  \"/not_accepted\": [\n    \"ordinary stock native restart (the persistence test used complete Power-slider halt then cold power-on)\",\n    \"remaining iPhone/iPod 1.1.4 daily hand checks\",\n    \"native USB enumeration or pairing\",\n    \"stock rotation\"\n  ],\n  \"/recovery/all_12_available_intervals_read\": true,\n  \"/recovery/boot_files_verified\": 593,\n  \"/recovery/sd_present\": false,\n  \"/recovery/fresh_hfs_checks/root/fsck_exit\": 0,\n  \"/recovery/fresh_hfs_checks/data/fsck_exit\": 0\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E52",
+    "title": "USB enumeration is a protocol gate",
+    "environment": "Physical PinePhone",
+    "method": "Host enumeration and native stock-family traces",
+    "observation": "A later native MUSB trial stays host-enumerated through stock IOUSBDeviceFamily and passes the stock usbmux v2 handshake with three reads, three writes and zero mux I/O errors. The earlier enumeration record remains a retained failure.",
+    "limits": "Pairing, ideviceinfo, syslog, AFC and repeated replug acceptance remain pending. Whole usbmon completeness is false. Finite cleanup returns BUSY (-2), retains prerequisites until reset and is not claimed as successful teardown.",
+    "records": [
+      {
+        "document": "pinephone-usb-underrun-2026-10-07.json",
+        "sha256": "f3d32b5300b392b720bad4aa500939e8f717558e65266a0e3786250faa527c79",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "pinephone-usb-enumeration-2026-10-07.json",
+        "sha256": "e4ea9f0d694c136ff5164f7d4f52639fa79637b2c475addac775ba164f1f2025",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "112-iphone313-usb-device-mode.md",
+        "sha256": "32c5c039ff0fa50abd7eeeba3f99feff74a3fbaa8eea69211f31dd3e02609053",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "7e18-usb-configuration-mux-gates.md",
+        "sha256": "9770ca4823df7d82517e92c7dde76d6942bae00ebb05629b039b3597a19501ff",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; enumeration gate passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A later native MUSB trial stays host-enumerated through stock IOUSBDeviceFamily and passes the stock usbmux v2 handshake with three reads, three writes and zero mux I/O errors. The earlier enumeration record remains a retained failure."
+          ],
+          [
+            "Acceptance limit",
+            "Pairing, ideviceinfo, syslog, AFC and repeated replug acceptance remain pending. Whole usbmon completeness is false. Finite cleanup returns BUSY (-2), retains prerequisites until reset and is not claimed as successful teardown."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "passed-mux",
+          "earlier-gates"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "passed-mux",
+        "document": "pinephone-usb-underrun-2026-10-07.json",
+        "sha256": "f3d32b5300b392b720bad4aa500939e8f717558e65266a0e3786250faa527c79",
+        "locator": "JSON pointers: /enumeration_acceptance_pass, /physical_result/host_enumerated, /physical_result/stock_host_mux_v2_handshake_pass, /physical_result/stock_mux_reads, /physical_result/stock_mux_writes, /physical_result/stock_mux_io_errors, /physical_result/info_or_pair_attempted, /physical_result/whole_usbmon_observation_complete, /physical_result/finite_trial_cleanup_result, /physical_result/cleanup_success_not_claimed",
+        "format": "json",
+        "content": "{\n  \"/enumeration_acceptance_pass\": true,\n  \"/physical_result/host_enumerated\": true,\n  \"/physical_result/stock_host_mux_v2_handshake_pass\": true,\n  \"/physical_result/stock_mux_reads\": 3,\n  \"/physical_result/stock_mux_writes\": 3,\n  \"/physical_result/stock_mux_io_errors\": 0,\n  \"/physical_result/info_or_pair_attempted\": false,\n  \"/physical_result/whole_usbmon_observation_complete\": false,\n  \"/physical_result/finite_trial_cleanup_result\": -2,\n  \"/physical_result/cleanup_success_not_claimed\": true\n}",
+        "note": "Exact selected fields from the later physical trial. The older enumeration record remains false and is retained below."
+      },
+      {
+        "id": "earlier-gates",
+        "document": "pinephone-usb-enumeration-2026-10-07.json",
+        "sha256": "e4ea9f0d694c136ff5164f7d4f52639fa79637b2c475addac775ba164f1f2025",
+        "locator": "JSON pointers: /enumeration_proven, /pairing_proven, /ideviceinfo_proven, /syslog_proven, /AFC_proven",
+        "format": "json",
+        "content": "{\n  \"/enumeration_proven\": false,\n  \"/pairing_proven\": false,\n  \"/ideviceinfo_proven\": false,\n  \"/syslog_proven\": false,\n  \"/AFC_proven\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E53",
+    "title": "A fixed USB delay did not admit lockdownd",
+    "environment": "Physical PinePhone",
+    "method": "Measured startup delay and matched host/device mux frames",
+    "observation": "A measured 30.0155-second soft-connect delay still receives stock ECONNREFUSED and RST at the local lockdownd connection. Matched complete mux frames narrow the fault beyond EP0.",
+    "limits": "The fixed-delay hypothesis is not sufficient; this is not proof of broken TCP or an absent baseband. Whole usbmon capture completeness remains false.",
+    "records": [
+      {
+        "document": "pinephone-usb-start-delay-2026-10-07.json",
+        "sha256": "01c3fd1b2202edd5a4d48d4be93abc306a89767819b3849920f579cf2e5b1ffb",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-usb-lockdownd-connection.md",
+        "sha256": "d4456fc8d98abb063fc2752175a46b0a2a117213828741fb6285121fc415c261",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Negative physical result",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A measured 30.0155-second soft-connect delay still receives stock ECONNREFUSED and RST at the local lockdownd connection. Matched complete mux frames narrow the fault beyond EP0."
+          ],
+          [
+            "Acceptance limit",
+            "The fixed-delay hypothesis is not sufficient; this is not proof of broken TCP or an absent baseband. Whole usbmon capture completeness remains false."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-usb-start-delay-2026-10-07.json",
+        "sha256": "01c3fd1b2202edd5a4d48d4be93abc306a89767819b3849920f579cf2e5b1ffb",
+        "locator": "JSON pointers: /physical_result, /hypothesis_result, /capture_limits",
+        "format": "json",
+        "content": "{\n  \"/physical_result\": {\n    \"measured_wait_seconds\": 30.015488208333334,\n    \"native_start_uart_receipt_seconds\": 64.948,\n    \"first_host_enumeration_seconds\": 81.772,\n    \"vid_pid\": \"05ac:1290\",\n    \"mux_version\": \"2.0\",\n    \"host_device_complete_frames_byte_identical\": 6,\n    \"destination_port\": 62078,\n    \"stock_bsd_error\": 61,\n    \"host_received_RST\": true,\n    \"pairing_attempted\": false,\n    \"native_timer_error\": 0,\n    \"native_timer_polls\": 32035,\n    \"native_cleanup_result\": -2,\n    \"cleanup_retained_until_reset\": true,\n    \"automatic_jumpdrive_seconds\": 214.101,\n    \"uart_released\": true\n  },\n  \"/hypothesis_result\": \"30-second deferral executed; same genuine BSD connect ECONNREFUSED. Listener timing is not sufficient to explain the fault.\",\n  \"/capture_limits\": {\n    \"metadata_complete\": true,\n    \"global_observation_complete\": false,\n    \"guarded_bulk_complete\": false,\n    \"ring_drops\": 0,\n    \"missing_cutoff_identity_completions\": 3,\n    \"unknown_bulk_discarded\": 1664,\n    \"reader_did_not_cover_full_recovery\": true,\n    \"wire_ACK_not_proven\": true,\n    \"original_failed_report_preserved\": true\n  }\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E54",
+    "title": "Listener timing is later than host preflight",
+    "environment": "Physical PinePhone",
+    "method": "Bounded periodic process/socket snapshots, stock logs and host ordering",
+    "observation": "A later diagnostic first positively samples the stock TCP listener 41.237 seconds after daemon startup. Host usbmux preflight starts at attach before that listener is observed. lockdownd stays alive; CommCenter genuinely checks in and reaches CFRunLoop.",
+    "limits": "The first sample is not exact bind time, and the creation-to-activation interval is not isolated RSA cost. Pairing and two-boot identity stability remain pending. The original runner and whole-capture gates are false despite scoped diagnostic/recovery success.",
+    "records": [
+      {
+        "document": "pinephone-lockdownd-combined-physical-2026-10-07.json",
+        "sha256": "e69249449da88cebf053953f97b9342d7d3efc3f4efd506d45fc0b8b813708f3",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-lockdownd-startup-static.md",
+        "sha256": "420f1bbf0e5b32518773d7e1c91e5619fb50350fc53ba956bbb95eee99d69512",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "pinephone-usb-kernel-snapshot-2026-10-07.json",
+        "sha256": "f52bad46c0d0e10bc49e399af49eab171de2425342227a777e055ca8bd87037a",
+        "access": "Private earlier snapshot record; selected negative result only"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; scoped diagnostic passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A later diagnostic first positively samples the stock TCP listener 41.237 seconds after daemon startup. Host usbmux preflight starts at attach before that listener is observed. lockdownd stays alive; CommCenter genuinely checks in and reaches CFRunLoop."
+          ],
+          [
+            "Acceptance limit",
+            "The first sample is not exact bind time, and the creation-to-activation interval is not isolated RSA cost. Pairing and two-boot identity stability remain pending. The original runner and whole-capture gates are false despite scoped diagnostic/recovery success."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-lockdownd-combined-physical-2026-10-07.json",
+        "sha256": "e69249449da88cebf053953f97b9342d7d3efc3f4efd506d45fc0b8b813708f3",
+        "locator": "JSON pointers: /diagnostic_and_recovery_passed, /original_runner_passed, /enumeration_seconds, /automatic_jumpdrive_seconds, /periodic/captured_samples, /interpretation/timing_limit, /interpretation/host_ordering, /not_accepted, /original_runner_limits, /safety/region_count, /safety/staged_files_verified, /safety/protected_regions_byte_identical, /safety/fat_fsck_exit, /verification/fresh_strict_114_regression_passed",
+        "format": "json",
+        "content": "{\n  \"/diagnostic_and_recovery_passed\": true,\n  \"/original_runner_passed\": false,\n  \"/enumeration_seconds\": 83.705,\n  \"/automatic_jumpdrive_seconds\": 248.893,\n  \"/periodic/captured_samples\": 25,\n  \"/interpretation/timing_limit\": \"listener first positively sampled 41.237s after daemon startup, not exact bind time; 12s creation-to-activation interval is not isolated RSA cost\",\n  \"/interpretation/host_ordering\": \"usbmuxd v2.0 connects at attach, before listener; initial preflight fails; no usable idevice_id listing in this trial\",\n  \"/not_accepted\": [\n    \"local pairing\",\n    \"ideviceinfo\",\n    \"idevicesyslog\",\n    \"AFC\",\n    \"actual stock UDID across two boots\",\n    \"phone-side listener gate (next candidate)\"\n  ],\n  \"/original_runner_limits\": [\n    \"whole usbmon ownership/completeness false: 15 unknown events and three missing completion identities\",\n    \"early reset/SETUP marker excluded by bounded head trace; not a claim that enumeration lacks real control transfers\"\n  ],\n  \"/safety/region_count\": 12,\n  \"/safety/staged_files_verified\": 793,\n  \"/safety/protected_regions_byte_identical\": true,\n  \"/safety/fat_fsck_exit\": 0,\n  \"/verification/fresh_strict_114_regression_passed\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "earlier-recovery-failure",
+        "document": "pinephone-usb-kernel-snapshot-2026-10-07.json",
+        "sha256": "f52bad46c0d0e10bc49e399af49eab171de2425342227a777e055ca8bd87037a",
+        "locator": "JSON pointers: /physical_capture/original_hardware_report_passed, /physical_capture/automatic_jumpdrive_recovery_observed, /physical_capture/parent_deadline_seconds, /physical_capture/whole_capture_complete",
+        "format": "json",
+        "content": "{\n  \"/physical_capture/original_hardware_report_passed\": false,\n  \"/physical_capture/automatic_jumpdrive_recovery_observed\": false,\n  \"/physical_capture/parent_deadline_seconds\": 230.059,\n  \"/physical_capture/whole_capture_complete\": false\n}",
+        "note": "Exact selected fields from the earlier failed snapshot. The later diagnostic and owner recovery do not erase this failure."
+      }
+    ]
+  },
+  {
+    "id": "E55",
+    "title": "A finite stream of real accelerometer samples",
+    "environment": "Physical PinePhone",
+    "method": "Raw MPU6050 reads after live mapping admission; UART/counter analysis",
+    "observation": "One finite trial records 100 consecutive MPU6050 samples over 14.562433 seconds, at 6.7983 observed callbacks/s, with monotonic timestamps and finite MPU/TWI restoration.",
+    "limits": "This rate is not hardware output data rate. No orientation calibration, stock HID motion publication or app rotation is accepted. There is no owner hand test.",
+    "records": [
+      {
+        "document": "pinephone-sensor-physical-stream-2026-10-07.json",
+        "sha256": "8570cc5c8208752379b7238ee89144e72a1656e580a7e59559adaefaacd0b27a",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-sensor-stream2-physical.md",
+        "sha256": "1633b48013d16e93cf3a6f866a88204969499c794e0c58e8838c02e6697c1d2c",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "One finite trial records 100 consecutive MPU6050 samples over 14.562433 seconds, at 6.7983 observed callbacks/s, with monotonic timestamps and finite MPU/TWI restoration."
+          ],
+          [
+            "Acceptance limit",
+            "This rate is not hardware output data rate. No orientation calibration, stock HID motion publication or app rotation is accepted. There is no owner hand test."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-sensor-physical-stream-2026-10-07.json",
+        "sha256": "8570cc5c8208752379b7238ee89144e72a1656e580a7e59559adaefaacd0b27a",
+        "locator": "JSON pointers: /samples/count, /samples/first_to_last_seconds, /samples/observed_callback_sample_rate_hz, /samples/axis_statistics/x/mean_g, /samples/axis_statistics/y/mean_g, /samples/axis_statistics/z/mean_g, /samples/sensor_output_data_rate_measured, /samples/calibration_proven, /native_hid_publication_enabled, /stock_rotation_proven, /safety/recovery_seconds, /recovery/checked_intervals, /recovery/immutable_interval_count, /recovery/staged_boot_files, /recovery/immutable_intervals_byte_identical",
+        "format": "json",
+        "content": "{\n  \"/samples/count\": 100,\n  \"/samples/first_to_last_seconds\": 14.562433,\n  \"/samples/observed_callback_sample_rate_hz\": 6.798314539884922,\n  \"/samples/axis_statistics/x/mean_g\": 0.04148193359375,\n  \"/samples/axis_statistics/y/mean_g\": 0.0062060546875,\n  \"/samples/axis_statistics/z/mean_g\": 1.026640625,\n  \"/samples/sensor_output_data_rate_measured\": false,\n  \"/samples/calibration_proven\": false,\n  \"/native_hid_publication_enabled\": false,\n  \"/stock_rotation_proven\": false,\n  \"/safety/recovery_seconds\": 154.018,\n  \"/recovery/checked_intervals\": 12,\n  \"/recovery/immutable_interval_count\": 11,\n  \"/recovery/staged_boot_files\": 575,\n  \"/recovery/immutable_intervals_byte_identical\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E56",
+    "title": "Sensor cleanup on one shutdown route",
+    "environment": "Physical PinePhone",
+    "method": "Finite trial, ordered UART continuation and frozen-code inference",
+    "observation": "A sibling trial records 100 samples, finite restoration, stock sync/unmount return, zero busy buffers and zero native drain; automatic Jumpdrive recovery takes 78.210 seconds.",
+    "limits": "Parent CLEANUP/CLEAN_STATUS execution is inferred from the pinned unique success continuation, without a direct success marker. Callback join, unload, motion publication and rotation remain unproven.",
+    "records": [
+      {
+        "document": "pinephone-sensor-shutdown-2026-10-07.json",
+        "sha256": "bc7155d89ced583817f3facf84a84a026723840764451c2770cb7e7090f05eee",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-sensor-shutdown-physical.md",
+        "sha256": "102c26b2b5e6509666501696e9fed4671573c0ee46e7a254ffe5c89f64ad56ab",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A sibling trial records 100 samples, finite restoration, stock sync/unmount return, zero busy buffers and zero native drain; automatic Jumpdrive recovery takes 78.210 seconds."
+          ],
+          [
+            "Acceptance limit",
+            "Parent CLEANUP/CLEAN_STATUS execution is inferred from the pinned unique success continuation, without a direct success marker. Callback join, unload, motion publication and rotation remain unproven."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-sensor-shutdown-2026-10-07.json",
+        "sha256": "bc7155d89ced583817f3facf84a84a026723840764451c2770cb7e7090f05eee",
+        "locator": "JSON pointers: /samples/count, /parent_shutdown_cleanup/direct_success_marker, /parent_shutdown_cleanup/execution_inferred_from_pinned_success_continuation, /parent_shutdown_cleanup/callback_join_proven, /parent_shutdown_cleanup/module_unload_proven, /stock_shutdown/busy_buffers_zero, /stock_shutdown/native_drain_zero, /safety/recovery_seconds, /recovery/checked_intervals, /recovery/immutable_interval_count, /recovery/staged_boot_files, /recovery/immutable_intervals_byte_identical",
+        "format": "json",
+        "content": "{\n  \"/samples/count\": 100,\n  \"/parent_shutdown_cleanup/direct_success_marker\": false,\n  \"/parent_shutdown_cleanup/execution_inferred_from_pinned_success_continuation\": true,\n  \"/parent_shutdown_cleanup/callback_join_proven\": false,\n  \"/parent_shutdown_cleanup/module_unload_proven\": false,\n  \"/stock_shutdown/busy_buffers_zero\": true,\n  \"/stock_shutdown/native_drain_zero\": true,\n  \"/safety/recovery_seconds\": 78.21,\n  \"/recovery/checked_intervals\": 12,\n  \"/recovery/immutable_interval_count\": 11,\n  \"/recovery/staged_boot_files\": 593,\n  \"/recovery/immutable_intervals_byte_identical\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E57",
+    "title": "Ranked next targets are an offline study",
+    "environment": "Static inspection",
+    "method": "Actual selected firmware inspection; kernel and renderer control-flow checks",
+    "observation": "The study conditionally ranks 3GS iOS 6.1.6 ahead of iPhone 5 iOS 10.3.4 and 5s/6 iOS 12.5.7. The selected kernels use 4 KiB pages, but fresh keybags, new bindings and display execution remain gates.",
+    "limits": "A static software-renderer route is not runtime UI acceptance. The inspected 5s renderer does not independently establish the iPhone 6 renderer. Modern SEP/keybag contracts are not supplied by the current explicit-key AES service.",
+    "records": [
+      {
+        "document": "next-ios-target-feasibility-2026-10-07.json",
+        "sha256": "b5788f65da53067b2233ca1d50cf87f2b040d47be56b983a145f0852ac41e873",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "121-next-ios-target-feasibility.md",
+        "sha256": "d1d55420f5a900a00772879bf537b68cc032de9fcb064fc8aa8017904833f69b",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-A-feasibility.md",
+        "sha256": "4b9834b5461dd1c4d1d693fae9bb6a273c56089371c6b065b207ab42d5f9d250",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-B-feasibility.md",
+        "sha256": "3e44f03183fff4f0324c6f8d15df4366e63d5d2aeffc9aec5907dd1b70262834",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-C-feasibility.md",
+        "sha256": "afc6dace1c663d313ead258f6b6473b0fb744964e3aaed0f5734f1c9f3f6e9fc",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The study conditionally ranks 3GS iOS 6.1.6 ahead of iPhone 5 iOS 10.3.4 and 5s/6 iOS 12.5.7. The selected kernels use 4 KiB pages, but fresh keybags, new bindings and display execution remain gates."
+          ],
+          [
+            "Acceptance limit",
+            "A static software-renderer route is not runtime UI acceptance. The inspected 5s renderer does not independently establish the iPhone 6 renderer. Modern SEP/keybag contracts are not supplied by the current explicit-key AES service."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "next-ios-target-feasibility-2026-10-07.json",
+        "sha256": "b5788f65da53067b2233ca1d50cf87f2b040d47be56b983a145f0852ac41e873",
+        "locator": "JSON pointers: /ranking, /recommendation/conditional, /security/keybag_runtime_executed, /security/earliest_missing_sep_boot_failure, /security/signature_and_fairplay_bypass_performed",
+        "format": "json",
+        "content": "{\n  \"/ranking\": [\n    \"B: iPhone2,1 iOS 6.1.6 / 10B500\",\n    \"A: iPhone5,1/5,2 iOS 10.3.4 / 14G61\",\n    \"C: iPhone 5s or 6 iOS 12.5.7 / 16H81\"\n  ],\n  \"/recommendation/conditional\": true,\n  \"/security/keybag_runtime_executed\": false,\n  \"/security/earliest_missing_sep_boot_failure\": \"Not executed / not established\",\n  \"/security/signature_and_fairplay_bypass_performed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E58",
+    "title": "10B500 stops at a real clock-gate dependency",
+    "environment": "PinePhone QEMU",
+    "method": "Diskless guest with actual QOM press/release stimuli and stock dispatch trace",
+    "observation": "The isolated 3GS 10B500 experiment reaches CPUIdle setup and genuine two-input stock keyboard dispatch, then panics on absent function-clock_gate.",
+    "limits": "No authentic normal Darwin banner, root storage, launchd, UI, stock reset or physical execution is accepted. Two inputs are not the full five-input GPIO contract; client delivery remains unproven.",
+    "records": [
+      {
+        "document": "ios6-10b500-buttons-2026-10-07.json",
+        "sha256": "f7e0389d1f02b9822d4c3f581edcfbd05651a994aa06b958e33760b7cc2c7650",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "10b500-cpu-idle-clock-abi.md",
+        "sha256": "df763e8850843b6783a1bf4dbc882c3fe119e819d1575dd5d6de2872bd47c929",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; QEMU only",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The isolated 3GS 10B500 experiment reaches CPUIdle setup and genuine two-input stock keyboard dispatch, then panics on absent function-clock_gate."
+          ],
+          [
+            "Acceptance limit",
+            "No authentic normal Darwin banner, root storage, launchd, UI, stock reset or physical execution is accepted. Two inputs are not the full five-input GPIO contract; client delivery remains unproven."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "ios6-10b500-buttons-2026-10-07.json",
+        "sha256": "f7e0389d1f02b9822d4c3f581edcfbd05651a994aa06b958e33760b7cc2c7650",
+        "locator": "JSON pointers: /actual_boot/next_first_fault, /actual_boot/CPUIdle_allocator_and_CPU_setup_observed, /actual_boot/normal_Darwin_banner, /actual_boot/launchd, /actual_boot/root_storage, /actual_host_stimulus/actual_QOM_masks, /actual_host_stimulus/stock_hid_client_delivery_proven, /physical_executed",
+        "format": "json",
+        "content": "{\n  \"/actual_boot/next_first_fault\": \"function-clock_gate is genuinely absent; AppleS5L8920XIO::start caller0x80787c77\",\n  \"/actual_boot/CPUIdle_allocator_and_CPU_setup_observed\": true,\n  \"/actual_boot/normal_Darwin_banner\": false,\n  \"/actual_boot/launchd\": false,\n  \"/actual_boot/root_storage\": false,\n  \"/actual_host_stimulus/actual_QOM_masks\": [\n    1,\n    0,\n    2,\n    0\n  ],\n  \"/actual_host_stimulus/stock_hid_client_delivery_proven\": false,\n  \"/physical_executed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E59",
+    "title": "Larger legacy preview queue, measured on hardware",
+    "environment": "Physical PinePhone",
+    "method": "One physical two-slot versus six-slot comparison before the first still",
+    "observation": "In the 1.1.4 comparison, distinct selected images increase from 7.8931 to 16.5198/s while native delivery changes from 29.6207 to 26.2787/s. Queue capacity changes from two to six.",
+    "limits": "These are original-renderer selection counters, not proof of physical panel presentation. The pair uses unequal intervals and is not a measured 3.1.3 throughput result.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "dfe73976cafdfb35ef86a2ed6a986b3cbd18f199a3012aa11597568705cc1032",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "102-pinephone-camera-render-rate.md",
+        "sha256": "85a8f427901810b12135cb27af7e7222b25399c70da42e260a05fd9f5d5cef84",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "In the 1.1.4 comparison, distinct selected images increase from 7.8931 to 16.5198/s while native delivery changes from 29.6207 to 26.2787/s. Queue capacity changes from two to six."
+          ],
+          [
+            "Acceptance limit",
+            "These are original-renderer selection counters, not proof of physical panel presentation. The pair uses unequal intervals and is not a measured 3.1.3 throughput result."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "dfe73976cafdfb35ef86a2ed6a986b3cbd18f199a3012aa11597568705cc1032",
+        "locator": "JSON pointers: /controlled_phone_comparison/phone13/queue_capacity, /controlled_phone_comparison/phone13/native/fps, /controlled_phone_comparison/phone13/renderer/fps, /controlled_phone_comparison/phone13/panel_update_fps, /controlled_phone_comparison/phone14/queue_capacity, /controlled_phone_comparison/phone14/native/fps, /controlled_phone_comparison/phone14/renderer/fps, /controlled_phone_comparison/phone14/panel_update_fps, /controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter",
+        "format": "json",
+        "content": "{\n  \"/controlled_phone_comparison/phone13/queue_capacity\": 2,\n  \"/controlled_phone_comparison/phone13/native/fps\": 29.62068367524263,\n  \"/controlled_phone_comparison/phone13/renderer/fps\": 7.893102602295655,\n  \"/controlled_phone_comparison/phone13/panel_update_fps\": 30.210111872728284,\n  \"/controlled_phone_comparison/phone14/queue_capacity\": 6,\n  \"/controlled_phone_comparison/phone14/native/fps\": 26.278742656491378,\n  \"/controlled_phone_comparison/phone14/renderer/fps\": 16.519793155036343,\n  \"/controlled_phone_comparison/phone14/panel_update_fps\": 30.54386549735618,\n  \"/controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E60",
+    "title": "Quiet EP0 advances beyond the address fault",
+    "environment": "Physical PinePhone",
+    "method": "Matched quiet control and bounded host/device events",
+    "observation": "Suppressing synchronous hot-path UART prints permits verified FADDR application 1.136083 ms after the status command and an addressed 18-byte descriptor. Configuration then fails at a guard seeing stale DATAEND.",
+    "limits": "This supports logging as a latency contributor, not the only cause. It does not measure status-IRQ-to-FADDR latency or individual wire ACKs. Later protocol gates supersede this earlier fault.",
+    "records": [
+      {
+        "document": "pinephone-usb-quiet-2026-10-07.json",
+        "sha256": "ee60a1feffd6f6cce5a3bf23baf65df9151db223f063efa97ad1099fd700fab3",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-usb-quiet-findings.md",
+        "sha256": "0860c884de6d0854b1a114813fbcc7a4ac7bdc4ed33b79ec6adb8733ae8f4383",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "7e18-usb-ep0-status-diagnosis.md",
+        "sha256": "1db4b2e5da9cd41fc5483d3c02a40340fc142ae6a610fdbf14d0785a1e67f818",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Negative physical result; addressed descriptor passed",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "Suppressing synchronous hot-path UART prints permits verified FADDR application 1.136083 ms after the status command and an addressed 18-byte descriptor. Configuration then fails at a guard seeing stale DATAEND."
+          ],
+          [
+            "Acceptance limit",
+            "This supports logging as a latency contributor, not the only cause. It does not measure status-IRQ-to-FADDR latency or individual wire ACKs. Later protocol gates supersede this earlier fault."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-usb-quiet-2026-10-07.json",
+        "sha256": "ee60a1feffd6f6cce5a3bf23baf65df9151db223f063efa97ad1099fd700fab3",
+        "locator": "JSON pointers: /physical_trial/status_command_to_verified_faddr_ns, /physical_trial/stock_address_dispatch_ns, /physical_trial/addressed_device_descriptor_bytes, /physical_trial/host_enumerated, /physical_trial/first_fatal_fault/reason, /physical_trial/first_fatal_fault/configuration_fifo_bytes",
+        "format": "json",
+        "content": "{\n  \"/physical_trial/status_command_to_verified_faddr_ns\": 1136083,\n  \"/physical_trial/stock_address_dispatch_ns\": 8917,\n  \"/physical_trial/addressed_device_descriptor_bytes\": 18,\n  \"/physical_trial/host_enumerated\": false,\n  \"/physical_trial/first_fatal_fault/reason\": \"RXPKTRDY plus stale DATAEND rejected by strict dispatch-time held-SETUP abort guard\",\n  \"/physical_trial/first_fatal_fault/configuration_fifo_bytes\": 0\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E61",
+    "title": "Selector back buffer accepted separately",
+    "environment": "Physical PinePhone",
+    "method": "Original C fixture, staged-file verification and owner visual/button check",
+    "observation": "The installed selector uses a separate back buffer and bounded damage copies. Owner visual and Volume/Power controls are accepted.",
+    "limits": "Later title/background styling is a separate candidate and must not inherit this visual acceptance. The selector is pre-XNU NuttX, not Linux underneath the OS.",
+    "records": [
+      {
+        "document": "pinephone-selector-damage-build-2026-10-05.json",
+        "sha256": "39f919ff8892fd399e3d36ee1e877d9b345460b202e4ee13a263402ea0aa6000",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "109-iphone313-stage4-and-selector.md",
+        "sha256": "c4de65bb273f6de88f8622a4819218db886baf9b8e3c88c93d28286f2a6e6c0d",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "116-owner-feedback-and-profile-recovery.md",
+        "sha256": "8ddec09d553fe2bfcbfe8d4915b0050721f9223ed32680bd267f31e2a3f83dce",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The installed selector uses a separate back buffer and bounded damage copies. Owner visual and Volume/Power controls are accepted."
+          ],
+          [
+            "Acceptance limit",
+            "Later title/background styling is a separate candidate and must not inherit this visual acceptance. The selector is pre-XNU NuttX, not Linux underneath the OS."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-selector-damage-build-2026-10-05.json",
+        "sha256": "39f919ff8892fd399e3d36ee1e877d9b345460b202e4ee13a263402ea0aa6000",
+        "locator": "JSON pointers: /hardware_executed, /installed, /owner_visual_acceptance, /owner_buttons_acceptance, /default_presents, /default_waits",
+        "format": "json",
+        "content": "{\n  \"/hardware_executed\": true,\n  \"/installed\": true,\n  \"/owner_visual_acceptance\": true,\n  \"/owner_buttons_acceptance\": true,\n  \"/default_presents\": 13,\n  \"/default_waits\": 750\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  },
+  {
+    "id": "E62",
+    "title": "Time zone configured, visible clock still pending",
+    "environment": "Physical PinePhone",
+    "method": "Private-data readback plus libc/CoreFoundation inspection; separate RTC initialization",
+    "observation": "The private 7E18 time-zone configuration selects America/Sao_Paulo and passes physical installation, libc/CoreFoundation resolution and recovery checks. UTC calendar initialization is a separate step.",
+    "limits": "The owner-visible clock hand check remains pending. A verified time-zone file does not establish every historical daylight-saving behavior or RTC drift.",
+    "status": "Configuration and physical readback passed; owner clock check pending",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "records": [
+      {
+        "document": "pinephone-private-timezone.json",
+        "sha256": "0e7dc6d512e7c01d3dc4ef4270f406b7676b921203bdf0d0303305bbad7458f0",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "pinephone-rtc-correction-2026-10-07.json",
+        "sha256": "ea703ece2ed4447753b34f191b4fd996eb3113fa8e81d737c0a08f38d6872043",
+        "access": "Private calendar validation; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-private-timezone.json",
+        "sha256": "0e7dc6d512e7c01d3dc4ef4270f406b7676b921203bdf0d0303305bbad7458f0",
+        "locator": "JSON pointers: /timezone_configuration_passed, /physical_private_data_install_passed, /physical_recovery_passed, /owner_visible_clock_accepted, /overall_timezone_user_acceptance_complete, /owner_selected_timezone",
+        "format": "json",
+        "content": "{\n  \"/timezone_configuration_passed\": true,\n  \"/physical_private_data_install_passed\": true,\n  \"/physical_recovery_passed\": true,\n  \"/owner_visible_clock_accepted\": false,\n  \"/overall_timezone_user_acceptance_complete\": false,\n  \"/owner_selected_timezone\": \"America/Sao_Paulo\"\n}",
+        "note": "Exact selected JSON values. No time-zone file, private-data image or identifier is distributed."
+      },
+      {
+        "id": "utc-calendar",
+        "document": "pinephone-rtc-correction-2026-10-07.json",
+        "sha256": "ea703ece2ed4447753b34f191b4fd996eb3113fa8e81d737c0a08f38d6872043",
+        "locator": "JSON pointers: /calendar_correction_passed, /os_boot/calendar_initialized, /os_boot/calendar_correct, /os_boot/automatic_jumpdrive_recovery, /timezone_change_pending",
+        "format": "json",
+        "content": "{\n  \"/calendar_correction_passed\": true,\n  \"/os_boot/calendar_initialized\": true,\n  \"/os_boot/calendar_correct\": true,\n  \"/os_boot/automatic_jumpdrive_recovery\": true,\n  \"/timezone_change_pending\": true\n}",
+        "note": "Exact selected UTC-calendar validation fields. The timezone_change_pending value belongs to this earlier calendar trial; the later time-zone installation is the separate fields excerpt."
+      }
+    ],
+    "exhibits": [
+      {
+        "id": "clock-gates",
+        "kind": "table",
+        "title": "Configuration and visible acceptance are separate",
+        "columns": [
+          "Gate",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Configuration and physical installation",
+            "Passed"
+          ],
+          [
+            "Owner-visible clock",
+            "Pending"
+          ]
+        ],
+        "sourceIds": [
+          "fields",
+          "utc-calendar"
+        ],
+        "interpretation": "The owner-visible clock hand check remains pending. A verified time-zone file does not establish every historical daylight-saving behavior or RTC drift."
+      }
+    ]
+  },
+  {
+    "id": "E63",
+    "title": "Physical MMC mapping advances a timeout frontier",
+    "environment": "Physical PinePhone",
+    "method": "Retained matched controller-mapping controls and UART checkpoints",
+    "observation": "In the early physical 4A102 MMC2 trial, non-cacheable controller mapping advances the clock-update timeout to a separate NTSR admission fault. Correcting the unsupported NTSR readback requirement reaches block-device/root discovery.",
+    "limits": "This September 26 control does not establish an HFS mount, launchd, graphical use, persistent physical writes or a known reset cause. Later storage acceptance has separate records.",
+    "status": "Historical bounded physical control; incomplete boot retained",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "records": [
+      {
+        "document": "pinephone-native-emmc-2026-09-26.json",
+        "sha256": "ca2b48b83a24c731ad8ba5a271847e1b4b2e028173c2bdf1f10e70f573be27ca",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "76-pinephone-mmc2-emmc.md",
+        "sha256": "9e05b4a5ab96d38f79423fe42deb8bc31d109a54aa242a84643002a2652685d4",
+        "access": "Private source chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "excerpts": [
+      {
+        "id": "mapping-controls",
+        "document": "pinephone-native-emmc-2026-09-26.json",
+        "sha256": "ca2b48b83a24c731ad8ba5a271847e1b4b2e028173c2bdf1f10e70f573be27ca",
+        "locator": "JSON pointers: /controls/0/observation, /controls/1/observation, /controls/2/observation, /source_correction, /successful_mmc2_run/hfs_root_mount_observed, /successful_mmc2_run/launchd_observed",
+        "format": "json",
+        "content": "{\n  \"/controls/0/observation\": \"Original XNU verbose UART, MMC2 clock-update timeout at stage 5, BSD root wait for disk0s1\",\n  \"/controls/1/observation\": \"MMC2 CMD remained 0x80202000 and NTSR read 0x80000000 through the original late I/O mapping\",\n  \"/controls/2/observation\": \"Non-cacheable mapping changed NTSR readback to 0; the old mandatory readback check stopped at stage 3\",\n  \"/source_correction\": \"A64 MMC2 NTSR bit 31 must not be required to read back after a write\",\n  \"/successful_mmc2_run/hfs_root_mount_observed\": false,\n  \"/successful_mmc2_run/launchd_observed\": false\n}",
+        "note": "Exact selected fields from the retained early physical controls. No run artifact, device identifier or proprietary code is included."
+      }
+    ],
+    "exhibits": [
+      {
+        "id": "mapping-frontiers",
+        "kind": "table",
+        "title": "A correct mapping reveals the next hardware gate",
+        "columns": [
+          "Control",
+          "Observed frontier"
+        ],
+        "rows": [
+          [
+            "Original late I/O mapping",
+            "MMC clock update timeout"
+          ],
+          [
+            "Non-cacheable mapping",
+            "NTSR unsupported readback requirement"
+          ],
+          [
+            "NTSR correction",
+            "Block device/root discovery; HFS mount and launchd unobserved"
+          ]
+        ],
+        "interpretation": "This September 26 control does not establish an HFS mount, launchd, graphical use, persistent physical writes or a known reset cause. Later storage acceptance has separate records.",
+        "sourceIds": [
+          "mapping-controls"
+        ]
+      }
+    ]
   }
 ]

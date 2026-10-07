@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E44",
+    "title": "Stock 3.1.3 Camera with a kernel JPEG provider",
+    "environment": "Physical PinePhone",
+    "method": "Owner hand test, separate storage readback and clean-design inspection",
+    "observation": "The accepted clean route keeps Apple userland text unchanged and serves stock H1ISP/IOSurface and AppleJPEGDriver clients. Preview, shutter, thumbnail, Photos and reboot persistence are owner accepted. Sensor acquisition is 640 × 480; 1600 × 1200 output is resampled.",
+    "limits": "The first successful hand test lacks concurrent UART; no pre-reboot JPEG digest exists for a byte-identical persistence claim. Higher-detail sensor modes and measured 3.1.3 preview throughput remain unaccepted.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-camera-2026-10-04.json",
+        "sha256": "c157d61c0a6322b332b9fb56c274f3b369f499d6d319746f808e6c50d8d1eb6d",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "110-iphone313-camera-port.md",
+        "sha256": "b6b0c718769b991ded8b7f28bc73cdd56beb55bb4abe3b472cb59dc423b608a1",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "IMG_0003.PNG",
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "access": "Reviewed research capture; full original pixels, selected file only"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The accepted clean route keeps Apple userland text unchanged and serves stock H1ISP/IOSurface and AppleJPEGDriver clients. Preview, shutter, thumbnail, Photos and reboot persistence are owner accepted. Sensor acquisition is 640 × 480; 1600 × 1200 output is resampled."
+          ],
+          [
+            "Acceptance limit",
+            "The first successful hand test lacks concurrent UART; no pre-reboot JPEG digest exists for a byte-identical persistence claim. Higher-detail sensor modes and measured 3.1.3 preview throughput remain unaccepted."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      },
+      {
+        "id": "e44-313-camera-stock",
+        "kind": "image",
+        "title": "Stock Camera screenshot recovered from the phone",
+        "src": "/ios/evidence/images/E44-313-camera-stock.png",
+        "width": 320,
+        "height": 480,
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "alt": "Unmodified stock Camera screenshot saved on the physical PinePhone, showing an upright robot model and thumbnail",
+        "caption": "Stock 7E18 Camera screenshot recovered from physical private-data storage. It shows upright preview and thumbnail, not a measured frame rate or native 1600 × 1200 sensor detail. The first hand-test UART gap remains explicit.",
+        "rights": "Depicted Apple interface and third-party subject retain their original rights. MIT covers this publication’s original prose and organization only.",
+        "interpretation": "Stock 7E18 Camera screenshot recovered from physical private-data storage. It shows upright preview and thumbnail, not a measured frame rate or native 1600 × 1200 sensor detail. The first hand-test UART gap remains explicit.",
+        "sourceIds": [
+          "e44-313-camera-stock"
+        ],
+        "original": {
+          "basename": "IMG_0003.PNG",
+          "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+          "cropBounds": null,
+          "pixelBounds": [
+            0,
+            0,
+            320,
+            480
+          ],
+          "pixelsPreserved": true,
+          "bytesPreserved": true
+        }
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-camera-2026-10-04.json",
+        "sha256": "c157d61c0a6322b332b9fb56c274f3b369f499d6d319746f808e6c50d8d1eb6d",
+        "locator": "JSON pointers: /clean_design/apple_userland_words_modified, /clean_design/signature_checks_modified, /clean_design/actual_capture, /clean_design/preview, /clean_design/still, /owner_acceptance/preview, /owner_acceptance/shutter, /owner_acceptance/thumbnail, /owner_acceptance/photo_opened_in_Photos, /owner_acceptance/photo_survives_reboot, /owner_acceptance/successful_test_UART_available, /persistence_test/pre_reboot_extracted_JPEG_hash_available",
+        "format": "json",
+        "content": "{\n  \"/clean_design/apple_userland_words_modified\": 0,\n  \"/clean_design/signature_checks_modified\": false,\n  \"/clean_design/actual_capture\": [\n    640,\n    480,\n    \"UYVY-full-range\"\n  ],\n  \"/clean_design/preview\": [\n    400,\n    304,\n    \"YUYV-video-range\"\n  ],\n  \"/clean_design/still\": [\n    1600,\n    1200,\n    \"YUYV-video-range-resampled\"\n  ],\n  \"/owner_acceptance/preview\": true,\n  \"/owner_acceptance/shutter\": true,\n  \"/owner_acceptance/thumbnail\": true,\n  \"/owner_acceptance/photo_opened_in_Photos\": true,\n  \"/owner_acceptance/photo_survives_reboot\": true,\n  \"/owner_acceptance/successful_test_UART_available\": false,\n  \"/persistence_test/pre_reboot_extracted_JPEG_hash_available\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      },
+      {
+        "id": "e44-313-camera-stock",
+        "document": "IMG_0003.PNG",
+        "sha256": "548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726",
+        "locator": "Whole capture; no crop; pixel bounds [0, 0, 320, 480]",
+        "format": "text",
+        "content": "Original reviewed physical-device screenshot capture. Output bytes and pixels are unchanged. Full private capture directory is not included.",
+        "note": "Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image."
+      }
+    ]
+  }
+}

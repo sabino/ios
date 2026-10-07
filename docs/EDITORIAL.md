@@ -19,7 +19,7 @@ The displayed map treats those relationships as undirected reading connections. 
 
 Evidence records contain `id`, `title`, `environment`, `method`, `observation`, `limits`, `status`, review date, optional recorded values, and private document identities. Recorded values always inherit the experimental scope of the record. Qualify estimates and separate repeated observations from a single run.
 
-The structured `atlas.json` export has `schemaVersion: 2`, edition metadata, full original chapter text, evidence, sources, corrections and glossary. It preserves the public editorial layer in an ordinary portable format. Generated search and sitemap files are rebuilt from the same source.
+The structured `atlas.json` export has `schemaVersion: 3`, edition metadata, paper/summary/edition text, the claims ledger, full original chapter text, evidence, sources, corrections and glossary. The separate `claims.json` export maps each claim to substrate, method, acceptance, source basenames, SHA-256 and locators. Generated search, diagrams, claims documentation and sitemap are rebuilt from the same source.
 
 ## Source handling
 

@@ -1,0 +1,19 @@
+E56 / pinephone-sensor-shutdown-2026-10-07.json
+Source SHA-256: bc7155d89ced583817f3facf84a84a026723840764451c2770cb7e7090f05eee
+Locator: JSON pointers: /samples/count, /parent_shutdown_cleanup/direct_success_marker, /parent_shutdown_cleanup/execution_inferred_from_pinned_success_continuation, /parent_shutdown_cleanup/callback_join_proven, /parent_shutdown_cleanup/module_unload_proven, /stock_shutdown/busy_buffers_zero, /stock_shutdown/native_drain_zero, /safety/recovery_seconds, /recovery/checked_intervals, /recovery/immutable_interval_count, /recovery/staged_boot_files, /recovery/immutable_intervals_byte_identical
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/samples/count": 100,
+  "/parent_shutdown_cleanup/direct_success_marker": false,
+  "/parent_shutdown_cleanup/execution_inferred_from_pinned_success_continuation": true,
+  "/parent_shutdown_cleanup/callback_join_proven": false,
+  "/parent_shutdown_cleanup/module_unload_proven": false,
+  "/stock_shutdown/busy_buffers_zero": true,
+  "/stock_shutdown/native_drain_zero": true,
+  "/safety/recovery_seconds": 78.21,
+  "/recovery/checked_intervals": 12,
+  "/recovery/immutable_interval_count": 11,
+  "/recovery/staged_boot_files": 593,
+  "/recovery/immutable_intervals_byte_identical": true
+}

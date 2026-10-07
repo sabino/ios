@@ -8,7 +8,9 @@
   "evidence": [
     "E35",
     "E37",
-    "E38"
+    "E38",
+    "E44",
+    "E59"
   ],
   "sources": [
     "S21"
@@ -20,9 +22,11 @@
     "measuring-performance",
     "camera-stills"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 ## A queue entry is a lifetime commitment
 
 The accepted Camera baseline exposed a useful mismatch: the producer delivered close to thirty frames each second, while the renderer selected fewer than eight distinct images per second. Many submissions were rejected before becoming selectable. Looking only at sensor timing would miss the boundary at which those frames disappeared. [E37](/ios/evidence/E37/)
@@ -44,3 +48,8 @@ Increasing downstream capacity is not sufficient if it consumes every available 
 The useful design principle is to account for every owner and reserve enough capacity for forward progress. It is not a rule that all queues should have six entries. That number belongs to the measured pool, renderer behavior and selected experiment.
 
 At the pinned publication revision, physical comparison of the larger queue was still pending. Host tests and a passing QEMU boot establish valuable safeguards but cannot supply the missing camera-performance result. A later record must show distinct-image improvement on the phone, preserved ownership and storage checks together. The earlier baseline remains available for comparison.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The formerly pending larger-queue candidate now has a separate physical 4A102 comparison. Six slots reduce queue pressure and increase selected-image rate in that one pair; selection does not prove individual physical frame presentation. The 7E18 camera retains exclusive capture-ring and destination ownership with stock completions, but no measured 7E18 rate is inferred from the older comparison. [E44](/ios/evidence/E44/) [E59](/ios/evidence/E59/)

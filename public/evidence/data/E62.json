@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E62",
+    "title": "Time zone configured, visible clock still pending",
+    "environment": "Physical PinePhone",
+    "method": "Private-data readback plus libc/CoreFoundation inspection; separate RTC initialization",
+    "observation": "The private 7E18 time-zone configuration selects America/Sao_Paulo and passes physical installation, libc/CoreFoundation resolution and recovery checks. UTC calendar initialization is a separate step.",
+    "limits": "The owner-visible clock hand check remains pending. A verified time-zone file does not establish every historical daylight-saving behavior or RTC drift.",
+    "status": "Configuration and physical readback passed; owner clock check pending",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "records": [
+      {
+        "document": "pinephone-private-timezone.json",
+        "sha256": "0e7dc6d512e7c01d3dc4ef4270f406b7676b921203bdf0d0303305bbad7458f0",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "pinephone-rtc-correction-2026-10-07.json",
+        "sha256": "ea703ece2ed4447753b34f191b4fd996eb3113fa8e81d737c0a08f38d6872043",
+        "access": "Private calendar validation; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-private-timezone.json",
+        "sha256": "0e7dc6d512e7c01d3dc4ef4270f406b7676b921203bdf0d0303305bbad7458f0",
+        "locator": "JSON pointers: /timezone_configuration_passed, /physical_private_data_install_passed, /physical_recovery_passed, /owner_visible_clock_accepted, /overall_timezone_user_acceptance_complete, /owner_selected_timezone",
+        "format": "json",
+        "content": "{\n  \"/timezone_configuration_passed\": true,\n  \"/physical_private_data_install_passed\": true,\n  \"/physical_recovery_passed\": true,\n  \"/owner_visible_clock_accepted\": false,\n  \"/overall_timezone_user_acceptance_complete\": false,\n  \"/owner_selected_timezone\": \"America/Sao_Paulo\"\n}",
+        "note": "Exact selected JSON values. No time-zone file, private-data image or identifier is distributed."
+      },
+      {
+        "id": "utc-calendar",
+        "document": "pinephone-rtc-correction-2026-10-07.json",
+        "sha256": "ea703ece2ed4447753b34f191b4fd996eb3113fa8e81d737c0a08f38d6872043",
+        "locator": "JSON pointers: /calendar_correction_passed, /os_boot/calendar_initialized, /os_boot/calendar_correct, /os_boot/automatic_jumpdrive_recovery, /timezone_change_pending",
+        "format": "json",
+        "content": "{\n  \"/calendar_correction_passed\": true,\n  \"/os_boot/calendar_initialized\": true,\n  \"/os_boot/calendar_correct\": true,\n  \"/os_boot/automatic_jumpdrive_recovery\": true,\n  \"/timezone_change_pending\": true\n}",
+        "note": "Exact selected UTC-calendar validation fields. The timezone_change_pending value belongs to this earlier calendar trial; the later time-zone installation is the separate fields excerpt."
+      }
+    ],
+    "exhibits": [
+      {
+        "id": "clock-gates",
+        "kind": "table",
+        "title": "Configuration and visible acceptance are separate",
+        "columns": [
+          "Gate",
+          "Result"
+        ],
+        "rows": [
+          [
+            "Configuration and physical installation",
+            "Passed"
+          ],
+          [
+            "Owner-visible clock",
+            "Pending"
+          ]
+        ],
+        "sourceIds": [
+          "fields",
+          "utc-calendar"
+        ],
+        "interpretation": "The owner-visible clock hand check remains pending. A verified time-zone file does not establish every historical daylight-saving behavior or RTC drift."
+      }
+    ]
+  }
+}

@@ -8,7 +8,11 @@
   "evidence": [
     "E07",
     "E08",
-    "E24"
+    "E24",
+    "E48",
+    "E50",
+    "E55",
+    "E62"
   ],
   "sources": [
     "S07",
@@ -19,9 +23,11 @@
     "async-storage",
     "power"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## A counter is a unit system
 
@@ -54,3 +60,8 @@ Two physical runs reached corresponding late userspace milestones even though on
 The stronger progress record combines increasing timer/idle counters, service attachment, process state, storage health and a controlled response. Each measures a different part of the system. A heartbeat proves that its callback runs; it does not prove that SpringBoard is responsive. A framebuffer response proves more about that client, but still says little about disk durability.
 
 Keeping those measurements separate makes the timer and interrupt layer a testable foundation for higher-level claims.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Current physical display and raw-sensor diagnostics use the nominal 24 MHz counter with their own elapsed boundaries. The 6.7983 Hz sensor callback rate is not the sensor output data rate. A requested USB timer cadence is not guaranteed scheduling. UTC RTC initialization and the verified São Paulo time-zone file/resolver are separate; the owner-visible clock hand check remains pending. [E48](/ios/evidence/E48/) [E50](/ios/evidence/E50/) [E55](/ios/evidence/E55/) [E62](/ios/evidence/E62/)

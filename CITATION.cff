@@ -3,15 +3,25 @@ message: "Please cite the edition and individual evidence record when referring 
 title: "iPhone OS Research Atlas"
 type: software
 authors:
-  - name: "iPhone OS Research Atlas contributors"
-version: "1.1.0"
-date-released: "2026-09-29"
-url: "https://sabino.pro/ios/"
+  - family-names: "Sabino"
+    given-names: "Felipe"
+version: "2.0.0"
+date-released: "2026-10-07"
+url: "https://sabino.pro/ios/paper/"
 repository-code: "https://github.com/sabino/ios"
 license: MIT
+preferred-citation:
+  type: article
+  title: "Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance"
+  authors:
+    - family-names: "Sabino"
+      given-names: "Felipe"
+  year: 2026
+  date-published: "2026-10-07"
+  url: "https://sabino.pro/ios/paper/"
 abstract: >-
-  An independent reference guide preserving original editorial accounts of
-  iPhone OS 1.1.4 research, with environment-specific evidence summaries,
+  An independent systems study of native iPhone OS 1.1.4 and 3.1.3 on the
+  PinePhone, with environment-specific evidence summaries,
   limitations, public architectural references and a connected concept map.
   Private experimental artifacts are not distributed and independent public
   reproduction is not claimed.

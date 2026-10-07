@@ -23,5 +23,17 @@ export const capabilityFocus: Record<string, string[]> = {
   'Audio output': ['kernel:IOKit'],
   'Networking / Wi-Fi': ['kernel:IOKit','kernel:BSD'],
   'Telephony': ['kernel:IOKit'],
+  'Shared 1.1.4 / 3.1.3 adapters': ['hardware:CPU','kernel:Mach','kernel:IOKit'],
+  'Panel boot selector': ['hardware:Display','hardware:CPU'],
+  'SD-free eMMC boot': ['hardware:Memory','kernel:IOKit','kernel:BSD'],
+  'Raw accelerometer samples': ['kernel:IOKit'],
+  'English locale & time zone': ['services:UIKit','apps:SpringBoard'],
+  'Complete power-off': ['kernel:IOKit','kernel:Mach'],
+  'Ordinary restart': ['hardware:CPU','kernel:Mach'],
+  'Idle display timing': ['hardware:Display','services:CoreSurface'],
+  'Legacy preview queue': ['hardware:OV5640','services:CoreSurface','apps:Camera'],
+  'USB device enumeration': ['kernel:IOKit'],
+  'USB pairing & services': ['kernel:IOKit','kernel:BSD'],
+  'GPU acceleration': ['hardware:Display','services:CoreSurface'],
 };
 export const capabilityKey = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');

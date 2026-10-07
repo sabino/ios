@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import SystemPlate from '../components/SystemPlate.astro';
+import {Content,frontmatter,getHeadings} from '../../content/paper.md';
+import {publication,url} from '../lib/content';
+import '../styles/publication.css';
+const headings=getHeadings().filter(h=>h.depth===2);
+const citation=`Felipe Sabino. “${frontmatter.title}: ${frontmatter.subtitle}.” iPhone OS Research Atlas, version ${frontmatter.version}, ${frontmatter.date}. https://sabino.pro/ios/paper/ (source snapshot ${publication.sourceRevision.slice(0,7)}).`;
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+<header class="paper-heading">
+  <p class="section-number">SYSTEMS RESEARCH · VERSION {frontmatter.version}</p>
+  <h1>{frontmatter.title}</h1><p class="paper-subtitle">{frontmatter.subtitle}</p>
+  <div class="paper-metadata"><strong>{frontmatter.author}</strong><time datetime={frontmatter.date}>7 October 2026</time><span>Source {publication.sourceRevision.slice(0,7)}</span></div>
+  <p class="paper-assistance">AI-assisted investigation, engineering and publication preparation. The author is responsible for the reviewed record. Evidence classes and limits remain explicit.</p>
+  <div class="article-tools"><button data-copy-citation={citation}>Copy citation</button><button data-print>Print paper</button><a href={url('summary/')}>Read the accessible summary →</a><a href={url('claims/')}>Inspect claims →</a></div>
+</header>
+<div class="publication-layout">
+  <aside class="publication-rail"><nav aria-label="Paper contents"><p class="mono">CONTENTS</p>{headings.map(h=><a href={'#'+h.slug}>{h.text}</a>)}</nav><p>QEMU gates, physical capture and owner acceptance answer different questions.</p><a href={url('edition/')}>Edition 2.0 boundary ↗</a></aside>
+  <div class="publication-body">
+    <section class="paper-plate" id="figure-1" aria-label="Figure 1: distinct execution substrates"><SystemPlate/><p class="paper-caption"><strong>Figure 1.</strong> Original interactive substrate plate. The 4A102 iPod reference, partial PinePhone QEMU contract and physical 4A102/7E18 results remain distinct. Each layer links to an explanatory chapter; placement is not a measured call graph.</p></section>
+    <article class="prose publication-prose"><Content/></article>
+    <section class="citation-box"><span class="mono">CITE THIS PAPER</span><p>{citation}</p><a href={url('claims/')}>Trace claims, methods and source basenames →</a></section>
+  </div>
+</div>
+</Base>

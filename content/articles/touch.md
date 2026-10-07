@@ -9,7 +9,9 @@
     "E21",
     "E17",
     "E20",
-    "E29"
+    "E29",
+    "E43",
+    "E51"
   ],
   "sources": [
     "S17",
@@ -22,9 +24,11 @@
     "native-iphone",
     "measuring-performance"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -69,3 +73,8 @@ The earlier touch gap is now closed for specific physical interactions. Goodix c
 A later trial exposed the missing distinction: two contact records shared the same interpreted finger identity. The consumer treated them as a collision. Stable distinct identities allowed the owner to enlarge the offline Photos grid by spreading two fingers. Trial 18 submitted 439 frames, 123 with two active contacts, and also accepted the visible brightness minimum and Power blank/wake. Its complete post-run data copy passed fsck with an unchanged root. [E29](/ios/evidence/E29/)
 
 The screenshot in the new record comes from that physical native run. It supports the captured screen state; the gesture claim rests on owner acceptance and the recorded contact path. General gesture, keyboard and application coverage remain open. The headless PinePhone QEMU tree disables touch, and a separate touch-enabled variant aborts early; neither is substitute acceptance for the phone.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The October 3 7E18 physical input/display run uses synthetic contacts through the genuine Z2 consumer; it is not human-finger acceptance. The October 7 daily trial separately accepts real slide-to-unlock and touch. The historical two-contact identity correction remains scoped to its own 4A102 gesture test. The alignment-safe trailing checksum rationale is retained in [C62](/ios/claims/#C62). [E43](/ios/evidence/E43/) [E51](/ios/evidence/E51/)

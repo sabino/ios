@@ -8,7 +8,9 @@
   "evidence": [
     "E18",
     "E17",
-    "E20"
+    "E20",
+    "E45",
+    "E51"
   ],
   "sources": [
     "S01"
@@ -18,9 +20,11 @@
     "buttons",
     "observability"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## The surface still contained the image
 
@@ -57,3 +61,8 @@ A tempting diagnostic shortcut is to force the last nonblack image to remain vis
 A better final acceptance records the guest request, resulting surface selection, visible frame and input response. The background should turn black when the client requests it; the device's power policy can then be tested independently.
 
 This investigation is a useful preservation result because it recovers a behavior, not just a picture. The original operating system is making a timed presentation decision, and the native adaptation must preserve enough of the event path for the user to reverse it.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The 7E18 daily hand test accepts Power blank/wake and complete Power-slider shutdown staying off for thirty seconds. Those are separate transitions; blanking does not establish whole-system suspend, and a transmitted PMIC request alone does not prove actual power-off. Earlier 4A102 fade measurements retain their original record. [E45](/ios/evidence/E45/) [E51](/ios/evidence/E51/)

@@ -1,0 +1,53 @@
+E50 / pinephone-display-timing-2026-10-07.json
+Source SHA-256: 47078abd485bac2f736d853dada1cfd112bc474088c520cf3f3b0f0d17e0abf6
+Locator: JSON pointers: /physical_followup/later64_frame_interval, /physical_followup/cache_policy_changed, /physical_followup/cpu_clock_changed, /physical_followup/owner_visual_acceptance
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical_followup/later64_frame_interval": {
+    "from_frame_exclusive": 64,
+    "to_frame_inclusive": 128,
+    "source_frames": 64,
+    "sampled_changes": 0,
+    "metrics": {
+      "total": {
+        "samples": 64,
+        "sum_ticks": 19497559,
+        "mean_ms": 12.693723307291666
+      },
+      "source": {
+        "samples": 64,
+        "sum_ticks": 7361130,
+        "mean_ms": 4.79240234375
+      },
+      "expand": {
+        "samples": 64,
+        "sum_ticks": 12002657,
+        "mean_ms": 7.814229817708333
+      },
+      "sync": {
+        "samples": 64,
+        "sum_ticks": 632,
+        "mean_ms": 0.00041145833333333334
+      },
+      "complete": {
+        "samples": 64,
+        "sum_ticks": 58703,
+        "mean_ms": 0.038218098958333335
+      },
+      "gap": {
+        "samples": 64,
+        "sum_ticks": 19758738,
+        "mean_ms": 12.86376171875
+      },
+      "log": {
+        "samples": 1,
+        "sum_ticks": 1737533,
+        "mean_ms": 72.39720833333334
+      }
+    }
+  },
+  "/physical_followup/cache_policy_changed": false,
+  "/physical_followup/cpu_clock_changed": false,
+  "/physical_followup/owner_visual_acceptance": false
+}

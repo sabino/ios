@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readArticles,data,validate} from '../scripts/content.mjs';
 import {searchArticles} from '../src/lib/search.mjs';
+import {readPublications,validatePublications} from '../scripts/publication-content.mjs';
 const articles=readArticles(),evidence=data('evidence'),sources=data('sources');
 test('published research references resolve and provenance is complete',()=>assert.deepEqual(validate(articles,evidence,sources),[]));
 test('editorial gate catches unknown evidence, damaged provenance and private paths',()=>{const a=structuredClone(articles),e=structuredClone(evidence);a[0].evidence.push('E999');a[0].body+=' /home/researcher/private';e[0].records[0].sha256='bad';const errors=validate(a,e,sources);assert.ok(errors.some(s=>s.includes('E999')));assert.ok(errors.some(s=>s.includes('provenance')));assert.ok(errors.some(s=>s.includes('private path')));});
@@ -28,4 +29,15 @@ test('evidence arrangement covers every stable record once and uses the establis
   assert.ok(entry.label.length>2&&entry.label.length<=28,id);
  }
  for(const event of data('timeline'))assert.ok(event.date<=evidence.find(e=>e.id===event.evidence).reviewedOn,event.evidence+' report must not follow its review');
+});
+
+test('paper citations, claims and acceptance boundaries resolve',()=>{
+ const publications=readPublications(),ledger=data('claims');
+ assert.deepEqual(validatePublications(publications,ledger,evidence),[]);
+ assert.equal(ledger.claims.length,64);
+ assert.equal(ledger.claims.find(c=>c.id==='C62').evidenceClass.substrate,'Static inspection');
+ const c=structuredClone(ledger);c.claims[0].evidence=['E999'];c.claims[1].sourceLocators[0].document='untracked.json';
+ const errors=validatePublications(publications,c,evidence);
+ assert.ok(errors.some(e=>e.includes('unresolved evidence')));
+ assert.ok(errors.some(e=>e.includes('unresolved locator')));
 });

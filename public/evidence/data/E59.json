@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E59",
+    "title": "Larger legacy preview queue, measured on hardware",
+    "environment": "Physical PinePhone",
+    "method": "One physical two-slot versus six-slot comparison before the first still",
+    "observation": "In the 1.1.4 comparison, distinct selected images increase from 7.8931 to 16.5198/s while native delivery changes from 29.6207 to 26.2787/s. Queue capacity changes from two to six.",
+    "limits": "These are original-renderer selection counters, not proof of physical panel presentation. The pair uses unequal intervals and is not a measured 3.1.3 throughput result.",
+    "records": [
+      {
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "dfe73976cafdfb35ef86a2ed6a986b3cbd18f199a3012aa11597568705cc1032",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "102-pinephone-camera-render-rate.md",
+        "sha256": "85a8f427901810b12135cb27af7e7222b25399c70da42e260a05fd9f5d5cef84",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "In the 1.1.4 comparison, distinct selected images increase from 7.8931 to 16.5198/s while native delivery changes from 29.6207 to 26.2787/s. Queue capacity changes from two to six."
+          ],
+          [
+            "Acceptance limit",
+            "These are original-renderer selection counters, not proof of physical panel presentation. The pair uses unequal intervals and is not a measured 3.1.3 throughput result."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-camera-render-rate-2026-10-01.json",
+        "sha256": "dfe73976cafdfb35ef86a2ed6a986b3cbd18f199a3012aa11597568705cc1032",
+        "locator": "JSON pointers: /controlled_phone_comparison/phone13/queue_capacity, /controlled_phone_comparison/phone13/native/fps, /controlled_phone_comparison/phone13/renderer/fps, /controlled_phone_comparison/phone13/panel_update_fps, /controlled_phone_comparison/phone14/queue_capacity, /controlled_phone_comparison/phone14/native/fps, /controlled_phone_comparison/phone14/renderer/fps, /controlled_phone_comparison/phone14/panel_update_fps, /controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter",
+        "format": "json",
+        "content": "{\n  \"/controlled_phone_comparison/phone13/queue_capacity\": 2,\n  \"/controlled_phone_comparison/phone13/native/fps\": 29.62068367524263,\n  \"/controlled_phone_comparison/phone13/renderer/fps\": 7.893102602295655,\n  \"/controlled_phone_comparison/phone13/panel_update_fps\": 30.210111872728284,\n  \"/controlled_phone_comparison/phone14/queue_capacity\": 6,\n  \"/controlled_phone_comparison/phone14/native/fps\": 26.278742656491378,\n  \"/controlled_phone_comparison/phone14/renderer/fps\": 16.519793155036343,\n  \"/controlled_phone_comparison/phone14/panel_update_fps\": 30.54386549735618,\n  \"/controlled_phone_comparison/phone14/renderer/physical_panel_presentation_proven_by_counter\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E58",
+    "title": "10B500 stops at a real clock-gate dependency",
+    "environment": "PinePhone QEMU",
+    "method": "Diskless guest with actual QOM press/release stimuli and stock dispatch trace",
+    "observation": "The isolated 3GS 10B500 experiment reaches CPUIdle setup and genuine two-input stock keyboard dispatch, then panics on absent function-clock_gate.",
+    "limits": "No authentic normal Darwin banner, root storage, launchd, UI, stock reset or physical execution is accepted. Two inputs are not the full five-input GPIO contract; client delivery remains unproven.",
+    "records": [
+      {
+        "document": "ios6-10b500-buttons-2026-10-07.json",
+        "sha256": "f7e0389d1f02b9822d4c3f581edcfbd05651a994aa06b958e33760b7cc2c7650",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "10b500-cpu-idle-clock-abi.md",
+        "sha256": "df763e8850843b6783a1bf4dbc882c3fe119e819d1575dd5d6de2872bd47c929",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "In progress; QEMU only",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The isolated 3GS 10B500 experiment reaches CPUIdle setup and genuine two-input stock keyboard dispatch, then panics on absent function-clock_gate."
+          ],
+          [
+            "Acceptance limit",
+            "No authentic normal Darwin banner, root storage, launchd, UI, stock reset or physical execution is accepted. Two inputs are not the full five-input GPIO contract; client delivery remains unproven."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "ios6-10b500-buttons-2026-10-07.json",
+        "sha256": "f7e0389d1f02b9822d4c3f581edcfbd05651a994aa06b958e33760b7cc2c7650",
+        "locator": "JSON pointers: /actual_boot/next_first_fault, /actual_boot/CPUIdle_allocator_and_CPU_setup_observed, /actual_boot/normal_Darwin_banner, /actual_boot/launchd, /actual_boot/root_storage, /actual_host_stimulus/actual_QOM_masks, /actual_host_stimulus/stock_hid_client_delivery_proven, /physical_executed",
+        "format": "json",
+        "content": "{\n  \"/actual_boot/next_first_fault\": \"function-clock_gate is genuinely absent; AppleS5L8920XIO::start caller0x80787c77\",\n  \"/actual_boot/CPUIdle_allocator_and_CPU_setup_observed\": true,\n  \"/actual_boot/normal_Darwin_banner\": false,\n  \"/actual_boot/launchd\": false,\n  \"/actual_boot/root_storage\": false,\n  \"/actual_host_stimulus/actual_QOM_masks\": [\n    1,\n    0,\n    2,\n    0\n  ],\n  \"/actual_host_stimulus/stock_hid_client_delivery_proven\": false,\n  \"/physical_executed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

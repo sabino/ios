@@ -1,0 +1,11 @@
+E54 / pinephone-usb-kernel-snapshot-2026-10-07.json
+Source SHA-256: f52bad46c0d0e10bc49e399af49eab171de2425342227a777e055ca8bd87037a
+Locator: JSON pointers: /physical_capture/original_hardware_report_passed, /physical_capture/automatic_jumpdrive_recovery_observed, /physical_capture/parent_deadline_seconds, /physical_capture/whole_capture_complete
+Exact selected fields from the earlier failed snapshot. The later diagnostic and owner recovery do not erase this failure.
+
+{
+  "/physical_capture/original_hardware_report_passed": false,
+  "/physical_capture/automatic_jumpdrive_recovery_observed": false,
+  "/physical_capture/parent_deadline_seconds": 230.059,
+  "/physical_capture/whole_capture_complete": false
+}

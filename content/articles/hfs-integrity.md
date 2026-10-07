@@ -12,7 +12,11 @@
     "E25",
     "E29",
     "E36",
-    "E40"
+    "E40",
+    "E44",
+    "E45",
+    "E47",
+    "E51"
   ],
   "sources": [
     "S05"
@@ -23,9 +27,11 @@
     "preservation-method",
     "camera-stills"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -91,3 +97,8 @@ The physical interaction record retains Auto-Lock preferences across a clean reb
 Both still-saving runs produced full 512 MiB data copies, clean bits and read-only fsck exit 0, with nine protected regions unchanged. This is an exercised application-persistence path, beyond a changed sector or mounted volume. It remains bounded to orderly reboot; it does not establish arbitrary power-loss durability.
 
 The production watchdog also has deliberate emulator panic and shutdown-stall controls. Physical normal petting and clean reboot do not prove recovery from every physical hang. Keep orderly unmount, filesystem validation and fallback reset as separate properties. [E40](/ios/evidence/E40/)
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The first clean 3.1.3 Camera acceptance is followed by a retained shutdown failure and narrowly bounded private-data recovery; it is not an initially clean shutdown claim. Later Power-slider halt and the October 7 daily trial pass fresh root/data filesystem checks. The daily photo reopens after cold power-on. Unlike the older VGA pair, no pre-reboot digest exists for the first successful 7E18 JPEG, so byte-identical before/after persistence is not asserted. [E44](/ios/evidence/E44/) [E45](/ios/evidence/E45/) [E47](/ios/evidence/E47/) [E51](/ios/evidence/E51/)

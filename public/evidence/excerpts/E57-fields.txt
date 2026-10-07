@@ -1,0 +1,16 @@
+E57 / next-ios-target-feasibility-2026-10-07.json
+Source SHA-256: b5788f65da53067b2233ca1d50cf87f2b040d47be56b983a145f0852ac41e873
+Locator: JSON pointers: /ranking, /recommendation/conditional, /security/keybag_runtime_executed, /security/earliest_missing_sep_boot_failure, /security/signature_and_fairplay_bypass_performed
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/ranking": [
+    "B: iPhone2,1 iOS 6.1.6 / 10B500",
+    "A: iPhone5,1/5,2 iOS 10.3.4 / 14G61",
+    "C: iPhone 5s or 6 iOS 12.5.7 / 16H81"
+  ],
+  "/recommendation/conditional": true,
+  "/security/keybag_runtime_executed": false,
+  "/security/earliest_missing_sep_boot_failure": "Not executed / not established",
+  "/security/signature_and_fairplay_bypass_performed": false
+}

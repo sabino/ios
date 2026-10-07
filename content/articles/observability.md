@@ -9,7 +9,12 @@
     "E16",
     "E24",
     "E25",
-    "E26"
+    "E26",
+    "E50",
+    "E53",
+    "E54",
+    "E56",
+    "E60"
   ],
   "sources": [
     "S14"
@@ -19,9 +24,11 @@
     "preservation-method",
     "display-blanking"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## A zero-filled buffer can mean no measurement happened
 
@@ -56,3 +63,8 @@ That record teaches more than deleting the misleading line from a status summary
 A screenshot without its selected surface and run identity loses much of its diagnostic value. A filesystem result without the input/output image identities cannot be assigned confidently to a trial. A comparison with different observation windows may merely sample different startup phases.
 
 This atlas therefore treats environment, method, date, document digest and limitations as part of the evidence, not administrative decoration. The measurements remain private experiment reports, but the public summaries preserve enough structure to explain why a conclusion was drawn and where a stronger conclusion would need new work.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Quiet hot-path USB logging advances address application, then a separate stale-DATAEND configuration fault appears. Host URBs do not expose every wire ACK, and complete selected mux frames do not establish whole-capture completeness. The later listener is first sampled 41.237 s after startup; this is not exact bind time or isolated RSA cost. Sensor cleanup inference has no direct success marker and no join/unload proof. [E50](/ios/evidence/E50/) [E53](/ios/evidence/E53/) [E54](/ios/evidence/E54/) [E56](/ios/evidence/E56/) [E60](/ios/evidence/E60/)

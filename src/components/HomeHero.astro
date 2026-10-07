@@ -11,19 +11,19 @@ import capabilities from '../data/capabilities.json';
       <div class="hero-copy">
         <div class="eyebrow"><span class="small-cross" aria-hidden="true">+</span> Independent systems research</div>
         <h1>iPhone OS,<br/><span>under the surface.</span></h1>
-        <p class="hero-dek">A field guide to an early mobile operating system—through the contracts that make it run, the experiments that reveal them, and the evidence that survives.</p>
-        <div class="hero-actions"><a class="button primary" href={url('articles/orientation/')}>Start reading <span aria-hidden="true">↗</span></a><a class="text-link" href={url('map/')}>Explore the concept map <span aria-hidden="true">→</span></a></div>
-        <div class="hero-meta"><span><strong>{articles.length}</strong> chapters</span><span><strong>{evidence.length}</strong> evidence records</span><span>1.1.4 / 4A102</span></div>
+        <p class="hero-dek">A systems study of early iPhone OS on open mobile hardware. Native execution, stock applications and physical acceptance—traced to a fixed research record.</p>
+        <div class="hero-actions"><a class="button primary" href={url('paper/')}>Read the paper <span aria-hidden="true">↗</span></a><a class="text-link" href={url('summary/')}>The study in plain language <span aria-hidden="true">→</span></a></div>
+        <div class="hero-meta"><span><strong>{articles.length}</strong> chapters</span><span><strong>{evidence.length}</strong> evidence records</span><span>1.1.4 + 3.1.3</span></div>
       </div>
       <LayerStack/>
     </div>
     <div class="hero-slide" data-hero-slide data-slide-title="What runs" role="group" aria-roledescription="slide" aria-label="2 of 4: What runs">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="small-cross" aria-hidden="true">+</span> What runs <span class="hero-edition">/ 1.1.4</span></div>
+        <div class="eyebrow"><span class="small-cross" aria-hidden="true">+</span> What runs <span class="hero-edition">/ 3.1.3</span></div>
         <h2>Old software.<br/><span>New ground.</span></h2>
-        <p class="hero-dek">Apple’s 2008 operating system on a PinePhone. Follow the native port from boot and display to touch, camera and the work still ahead.</p>
+        <p class="hero-dek">iPhone OS 3.1.3 now runs natively on the PinePhone. Explore the accepted touch, Camera, Photos and power-off workflow, alongside the separate 1.1.4 profiles.</p>
         <div class="hero-actions"><a class="button primary" href={url('status/')}>See what runs <span aria-hidden="true">↗</span></a><a class="text-link" href={url('articles/three-machines/')}>Meet the three environments <span aria-hidden="true">→</span></a></div>
-        <p class="hero-snapshot"><span class="mono">REVIEWED SNAPSHOT / {capabilities.updated}</span>Touch, Camera preview and saved photographs now have dated evidence. Capability status follows the same reviewed edition.</p>
+        <p class="hero-snapshot"><span class="mono">REVIEWED SNAPSHOT / {capabilities.updated}</span>The October 7 owner test accepts Camera/Photos and reopening a photo after cold power-on. Ordinary restart and USB pairing retain separate gates.</p>
       </div>
       <DeviceShowcase variant="hero"/>
     </div>
@@ -33,7 +33,7 @@ import capabilities from '../data/capabilities.json';
         <h2>From sensor<br/><span>to viewfinder.</span></h2>
         <p class="hero-dek">The stock Camera app shows live frames from the PinePhone’s sensor. Follow the path through capture, pixel conversion and image ownership to the screen.</p>
         <div class="hero-actions"><a class="button primary" href={url('articles/camera-preview/')}>Follow the camera path <span aria-hidden="true">↗</span></a><a class="text-link" href={url('status/#interaction/camera')}>Camera capabilities <span aria-hidden="true">→</span></a></div>
-        <p class="hero-snapshot"><span class="mono">PHYSICAL PINEPHONE / M68AP</span>Upright, exposed preview is accepted in the reviewed trial. Frame delivery, rendering and distinct images are separate measurements.</p>
+        <p class="hero-snapshot"><span class="mono">PHYSICAL PINEPHONE / 7E18</span>Stock 3.1.3 Camera uses original kernel providers. Accepted preview and capture do not establish a measured preview frame rate.</p>
       </div>
       <ResearchStory kind="camera"/>
     </div>
@@ -41,9 +41,9 @@ import capabilities from '../data/capabilities.json';
       <div class="hero-copy">
         <div class="eyebrow"><span class="small-cross" aria-hidden="true">+</span> Beyond the preview</div>
         <h2>A photograph.<br/><span>A fresh boot.</span></h2>
-        <p class="hero-dek">A shutter press is only the beginning. Two original Camera photographs survived checked reboots and opened again in Photos, with matching file hashes.</p>
-        <div class="hero-actions"><a class="button primary" href={url('articles/camera-stills/')}>Follow a saved photograph <span aria-hidden="true">↗</span></a><a class="text-link" href={url('evidence/E36/')}>Inspect the capture <span aria-hidden="true">→</span></a></div>
-        <p class="hero-snapshot"><span class="mono">REVIEWED SNAPSHOT / {capabilities.updated}</span>Acceptance covers genuine 640 × 480 sensor images. Higher-resolution modes and broader gallery behavior remain outside this result.</p>
+        <p class="hero-dek">A shutter press is only the beginning. In the accepted 3.1.3 daily test, the owner saved a photograph, powered the phone off and reopened it after cold power-on.</p>
+        <div class="hero-actions"><a class="button primary" href={url('articles/camera-stills/')}>Follow a saved photograph <span aria-hidden="true">↗</span></a><a class="text-link" href={url('evidence/E51/')}>Inspect the daily test <span aria-hidden="true">→</span></a></div>
+        <p class="hero-snapshot"><span class="mono">REVIEWED SNAPSHOT / {capabilities.updated}</span>The 1600 × 1200 output is resampled from 640 × 480 acquisition. More output pixels do not establish more captured detail.</p>
       </div>
       <ResearchStory kind="photo"/>
     </div>

@@ -14,7 +14,13 @@
     "E34",
     "E36",
     "E38",
-    "E39"
+    "E39",
+    "E47",
+    "E48",
+    "E51",
+    "E53",
+    "E54",
+    "E56"
   ],
   "sources": [
     "S18"
@@ -26,9 +32,11 @@
     "camera-stills",
     "measuring-performance"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -73,3 +81,8 @@ Preservation succeeds when the next researcher inherits both the useful result a
 The camera sequence supplies another reason to retain intermediate failures. A very dark first DMA frame proved capture but not useful exposure. Later app-visible preview and post-reboot JPEG persistence closed different boundaries. The saved-photo record retains the first image’s transient black display even though both files reopened after reboot. [E34](/ios/evidence/E34/) [E36](/ios/evidence/E36/)
 
 Performance evidence also resists a single success label. An isolated queue replay is synthetic even when it executes original ARM bookkeeping. A physical atomic-hotspot fix can remove nearly all measured trap overhead without producing a consistent UI timing improvement. Naming those limits makes the accepted findings more useful. [E38](/ios/evidence/E38/) [E39](/ios/evidence/E39/)
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Edition 2.0 retains E01–E40 and adds separately reviewed records through the committed October 7 listener diagnosis. Frozen staging, finite diagnostic recovery, fresh immutable readback and owner acceptance remain distinct gates. A failed fixed USB delay and an earlier failed automatic return are kept beside the later scoped result. The publication’s [claims ledger](/ios/claims/) records source identities and exact locators; hashes do not establish independent reproduction of unavailable private reports. [E47](/ios/evidence/E47/) [E48](/ios/evidence/E48/) [E51](/ios/evidence/E51/) [E53](/ios/evidence/E53/) [E54](/ios/evidence/E54/) [E56](/ios/evidence/E56/)

@@ -11,7 +11,10 @@
     "E17",
     "E18",
     "E35",
-    "E37"
+    "E37",
+    "E41",
+    "E43",
+    "E50"
   ],
   "sources": [
     "S01",
@@ -25,9 +28,11 @@
     "camera-preview",
     "frame-retirement"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -70,3 +75,8 @@ The next investigation should follow the first concrete failure of the next requ
 The physical stock Camera now displays an accepted live preview, adding an image-queue consumer to the earlier framebuffer and surface observations. Orientation, exposure, memory guards and clean restoration passed the bounded trial. [E35](/ios/evidence/E35/)
 
 This is software-path acceptance, not GPU acceleration or broad graphics compatibility. Native delivery, distinct renderer selection and panel-update counters differ substantially. Follow the [preview chapter](/ios/articles/camera-preview/) for the measured baseline and the ownership boundary that limits its fresh-image rate. [E37](/ios/evidence/E37/)
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+7E18 selects the stock software compositor after an initial hardware-context failure. The shared display provider supplies its independently measured IOSurface contract. Ordinary launch configuration changes, rather than Apple executable instruction edits, select that path. The later 64-presentation idle interval averages 12.6937 ms elapsed work with zero sampled changes; GPU acceleration and animation performance remain unaccepted. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E50](/ios/evidence/E50/)
