@@ -5,6 +5,8 @@
 .paper-assistance{max-width:78ch;font-size:12px;color:var(--muted);line-height:1.8;margin:22px 0}
 .paper-heading .article-tools{display:flex;flex-wrap:wrap;gap:16px;line-height:1.7}
 .paper-heading .article-tools a{color:var(--blue)}
+.paper-downloads{margin:26px 0 22px;padding:18px 20px;border:1px solid var(--rule);border-left:3px solid var(--blue);font-size:14px;line-height:1.6}
+.paper-downloads p{margin:0 0 10px}
 .publication-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:54px;padding:44px 0 80px;align-items:start}
 .publication-rail{position:sticky;top:105px;font-size:11px;line-height:1.8;max-height:calc(100vh - 135px);overflow:auto}
 .publication-rail nav{display:grid;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--rule)}

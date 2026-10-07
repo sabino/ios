@@ -15,6 +15,11 @@ The atlas preserves the discoveries, failed explanations and remaining questions
 
 The publication includes a long-form paper, accessible summary, edition note and 64-claim ledger, 63 evidence records with 98 exhibits and 85 inspectable source excerpts, and 34 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
 
+The paper page also offers a typeset preprint PDF, an arXiv source ZIP with
+curated ancillary data, submission metadata and an upload guide. The preprint is
+prepared for submission; it has not been submitted or peer reviewed. See
+[preparation and rebuilding instructions](docs/ARXIV.md).
+
 ## What the evidence establishes
 
 Edition 2.0 reviews source revision `15b3a954f6d81eb858d0c11f372a8ae1e29d0788` (7 October 2026). The physical 7E18 daily workflow accepts touch, stock Camera/Photos, complete power-off and photo reopening after cold power-on. SD-free eMMC boot, a panel selector, real raw accelerometer samples and an idle display timing baseline have separate evidence. Native USB enumeration and stock mux advance to a sampled lockdownd listener frontier; pairing/AFC, stock rotation, repeated ordinary restart acceptance, GPU, audio, networking, telephony and full suspend remain open. The Camera output is 1600 × 1200 resampled from 640 × 480 acquisition; 7E18 preview FPS is unmeasured. E01–E40 retain their earlier payloads and snapshots; E41–E63 add reviewed reports and retained failures. See [the edition note](https://sabino.pro/ios/edition/) and [changelog](docs/CHANGELOG.md).
@@ -63,6 +68,7 @@ The browser check covers the main page templates, shared header/content/footer g
 | `src/components/` | Original reusable diagrams |
 | `src/lib/` | Content relationships, local search and progressive enhancement |
 | `scripts/` | Editorial validation, link checks and browser QA |
+| `arxiv/`, `public/downloads/` | Reviewed preprint TeX, print figures, ancillary data and downloadable artifacts |
 | `docs/EDITORIAL.md` | Evidence model, maintenance and publication protocol |
 | `public/atlas.json` | Generated, portable edition of the public content |
 

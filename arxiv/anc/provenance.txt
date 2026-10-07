@@ -1,0 +1,18 @@
+Curated ancillary records for the preprint, edition 2.0, 7 October 2026.
+
+These files are reports of private experiments, not independent public reproductions.
+evidence.json: 63 reviewed records, source identities, selected excerpts and limits.
+claims.json: 64 claim mappings, evidence classes and remaining gates.
+paper-evaluation.json: exact selected values used for the camera and display plots.
+
+Publication source snapshot: 15b3a954f6d81eb858d0c11f372a8ae1e29d0788
+The article lists the 44 records it cites. The full reviewed catalog is retained here.
+Captures E43-313-lock-qemu.png, E43-313-home-qemu.png and E44-313-camera-stock.png
+are selected, complete, byte-identical files; no retouching or crop is performed.
+Their source basenames, SHA-256 and pixel bounds are in evidence.json.
+Original plot/diagram PDFs are explanatory drawings, not capture evidence.
+
+Original text, diagrams, data organization and website code are MIT licensed.
+Depicted third-party interfaces retain their original rights. The repository MIT
+license does not transfer those rights. Firmware, source implementation, device
+images, raw capture files, credentials and private identifiers are not included.
