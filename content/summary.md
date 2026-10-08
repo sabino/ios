@@ -39,4 +39,4 @@ The [capability explorer](/ios/status/) shows each feature’s evidence and limi
 
 ## What is public?
 
-This site publishes original explanations, diagrams, selected measurements and reviewed captures. It does not distribute Apple firmware, keys, the private port implementation or storage images. Source hashes identify the reviewed private reports; they do not make those reports independently reproducible. This is an independent study by Felipe Sabino, with AI-assisted engineering and publication preparation, and no Apple or PINE64 affiliation.
+This site publishes original explanations, diagrams, selected measurements and reviewed captures. It does not distribute Apple firmware, keys, the private port implementation or storage images. Source hashes identify the reviewed private reports; they do not make those reports independently reproducible. This is an independent study by Felipe Guilherme Sabino, with AI-assisted engineering and publication preparation, and no Apple or PINE64 affiliation.

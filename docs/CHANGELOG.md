@@ -4,11 +4,12 @@
 
 Source revision: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`. Local review edition; publication awaits preview approval.
 
-- Add the systems paper by Felipe Sabino, accessible summary, edition note, 64-claim ledger and seven figures, including the retained substrate plate. Ten tables separate measurement boundaries and trial origins.
+- Add the systems paper by Felipe Guilherme Sabino, accessible summary, edition note, 64-claim ledger and seven figures, including the retained substrate plate. Ten tables separate measurement boundaries and trial origins.
 - Add E41–E63 for the two-build adaptation, physical 7E18 workflow, clean Camera path, halt/reset, eMMC/selector/recovery, handoff state, display timing, USB frontier, sensors, conditional next-target studies and historical MMC controls. Preserve E01–E40.
 - Publish three unchanged selected captures with source basenames, hashes and bounds; no selector photograph was available. Retain failures and limits, including fixed USB delay, whole-capture incompleteness, TF-A HVC stall, resampled stills and unaccepted sensor rotation.
 - Update all 30 chapters with explicitly dated advances; connect homepage, showcase, status, timeline, search, sources and portable exports. Original implementation, firmware, keys, private paths and device identifiers remain excluded.
 - Generate diagrams and measurement exports from curated fields; validate the paper citations and ledger alongside existing evidence.
+- Refine the preprint to an 18-page, two-column layout with consistent grayscale charts and print diagrams; correct the author to Felipe Guilherme Sabino throughout. Add six checked related papers (21 references total), retain the absence of a priority claim, and remove the HTML submission/download panel at the author's request.
 
 
 ## 1.2 — 1 October 2026

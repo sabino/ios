@@ -5,7 +5,7 @@ import {Content,frontmatter,getHeadings} from '../../content/paper.md';
 import {publication,url} from '../lib/content';
 import '../styles/publication.css';
 const headings=getHeadings().filter(h=>h.depth===2);
-const citation=`Felipe Sabino. “${frontmatter.title}: ${frontmatter.subtitle}.” iPhone OS Research Atlas, version ${frontmatter.version}, ${frontmatter.date}. https://sabino.pro/ios/paper/ (source snapshot ${publication.sourceRevision.slice(0,7)}).`;
+const citation=`${publication.author}. “${frontmatter.title}: ${frontmatter.subtitle}.” iPhone OS Research Atlas, version ${frontmatter.version}, ${frontmatter.date}. https://sabino.pro/ios/paper/ (source snapshot ${publication.sourceRevision.slice(0,7)}).`;
 ---
 <Base title={frontmatter.title} description={frontmatter.description}>
 <header class="paper-heading">
@@ -13,10 +13,6 @@ const citation=`Felipe Sabino. “${frontmatter.title}: ${frontmatter.subtitle}.
   <h1>{frontmatter.title}</h1><p class="paper-subtitle">{frontmatter.subtitle}</p>
   <div class="paper-metadata"><strong>{frontmatter.author}</strong><time datetime={frontmatter.date}>7 October 2026</time><span>Source {publication.sourceRevision.slice(0,7)}</span></div>
   <p class="paper-assistance">AI-assisted investigation, engineering and publication preparation. The author is responsible for the reviewed record. Evidence classes and limits remain explicit.</p>
-  <div class="paper-downloads" aria-label="Preprint downloads">
-    <p><strong>Preprint prepared for arXiv submission.</strong> Not yet submitted or peer reviewed.</p>
-    <div class="article-tools"><a href={url('downloads/early-iphone-os-native-pinephone-preprint.pdf')} download>Download preprint PDF</a><a href={url('downloads/early-iphone-os-native-pinephone-preprint-source.zip')} download>Download arXiv source ZIP</a><a href={url('downloads/early-iphone-os-native-pinephone-preprint-metadata.json')} download>Submission metadata</a><a href={url('downloads/arxiv-submission-guide.txt')} download>Submission guide</a></div>
-  </div>
   <div class="article-tools"><button data-copy-citation={citation}>Copy citation</button><button data-print>Print paper</button><a href={url('summary/')}>Read the accessible summary →</a><a href={url('claims/')}>Inspect claims →</a></div>
 </header>
 <div class="publication-layout">

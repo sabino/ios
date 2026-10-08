@@ -80,7 +80,7 @@ Before publishing a new edition, follow [the editorial protocol](docs/EDITORIAL.
 
 ## Credits and license
 
-[Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) inspired the connected-concept and guided-reading organization; its code is not incorporated. Claude participated in interface design and review. Original diagrams are publication schematics; genuine interface captures retain their explicit substrate and rights notices. AI assisted investigation, engineering and publication preparation; Felipe Sabino is responsible for the reviewed record.
+[Understand-Anything](https://github.com/Egonex-AI/Understand-Anything) inspired the connected-concept and guided-reading organization; its code is not incorporated. Claude participated in interface design and review. Original diagrams are publication schematics; genuine interface captures retain their explicit substrate and rights notices. AI assisted investigation, engineering and publication preparation; Felipe Guilherme Sabino is responsible for the reviewed record.
 
 Original content, diagrams, curated data organization and site code: [MIT](LICENSE). Schibsted Grotesk and IBM Plex Mono: SIL Open Font License, included under `public/licenses/`. Linked works retain their own licenses. Apple and PINE64 names are descriptive; this publication is independent of both organizations.
 

@@ -9,7 +9,7 @@
 
 Edition 2.0 is reviewed on **7 October 2026** at source revision `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`. It covers the shared 4A102/7E18 adaptation, physical 3.1.3 acceptance, recovery and USB work through the committed listener diagnostic. Later live-session candidates are outside this snapshot.
 
-The publication adds the [systems paper](/ios/paper/), a [plain-language summary](/ios/summary/) and the [claims ledger](/ios/claims/). Felipe Sabino is the author; the paper states how AI assistance participated in engineering and preparation.
+The publication adds the [systems paper](/ios/paper/), a [plain-language summary](/ios/summary/) and the [claims ledger](/ios/claims/). Felipe Guilherme Sabino is the author; the paper states how AI assistance participated in engineering and preparation.
 
 ## New reviewed results
 

@@ -28,10 +28,10 @@ The preparation follows the official requirements checked on 7 October 2026:
 
 - [Format requirements](https://info.arxiv.org/help/policies/format_requirements.html):
   author and title, complete references, machine-readable single-spaced text,
-  10–14 point body type and at least one-inch margins. This article uses an A4
-  `article` class with 11-point body type, 10-point captions/tables and 1.05-inch
-  margins including the page-number footer. Print diagram labels remain over
-  10 points after placement. It has no line numbering, margin notes or
+  10–14 point body type and at least one-inch margins. This article uses a US
+  Letter, two-column `article` class, 10-point body/captions/tables and 1.05-inch
+  margins including the page-number footer. Print diagram labels are drawn at
+  their final 10-point size. It has no line numbering, margin notes or
   obstructive watermark.
 - [TeX source requirements](https://info.arxiv.org/help/submit_tex.html):
   a single top-level `main.tex`, fixed date, embedded PDF/PNG figures, standard
@@ -47,8 +47,46 @@ The preparation follows the official requirements checked on 7 October 2026:
   reviewed JSON records and exact plotted values are in `anc/`; figures used by
   the article remain in `figures/`.
 
-There is no universal arXiv cover page or mandatory journal template. The plain
-academic layout avoids claiming association with a journal or arXiv acceptance.
+There is no universal arXiv cover page or mandatory journal template. This is an
+independent systems preprint layout, without publisher branding or an acceptance
+claim.
+
+## Typesetting and figure style
+
+The [USENIX systems-paper guidance](https://www.usenix.org/conferences/author-resources/paper-templates)
+informs the two-column US Letter layout and 10-point Times-style body on
+12-point leading. arXiv's minimum one-inch margins take precedence over the
+USENIX template's wider text block: the preprint uses a 6.4-inch text width,
+an 18-point column gap and 1.05-inch margins. Standard PSNFSS packages provide
+embedded Nimbus fonts; no publisher-specific class or custom font lookup is
+needed during upload.
+
+Wide matrices, architecture diagrams and descriptive tables span both columns.
+Camera and display plots are drawn at the actual column width, with 10-point
+labels, zero-based linear axes, units and directly labelled values. Solid and
+outline bars distinguish queue configurations in grayscale. The single logging
+sample has an explicitly separate scale from the 64-presentation idle means;
+there are no invented uncertainty bands or population comparisons. This follows
+the [ACM figure guidance](https://authors.acm.org/binaries/content/assets/publications/taps/acm_layout_submission_template.pdf)
+to preserve distinctions in grayscale.
+
+Original explanatory diagrams use square boxes, light gray fills, consistent
+line weights and directed connectors. Dashed architecture connectors identify
+boot/reset transitions. The three reviewed captures retain their original bytes
+and colors. Captions remain below figures and above tables. Long source names
+can wrap at punctuation, and table widths follow the actual column contents.
+Explicit cross-references connect deferred floats to their relevant subsection.
+
+This formatting revision replaces the earlier 25-page single-column reader with
+an 18-page paper, retaining seven figures, ten tables and the reviewed findings.
+Related work now contains twenty-one primary references, including six verified
+papers supplied by the author. The corrected full author name is used throughout
+the paper, site citation and metadata. Research findings, capture hashes and the
+edition's source revision are unchanged.
+
+The HTML paper omits the preprint submission panel, download controls, metadata
+and submission-guide links at the author's request. The independently prepared
+PDF and source archive remain available as files.
 
 ## Submission decisions
 
@@ -60,7 +98,7 @@ in the form. The repository MIT license covers original material; depicted
 third-party interfaces retain their original rights. No license agreement or
 submitter attestation has been selected on the author's behalf.
 
-The author is Felipe Sabino, as in the reviewed publication. No unverified
+The author is Felipe Guilherme Sabino, as in the reviewed publication. No unverified
 affiliation, email address or ORCID was inserted. Journal reference, DOI and
 report number are intentionally empty. A new account may need
 [endorsement](https://info.arxiv.org/help/endorsement.html) for the chosen

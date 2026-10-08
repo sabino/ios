@@ -1,6 +1,6 @@
 # Paper outline — edition 2.0
 
-Reviewed source snapshot: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`, 7 October 2026. Author: Felipe Sabino. Working title: **Rehosting early iPhone OS on open mobile hardware: native execution, hardware contracts and bounded acceptance**.
+Reviewed source snapshot: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`, 7 October 2026. Author: Felipe Guilherme Sabino. Working title: **Rehosting early iPhone OS on open mobile hardware: native execution, hardware contracts and bounded acceptance**.
 
 ## Argument and scope
 
@@ -10,7 +10,7 @@ The paper preserves the 4A102 work as a historical comparison and introduces the
 
 ## Detailed section outline
 
-1. **Title and publication metadata.** Felipe Sabino; edition 2.0; 7 October 2026; fixed source revision. Honest note: AI agents assisted investigation, implementation, test development and editorial work; the author owns experiments, review and responsibility. Publication source is separate from the private implementation.
+1. **Title and publication metadata.** Felipe Guilherme Sabino; edition 2.0; 7 October 2026; fixed source revision. Honest note: AI agents assisted investigation, implementation, test development and editorial work; the author owns experiments, review and responsibility. Publication source is separate from the private implementation.
 2. **Abstract, about 200 words.** Preservation problem → exact-build binary adaptation → physical 1.1.4/3.1.3 results → clean Camera/Photos/cold-power-cycle acceptance → idle display timing and finite sensor data → USB frontier and evidence limitations. No unexplained performance or novelty claim.
 3. **Introduction.** Why historical hardware loss also loses OS behavior; why an app screenshot or kernel log is insufficient. State research question and four numbered contributions: shared adapters across builds; physical consumer contracts; recovery/integrity methodology; discriminating case studies and data.
 4. **Background.** A64 Cortex-A53 with AArch32, GIC, eMMC, panel/touch, PMIC, OV5640 and MUSB; original S5L8900/ARM11 targets. XNU 933 versus 1357 exact binary identities; Mach/BSD/IOKit and service matching; historical compositor; Tow-Boot/TF-A handoff and pre-XNU NuttX initialization. Explain EL2 resident compatibility/reset separately from NuttX boot-time work. C01–C08, C41–C43, C48–C49.

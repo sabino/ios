@@ -7,7 +7,7 @@
   "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
   "independentReproduction": false,
   "license": "MIT",
-  "author": "Felipe Sabino",
+  "author": "Felipe Guilherme Sabino",
   "paperVersion": "2.0",
   "paper": "/ios/paper/"
 }

@@ -2,9 +2,13 @@
 
 Reviewed locally on 7 October 2026. Research snapshot: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`. This records a publication update and local preview, not deployment or a new hardware experiment.
 
+The later two-column preprint, full-name correction, six-paper literature
+addition and HTML submission-panel removal are reviewed in `ARXIV_REVIEW.md`.
+The checks below describe the earlier publication state with 15 references.
+
 ## Content and provenance
 
-The systems paper, accessible summary, edition note and 64-claim ledger accompany the updated 30-chapter atlas. Seven figures and ten tables distinguish substrates, measurement boundaries and acceptance. The paper names Felipe Sabino as author and states the role of AI assistance. All 63 evidence records remain connected to the reading atlas, search and portable exports.
+The systems paper, accessible summary, edition note and 64-claim ledger accompany the updated 30-chapter atlas. Seven figures and ten tables distinguish substrates, measurement boundaries and acceptance. The paper names Felipe Guilherme Sabino as author and states the role of AI assistance. All 63 evidence records remain connected to the reading atlas, search and portable exports.
 
 - E01–E40 compare unchanged with the preceding edition's source payloads. Their dates and source revisions remain separate from the new publication metadata.
 - E41–E63 were checked against the committed research snapshot. The audit verifies 60 supporting document identities and 189 selected JSON values at their recorded pointers. Static source/commit rationale remains distinct from a physical exception capture.

@@ -1,23 +1,25 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,letterpaper,twocolumn]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}
+\usepackage{mathptmx}
+\usepackage[scaled=.92]{helvet}
+\usepackage{courier}
 \usepackage[margin=1.05in,includefoot]{geometry}
+\setlength{\columnsep}{18pt}
 \usepackage{microtype}
 \usepackage{graphicx}
 \usepackage{booktabs,tabularx,array}
 \usepackage{caption}
 \usepackage{enumitem}
-\usepackage[section]{placeins}
-\usepackage{multicol}
+\usepackage{placeins}
 \usepackage{xurl}
 \usepackage[unicode]{hyperref}
 \input{glyphtounicode}
 \pdfgentounicode=1
-\hypersetup{hidelinks,pdfauthor={Felipe Sabino},pdftitle={Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance},pdfsubject={Preprint prepared for arXiv submission; not yet submitted}}
-\captionsetup{font=small,labelfont=bf,justification=raggedright,singlelinecheck=false}
+\hypersetup{hidelinks,pdfauthor={Felipe Guilherme Sabino},pdftitle={Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance},pdfsubject={Preprint prepared for arXiv submission; not yet submitted}}
+\captionsetup{font=normalsize,labelfont=bf,justification=raggedright,singlelinecheck=false,skip=5pt}
 \setlength{\emergencystretch}{2em}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{0pt}
 \widowpenalty=10000
 \clubpenalty=10000
 \setlist{nosep,leftmargin=*}
@@ -25,21 +27,40 @@
 \renewcommand{\bottomfraction}{0.85}
 \renewcommand{\textfraction}{0.08}
 \renewcommand{\floatpagefraction}{0.7}
-\title{Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance}
-\author{Felipe Sabino}
-\date{7 October 2026}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.7}
+\setcounter{topnumber}{3}
+\setcounter{dbltopnumber}{3}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{10pt plus 2pt minus 2pt}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0pt}
+  {-2.5ex plus -.5ex minus -.2ex}{1.2ex plus .2ex}
+  {\normalfont\large\bfseries\raggedright}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0pt}
+  {-2ex plus -.4ex minus -.2ex}{.8ex plus .2ex}
+  {\normalfont\normalsize\bfseries\raggedright}}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{10pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\setlength{\@dblfptop}{0pt}
+\setlength{\@dblfpsep}{10pt}
+\setlength{\@dblfpbot}{0pt plus 1fil}
+\renewcommand{\@maketitle}{\begin{center}
+{\fontsize{16}{18}\selectfont\bfseries Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance\par}\vskip .7em
+{\large Felipe Guilherme Sabino\par}\vskip .4em
+{\normalsize 7 October 2026. Preprint prepared for arXiv; not yet submitted or peer reviewed.\par}
+\end{center}\vskip .7em}
+\makeatother
 \begin{document}
+\raggedbottom
 \maketitle
-\begin{center}\small Preprint. Prepared for arXiv submission. Not yet submitted or peer reviewed.\end{center}
-\begin{abstract}
+\section*{Abstract}
 Preserving a historical mobile operating system requires more than retaining its installation archive: observable behavior depends on obsolete processors, peripheral contracts and service ordering. This study investigates whether early iPhone OS can execute on an open, non-Apple mobile board while retaining original userspace consumers. We adapt the 1.1.4/4A102 and 3.1.3/7E18 kernels to the PinePhone's Allwinner A64 using shared original hardware adapters, kernel-hash-selected bindings and selective architectural compatibility handling. QEMU supplies bounded development gates; physical capture, protected-media readback and owner hand tests establish acceptance. The 7E18 daily trial accepts touch, battery indication, upright stock Camera preview, photo saving, complete power-off and reopening a photograph after cold power-on. Camera output is 1600 \(\times\) 1200, resampled from 640 \(\times\) 480 acquisition. A 64-presentation idle interval averages 12.7 ms of elapsed display work; a separate finite diagnostic reads 100 real accelerometer samples at 6.80 observed callbacks/s. Native USB enumeration and the stock mux handshake advance to a listener-readiness frontier, with ordinary pairing still pending. Case studies expose differences between modeled and physical CPU state, memory attributes, logging latency and inherited regulator ownership. The result is a bounded native preservation system and an auditable experimental method, rather than complete device compatibility or an independently reproducible public port. \hyperlink{e-E41}{\textsf{E41}} \hyperlink{e-E44}{\textsf{E44}} \hyperlink{e-E50}{\textsf{E50}} \hyperlink{e-E51}{\textsf{E51}} \hyperlink{e-E52}{\textsf{E52}} \hyperlink{e-E54}{\textsf{E54}} \hyperlink{e-E55}{\textsf{E55}}
-\end{abstract}
-\noindent\small\textbf{Publication boundary.} Edition 2.0; reviewed source snapshot
-\texttt{15b3a95} (full revision in the ancillary data). AI-assisted investigation,
-engineering and publication preparation; the author is responsible for the reviewed record.
-The implementation, firmware and private experiment artifacts are not distributed.
-Curated ancillary records support inspection, not independent public reproduction.
-\normalsize
+
+\noindent\textit{Publication snapshot: edition 2.0, source \texttt{15b3a95}.
+Curated ancillary records support inspection of private experiments;
+independent reproduction of the port is not provided.}
 \section{Introduction}
 
 Historical mobile software is unusually dependent on the device around it. A retained application may expect an old graphics service; that service may expect a particular kernel user client; the kernel may expect a processor instruction or power controller that no current board supplies. An archive preserves bytes. It does not, by itself, preserve the interaction among those layers.
@@ -66,12 +87,12 @@ The study makes four contributions:
 
 This is a versioned research publication derived from private experiments. The evidence pages publish selected fields, reviewed captures and original explanations. They identify the unavailable source reports by basename, digest and locator. That supports an authorized audit; it does not provide independent public reproduction. The claims ledger exposes the claim-to-source mapping, and the edition note fixes the October 7 boundary.
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
 \centering\includegraphics[width=\linewidth]{figures/substrates.pdf}
 \caption{Distinct execution substrates. Original print schematic separating the
 4A102 iPod reference, partial PinePhone QEMU contract and physical 4A102/7E18
 results. This is explanatory organization, not a measured call graph.}
-\label{fig:1}\end{figure}
+\label{fig:1}\end{figure*}
 
 \section{Background}
 
@@ -81,11 +102,12 @@ The original iPhone and first-generation iPod touch targets belong to the S5L890
 
 The inspected 4A102 kernel identifies XNU 933.0.0.211, while 7E18 identifies XNU 1357.5.30. Both selected historical kernels are ARM32, but their boot arguments, reserved initialization space, service layouts and userspace contracts differ. Public XNU source explains architectural organization; a nearby release is not proof of either proprietary ARM binary's layout. The source inspection and exact-build binding gates carry that burden. \cite{ref-3} \hyperlink{e-E27}{\textsf{E27}} \hyperlink{e-E41}{\textsf{E41}}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption[]{The two accepted software generations are not interchangeable ABIs. The kernel identities come from reviewed target inspection; original-root differences and shared 4A102 kernel identity are separate observations. \hyperlink{e-E01}{\textsf{E01}} \hyperlink{e-E41}{\textsf{E41}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:1}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=0.65\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.95\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.4\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Software target} & \textbf{Original product context} & \textbf{Kernel identity / adaptation boundary} \\
 \midrule
@@ -93,7 +115,7 @@ The inspected 4A102 kernel identifies XNU 933.0.0.211, while 7E18 identifies XNU
 3.1.3 / 7E18 & M68AP / iPhone1,1 & XNU 1357.5.30; independently measured bindings, IOSurface and newer service expectations \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 \subsection{XNU and IOKit contracts}
 
@@ -117,18 +139,26 @@ Corellium uses ARM-native virtualization through its CHARM hypervisor. It should
 
 \textbf{Open mobile hardware.} PINE64 documentation, the mainline PinePhone device tree and the postmarketOS ecosystem provide hardware and Linux-port context. Those sources help identify components and ownership expectations; Linux support does not automatically transfer into IOKit. The postmarketOS device page was inaccessible to the review fetch after a redirect and anti-bot response, so this paper makes no current support claim from that page. Readable PINE64 documentation and the pinned mainline description support the board facts. \cite{ref-1} \cite{ref-2} \cite{ref-11}
 
+\textbf{Device reuse and security.} Roty, Mühlberg and Determe study PinePhone repurposing through boot-chain integrity, TrustZone isolation and hardware-bound secrets. Their experiments show the difficulty of reconstructing trust anchors after leaving a device's original ecosystem. The present work shares the concern for device longevity, but its preservation target is a historical proprietary OS on an open replacement board. Successful stock application behavior here does not establish the secure-repurposing guarantees examined there. \cite{ref-16}
+
+\textbf{PinePhone as an experimental platform.} Keim, Yoon and Karabiyik examine filesystem and application artifacts from Ubuntu Touch on a Braveheart PinePhone, using removable-media acquisition. Bowler and colleagues use off-the-shelf PinePhone hardware for a non-custodial digital-currency wallet prototype and explicitly leave final user testing open. These are forensic and application-design studies; neither establishes the native historical-kernel or peripheral contracts evaluated here. \cite{ref-17} \cite{ref-18}
+
+\textbf{User control and isolated peripherals.} Sovereign Smartphone argues for transferring control to users while retaining existing software ecosystems and cites open phones among the alternatives. Its later TEEtime architecture addresses protected peripheral access among mutually distrustful domains. TEEtime's evaluated implementation runs on Arm FVP, with stated limitations in the simulator's access-control enforcement; it is not a measured PinePhone deployment. Its ownership model is useful architectural context, rather than evidence that this preservation system supplies comparable isolation. \cite{ref-19} \cite{ref-20}
+
+\textbf{Cellular measurement methodology.} MobileAtlas separates SIM location from modem location for controlled cellular security and privacy experiments. Its probe uses a Raspberry Pi 4 with a Quectel EG25-G; the paper notes that the PinePhone uses the same modem. This is relevant to future modem measurement, not evidence of PinePhone execution or native XNU telephony. \cite{ref-21}
+
 \textbf{Translation and rehosting literature.} Bellard describes QEMU's portable dynamic translation and full-system emulation. Avatar combines emulation with real embedded hardware for analysis, while P2IM abstracts peripheral interfaces to make firmware testing progress without the original hardware. These works show why CPU execution and peripheral behavior must be considered separately. Our engineering distinction is physical acceptance: a modeled return value can advance a test while failing to establish a real display, radio or power transition. \cite{ref-12} \cite{ref-13} \cite{ref-14}
 
 The resulting position is specific, without a priority claim: \textbf{native execution of selected historical iPhone OS builds on a physical non-Apple mobile board, using original hardware providers and explicitly bounded evidence}. Neither the literature review nor the private experiments establish that this is the first such execution in all historical settings.
 
 \section{System design}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/native-architecture.pdf}
 \caption[]{\textbf{Boot and runtime architecture.} Original schematic for the 7E18 PinePhone route. NuttX performs boot-time panel/selector work; ordinary kernel and application instructions execute as AArch32 on the A53. Original providers supply hardware contracts beneath stock consumers. Resident EL2 compatibility/reset and separate Jumpdrive recovery are distinct branches. This is explanatory organization, not a captured call graph. \hyperlink{e-E41}{\textsf{E41}}, \hyperlink{e-E46}{\textsf{E46}}, \hyperlink{e-E48}{\textsf{E48}}.}
 \label{fig:2}
-\end{figure}
+\end{figure*}
 
 \subsection{Exact identity before adaptation}
 
@@ -192,14 +222,14 @@ The accepted 7E18 path is stock PhotoLibrary \(\rightarrow\) Celestial/FigRecord
 
 The 1600 \(\times\) 1200 still is resampled from that VGA acquisition. It satisfies the stock format contract but adds no captured scene detail. Owner acceptance covers preview, shutter, thumbnail, Photos and persistence. The first successful hand test lacks contemporaneous UART, and its pre-reboot JPEG digest was not extracted. We therefore report reopening and decoded post-reboot media, not byte-identical before/after persistence for that test. The later daily trial supplies continuous UART and cold-power-cycle acceptance. \hyperlink{e-E44}{\textsf{E44}} \hyperlink{e-E51}{\textsf{E51}}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=.31\linewidth]{figures/E43-313-lock-qemu.png}
 \includegraphics[width=.31\linewidth]{figures/E43-313-home-qemu.png}
 \includegraphics[width=.31\linewidth]{figures/E44-313-camera-stock.png}
 \caption[]{\textbf{Genuine captures from distinct experiments.} Left and middle: 7E18 guest pixels before and after synthetic unlock/Home replay in QEMU; the stock home-screen overlay is preserved. Right: an unmodified stock Camera screenshot recovered from physical private-data storage. All selected files retain original bytes and pixels, with source basenames and SHA-256 in \hyperlink{e-E43}{\textsf{E43}} and \hyperlink{e-E44}{\textsf{E44}}. None is a photograph of the panel, and the cellular labels establish no radio connection.}
 \label{fig:3}
-\end{figure}
+\end{figure*}
 
 \subsection{Selector, eMMC and recovery}
 
@@ -221,14 +251,12 @@ Each trial declares its build, loaded profile, substrate, writable scope, captur
 
 The physical loop is stage \(\rightarrow\) boot \(\rightarrow\) capture \(\rightarrow\) recovery \(\rightarrow\) readback. Exclusive UART ownership avoids concurrent readers or accidental commands. Host-side USB observations, device RAM traces and counter timestamps retain distinct clocks and completeness limits. Watchdog/RTC recovery is finite for diagnostic profiles; it is not silently enabled in accepted daily profiles. Owner hand tests run only after the necessary technical gate and provide a different form of evidence from automated capture. \hyperlink{e-E40}{\textsf{E40}} \hyperlink{e-E48}{\textsf{E48}} \hyperlink{e-E51}{\textsf{E51}} \hyperlink{e-E54}{\textsf{E54}}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/trial-loop.pdf}
 \caption[]{\textbf{Bounded experimental loop.} Original schematic of the physical 7E18 method. Diagnostic watchdog leases and RTC return are configured per trial; accepted normal profiles keep boot/runtime watchdogs disabled. Protected bytes, permitted private-data deltas and owner-visible behavior are separate acceptance gates. A failed gate remains in the record and returns to diagnosis. \hyperlink{e-E48}{\textsf{E48}}, \hyperlink{e-E51}{\textsf{E51}}, \hyperlink{e-E54}{\textsf{E54}}.}
 \label{fig:4}
-\end{figure}
-
-\FloatBarrier
+\end{figure*}
 
 \subsection{Integrity checks after recovery}
 
@@ -238,11 +266,14 @@ Earlier camera recovery required a narrowly bounded private-data repair after a 
 
 \subsection{Two axes of evidence}
 
-\begin{table}[htbp]
+Table~\ref{tab:2} separates the experiment substrate from its observation method; neither axis is an acceptance state.
+
+\begin{table*}[t]
 \centering
 \caption[]{Evidence classification has both a substrate and an observation method. ``In progress'' is an acceptance state, not a sixth substrate. Mixed records identify which part belongs to which environment. Claims ledger, research method.}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:2}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=0.85\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.85\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.15\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.15\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Substrate} & \textbf{Method} & \textbf{What the method can establish} & \textbf{What it cannot inherit} \\
 \midrule
@@ -254,7 +285,7 @@ Files/binaries & Static inspection & Exact inspected layouts or control flow & R
 Synthetic probe & Purpose-built fixture & The isolated contract under supplied assumptions & Complete client lifetime or real hardware \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 \section{Evaluation}
 
@@ -264,11 +295,12 @@ The evaluation addresses four questions: does the shared design reach original c
 
 The October 3 default-selector trial provides buffered host-receipt milestones. The difference between the menu-start and choice markers is 12.049 seconds, consistent with the intended twelve-second selection. The later display and launchd markers are stages in that run, not universal cold-boot latencies. The run's synthetic touch replay is superseded only for human use by the separate daily hand test. \hyperlink{e-E43}{\textsf{E43}} \hyperlink{e-E51}{\textsf{E51}}
 
-\begin{table}[htbp]
+\begin{table}[tb]
 \centering
-\caption[]{One physical 7E18 selector trial, measured from its host capture origin. UART buffering and work before each printed marker limit timing interpretation. Source: \texttt{pinephone-iphone313-stage4-selector-2026-10-03.json}, \texttt{/selector\_physical\_run/markers\_seconds}. \hyperlink{e-E43}{\textsf{E43}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\caption[]{One physical 7E18 selector trial, measured from its host capture origin. UART buffering and work before each printed marker limit timing interpretation. Source: \texttt{pinephone-\allowbreak{}iphone313-\allowbreak{}stage4-\allowbreak{}selector-\allowbreak{}2026-\allowbreak{}10-\allowbreak{}03.\allowbreak{}json}, \texttt{/\allowbreak{}selector\_\allowbreak{}physical\_\allowbreak{}run/\allowbreak{}markers\_\allowbreak{}seconds}. \hyperlink{e-E43}{\textsf{E43}}}
+\label{tab:3}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=0.85\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.65\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.5\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Milestone} & \textbf{Host receipt, s} & \textbf{Interpretation} \\
 \midrule
@@ -287,11 +319,12 @@ The October 7 daily test is stronger for end-to-end use: accepted touch and Came
 
 The historical 1.1.4 comparison changes queue capacity from two to six. Different native-delivery, renderer-selection and panel-update rates reveal the bottleneck: panel updates can repeatedly reuse one selected image. The comparison improves distinct selection while native delivery falls modestly. It is one physical pair with unequal intervals, not a controlled multi-run speed claim and not a 3.1.3 measurement. \hyperlink{e-E59}{\textsf{E59}}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
-\caption[]{Physical legacy Camera comparison from \texttt{/controlled\_phone\_comparison/phone13} and \texttt{/phone14}. ``Selected'' is the original renderer boundary; these counters do not individually prove physical panel presentation. Unequal sampling windows and one pair limit generalization. \hyperlink{e-E59}{\textsf{E59}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\caption[]{Physical legacy Camera comparison from \texttt{/\allowbreak{}controlled\_\allowbreak{}phone\_\allowbreak{}comparison/\allowbreak{}phone13} and \texttt{/\allowbreak{}phone14}. ``Selected'' is the original renderer boundary; these counters do not individually prove physical panel presentation. Unequal sampling windows and one pair limit generalization. \hyperlink{e-E59}{\textsf{E59}}}
+\label{tab:4}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{1.1.4 preview queue} & \textbf{Native deliveries/s} & \textbf{Distinct selected images/s} & \textbf{Panel update counter/s} \\
 \midrule
@@ -299,20 +332,21 @@ Two slots, before first still & 29.621 & 7.893 & 30.210 \\
 Six slots, early steady preview & 26.279 & 16.520 & 30.544 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figures/camera-rates.pdf}
 \caption[]{\textbf{More updates do not imply more distinct camera images.} Original plot of one physical 4A102 queue comparison. Each rate counts the boundary named beside its bars. The native-delivery, selected-image and update samples are not interchangeable; the pair has unequal intervals. These values are not measured 7E18 preview throughput. \hyperlink{e-E59}{\textsf{E59}}.}
 \label{fig:5}
 \end{figure}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption[]{7E18 output geometry is a stock-client contract, not evidence of 1600 \(\times\) 1200 acquisition. The first successful Camera hand test has a UART gap and no pre-reboot JPEG digest. The daily test is a separate later result. \hyperlink{e-E44}{\textsf{E44}} \hyperlink{e-E51}{\textsf{E51}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:5}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{3.1.3 Camera boundary} & \textbf{Recorded format} & \textbf{Accepted scope} \\
 \midrule
@@ -322,19 +356,20 @@ Stock still destination/output & 1600 \(\times\) 1200; resampled source, JPEG ou
 After power cycle & Same new photo opens in Photos & Daily cold-power-cycle acceptance; broader durability unproven \\
 \bottomrule
 \end{tabularx}
-\end{table}
-
-\FloatBarrier
+\end{table*}
 
 \subsection{Display elapsed-time baseline}
 
+Figure~\ref{fig:6} and Table~\ref{tab:6} separate the elapsed display-work boundaries from the diagnostic logging sample.
+
 The later 64-presentation interval contains zero sampled source changes. Its mean total cost is 12.6937 ms, dominated by source work and expansion. The presentation gap is 12.8638 ms. These are elapsed counter observations around an idle route, which can include interruption and scheduling effects. They do not yield an animation frame rate or pure compositor CPU utilization. \hyperlink{e-E50}{\textsf{E50}}
 
-\begin{table}[htbp]
+\begin{table}[tb]
 \centering
 \caption[]{Physical 7E18, presentations 64-exclusive through 128-inclusive, nominal 24 MHz counter, zero sampled changes. Component means are instrumented boundaries and are not asserted to partition every tick exactly. Cache policy and CPU clock are unchanged. The single logging sample is not a 64-frame average. \hyperlink{e-E50}{\textsf{E50}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:6}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1.5\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.65\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.85\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Instrumented boundary} & \textbf{Samples} & \textbf{Mean elapsed ms} \\
 \midrule
@@ -349,24 +384,25 @@ Diagnostic log & 1 & 72.3972 \\
 \end{tabularx}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\linewidth]{figures/display-timing.pdf}
 \caption[]{\textbf{Idle presentation cost and instrumentation cost.} Original plot of the later 64-presentation physical 7E18 interval. The upper bars share a millisecond scale; the log is explicitly a separate single sample. Zero sampled changes make this an idle baseline. It is not an animation benchmark or a cache-policy comparison. \hyperlink{e-E50}{\textsf{E50}}.}
 \label{fig:6}
 \end{figure}
 
-\FloatBarrier
-
 \subsection{USB protocol ladder}
+
+Figure~\ref{fig:7} and Table~\ref{tab:7} distinguish enumeration, mux transport, listener readiness and ordinary service acceptance.
 
 USB success is a sequence of gates. Real bus reset and descriptor transfer precede address application; full configuration precedes bulk mux traffic; mux framing precedes a local listener connection; ordinary pairing precedes service access. A later trial stays enumerated, records three stock mux reads and three writes without mux I/O errors, and passes the host v2 handshake. Finite cleanup still returns BUSY and retains prerequisites until reset. \hyperlink{e-E52}{\textsf{E52}}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption[]{The latest state combines distinct dated experiments rather than pretending one capture proves every gate. Complete matched mux frames are narrower evidence than whole-usbmon completeness, which remains false. \hyperlink{e-E52}{\textsf{E52}} \hyperlink{e-E53}{\textsf{E53}} \hyperlink{e-E54}{\textsf{E54}} \hyperlink{e-E60}{\textsf{E60}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:7}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Gate} & \textbf{Reported state at this edition} & \textbf{Remaining qualification} \\
 \midrule
@@ -378,26 +414,25 @@ TCP listener census & First positive sample 41.237 s after daemon startup & Not 
 Ordinary pairing / info / syslog / AFC & Pending & Actual service acceptance and two-boot identity stability \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
-\begin{figure}[htbp]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/usb-ladder.pdf}
 \caption[]{\textbf{The current USB frontier is a service-readiness boundary.} Original schematic of physical 7E18 progress. Passed enumeration and mux gates do not promote the sampled listener into accepted ordinary pairing. The latest diagnostic has scoped success and verified recovery while its original whole-run completeness gate remains false. \hyperlink{e-E52}{\textsf{E52}}, \hyperlink{e-E54}{\textsf{E54}}.}
 \label{fig:7}
-\end{figure}
+\end{figure*}
 
 The combined listener diagnostic enumerates at host receipt 83.705 s and returns automatically to Jumpdrive at 248.893 s. Twenty-five periodic samples retain the first observed listener and genuine CommCenter check-in. Its original runner remains false because capture ownership/completion and bounded-head marker gates are incomplete. No application-level pairing success is inferred from the successful recovery. \hyperlink{e-E54}{\textsf{E54}}
 
-\FloatBarrier
-
 \subsection{Recovery, integrity and sensor diagnostics}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption[]{Selected recovery and integrity reports, not an aggregate reliability percentage. Origins differ and are named explicitly. The RTC-only trial's timing and the separately recorded SD-free integrity check are not one fabricated continuous run. Absent SD intervals are not re-read. \hyperlink{e-E46}{\textsf{E46}} \hyperlink{e-E48}{\textsf{E48}} \hyperlink{e-E51}{\textsf{E51}} \hyperlink{e-E54}{\textsf{E54}} \hyperlink{e-E55}{\textsf{E55}} \hyperlink{e-E56}{\textsf{E56}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:8}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1.15\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.75\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.15\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.95\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Named physical trial} & \textbf{Recovery / transition, s} & \textbf{Reported checked scope} & \textbf{Result / limit} \\
 \midrule
@@ -409,19 +444,20 @@ Combined listener diagnostic & 248.893 to Jumpdrive & 12 regions; 793 staged fil
 Direct EL2 reset confirmation & 1.084 EL2 \(\rightarrow\) new SPL & Separate clean-volume/protected readback & One reset confirmation; ordinary repeatability pending \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 The finite sensor stream records 100 samples across 14.562433 s, with an observed callback rate of 6.7983 Hz and mean axes approximately (0.041482, 0.006206, 1.026641) g. This is raw sampling in one stationary configuration, not calibrated orientation or measured hardware output data rate. No stock motion publication or owner rotation acceptance follows from these numbers. \hyperlink{e-E55}{\textsf{E55}}
 
-\FloatBarrier
-
 \subsection{Milestone chronology}
 
-\begin{table}[htbp]
+Table~\ref{tab:9} locates selected engineering milestones in the pinned source history; a date alone does not establish acceptance.
+
+\begin{table*}[t]
 \centering
 \caption[]{Commit subjects locate the engineering chronology in the pinned private corpus; validation records support the results. A commit date alone does not prove acceptance. Earlier milestones and their original publication snapshots remain in the research timeline.}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:9}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=0.45\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.55\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1.25\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=0.75\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Date} & \textbf{Reviewed milestone} & \textbf{Source commit} & \textbf{Evidence} \\
 \midrule
@@ -435,7 +471,7 @@ The finite sensor stream records 100 samples across 14.562433 s, with an observe
 7 Oct & USB enumeration/mux, then sampled listener frontier & \texttt{2bf60c6}, \texttt{df891b1}, \texttt{15b3a95} & E52, E54 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 \section{Case studies: useful disagreements and failures}
 
@@ -507,19 +543,22 @@ The experiments use the owner's hardware and isolated research profiles. Synthet
 
 This repository distributes original writing, diagrams, curated data organization and website code. It does not distribute firmware, keys, Apple implementation code, binary patches, storage images, raw sessions, credentials or private identifiers. Selected research captures retain provenance and unchanged pixels. Depicted third-party interfaces and subjects retain their original rights; MIT applies only to the repository's original contributions. Apple names identify the software descriptively. This publication is independent and is not an Apple or PINE64 product.
 
-AI agents assisted investigation, adapter engineering, test development and publication preparation. Their suggestions and generated prose are not experiment results. Felipe Sabino is the author responsible for the hardware work, selected publication record and its review. Claims remain tied to captures, validation and hand acceptance rather than agent confidence.
+AI agents assisted investigation, adapter engineering, test development and publication preparation. Their suggestions and generated prose are not experiment results. Felipe Guilherme Sabino is the author responsible for the hardware work, selected publication record and its review. Claims remain tied to captures, validation and hand acceptance rather than agent confidence.
 
 \section{Future work}
 
 The immediate connectivity path is USB service acceptance: measure/admit listener readiness, complete ordinary private pairing, retrieve version information, sustain syslog and retrieve a saved photo over AFC with a verified hash. Replug, cancellation and lifetime behavior remain required. Only then should a stock USB-network function or a declared original CDC-ECM route establish bidirectional local traffic. Wi-Fi adds SDIO, power ownership and an exact IO80211 contract; it does not follow automatically from USB enumeration. No cellular-state fabrication is a substitute for those gates. \hyperlink{e-E52}{\textsf{E52}} \hyperlink{e-E54}{\textsf{E54}} \hyperlink{e-E57}{\textsf{E57}}
 
+For later modem work, MobileAtlas offers a model for declaring SIM, operator, modem and traffic-capture conditions separately. Those controlled measurements would follow local modem transport and stock telephony-service admission; this edition accepts neither cellular registration nor calls. \cite{ref-21}
+
 Motion work needs signed-axis calibration, lifetime admission, real stock HID publication and owner-visible rotation. Performance work needs matched moving-UI trials and measurements of application latency, source/expansion cost and still/JPEG cost. Genuine higher-detail sensor acquisition must precede a higher-resolution quality claim. Repeatable ordinary restart acceptance is separate from cold-power-cycle persistence. \hyperlink{e-E44}{\textsf{E44}} \hyperlink{e-E46}{\textsf{E46}} \hyperlink{e-E50}{\textsf{E50}} \hyperlink{e-E55}{\textsf{E55}}
 
-\begin{table}[htbp]
+\begin{table*}[t]
 \centering
 \caption[]{Conditional engineering ranking, not accepted ports or measured effort. Selected kernels' 4 KiB page geometry does not establish CPU/MMU or service compatibility. The inspected 5s userland renderer does not independently validate the iPhone 6 renderer. \hyperlink{e-E57}{\textsf{E57}} \hyperlink{e-E58}{\textsf{E58}}}
-\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.18}
-\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\label{tab:10}
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X>{\hsize=1\hsize\linewidth=\hsize\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{Ranked prospective target} & \textbf{Evidence at this edition} & \textbf{Main new gate} \\
 \midrule
@@ -528,7 +567,7 @@ Motion work needs signed-axis calibration, lifetime admission, real stock HID pu
 3. iPhone 5s / 6 iOS 12.5.7 / 16H81 & ARM64/kernel inspection; 5s renderer inspected separately & Original AArch64 platform and SEP-dependent service contracts; no fake-key shortcut \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 The latest 10B500 QEMU work deserves a precise frontier: actual host press/release stimuli reach preserved stock keyboard dispatch and CPUIdle setup, then an absent function-clock\_gate dependency panics. No authentic normal Darwin banner, root, launchd, stock reset, graphical session or physical boot is accepted. Static feasibility and this partial runtime gate are separate studies. \hyperlink{e-E58}{\textsf{E58}}
 
@@ -548,11 +587,11 @@ Negative trials receive the same treatment. An earlier summary may remain false 
 
 \subsection{Rebuild this publication}
 
-With the repository's pinned Node dependencies installed, run \texttt{npm test} and \texttt{npm run build}, then \texttt{npm run preview}. The build validates source references, provenance, capture digests, generated search/export and internal links under \texttt{/ios/}. Browser review covers mobile widths, both appearance modes, keyboard navigation, reduced motion, search, the concept map and evidence controls. It validates the publication experience, not the phone's runtime. The edition note records this distinction and the local review state.
+With the repository's pinned Node dependencies installed, run \texttt{npm test} and \texttt{npm run build}, then \texttt{npm run preview}. The build validates source references, provenance, capture digests, generated search/export and internal links under \texttt{/\allowbreak{}ios/\allowbreak{}}. Browser review covers mobile widths, both appearance modes, keyboard navigation, reduced motion, search, the concept map and evidence controls. It validates the publication experience, not the phone's runtime. The edition note records this distinction and the local review state.
 
 The references below are real primary sources, reviewed on 7 October 2026. Living repositories/documentation may change. They provide related-work or architectural context, not local experiment acceptance. Private experiment citations use the separate E records and claims ledger.
 
-\begingroup\small\begin{thebibliography}{99}\setlength{\itemsep}{4pt}
+\FloatBarrier\begin{thebibliography}{99}\setlength{\itemsep}{2pt}
 
 \bibitem{ref-1} PINE64. \emph{PinePhone hardware documentation}. \url{https://pine64.org/documentation/PinePhone/_full/}. Board and component context.
 
@@ -584,9 +623,19 @@ The references below are real primary sources, reviewed on 7 October 2026. Livin
 
 \bibitem{ref-15} Linux contributors. \emph{MUSB peripheral EP0 handling, v6.12}. \url{https://github.com/torvalds/linux/blob/v6.12/drivers/usb/musb/musb_gadget_ep0.c}. Controller completion/ordering context. USB-IF's \emph{USB 2.0 specification}. \url{https://www.usb.org/document-library/usb-20-specification} defines the protocol's address-settle timing; neither reference replaces the local event trace.
 
-\end{thebibliography}\endgroup
+\bibitem{ref-16} Adelin Roty, Jan Tobias Mühlberg and Jean-François Determe. \emph{Opportunities and Challenges in Securely Reusing and Repurposing Mobile Devices}. \url{https://arxiv.org/abs/2606.06181v2}. arXiv:2606.06181v2, 2026; the author record identifies LIMITS 2026 proceedings. Reviewed \emph{version 2 text}. \url{https://arxiv.org/html/2606.06181v2}, Sections 3-6: PinePhone case study and secure-repurposing limits.
 
-\clearpage
+\bibitem{ref-17} Yansi Keim, Yung Han Yoon and Umit Karabiyik. \emph{Digital Forensics Analysis of Ubuntu Touch on PinePhone}. \url{https://www.mdpi.com/2079-9292/10/3/343}. \emph{Electronics} 10(3), 343, 2021. DOI: 10.3390/electronics10030343. Sections 3-4: Braveheart PinePhone, Ubuntu Touch build 270 and removable-media acquisition.
+
+\bibitem{ref-18} Ryan Bowler, Geoffrey Goodell, Joe Revans, Gabriel Bizama and Chris Speed. \emph{A non-custodial wallet for digital currency: design challenges and opportunities}. \url{https://arxiv.org/abs/2307.05167v4}. arXiv:2307.05167v4, 2024. Reviewed \emph{version 4 text}. \url{https://arxiv.org/html/2307.05167v4}, Section 6: off-the-shelf PinePhone prototype and remaining user testing.
+
+\bibitem{ref-19} Friederike Groschupp, Moritz Schneider, Ivan Puddu, Shweta Shinde and Srdjan Capkun. \emph{Sovereign Smartphone: To Enjoy Freedom We Have to Control Our Phones}. \url{https://arxiv.org/abs/2102.02743v1}. arXiv:2102.02743v1, 2021. User-control architecture and open-phone context.
+
+\bibitem{ref-20} Friederike Groschupp, Mark Kuhne, Moritz Schneider, Ivan Puddu, Shweta Shinde and Srdjan Capkun. \emph{It's TEEtime: A New Architecture Bringing Sovereignty to Smartphones}. \url{https://arxiv.org/abs/2211.05206v2}. arXiv:2211.05206v2, 2023. Reviewed \emph{version 2 text}. \url{https://arxiv.org/html/2211.05206v2}, Sections V-VI and Appendix C: Arm FVP implementation and platform limitations.
+
+\bibitem{ref-21} Gabriel K. Gegenhuber, Wilfried Mayer, Edgar Weippl and Adrian Dabrowski. \emph{MobileAtlas: Geographically Decoupled Measurements in Cellular Networks for Security and Privacy Research}. \url{https://www.usenix.org/conference/usenixsecurity23/presentation/gegenhuber}. \emph{32nd USENIX Security Symposium}, 2023, pp. 3493-3510. Reviewed \emph{published paper}. \url{https://www.usenix.org/system/files/usenixsecurity23-gegenhuber.pdf}, Section 6.1 and Appendix A.1: Raspberry Pi / EG25-G probe and PinePhone modem note.
+
+\end{thebibliography}
 
 \appendix
 
@@ -594,7 +643,7 @@ The references below are real primary sources, reviewed on 7 October 2026. Livin
 
 E identifiers denote the author's curated reports of private experiments, rather than independent publications. All 63 reviewed records are supplied in ancillary \texttt{evidence.json}, with source basenames, SHA-256, excerpt locators, selected measurements, capture provenance and limits. \texttt{claims.json} maps claims to those records. This index lists the 44 cited identities.
 
-\begin{multicols}{2}\small\setlength{\parskip}{1pt}
+\setlength{\parskip}{2pt}
 
 \noindent\hypertarget{e-E01}{\textbf{E01}} One kernel, different products. Static inspection.
 
@@ -684,6 +733,6 @@ E identifiers denote the author's curated reports of private experiments, rather
 
 \noindent\hypertarget{e-E63}{\textbf{E63}} Physical MMC mapping advances a timeout frontier. Physical PinePhone.
 
-\end{multicols}
+\normalsize
 
 \end{document}
