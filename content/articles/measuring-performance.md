@@ -8,7 +8,12 @@
   "evidence": [
     "E37",
     "E38",
-    "E39"
+    "E39",
+    "E44",
+    "E50",
+    "E55",
+    "E59",
+    "E60"
   ],
   "sources": [
     "S06",
@@ -22,9 +27,11 @@
     "observability",
     "power"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 ## A local win needs a local name
 
 The native port runs an older userspace on a different CPU and board. A compatibility path can be correct enough to progress while imposing substantial overhead. Finding such a path is useful, but the measured unit determines the claim. A reduction in exceptions is an exception-rate result. It becomes an application-speed result only when application behavior is measured too.
@@ -50,3 +57,8 @@ The queue replay then changed capacity and retention in an isolated environment.
 For startup responsiveness, measure a defined trigger through a visible ready state over repeated matched boots. For a viewfinder, distinguish delivery, admission, distinct selection and presentation timing. For power, sample battery-side balance during the actual workload instead of relying on a charging icon.
 
 The common discipline is to name the environment, workload, interval and rejected data alongside the result. This lets a real local improvement remain useful without expanding it into an unsupported claim about the whole system.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The later physical 7E18 idle interval averages 12.6937 ms elapsed display work across 64 presentations with zero sampled changes. A single diagnostic log takes 72.3972 ms; neither is an animation-FPS estimate. The 4A102 preview queue comparison and finite 6.7983 Hz raw sensor callback stream retain their distinct units and samples. The quiet USB control also shows why instrumentation can perturb the measured path. No 7E18 preview frame rate or general UI multiplier is claimed. [E44](/ios/evidence/E44/) [E50](/ios/evidence/E50/) [E55](/ios/evidence/E55/) [E59](/ios/evidence/E59/) [E60](/ios/evidence/E60/)

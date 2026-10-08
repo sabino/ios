@@ -6,3 +6,9 @@ playwright-report/
 .DS_Store
 .env*
 .dream-loop/
+tmp/pdfs/
+output/pdf/
+arxiv/*.aux
+arxiv/*.log
+arxiv/*.out
+arxiv/*.pdf

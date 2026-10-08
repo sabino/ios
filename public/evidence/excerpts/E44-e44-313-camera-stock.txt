@@ -1,0 +1,6 @@
+E44 / IMG_0003.PNG
+Source SHA-256: 548b062bd89129cf4c781a6e2b3aae05b8130ae1ba02fa3945dc9d420e36c726
+Locator: Whole capture; no crop; pixel bounds [0, 0, 320, 480]
+Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image.
+
+Original reviewed physical-device screenshot capture. Output bytes and pixels are unchanged. Full private capture directory is not included.

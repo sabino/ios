@@ -1,0 +1,6 @@
+E43 / after-slide-home.png
+Source SHA-256: 19dbc46892279bc9bcdec3805416ce7062c48f27c671bd71f5d2799a1f8aa861
+Locator: Whole capture; no crop; pixel bounds [0, 0, 320, 480]
+Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image.
+
+Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.

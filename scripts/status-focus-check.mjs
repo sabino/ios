@@ -169,13 +169,13 @@ try {
   expect(paused[0]).toBe(paused[1]);
   await page.emulateMedia({reducedMotion:'reduce'}); await expect(page.locator('[data-layer-motion]')).toBeDisabled();
   expect(await plate().evaluate(el=>el.getAnimations({subtree:true}).filter(a=>a.playState==='running').length)).toBe(0);
-  await page.emulateMedia({media:'print'}); await expect(visible()).toHaveCount(22); await expect(visible().locator('.score-number:visible')).toHaveCount(44);
+  await page.emulateMedia({media:'print'}); await expect(visible()).toHaveCount(source.length); await expect(visible().locator('.score-number:visible')).toHaveCount(source.length*2);
   await page.emulateMedia({media:'screen'});
   const fallback = await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
   const plain = await fallback.newPage(); await plain.goto(base+'status/');
-  await expect(plain.locator('[data-capability]:visible')).toHaveCount(22); await expect(plain.locator('[data-status-trigger]:disabled')).toHaveCount(3);
+  await expect(plain.locator('[data-capability]:visible')).toHaveCount(source.length); await expect(plain.locator('[data-status-trigger]:disabled')).toHaveCount(3);
   await fallback.close();
-  expect(new Set(checked).size).toBe(22); expect(errors).toEqual([]); expect(audits.flatMap(a=>a.violations)).toEqual([]);
+  expect(new Set(checked).size).toBe(source.length); expect(errors).toEqual([]); expect(audits.flatMap(a=>a.violations)).toEqual([]);
   writeFileSync(out+'/results.json',JSON.stringify({result:'pass',features:checked,layouts,audits,errors,motion:sample,paused},null,2));
-  console.log('PASS: 22 original capabilities, status cohorts, connected focus, scores, restore/history, keyboard, responsive layouts, pause, reduced motion, print and no-JavaScript.');
+  console.log(`PASS: ${source.length} original capabilities, status cohorts, connected focus, scores, restore/history, keyboard, responsive layouts, pause, reduced motion, print and no-JavaScript.`);
 } finally {await context.close(); await browser.close();}

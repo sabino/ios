@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E48",
+    "title": "SD-free boot and RTC-only recovery",
+    "environment": "Physical PinePhone",
+    "method": "Cold eMMC boot and deliberate early-stall recovery",
+    "observation": "Tow-Boot from the eMMC hardware boot area reaches the selector and Jumpdrive without an SD card. A deliberately stalled pre-XNU trial reaches watchdog reset after 14.336 seconds and Jumpdrive after 23.287 seconds.",
+    "limits": "The RTC-only stall trial never starts XNU. It proves that recovery route, not recovery from arbitrary hangs. Absent SD intervals are not re-read.",
+    "records": [
+      {
+        "document": "pinephone-emmc-boot-2026-10-06.json",
+        "sha256": "c54dad828f94124c105f6c1fe245e9f3b99139d19ff1b2c9ad5736ce7c890c02",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "117-trial-boot-watchdog.md",
+        "sha256": "e927352a4a569e8e52c55e6434ccb35ba723397cb8e745b4342904c440b1e57a",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "119-pinephone-emmc-boot.md",
+        "sha256": "a10513df83508a15e05523df568306c2879aa5cbda3626adc1150a114f735151",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "Tow-Boot from the eMMC hardware boot area reaches the selector and Jumpdrive without an SD card. A deliberately stalled pre-XNU trial reaches watchdog reset after 14.336 seconds and Jumpdrive after 23.287 seconds."
+          ],
+          [
+            "Acceptance limit",
+            "The RTC-only stall trial never starts XNU. It proves that recovery route, not recovery from arbitrary hangs. Absent SD intervals are not re-read."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-emmc-boot-2026-10-06.json",
+        "sha256": "c54dad828f94124c105f6c1fe245e9f3b99139d19ff1b2c9ad5736ce7c890c02",
+        "locator": "JSON pointers: /bootloader_written, /sd_free_recovery/regions, /sd_free_recovery/files, /sd_free_recovery/sd_present, /sd_free_recovery/protected_payloads_byte_identical, /rtc_only_trial/watchdog_reset_after_entry_seconds, /rtc_only_trial/jumpdrive_after_entry_seconds, /rtc_only_trial/xnu_started",
+        "format": "json",
+        "content": "{\n  \"/bootloader_written\": false,\n  \"/sd_free_recovery/regions\": 12,\n  \"/sd_free_recovery/files\": 218,\n  \"/sd_free_recovery/sd_present\": false,\n  \"/sd_free_recovery/protected_payloads_byte_identical\": true,\n  \"/rtc_only_trial/watchdog_reset_after_entry_seconds\": 14.336,\n  \"/rtc_only_trial/jumpdrive_after_entry_seconds\": 23.287,\n  \"/rtc_only_trial/xnu_started\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

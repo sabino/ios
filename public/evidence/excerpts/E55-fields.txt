@@ -1,0 +1,22 @@
+E55 / pinephone-sensor-physical-stream-2026-10-07.json
+Source SHA-256: 8570cc5c8208752379b7238ee89144e72a1656e580a7e59559adaefaacd0b27a
+Locator: JSON pointers: /samples/count, /samples/first_to_last_seconds, /samples/observed_callback_sample_rate_hz, /samples/axis_statistics/x/mean_g, /samples/axis_statistics/y/mean_g, /samples/axis_statistics/z/mean_g, /samples/sensor_output_data_rate_measured, /samples/calibration_proven, /native_hid_publication_enabled, /stock_rotation_proven, /safety/recovery_seconds, /recovery/checked_intervals, /recovery/immutable_interval_count, /recovery/staged_boot_files, /recovery/immutable_intervals_byte_identical
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/samples/count": 100,
+  "/samples/first_to_last_seconds": 14.562433,
+  "/samples/observed_callback_sample_rate_hz": 6.798314539884922,
+  "/samples/axis_statistics/x/mean_g": 0.04148193359375,
+  "/samples/axis_statistics/y/mean_g": 0.0062060546875,
+  "/samples/axis_statistics/z/mean_g": 1.026640625,
+  "/samples/sensor_output_data_rate_measured": false,
+  "/samples/calibration_proven": false,
+  "/native_hid_publication_enabled": false,
+  "/stock_rotation_proven": false,
+  "/safety/recovery_seconds": 154.018,
+  "/recovery/checked_intervals": 12,
+  "/recovery/immutable_interval_count": 11,
+  "/recovery/staged_boot_files": 575,
+  "/recovery/immutable_intervals_byte_identical": true
+}

@@ -1,0 +1,37 @@
+E53 / pinephone-usb-start-delay-2026-10-07.json
+Source SHA-256: 01c3fd1b2202edd5a4d48d4be93abc306a89767819b3849920f579cf2e5b1ffb
+Locator: JSON pointers: /physical_result, /hypothesis_result, /capture_limits
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical_result": {
+    "measured_wait_seconds": 30.015488208333334,
+    "native_start_uart_receipt_seconds": 64.948,
+    "first_host_enumeration_seconds": 81.772,
+    "vid_pid": "05ac:1290",
+    "mux_version": "2.0",
+    "host_device_complete_frames_byte_identical": 6,
+    "destination_port": 62078,
+    "stock_bsd_error": 61,
+    "host_received_RST": true,
+    "pairing_attempted": false,
+    "native_timer_error": 0,
+    "native_timer_polls": 32035,
+    "native_cleanup_result": -2,
+    "cleanup_retained_until_reset": true,
+    "automatic_jumpdrive_seconds": 214.101,
+    "uart_released": true
+  },
+  "/hypothesis_result": "30-second deferral executed; same genuine BSD connect ECONNREFUSED. Listener timing is not sufficient to explain the fault.",
+  "/capture_limits": {
+    "metadata_complete": true,
+    "global_observation_complete": false,
+    "guarded_bulk_complete": false,
+    "ring_drops": 0,
+    "missing_cutoff_identity_completions": 3,
+    "unknown_bulk_discarded": 1664,
+    "reader_did_not_cover_full_recovery": true,
+    "wire_ACK_not_proven": true,
+    "original_failed_report_preserved": true
+  }
+}

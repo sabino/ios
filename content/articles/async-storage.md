@@ -8,7 +8,10 @@
   "evidence": [
     "E11",
     "E13",
-    "E14"
+    "E14",
+    "E41",
+    "E45",
+    "E51"
   ],
   "sources": [
     "S05"
@@ -18,9 +21,11 @@
     "hfs-integrity",
     "time-and-interrupts"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## Why an inline callback exhausted the stack
 
@@ -56,3 +61,8 @@ A clean reboot requires more than entering a reboot function. Accepted writes mu
 The stronger acceptance observes return to recovery and checks the resulting volume. A separate QEMU file experiment also follows a write through sync, guest reset and fresh-process readback. [E14](/ios/evidence/E14/)
 
 Storage preservation therefore includes time and ownership: when a request is accepted, who retains its memory, when its completion becomes visible, and what a synchronization boundary guarantees. A sector checksum alone cannot answer those questions.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The accepted 7E18 halt reaches stock sync/unmount and authoritative native drain before a bounded PMIC shutdown request. Camera restoration errors must block shutdown, not be hidden by a successful shutter event. The daily trial separately accepts staying off and reopening a new photograph after cold power-on; it does not establish sudden-power-loss durability. [E41](/ios/evidence/E41/) [E45](/ios/evidence/E45/) [E51](/ios/evidence/E51/)

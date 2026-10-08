@@ -8,7 +8,10 @@
   "evidence": [
     "E33",
     "E35",
-    "E36"
+    "E36",
+    "E44",
+    "E45",
+    "E51"
   ],
   "sources": [
     "S09",
@@ -21,9 +24,11 @@
     "native-iphone",
     "frame-retirement"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 ## Capture and saving failed at different points
 
 A shutter event can reach the native camera and still fail to produce a photograph. In the reviewed development sequence, an early still request completed at the capture boundary but left the shutter closed and saved no JPEG. A later attempt reached software encoding but the application exited. Those failures are retained in the source record because they explain why native completion alone was an inadequate acceptance test. [E36](/ios/evidence/E36/)
@@ -55,3 +60,8 @@ The evidence record includes the unchanged second JPEG, showing a small robot mo
 A screen capture is a different artifact. The earlier M68 TIFF records the application-visible screen, not a camera exposure. Keeping the two records separate prevents a screenshot of a camera interface from standing in for a saved sensor photograph. [E33](/ios/evidence/E33/)
 
 Higher-resolution stills, capture latency, broader exposure behavior and the initial black-viewer transient remain open. Those questions can now be investigated against a working, checked VGA save path.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The current stock 7E18 path uses an original kernel encoder behind AppleJPEGDriver’s user client and changes zero Apple userland instruction words. The owner accepts preview, shutter, thumbnail, Photos and persistence. The first successful test has no concurrent UART or pre-reboot JPEG digest; an intervening shutdown failure and bounded repair are retained. The later daily trial separately accepts a new photo after clean halt and cold power-on. Output is 1600 × 1200 resampled from VGA, not higher-detail acquisition. [E44](/ios/evidence/E44/) [E45](/ios/evidence/E45/) [E51](/ios/evidence/E51/)

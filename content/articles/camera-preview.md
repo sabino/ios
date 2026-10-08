@@ -9,7 +9,10 @@
     "E34",
     "E35",
     "E37",
-    "E38"
+    "E38",
+    "E44",
+    "E51",
+    "E59"
   ],
   "sources": [
     "S19",
@@ -23,9 +26,11 @@
     "frame-retirement",
     "measuring-performance"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 ## The visible milestone
 
 The accepted seventh physical Camera trial displayed a live scene through the original M68AP application. The owner confirmed orientation and exposure, and the native path delivered 1,561 frames without a bridge failure. Memory guards and shutdown checks passed, the phone returned through clean reboot, and eight protected storage hashes remained unchanged. This is application preview acceptance, beyond the earlier raw DMA frame. [E35](/ios/evidence/E35/)
@@ -53,3 +58,8 @@ An isolated replay of the original ARM bookkeeping reproduced a strong dependenc
 At the reviewed source revision, the larger-queue candidate had passed host, isolated ARM and QEMU controls; its physical performance comparison remained pending. Later live-session reports are leads for a subsequent reviewed record. This edition preserves the measured baseline instead of silently replacing it with an in-progress number.
 
 The next decisive comparison needs matched scene and sensor geometry, separate admission failures, image insertion and selection timestamps, retirement observations and the usual shutdown and storage checks. Still saving is a different acceptance path and is described in its own chapter.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The retained 1.1.4 queue comparison is now physically measured: distinct selected images change from 7.893 to 16.520/s with two versus six slots. Native delivery and panel update counters measure different boundaries, and sampling windows are unequal. The current 3.1.3 stock preview is owner accepted through its clean provider path, but its preview frame rate is unmeasured. Do not transfer the legacy rates to 7E18. [E44](/ios/evidence/E44/) [E51](/ios/evidence/E51/) [E59](/ios/evidence/E59/)

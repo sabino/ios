@@ -29,11 +29,11 @@ function node<K extends keyof HTMLElementTagNameMap>(tag:K,cls='',text=''){
 }
 function readState():State {
   const params=new URL(location.href).searchParams;
-  const chosen=params.get('focus')?.toUpperCase() || 'E35';
+  const chosen=params.get('focus')?.toUpperCase() || 'E51';
   const category=params.get('domain') || '';
   const substrate=params.get('env') || '';
   const snapshot=params.get('review') || '';
-  return {focus:byId.has(chosen)?chosen:'E35',domain:domains.has(category)?category:'',env:records.some(r=>r.environment===substrate)?substrate:'',review:Array.from(review.options).some(o=>o.value===snapshot)?snapshot:'',q:params.get('q') || '',view:params.get('view')==='ledger'?'ledger':'atlas'};
+  return {focus:byId.has(chosen)?chosen:'E51',domain:domains.has(category)?category:'',env:records.some(r=>r.environment===substrate)?substrate:'',review:Array.from(review.options).some(o=>o.value===snapshot)?snapshot:'',q:params.get('q') || '',view:params.get('view')==='ledger'?'ledger':'atlas'};
 }
 function writeState(push=false) {
   const target=new URL(location.href);target.hash='';

@@ -1,0 +1,13 @@
+E46 / pinephone-direct-el2-reset-2026-10-05.json
+Source SHA-256: e8b4eb9f1f57ff9c7844e214236109ca6e2b9fe6dd20414e2e2dd5256a67b1b6
+Locator: JSON pointers: /physical_confirmation/passed, /physical_confirmation/el2_to_spl_seconds, /physical_confirmation/ordinary_selector_observed, /physical_confirmation/firmware_reset_called, /physical_confirmation/runtime_watchdog, /physical_confirmation/physical_reset_required
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical_confirmation/passed": true,
+  "/physical_confirmation/el2_to_spl_seconds": 1.084,
+  "/physical_confirmation/ordinary_selector_observed": true,
+  "/physical_confirmation/firmware_reset_called": false,
+  "/physical_confirmation/runtime_watchdog": false,
+  "/physical_confirmation/physical_reset_required": false
+}

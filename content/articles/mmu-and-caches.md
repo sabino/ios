@@ -9,7 +9,11 @@
     "E04",
     "E05",
     "E15",
-    "E17"
+    "E17",
+    "E41",
+    "E49",
+    "E50",
+    "E63"
   ],
   "sources": [
     "S07",
@@ -20,9 +24,11 @@
     "surface-memory",
     "presentation"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## Follow the translation all the way down
 
@@ -66,3 +72,8 @@ physical address = 0x5096a000 + 0x54 = 0x5096a054
 ```
 
 This arithmetic explains the backing location; it does not independently validate access permissions, access-flag interpretation or cacheability. In the faulting capture, DFSR is 6. The control retains the same PTE and progresses without that fault. See the [descriptor walk and control](/ios/evidence/E04/#descriptor-walk), then compare the independent [physical marker photograph](/ios/evidence/E05/#physical-photo).
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+A retained physical MMC2 control shows a late controller mapping timing out; a non-cacheable mapping advances to a separate unsupported NTSR readback check. That early result does not establish a mounted root. The current 7E18 memory reservation also verifies allocator frontier and loaded guards together. Display timing leaves cache policy unchanged, and idle elapsed cost is not evidence that a new cache policy has been accepted. [E41](/ios/evidence/E41/) [E49](/ios/evidence/E49/) [E50](/ios/evidence/E50/) [E63](/ios/evidence/E63/)

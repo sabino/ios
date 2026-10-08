@@ -8,7 +8,11 @@
   "evidence": [
     "E10",
     "E09",
-    "E11"
+    "E11",
+    "E41",
+    "E47",
+    "E51",
+    "E63"
   ],
   "sources": [
     "S05"
@@ -18,9 +22,11 @@
     "async-storage",
     "hfs-integrity"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## The data path includes the callback
 
@@ -62,3 +68,8 @@ EABI fourth arg: [sp] = 0x9abcdef0; [sp+4] = 0x12345678
 ```
 
 This is an explanatory register layout, not executable bridge code. ARM and Thumb fixtures check the legacy placement and restored r9. The deliberate direct-EABI negative control observes low word `0xdeadbeef` and high word `0x9abcdef0`: the caller and callee disagree about where the value lives. The [original serial receipt](/ios/evidence/E10/#serial) makes that disagreement inspectable.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Storage and explicit-key AES share their original adapter implementations across exact-build binding tables. Stock integrity service ordering is preserved rather than bypassed. AHVBOOT grows with reviewed reserved OS windows; these are not free gaps. The current owner trial accepts a new photograph after cold power-on with fresh root/data checks, while the earlier non-cacheable MMC mapping control retains its incomplete-boot limit. [E41](/ios/evidence/E41/) [E47](/ios/evidence/E47/) [E51](/ios/evidence/E51/) [E63](/ios/evidence/E63/)

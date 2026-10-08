@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E50",
+    "title": "Idle display elapsed-time baseline",
+    "environment": "Physical PinePhone",
+    "method": "Opt-in 24 MHz counter instrumentation; 64-presentation interval",
+    "observation": "The later interval from presentation 64 to 128 records 64 source frames, zero sampled changes and mean total elapsed cost 12.6937 ms. Source work averages 4.7924 ms and expansion 7.8142 ms.",
+    "limits": "This is idle elapsed time, not animation FPS, a pure compositor CPU benchmark or a full scanout-latency measurement. Logging has one 72.3972 ms sample. Cache and clock policy are unchanged.",
+    "records": [
+      {
+        "document": "pinephone-display-timing-2026-10-07.json",
+        "sha256": "47078abd485bac2f736d853dada1cfd112bc474088c520cf3f3b0f0d17e0abf6",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-graphics-cache-policy.md",
+        "sha256": "a7e1f372fde4dbb3ad37c5c47e255c55955bbfd16653feb4dcd3cf8b48786f41",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The later interval from presentation 64 to 128 records 64 source frames, zero sampled changes and mean total elapsed cost 12.6937 ms. Source work averages 4.7924 ms and expansion 7.8142 ms."
+          ],
+          [
+            "Acceptance limit",
+            "This is idle elapsed time, not animation FPS, a pure compositor CPU benchmark or a full scanout-latency measurement. Logging has one 72.3972 ms sample. Cache and clock policy are unchanged."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-display-timing-2026-10-07.json",
+        "sha256": "47078abd485bac2f736d853dada1cfd112bc474088c520cf3f3b0f0d17e0abf6",
+        "locator": "JSON pointers: /physical_followup/later64_frame_interval, /physical_followup/cache_policy_changed, /physical_followup/cpu_clock_changed, /physical_followup/owner_visual_acceptance",
+        "format": "json",
+        "content": "{\n  \"/physical_followup/later64_frame_interval\": {\n    \"from_frame_exclusive\": 64,\n    \"to_frame_inclusive\": 128,\n    \"source_frames\": 64,\n    \"sampled_changes\": 0,\n    \"metrics\": {\n      \"total\": {\n        \"samples\": 64,\n        \"sum_ticks\": 19497559,\n        \"mean_ms\": 12.693723307291666\n      },\n      \"source\": {\n        \"samples\": 64,\n        \"sum_ticks\": 7361130,\n        \"mean_ms\": 4.79240234375\n      },\n      \"expand\": {\n        \"samples\": 64,\n        \"sum_ticks\": 12002657,\n        \"mean_ms\": 7.814229817708333\n      },\n      \"sync\": {\n        \"samples\": 64,\n        \"sum_ticks\": 632,\n        \"mean_ms\": 0.00041145833333333334\n      },\n      \"complete\": {\n        \"samples\": 64,\n        \"sum_ticks\": 58703,\n        \"mean_ms\": 0.038218098958333335\n      },\n      \"gap\": {\n        \"samples\": 64,\n        \"sum_ticks\": 19758738,\n        \"mean_ms\": 12.86376171875\n      },\n      \"log\": {\n        \"samples\": 1,\n        \"sum_ticks\": 1737533,\n        \"mean_ms\": 72.39720833333334\n      }\n    }\n  },\n  \"/physical_followup/cache_policy_changed\": false,\n  \"/physical_followup/cpu_clock_changed\": false,\n  \"/physical_followup/owner_visual_acceptance\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

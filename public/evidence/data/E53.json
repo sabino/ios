@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E53",
+    "title": "A fixed USB delay did not admit lockdownd",
+    "environment": "Physical PinePhone",
+    "method": "Measured startup delay and matched host/device mux frames",
+    "observation": "A measured 30.0155-second soft-connect delay still receives stock ECONNREFUSED and RST at the local lockdownd connection. Matched complete mux frames narrow the fault beyond EP0.",
+    "limits": "The fixed-delay hypothesis is not sufficient; this is not proof of broken TCP or an absent baseband. Whole usbmon capture completeness remains false.",
+    "records": [
+      {
+        "document": "pinephone-usb-start-delay-2026-10-07.json",
+        "sha256": "01c3fd1b2202edd5a4d48d4be93abc306a89767819b3849920f579cf2e5b1ffb",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-usb-lockdownd-connection.md",
+        "sha256": "d4456fc8d98abb063fc2752175a46b0a2a117213828741fb6285121fc415c261",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Negative physical result",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "A measured 30.0155-second soft-connect delay still receives stock ECONNREFUSED and RST at the local lockdownd connection. Matched complete mux frames narrow the fault beyond EP0."
+          ],
+          [
+            "Acceptance limit",
+            "The fixed-delay hypothesis is not sufficient; this is not proof of broken TCP or an absent baseband. Whole usbmon capture completeness remains false."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-usb-start-delay-2026-10-07.json",
+        "sha256": "01c3fd1b2202edd5a4d48d4be93abc306a89767819b3849920f579cf2e5b1ffb",
+        "locator": "JSON pointers: /physical_result, /hypothesis_result, /capture_limits",
+        "format": "json",
+        "content": "{\n  \"/physical_result\": {\n    \"measured_wait_seconds\": 30.015488208333334,\n    \"native_start_uart_receipt_seconds\": 64.948,\n    \"first_host_enumeration_seconds\": 81.772,\n    \"vid_pid\": \"05ac:1290\",\n    \"mux_version\": \"2.0\",\n    \"host_device_complete_frames_byte_identical\": 6,\n    \"destination_port\": 62078,\n    \"stock_bsd_error\": 61,\n    \"host_received_RST\": true,\n    \"pairing_attempted\": false,\n    \"native_timer_error\": 0,\n    \"native_timer_polls\": 32035,\n    \"native_cleanup_result\": -2,\n    \"cleanup_retained_until_reset\": true,\n    \"automatic_jumpdrive_seconds\": 214.101,\n    \"uart_released\": true\n  },\n  \"/hypothesis_result\": \"30-second deferral executed; same genuine BSD connect ECONNREFUSED. Listener timing is not sufficient to explain the fault.\",\n  \"/capture_limits\": {\n    \"metadata_complete\": true,\n    \"global_observation_complete\": false,\n    \"guarded_bulk_complete\": false,\n    \"ring_drops\": 0,\n    \"missing_cutoff_identity_completions\": 3,\n    \"unknown_bulk_discarded\": 1664,\n    \"reader_did_not_cover_full_recovery\": true,\n    \"wire_ACK_not_proven\": true,\n    \"original_failed_report_preserved\": true\n  }\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

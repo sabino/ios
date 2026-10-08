@@ -9,7 +9,11 @@
     "E20",
     "E18",
     "E29",
-    "E33"
+    "E33",
+    "E43",
+    "E46",
+    "E51",
+    "E61"
   ],
   "sources": [
     "S12",
@@ -21,9 +25,11 @@
     "power",
     "native-iphone"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -60,3 +66,8 @@ A later publication should add separate evidence for each expanded interaction. 
 Later physical trials accepted the visible minimum of the Settings brightness slider while retaining complete Power blank/wake. A separate M68 run recorded one complete screenshot chord and saved a stock lock-screen TIFF. [E29](/ios/evidence/E29/) [E33](/ios/evidence/E33/)
 
 The temporary mappings remain profile-specific controls: Power serves sleep/wake, Volume Up serves Home, and Volume Down requests a screenshot. They do not establish audio-volume adjustment. The screenshot’s reported pause remains unmeasured, and its later reboot was host-requested rather than evidence that pressing the shortcut caused a crash.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The separate selector back-buffer trial accepts Volume/Power controls. The 7E18 daily hand test accepts Power blank/wake and complete shutdown. One direct EL2 reset returns to the ordinary selector, but repeated ordinary stock-restart hand acceptance remains pending. The committed odd-checksum fix is a source/commit rationale, not a fabricated standalone fault trace; see [C62](/ios/claims/#C62). [E43](/ios/evidence/E43/) [E46](/ios/evidence/E46/) [E51](/ios/evidence/E51/) [E61](/ios/evidence/E61/)

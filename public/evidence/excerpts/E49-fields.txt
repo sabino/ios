@@ -1,0 +1,19 @@
+E49 / pinephone-firmware-handoff-diff-2026-10-07.json
+Source SHA-256: 3e73450d9bbc46d6183d415cd150c89a83ee00d92d55e2f2a353b237722707ab
+Locator: JSON pointers: /probe_image_identical, /changed_record_count, /probe_limits, /bootloader_written, /cpu_clock_or_voltage_changed
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/probe_image_identical": true,
+  "/changed_record_count": 26,
+  "/probe_limits": [
+    "Programmed selectors are not voltage measurements.",
+    "Five parent-gated/reset inner display words are unavailable under both loaders.",
+    "Prior Jumpdrive state and SD presence are recorded; dynamic source/ADC/pad values cannot be attributed solely to the loader.",
+    "RSB interface mode/address assignment is the only PMIC configuration write in either probe.",
+    "No new runtime driver change follows the comparison; USB enumeration, stock rotation, vibration and Wi-Fi have not been accepted.",
+    "Exact 4A102 Camera bindings retain their stricter rail policy; daily legacy eMMC Camera admission needs separate qualification."
+  ],
+  "/bootloader_written": false,
+  "/cpu_clock_or_voltage_changed": false
+}

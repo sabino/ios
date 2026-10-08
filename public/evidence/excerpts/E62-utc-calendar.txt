@@ -1,0 +1,12 @@
+E62 / pinephone-rtc-correction-2026-10-07.json
+Source SHA-256: ea703ece2ed4447753b34f191b4fd996eb3113fa8e81d737c0a08f38d6872043
+Locator: JSON pointers: /calendar_correction_passed, /os_boot/calendar_initialized, /os_boot/calendar_correct, /os_boot/automatic_jumpdrive_recovery, /timezone_change_pending
+Exact selected UTC-calendar validation fields. The timezone_change_pending value belongs to this earlier calendar trial; the later time-zone installation is the separate fields excerpt.
+
+{
+  "/calendar_correction_passed": true,
+  "/os_boot/calendar_initialized": true,
+  "/os_boot/calendar_correct": true,
+  "/os_boot/automatic_jumpdrive_recovery": true,
+  "/timezone_change_pending": true
+}

@@ -11,7 +11,10 @@
     "E29",
     "E33",
     "E35",
-    "E37"
+    "E37",
+    "E43",
+    "E50",
+    "E51"
   ],
   "sources": [
     "S09",
@@ -24,9 +27,11 @@
     "touch",
     "camera-preview"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -67,3 +72,8 @@ The next stage should continue to connect visible behavior to its originating cl
 The September setup-frame record remains a setup-frame record. New physical evidence now includes a native N45 home-screen capture from the accepted touch trial, a pixel-identical M68 lock-screen screenshot and an owner-accepted live Camera preview. These extend the visible frontier through separate dated records. [E29](/ios/evidence/E29/) [E33](/ios/evidence/E33/) [E35](/ios/evidence/E35/)
 
 Camera performance shows why presentation terminology still matters. The baseline panel-update counter reports about 30.3 updates per second while the renderer selects about 7.9 distinct camera images per second. Reused images can participate in multiple updates. Neither counter independently measures the precise physical presentation time of each image. [E37](/ios/evidence/E37/)
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The 7E18 interface is 320 × 480, doubled to 640 × 960 and centered inside the 720 × 1440 panel. English lock/home captures are QEMU results; later physical owner acceptance is separate. The idle display timing covers 64 later presentations and zero sampled changes. Its elapsed mean is not animation FPS or pure compositor CPU time. [E43](/ios/evidence/E43/) [E50](/ios/evidence/E50/) [E51](/ios/evidence/E51/)

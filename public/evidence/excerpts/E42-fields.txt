@@ -1,0 +1,13 @@
+E42 / pinephone-iphone313-userspace-2026-10-02.json
+Source SHA-256: 188d75da97f8dc949a0e4c9044592263c3edaff2c1c354c54748af1dbba95954
+Locator: JSON pointers: /physical_executed, /userspace/dyld_and_cache_execution, /userspace/launchd_and_launchctl_execution, /userspace/trigger_assertion, /userspace/rendered_home_screen, /userspace/assertion_preserved
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical_executed": false,
+  "/userspace/dyld_and_cache_execution": true,
+  "/userspace/launchd_and_launchctl_execution": true,
+  "/userspace/trigger_assertion": "No window server display found",
+  "/userspace/rendered_home_screen": false,
+  "/userspace/assertion_preserved": true
+}

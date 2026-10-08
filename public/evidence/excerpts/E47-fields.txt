@@ -1,0 +1,16 @@
+E47 / pinephone-ahvboot-growth-2026-10-06.json
+Source SHA-256: e31ff4982adaeb9b6f1dac34af81752ecbe554d256bc2c3e3b48cb0e0ea77868
+Locator: JSON pointers: /migration_installed, /os_payload_writes, /microsd_writes, /ahvboot/sectors, /ahvboot/file_count, /ahvboot/all_file_contents_paths_and_dos_attributes_preserved, /ahvboot/fsck_exit, /gpt/sector_write_count, /gpt/bootloader_unchanged
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/migration_installed": true,
+  "/os_payload_writes": false,
+  "/microsd_writes": false,
+  "/ahvboot/sectors": 2097152,
+  "/ahvboot/file_count": 215,
+  "/ahvboot/all_file_contents_paths_and_dos_attributes_preserved": true,
+  "/ahvboot/fsck_exit": 0,
+  "/gpt/sector_write_count": 6,
+  "/gpt/bootloader_unchanged": true
+}

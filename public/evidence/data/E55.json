@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E55",
+    "title": "A finite stream of real accelerometer samples",
+    "environment": "Physical PinePhone",
+    "method": "Raw MPU6050 reads after live mapping admission; UART/counter analysis",
+    "observation": "One finite trial records 100 consecutive MPU6050 samples over 14.562433 seconds, at 6.7983 observed callbacks/s, with monotonic timestamps and finite MPU/TWI restoration.",
+    "limits": "This rate is not hardware output data rate. No orientation calibration, stock HID motion publication or app rotation is accepted. There is no owner hand test.",
+    "records": [
+      {
+        "document": "pinephone-sensor-physical-stream-2026-10-07.json",
+        "sha256": "8570cc5c8208752379b7238ee89144e72a1656e580a7e59559adaefaacd0b27a",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "7e18-sensor-stream2-physical.md",
+        "sha256": "1633b48013d16e93cf3a6f866a88204969499c794e0c58e8838c02e6697c1d2c",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "One finite trial records 100 consecutive MPU6050 samples over 14.562433 seconds, at 6.7983 observed callbacks/s, with monotonic timestamps and finite MPU/TWI restoration."
+          ],
+          [
+            "Acceptance limit",
+            "This rate is not hardware output data rate. No orientation calibration, stock HID motion publication or app rotation is accepted. There is no owner hand test."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-sensor-physical-stream-2026-10-07.json",
+        "sha256": "8570cc5c8208752379b7238ee89144e72a1656e580a7e59559adaefaacd0b27a",
+        "locator": "JSON pointers: /samples/count, /samples/first_to_last_seconds, /samples/observed_callback_sample_rate_hz, /samples/axis_statistics/x/mean_g, /samples/axis_statistics/y/mean_g, /samples/axis_statistics/z/mean_g, /samples/sensor_output_data_rate_measured, /samples/calibration_proven, /native_hid_publication_enabled, /stock_rotation_proven, /safety/recovery_seconds, /recovery/checked_intervals, /recovery/immutable_interval_count, /recovery/staged_boot_files, /recovery/immutable_intervals_byte_identical",
+        "format": "json",
+        "content": "{\n  \"/samples/count\": 100,\n  \"/samples/first_to_last_seconds\": 14.562433,\n  \"/samples/observed_callback_sample_rate_hz\": 6.798314539884922,\n  \"/samples/axis_statistics/x/mean_g\": 0.04148193359375,\n  \"/samples/axis_statistics/y/mean_g\": 0.0062060546875,\n  \"/samples/axis_statistics/z/mean_g\": 1.026640625,\n  \"/samples/sensor_output_data_rate_measured\": false,\n  \"/samples/calibration_proven\": false,\n  \"/native_hid_publication_enabled\": false,\n  \"/stock_rotation_proven\": false,\n  \"/safety/recovery_seconds\": 154.018,\n  \"/recovery/checked_intervals\": 12,\n  \"/recovery/immutable_interval_count\": 11,\n  \"/recovery/staged_boot_files\": 575,\n  \"/recovery/immutable_intervals_byte_identical\": true\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import {Content,frontmatter} from '../../content/summary.md';
+import {url,publication} from '../lib/content';
+import '../styles/publication.css';
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+<header class="page-heading"><span class="section-number">THE STUDY IN PLAIN LANGUAGE</span><h1>{frontmatter.title}</h1><p>{frontmatter.description}</p><p class="mono">{publication.author} · Edition {publication.edition} · {publication.date}</p><a class="text-link" href={url('paper/')}>Read the full systems paper →</a></header>
+<article class="prose companion-prose"><Content/></article>
+</Base>

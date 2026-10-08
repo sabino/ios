@@ -10,7 +10,10 @@
     "E02",
     "E07",
     "E09",
-    "E19"
+    "E19",
+    "E41",
+    "E43",
+    "E57"
   ],
   "sources": [
     "S11",
@@ -21,9 +24,11 @@
     "iokit-discovery",
     "time-and-interrupts"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## The archive was missing runtime values
 
@@ -56,3 +61,8 @@ A preservation record should therefore identify the exact tree used by each expe
 ## Limits of a live tree
 
 Even a live tree is not an electrical measurement. It may omit a board subrevision, use a shared compatible string, or reflect firmware policy rather than fitted hardware. The tree supplies an important contract and a valuable hypothesis source. Register observations, board documentation and controlled physical tests establish which parts of that contract hold on the actual device.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+7E18 service publication needs the correct parent/provider contract as well as a named display child. Its shared adapter selects separate exact-build layouts rather than importing the 4A102 tree wholesale. The newer-target study reads actual trees and kernel contracts but does not turn static provider presence into runtime acceptance. Missing modem integration also does not mean the PinePhone lacks its physical EG25-G. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E57](/ios/evidence/E57/)

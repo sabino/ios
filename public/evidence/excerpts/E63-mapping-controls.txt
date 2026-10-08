@@ -1,0 +1,13 @@
+E63 / pinephone-native-emmc-2026-09-26.json
+Source SHA-256: ca2b48b83a24c731ad8ba5a271847e1b4b2e028173c2bdf1f10e70f573be27ca
+Locator: JSON pointers: /controls/0/observation, /controls/1/observation, /controls/2/observation, /source_correction, /successful_mmc2_run/hfs_root_mount_observed, /successful_mmc2_run/launchd_observed
+Exact selected fields from the retained early physical controls. No run artifact, device identifier or proprietary code is included.
+
+{
+  "/controls/0/observation": "Original XNU verbose UART, MMC2 clock-update timeout at stage 5, BSD root wait for disk0s1",
+  "/controls/1/observation": "MMC2 CMD remained 0x80202000 and NTSR read 0x80000000 through the original late I/O mapping",
+  "/controls/2/observation": "Non-cacheable mapping changed NTSR readback to 0; the old mandatory readback check stopped at stage 3",
+  "/source_correction": "A64 MMC2 NTSR bit 31 must not be required to read back after a write",
+  "/successful_mmc2_run/hfs_root_mount_observed": false,
+  "/successful_mmc2_run/launchd_observed": false
+}

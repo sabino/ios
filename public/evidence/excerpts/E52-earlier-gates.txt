@@ -1,0 +1,12 @@
+E52 / pinephone-usb-enumeration-2026-10-07.json
+Source SHA-256: e4ea9f0d694c136ff5164f7d4f52639fa79637b2c475addac775ba164f1f2025
+Locator: JSON pointers: /enumeration_proven, /pairing_proven, /ideviceinfo_proven, /syslog_proven, /AFC_proven
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/enumeration_proven": false,
+  "/pairing_proven": false,
+  "/ideviceinfo_proven": false,
+  "/syslog_proven": false,
+  "/AFC_proven": false
+}

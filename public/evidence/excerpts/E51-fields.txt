@@ -1,0 +1,32 @@
+E51 / pinephone-owner313-daily-2026-10-07.json
+Source SHA-256: f7d30073cb25e6df5a59168b6f1dcad4382bf40d532c43c1397fe4a909b325ca
+Locator: JSON pointers: /passed, /owner_hand_test, /apple_userland_text_changes, /accepted_checks, /not_accepted, /recovery/all_12_available_intervals_read, /recovery/boot_files_verified, /recovery/sd_present, /recovery/fresh_hfs_checks/root/fsck_exit, /recovery/fresh_hfs_checks/data/fsck_exit
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/passed": true,
+  "/owner_hand_test": true,
+  "/apple_userland_text_changes": 0,
+  "/accepted_checks": [
+    "battery_level_and_charging_icon",
+    "slide_to_unlock_and_touch",
+    "power_sleep_wake",
+    "live_upright_camera_preview",
+    "shutter",
+    "thumbnail",
+    "new_photo_in_Photos",
+    "power_slider_complete_poweroff_stays_off_30_seconds",
+    "same_new_photo_reopened_after_clean_power_cycle"
+  ],
+  "/not_accepted": [
+    "ordinary stock native restart (the persistence test used complete Power-slider halt then cold power-on)",
+    "remaining iPhone/iPod 1.1.4 daily hand checks",
+    "native USB enumeration or pairing",
+    "stock rotation"
+  ],
+  "/recovery/all_12_available_intervals_read": true,
+  "/recovery/boot_files_verified": 593,
+  "/recovery/sd_present": false,
+  "/recovery/fresh_hfs_checks/root/fsck_exit": 0,
+  "/recovery/fresh_hfs_checks/data/fsck_exit": 0
+}

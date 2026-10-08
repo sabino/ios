@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E61",
+    "title": "Selector back buffer accepted separately",
+    "environment": "Physical PinePhone",
+    "method": "Original C fixture, staged-file verification and owner visual/button check",
+    "observation": "The installed selector uses a separate back buffer and bounded damage copies. Owner visual and Volume/Power controls are accepted.",
+    "limits": "Later title/background styling is a separate candidate and must not inherit this visual acceptance. The selector is pre-XNU NuttX, not Linux underneath the OS.",
+    "records": [
+      {
+        "document": "pinephone-selector-damage-build-2026-10-05.json",
+        "sha256": "39f919ff8892fd399e3d36ee1e877d9b345460b202e4ee13a263402ea0aa6000",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "109-iphone313-stage4-and-selector.md",
+        "sha256": "c4de65bb273f6de88f8622a4819218db886baf9b8e3c88c93d28286f2a6e6c0d",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "116-owner-feedback-and-profile-recovery.md",
+        "sha256": "8ddec09d553fe2bfcbfe8d4915b0050721f9223ed32680bd267f31e2a3f83dce",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The installed selector uses a separate back buffer and bounded damage copies. Owner visual and Volume/Power controls are accepted."
+          ],
+          [
+            "Acceptance limit",
+            "Later title/background styling is a separate candidate and must not inherit this visual acceptance. The selector is pre-XNU NuttX, not Linux underneath the OS."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-selector-damage-build-2026-10-05.json",
+        "sha256": "39f919ff8892fd399e3d36ee1e877d9b345460b202e4ee13a263402ea0aa6000",
+        "locator": "JSON pointers: /hardware_executed, /installed, /owner_visual_acceptance, /owner_buttons_acceptance, /default_presents, /default_waits",
+        "format": "json",
+        "content": "{\n  \"/hardware_executed\": true,\n  \"/installed\": true,\n  \"/owner_visual_acceptance\": true,\n  \"/owner_buttons_acceptance\": true,\n  \"/default_presents\": 13,\n  \"/default_waits\": 750\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

@@ -1,15 +1,17 @@
 ---
+import capabilities from '../data/capabilities.json';
 const {id, footer = false} = Astro.props;
+const workingCount=capabilities.domains.flatMap(d=>d.features).filter(f=>f.status==='Working').length;
 ---
 {!footer ? <div class="status-focus" data-status-focus-panel hidden>
-  <div class="focus-top"><span data-focus-label>WORKING FOCUS</span><span data-focus-position>1 / 14</span><button type="button" data-focus-restore>Restore overview <span aria-hidden="true">↗</span></button></div>
+  <div class="focus-top"><span data-focus-label>WORKING FOCUS</span><span data-focus-position>1 / {workingCount}</span><button type="button" data-focus-restore>Restore overview <span aria-hidden="true">↗</span></button></div>
   <h3 data-focus-title>Live viewfinder</h3>
   <div class="focus-navigation">
     <button type="button" data-focus-step="-1" aria-label="Previous capability">‹</button>
     <label class="sr-only" for={`${id}-focus-choice`}>Choose a capability</label><select id={`${id}-focus-choice`} data-focus-choice></select>
     <button type="button" data-focus-step="1" aria-label="Next capability">›</button>
   </div>
-</div> : <div class="focus-footer" data-status-focus-footer hidden><button type="button" data-focus-all aria-expanded="false">Show all 14</button><p>Ratings apply to the selected capability. Connections guide reading across boundaries.</p></div>}
+</div> : <div class="focus-footer" data-status-focus-footer hidden><button type="button" data-focus-all aria-expanded="false">Show all {workingCount}</button><p>Ratings apply to the selected capability. Connections guide reading across boundaries.</p></div>}
 <script>
   for(const plate of document.querySelectorAll<HTMLElement>('.with-capabilities')){
     const rows=[...plate.querySelectorAll<HTMLElement>('[data-capability]')];

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E57",
+    "title": "Ranked next targets are an offline study",
+    "environment": "Static inspection",
+    "method": "Actual selected firmware inspection; kernel and renderer control-flow checks",
+    "observation": "The study conditionally ranks 3GS iOS 6.1.6 ahead of iPhone 5 iOS 10.3.4 and 5s/6 iOS 12.5.7. The selected kernels use 4 KiB pages, but fresh keybags, new bindings and display execution remain gates.",
+    "limits": "A static software-renderer route is not runtime UI acceptance. The inspected 5s renderer does not independently establish the iPhone 6 renderer. Modern SEP/keybag contracts are not supplied by the current explicit-key AES service.",
+    "records": [
+      {
+        "document": "next-ios-target-feasibility-2026-10-07.json",
+        "sha256": "b5788f65da53067b2233ca1d50cf87f2b040d47be56b983a145f0852ac41e873",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "121-next-ios-target-feasibility.md",
+        "sha256": "d1d55420f5a900a00772879bf537b68cc032de9fcb064fc8aa8017904833f69b",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-A-feasibility.md",
+        "sha256": "4b9834b5461dd1c4d1d693fae9bb6a273c56089371c6b065b207ab42d5f9d250",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-B-feasibility.md",
+        "sha256": "3e44f03183fff4f0324c6f8d15df4366e63d5d2aeffc9aec5907dd1b70262834",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "next-ios-C-feasibility.md",
+        "sha256": "afc6dace1c663d313ead258f6b6473b0fb744964e3aaed0f5734f1c9f3f6e9fc",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "The study conditionally ranks 3GS iOS 6.1.6 ahead of iPhone 5 iOS 10.3.4 and 5s/6 iOS 12.5.7. The selected kernels use 4 KiB pages, but fresh keybags, new bindings and display execution remain gates."
+          ],
+          [
+            "Acceptance limit",
+            "A static software-renderer route is not runtime UI acceptance. The inspected 5s renderer does not independently establish the iPhone 6 renderer. Modern SEP/keybag contracts are not supplied by the current explicit-key AES service."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "next-ios-target-feasibility-2026-10-07.json",
+        "sha256": "b5788f65da53067b2233ca1d50cf87f2b040d47be56b983a145f0852ac41e873",
+        "locator": "JSON pointers: /ranking, /recommendation/conditional, /security/keybag_runtime_executed, /security/earliest_missing_sep_boot_failure, /security/signature_and_fairplay_bypass_performed",
+        "format": "json",
+        "content": "{\n  \"/ranking\": [\n    \"B: iPhone2,1 iOS 6.1.6 / 10B500\",\n    \"A: iPhone5,1/5,2 iOS 10.3.4 / 14G61\",\n    \"C: iPhone 5s or 6 iOS 12.5.7 / 16H81\"\n  ],\n  \"/recommendation/conditional\": true,\n  \"/security/keybag_runtime_executed\": false,\n  \"/security/earliest_missing_sep_boot_failure\": \"Not executed / not established\",\n  \"/security/signature_and_fairplay_bypass_performed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

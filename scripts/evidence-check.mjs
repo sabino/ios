@@ -27,7 +27,7 @@ try{
  await go();
  expect(await ids()).toEqual(source.map(e=>e.id).sort());
  expect(new Set(await page.locator('[data-ea-tile]').evaluateAll(nodes=>nodes.map(n=>n.dataset.eaTile))).size).toBe(source.length);
- await expect(selected()).toHaveAttribute('data-ea-tile','E35');
+ await expect(selected()).toHaveAttribute('data-ea-tile','E51');
  expect(await page.locator('[data-ea-day]').evaluateAll(nodes=>nodes.map(n=>n.dataset.eaDay))).toEqual(dates);
  await audit('atlas-light');
 
@@ -112,15 +112,19 @@ try{
  expect(await ids()).toHaveLength(source.length);
  await page.locator('[data-ea-open]').click();await expect(page).toHaveURL(new RegExp('/evidence/E28/$'));
  await page.getByRole('link',{name:'← Evidence Atlas',exact:true}).click();
+ await expect(page).toHaveURL(new RegExp('/evidence/\\?focus=E28$'));
+ await page.locator('[data-evidence-atlas][data-ready]').waitFor();
  await expect(selected()).toHaveAttribute('data-ea-tile','E28');
  await page.locator('[data-ea-tile="E35"]').click();
  await page.locator('[data-ea-step="-1"]').click();await expect(selected()).toHaveAttribute('data-ea-tile','E34');
  await page.locator('[data-ea-step="1"]').click();await expect(selected()).toHaveAttribute('data-ea-tile','E35');
  await page.locator('[data-ea-tile="E35"]').focus();await page.keyboard.press('ArrowUp');
  await expect(selected()).toHaveAttribute('data-ea-tile','E33');
- await page.keyboard.press('Home');await expect(selected()).toHaveAttribute('data-ea-tile','E01');
- await page.keyboard.press('End');await expect(selected()).toHaveAttribute('data-ea-tile','E40');
- await page.keyboard.press('Enter');await expect(page).toHaveURL(new RegExp('focus=E40'));
+ const firstVisibleId=await visible().first().getAttribute('data-ea-tile');
+ const lastVisibleId=await visible().last().getAttribute('data-ea-tile');
+ await page.keyboard.press('Home');await expect(selected()).toHaveAttribute('data-ea-tile',firstVisibleId);
+ await page.keyboard.press('End');await expect(selected()).toHaveAttribute('data-ea-tile',lastVisibleId);
+ await page.keyboard.press('Enter');await expect(page).toHaveURL(new RegExp('focus='+lastVisibleId));
  await page.locator('[data-ea-view="ledger"]').click();
  await expect(page.locator('[data-ea-row]:visible')).toHaveCount(source.length);
  await audit('ledger');

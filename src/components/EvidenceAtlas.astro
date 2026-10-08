@@ -3,7 +3,7 @@ import {atlasRecords, reviewGroups, reviewLabel, historyGroups} from '../lib/evi
 import {sections, environments, envKey, url} from '../lib/content';
 import {glyph} from '../lib/evidence-cards';
 import '../styles/evidence-atlas.css';
-const initial = atlasRecords.find(e=>e.id==='E35') || atlasRecords[0];
+const initial = atlasRecords.find(e=>e.id==='E51') || atlasRecords[0];
 const related = initial.related.slice(0,6).map(r=>({...r,record:atlasRecords.find(e=>e.id===r.id)!}));
 const clientRecords = atlasRecords.map(({id,title,label,domain,environment,observation,limits,reviewedOn,sourceRevision,href,search,related,chapters,milestones})=>({id,title,label,domain,environment,observation,limits,reviewedOn,sourceRevision,href,search,related,chapters,milestones}));
 ---
@@ -17,7 +17,7 @@ const clientRecords = atlasRecords.map(({id,title,label,domain,environment,obser
   <nav class="ea-history" aria-label="Dated research milestones">
     <div class="ea-history-head"><h2>Research history</h2><p>{historyGroups.reduce((n,group)=>n+group.events.length,0)} dated milestones · reports, not review dates</p><a href={url('timeline/')}>Full chronology ↗</a></div>
     <div class="ea-history-rail">{historyGroups.map(group=>{const first=atlasRecords.find(e=>e.id===group.events[0].evidence)!;return <a href={url('timeline/#day-'+group.date)} data-ea-day={group.date} data-ea-day-focus={first.id} data-domain={first.domain} aria-label={reviewLabel(group.date)+': '+group.events.length+' research milestone'+(group.events.length===1?'':'s')}><i aria-hidden="true"/><time datetime={group.date}>{reviewLabel(group.date).replace(' 2026','')}</time><span>{group.events.length} {group.events.length===1?'milestone':'milestones'}</span></a>;})}</div>
-    <div class="ea-history-context" data-ea-history-context><span class="mono">01 Oct 2026</span><div>{historyGroups.at(-1)!.events.map(event=>{const record=atlasRecords.find(e=>e.id===event.evidence)!;return <a href={record.href} data-ea-history-record={record.id} data-domain={record.domain}><span class="mono">{record.id}</span>{record.label}</a>;})}</div></div>
+    <div class="ea-history-context" data-ea-history-context><span class="mono">{reviewLabel(historyGroups.at(-1)!.date)}</span><div>{historyGroups.at(-1)!.events.map(event=>{const record=atlasRecords.find(e=>e.id===event.evidence)!;return <a href={record.href} data-ea-history-record={record.id} data-domain={record.domain}><span class="mono">{record.id}</span>{record.label}</a>;})}</div></div>
   </nav>
   <div class="ea-domains" role="group" aria-label="Filter by research category">
     <button type="button" data-ea-domain="" aria-pressed="true" class="ea-all" disabled>All {atlasRecords.length}</button>

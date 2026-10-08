@@ -145,5 +145,109 @@
     "url": "https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html",
     "kind": "Apple documentation archive",
     "scope": "Mach, BSD, I/O Kit and kernel/userspace context. The broad diagram is not an exact source or runtime graph of the target 933-era ARM build."
+  },
+  {
+    "id": "S22",
+    "title": "Corellium: ARM-native virtual devices",
+    "url": "https://support.corellium.com/getting-started/",
+    "kind": "Platform documentation",
+    "scope": "Primary description of ARM virtualization and CHARM; no local comparison or benchmark is asserted.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S23",
+    "title": "Aleph Security: iOS on QEMU",
+    "url": "https://github.com/alephsecurity/xnu-qemu-arm64",
+    "kind": "Research implementation",
+    "scope": "Upstream README documents its QEMU/KVM goals and altered security/debugging configuration; this is related work, not this project’s acceptance.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S24",
+    "title": "touchHLE",
+    "url": "https://github.com/touchHLE/touchHLE",
+    "kind": "Preservation implementation",
+    "scope": "High-level emulation of early iOS applications; distinct from rehosting the original whole OS.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S25",
+    "title": "Project Sandcastle",
+    "url": "https://projectsandcastle.org/",
+    "kind": "Project documentation",
+    "scope": "Android/Linux on iPhone hardware: the reverse direction. The published status is scoped to its listed devices and features.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S26",
+    "title": "Legacy iOS Kit",
+    "url": "https://github.com/LukeZGD/Legacy-iOS-Kit",
+    "kind": "Preservation tooling",
+    "scope": "Restoration and related tooling for original legacy Apple devices; its firmware-patching route is not the route accepted here.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S27",
+    "title": "Bellard: QEMU, a Fast and Portable Dynamic Translator (2005)",
+    "url": "https://www.usenix.org/conference/2005-usenix-annual-technical-conference/qemu-fast-and-portable-dynamic-translator",
+    "kind": "Research paper",
+    "scope": "Primary paper on machine emulation and dynamic translation; no imported performance result is used.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S28",
+    "title": "Zaddach et al.: Avatar (NDSS 2014)",
+    "url": "https://www.ndss-symposium.org/ndss2014/ndss-2014-programme/avatar-framework-support-dynamic-security-analysis-embedded-systems-firmwares/",
+    "kind": "Research paper",
+    "scope": "Hybrid firmware emulation and physical-device analysis; informs the distinction between a model and real hardware.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S29",
+    "title": "Feng, Mera and Lu: P2IM (USENIX Security 2020)",
+    "url": "https://www.usenix.org/conference/usenixsecurity20/presentation/feng",
+    "kind": "Research paper",
+    "scope": "Automatic peripheral-interface abstraction for firmware testing. Modeling progress is distinct from physical peripheral acceptance.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S30",
+    "title": "postmarketOS PinePhone device page",
+    "url": "https://wiki.postmarketos.org/wiki/PINE64_PinePhone_(pine64-pinephone)",
+    "kind": "Living device documentation",
+    "scope": "Named related ecosystem reference. Review fetch on 7 October 2026 reached an anti-bot page after a redirect; no current support claim is inferred from unavailable contents.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S31",
+    "title": "Linux v6.12 PinePhone board description",
+    "url": "https://github.com/torvalds/linux/blob/v6.12/arch/arm64/boot/dts/allwinner/sun50i-a64-pinephone.dtsi",
+    "kind": "Pinned mainline source",
+    "scope": "Public board/peripheral topology and regulator context. Linux driver presence is not native XNU acceptance, and programmed rail selectors are not voltage measurements.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S32",
+    "title": "Linux v6.12 MUSB peripheral EP0",
+    "url": "https://github.com/torvalds/linux/blob/v6.12/drivers/usb/musb/musb_gadget_ep0.c",
+    "kind": "Pinned controller reference",
+    "scope": "Primary EP0 ordering and status semantics reference. No implementation code is incorporated into the publication.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S33",
+    "title": "Apple XNU source distribution",
+    "url": "https://github.com/apple-oss-distributions/xnu",
+    "kind": "Primary source distribution",
+    "scope": "Architecture context for Mach/BSD/IOKit. This living tree does not certify the private 933 or 1357 ARM binary layouts.",
+    "accessed": "2026-10-07"
+  },
+  {
+    "id": "S34",
+    "title": "USB 2.0 specification",
+    "url": "https://www.usb.org/document-library/usb-20-specification",
+    "kind": "Primary protocol specification",
+    "scope": "USB-IF lists the original specification. Section 9.2.6.3 specifies the SetAddress recovery interval; host URBs and local counter observations do not themselves reveal every wire stage.",
+    "accessed": "2026-10-07"
   }
 ]

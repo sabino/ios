@@ -1,0 +1,13 @@
+E41 / pinephone-iphone313-storage-2026-10-02.json
+Source SHA-256: c94b3e08981d052457c4084905bdc22d65119c19e501994da1637d196970267f
+Locator: JSON pointers: /shared_abi/selection, /shared_abi/separate_os_driver_fork_added, /shared_abi/legacy_bootstrap_abi_preserved, /shared_abi/aes_explicit_keys_only, /shared_abi/uid_gid_selectors_rejected, /shared_abi/file_integrity_or_security_policy_checks_changed
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/shared_abi/selection": "exact original kernel SHA-256, optional matching build name",
+  "/shared_abi/separate_os_driver_fork_added": false,
+  "/shared_abi/legacy_bootstrap_abi_preserved": true,
+  "/shared_abi/aes_explicit_keys_only": true,
+  "/shared_abi/uid_gid_selectors_rejected": true,
+  "/shared_abi/file_integrity_or_security_policy_checks_changed": false
+}

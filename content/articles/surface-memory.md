@@ -9,7 +9,10 @@
     "E15",
     "E16",
     "E37",
-    "E38"
+    "E38",
+    "E41",
+    "E44",
+    "E50"
   ],
   "sources": [
     "S07"
@@ -21,9 +24,11 @@
     "frame-retirement",
     "camera-preview"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -83,3 +88,8 @@ The [captured image and pointer table](/ios/evidence/E16/#surface-swaps) retain 
 The Camera path adds a new ownership boundary. A selected camera image remains retained until the renderer’s completion state permits release. In the measured baseline, two image-queue entries coexist with three display pages; repeated selection refreshes last use while page reuse advances completion. [E37](/ios/evidence/E37/)
 
 An isolated ARM replay reproduces the resulting admission pressure. Larger capacity removes drops in selected modeled scenarios, but retaining every input surface can starve the producer. The candidate keeps one of six surfaces available while preserving retirement checks. Its physical comparison was still pending at the pinned revision. Synthetic throughput is not a measured phone improvement. [E38](/ios/evidence/E38/)
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The 7E18 adapter has separate exact-build IOSurface fields and reserved native memory. Camera acquisition remains real 640 × 480 UYVY; stock preview/still destinations have their expected YUYV geometry and ownership. A 1600 × 1200 resampled still adds no captured detail. DMA ownership, source aliases and completion remain distinct from a plausible descriptor. [E41](/ios/evidence/E41/) [E44](/ios/evidence/E44/) [E50](/ios/evidence/E50/)

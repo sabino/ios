@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E51",
+    "title": "3.1.3 daily use after cold power-on",
+    "environment": "Physical PinePhone",
+    "method": "Owner hand test, continuous UART, decoded media and complete available-region readback",
+    "observation": "On October 7 the owner accepts battery/charging indication, unlock/touch, Power blank/wake, upright Camera preview, shutter, thumbnail, Photos, complete power-off staying off for 30 seconds and reopening the same new photo after cold power-on.",
+    "limits": "Ordinary stock restart, legacy daily hand checks, USB pairing and stock rotation remain unaccepted by this trial. This does not measure battery endurance or image quality.",
+    "records": [
+      {
+        "document": "pinephone-owner313-daily-2026-10-07.json",
+        "sha256": "f7d30073cb25e6df5a59168b6f1dcad4382bf40d532c43c1397fe4a909b325ca",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "daily-profiles-20261007.md",
+        "sha256": "191eea47117312a8f9a6a9e03df04d09b3ad5c90faa2a69723e663ca299fcf1b",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Owner accepted within stated trial",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "On October 7 the owner accepts battery/charging indication, unlock/touch, Power blank/wake, upright Camera preview, shutter, thumbnail, Photos, complete power-off staying off for 30 seconds and reopening the same new photo after cold power-on."
+          ],
+          [
+            "Acceptance limit",
+            "Ordinary stock restart, legacy daily hand checks, USB pairing and stock rotation remain unaccepted by this trial. This does not measure battery endurance or image quality."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-owner313-daily-2026-10-07.json",
+        "sha256": "f7d30073cb25e6df5a59168b6f1dcad4382bf40d532c43c1397fe4a909b325ca",
+        "locator": "JSON pointers: /passed, /owner_hand_test, /apple_userland_text_changes, /accepted_checks, /not_accepted, /recovery/all_12_available_intervals_read, /recovery/boot_files_verified, /recovery/sd_present, /recovery/fresh_hfs_checks/root/fsck_exit, /recovery/fresh_hfs_checks/data/fsck_exit",
+        "format": "json",
+        "content": "{\n  \"/passed\": true,\n  \"/owner_hand_test\": true,\n  \"/apple_userland_text_changes\": 0,\n  \"/accepted_checks\": [\n    \"battery_level_and_charging_icon\",\n    \"slide_to_unlock_and_touch\",\n    \"power_sleep_wake\",\n    \"live_upright_camera_preview\",\n    \"shutter\",\n    \"thumbnail\",\n    \"new_photo_in_Photos\",\n    \"power_slider_complete_poweroff_stays_off_30_seconds\",\n    \"same_new_photo_reopened_after_clean_power_cycle\"\n  ],\n  \"/not_accepted\": [\n    \"ordinary stock native restart (the persistence test used complete Power-slider halt then cold power-on)\",\n    \"remaining iPhone/iPod 1.1.4 daily hand checks\",\n    \"native USB enumeration or pairing\",\n    \"stock rotation\"\n  ],\n  \"/recovery/all_12_available_intervals_read\": true,\n  \"/recovery/boot_files_verified\": 593,\n  \"/recovery/sd_present\": false,\n  \"/recovery/fresh_hfs_checks/root/fsck_exit\": 0,\n  \"/recovery/fresh_hfs_checks/data/fsck_exit\": 0\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

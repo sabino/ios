@@ -1,0 +1,20 @@
+E58 / ios6-10b500-buttons-2026-10-07.json
+Source SHA-256: f7e0389d1f02b9822d4c3f581edcfbd05651a994aa06b958e33760b7cc2c7650
+Locator: JSON pointers: /actual_boot/next_first_fault, /actual_boot/CPUIdle_allocator_and_CPU_setup_observed, /actual_boot/normal_Darwin_banner, /actual_boot/launchd, /actual_boot/root_storage, /actual_host_stimulus/actual_QOM_masks, /actual_host_stimulus/stock_hid_client_delivery_proven, /physical_executed
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/actual_boot/next_first_fault": "function-clock_gate is genuinely absent; AppleS5L8920XIO::start caller0x80787c77",
+  "/actual_boot/CPUIdle_allocator_and_CPU_setup_observed": true,
+  "/actual_boot/normal_Darwin_banner": false,
+  "/actual_boot/launchd": false,
+  "/actual_boot/root_storage": false,
+  "/actual_host_stimulus/actual_QOM_masks": [
+    1,
+    0,
+    2,
+    0
+  ],
+  "/actual_host_stimulus/stock_hid_client_delivery_proven": false,
+  "/physical_executed": false
+}

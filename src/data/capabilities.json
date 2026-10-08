@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-01",
-  "provenance": "Edition 1.2, reviewed 1 October 2026 at source revision ec07dd0. Working means accepted within the stated physical trial; Partial retains a material acceptance limit. Entries link the relevant dated evidence. Later live-session work is outside this pinned snapshot. Scores are editorial judgements, not measurements.",
+  "updated": "2026-10-07",
+  "provenance": "Edition 2.0, reviewed 7 October 2026 at source revision 15b3a95. The primary daily workflow is physical 3.1.3 / 7E18. Retained 1.1.4 results keep separate records and profile limits. Working means observed within the named physical trial; owner acceptance is stated explicitly. Partial retains a material gate. Scores are editorial judgments, not measurements.",
   "scale": {
     "functionality": "How complete the behaviour is for someone using the device.",
     "implementation": "How robust and general the underlying implementation is."
@@ -23,7 +23,7 @@
         "PinePhone QEMU",
         "iPod reference"
       ],
-      "reach": "Boots to SpringBoard and an interactive home screen. Settings changes persist across a clean reboot.",
+      "reach": "Boots to SpringBoard and an interactive home screen. Settings changes persist across a clean reboot. These historical hand checks do not qualify every newer SD-free profile combination.",
       "functionality": 5,
       "implementation": 4
     },
@@ -35,9 +35,22 @@
       "environments": [
         "Physical PinePhone"
       ],
-      "reach": "The separate M68AP profile reaches its home screen with accepted touch, live Camera preview and saved VGA photos that reopen after a fresh boot. The PinePhone has an EG25-G modem; native telephony integration remains unaccepted.",
+      "reach": "The separate M68AP profile reaches its home screen with accepted touch, live Camera preview and saved VGA photos that reopen after a fresh boot. The PinePhone has an EG25-G modem; native telephony integration remains unaccepted. The later 3.1.3 profile has separate acceptance; 4A102 camera rail admission remains independently scoped.",
       "functionality": 4,
       "implementation": 3
+    },
+    {
+      "id": "7e18",
+      "os": "iPhone OS 3.1.3",
+      "build": "7E18",
+      "variant": "M68AP · iPhone (1,1) userspace",
+      "environments": [
+        "Physical PinePhone",
+        "PinePhone QEMU"
+      ],
+      "reach": "Primary daily profile: owner-accepted touch, battery indication, stock Camera/Photos, complete power-off and reopening a new photograph after cold power-on. Ordinary restart, USB pairing and rotation remain separate pending gates.",
+      "functionality": 5,
+      "implementation": 4
     }
   ],
   "domains": [
@@ -50,8 +63,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E29",
-          "note": "N45 unlock and Settings interaction are accepted on the physical phone; the separate M68 home-screen result has its own record.",
+          "evidence": "E51",
+          "note": "The 7E18 daily hand test accepts unlock and touch after native boot. Retained N45/M68 4A102 results remain separate.",
           "layers": [
             "Foundations",
             "Machine"
@@ -63,11 +76,11 @@
           "functionality": 4,
           "implementation": 3,
           "environment": "Physical PinePhone",
-          "note": "The M68AP build reaches its home screen on the device, from an isolated second system image.",
+          "note": "3.1.3 / 7E18 reaches its interactive home screen on the phone; the older M68 1.1.4 result remains E32.",
           "layers": [
             "Foundations"
           ],
-          "evidence": "E32"
+          "evidence": "E51"
         },
         {
           "feature": "Checked storage & persistence",
@@ -75,8 +88,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E36",
-          "note": "Settings and two VGA JPEGs persist through checked clean reboots. Full data copies pass fsck; this does not establish sudden-power-loss durability.",
+          "evidence": "E51",
+          "note": "A newly captured 7E18 photo reopens after full Power-slider halt and cold power-on. Fresh root/data copies pass fsck; sudden-power-loss durability remains unproven.",
           "layers": [
             "Storage",
             "Method"
@@ -87,13 +100,52 @@
           "status": "Partial",
           "functionality": 3,
           "implementation": 3,
-          "environment": "PinePhone QEMU controls; physical clean reboot",
-          "note": "The watchdog passes deliberate panic and shutdown-stall controls in QEMU. Physical normal runs show petting and clean reboot; arbitrary hardware-hang recovery is unproven.",
+          "environment": "Physical PinePhone",
+          "note": "SD-free RTC/watchdog recovery passes a deliberate early pre-XNU stall; Jumpdrive returns without further serial commands. This is not arbitrary-hang coverage, and normal daily boot/runtime watchdogs remain off.",
           "layers": [
             "Machine",
             "Method"
           ],
-          "evidence": "E40"
+          "evidence": "E48"
+        },
+        {
+          "feature": "Shared 1.1.4 / 3.1.3 adapters",
+          "status": "Working",
+          "evidence": "E51",
+          "note": "Accepted daily 7E18 uses the shared exact-build adapter family. Binding inspection is E41; shared source does not imply equal ABIs.",
+          "layers": [
+            "Foundations",
+            "Machine"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 5,
+          "implementation": 4
+        },
+        {
+          "feature": "Panel boot selector",
+          "status": "Working",
+          "evidence": "E61",
+          "note": "Twelve-second default route; separately accepted back-buffer rendering and Volume/Power selection. Later styling is a separate candidate.",
+          "layers": [
+            "Foundations",
+            "Machine"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 5,
+          "implementation": 4
+        },
+        {
+          "feature": "SD-free eMMC boot",
+          "status": "Working",
+          "evidence": "E48",
+          "note": "Tow-Boot from eMMC hardware boot area reaches the selector and Jumpdrive with SD absent; the bootloader is preserved.",
+          "layers": [
+            "Foundations",
+            "Storage"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 5,
+          "implementation": 4
         }
       ]
     },
@@ -106,8 +158,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E17",
-          "note": "The original client's pixels reach the physical display.",
+          "evidence": "E51",
+          "note": "The physical 7E18 hand test accepts the original interface through the software copy/expansion path; GPU acceleration is unaccepted.",
           "layers": [
             "Graphics"
           ]
@@ -118,8 +170,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E20",
-          "note": "A curved fade precedes blank; a Power tap restores the image.",
+          "evidence": "E51",
+          "note": "The 7E18 owner test accepts Power blank/wake. The earlier 4A102 fade measurement remains E20; system suspend is not inferred.",
           "layers": [
             "Graphics",
             "Interaction"
@@ -148,11 +200,11 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "note": "Finger contacts from the panel's controller reach the UI through the original multitouch driver — tap, drag and slide-to-unlock.",
+          "note": "Human slide-to-unlock and touch are accepted in the 7E18 daily trial; the October 3 replay used synthetic contacts.",
           "layers": [
             "Interaction"
           ],
-          "evidence": "E29"
+          "evidence": "E51"
         },
         {
           "feature": "Multitouch & pinch-zoom",
@@ -172,8 +224,8 @@
           "functionality": 5,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E20",
-          "note": "Power and Home reach the original HID path.",
+          "evidence": "E51",
+          "note": "Power blank/wake and complete Power-slider halt are owner accepted in 7E18; original HID delivery and selector buttons have separate records.",
           "layers": [
             "Interaction"
           ]
@@ -191,6 +243,32 @@
             "Interaction"
           ],
           "evidence": "E33"
+        },
+        {
+          "feature": "Raw accelerometer samples",
+          "status": "Partial",
+          "evidence": "E55",
+          "note": "One finite physical MPU6050 stream records 100 real samples. Callback rate is 6.80 Hz; calibrated stock rotation and client lifetime remain pending.",
+          "layers": [
+            "Machine",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 2,
+          "implementation": 3
+        },
+        {
+          "feature": "English locale & time zone",
+          "status": "Partial",
+          "evidence": "E62",
+          "note": "English UI is captured in QEMU and used in the daily profile. São Paulo time-zone installation/resolution passes; owner-visible clock acceptance remains pending.",
+          "layers": [
+            "Foundations",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 4,
+          "implementation": 3
         }
       ]
     },
@@ -203,12 +281,12 @@
           "functionality": 4,
           "implementation": 3,
           "environment": "Physical PinePhone",
-          "note": "Owner accepted upright, exposed preview. The reviewed baseline delivers 29.5 native frames/s and selects 7.9 distinct images/s; panel updates are a separate counter.",
+          "note": "Owner accepted the clean stock 7E18 upright preview. No 3.1.3 preview frame rate is measured; the two/six-slot 1.1.4 comparison is E59.",
           "layers": [
             "Graphics",
             "Interaction"
           ],
-          "evidence": "E35"
+          "evidence": "E44"
         },
         {
           "feature": "Photo capture & save",
@@ -216,12 +294,12 @@
           "functionality": 4,
           "implementation": 3,
           "environment": "Physical PinePhone",
-          "note": "Two genuine 640 × 480 JPEGs and thumbnails save; preview resumes. Both JPEGs keep their hashes and reopen after a fresh boot.",
+          "note": "Stock 7E18 shutter, thumbnail and Photos pass the daily hand test. The same new image reopens after clean cold power-on.",
           "layers": [
             "Storage",
             "Interaction"
           ],
-          "evidence": "E36"
+          "evidence": "E51"
         },
         {
           "feature": "Full-resolution stills",
@@ -229,11 +307,11 @@
           "functionality": 2,
           "implementation": 2,
           "environment": "Physical PinePhone",
-          "note": "Only genuine 640 × 480 sensor capture is accepted. Higher-resolution modes remain untested; VGA is not enlarged to claim a higher resolution.",
+          "note": "The stock 1600 × 1200 output is resampled from real 640 × 480 acquisition; it adds no captured detail. Genuine higher-detail sensor modes remain pending.",
           "layers": [
             "Interaction"
           ],
-          "evidence": "E36"
+          "evidence": "E44"
         }
       ]
     },
@@ -246,8 +324,8 @@
           "functionality": 4,
           "implementation": 4,
           "environment": "Physical PinePhone",
-          "evidence": "E31",
-          "note": "Read-only physical AXP803 values publish through the original power-source service. Synthetic QEMU samples separately validate the original UI consumer.",
+          "evidence": "E51",
+          "note": "The daily 7E18 owner test accepts battery level and charging indication; physical power-budget measurements remain the separate 4A102 record E31.",
           "layers": [
             "Interaction"
           ]
@@ -282,10 +360,37 @@
           "functionality": 0,
           "implementation": 1,
           "environment": "Physical PinePhone",
-          "note": "The clock runs at its handoff frequency; a higher clock needs a regulator change that has not been made.",
+          "note": "No dynamic frequency policy is accepted for the daily profile. The 7E18 timing baseline leaves the CPU clock unchanged.",
           "layers": [
             "Machine"
-          ]
+          ],
+          "evidence": "E50"
+        },
+        {
+          "feature": "Complete power-off",
+          "status": "Working",
+          "evidence": "E51",
+          "note": "Owner accepts Power-slider halt staying off for thirty seconds; native drain and PMIC request are separately traced.",
+          "layers": [
+            "Machine",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 5,
+          "implementation": 4
+        },
+        {
+          "feature": "Ordinary restart",
+          "status": "Partial",
+          "evidence": "E46",
+          "note": "One physical drained EL2→WDOG0 route reaches new SPL after 1.084 s and the ordinary selector. Repeated ordinary stock-restart hand acceptance is pending.",
+          "layers": [
+            "Machine",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 3,
+          "implementation": 3
         }
       ]
     },
@@ -303,6 +408,32 @@
             "Machine"
           ],
           "evidence": "E39"
+        },
+        {
+          "feature": "Idle display timing",
+          "status": "Partial",
+          "evidence": "E50",
+          "note": "A later 64-presentation interval averages 12.7 ms elapsed work with zero sampled changes. This is not animation FPS or pure compositor CPU time.",
+          "layers": [
+            "Graphics",
+            "Method"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 3,
+          "implementation": 4
+        },
+        {
+          "feature": "Legacy preview queue",
+          "status": "Working",
+          "evidence": "E59",
+          "note": "One 4A102 physical queue comparison raises distinct selected images from 7.893 to 16.520/s. Unequal intervals and selection counters limit interpretation; this is not 7E18 throughput.",
+          "layers": [
+            "Graphics",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 4,
+          "implementation": 3
         }
       ]
     },
@@ -342,6 +473,44 @@
             "Interaction"
           ],
           "evidence": "E32"
+        },
+        {
+          "feature": "USB device enumeration",
+          "status": "Partial",
+          "evidence": "E52",
+          "note": "Native MUSB reaches host enumeration and stock mux v2 handshake in finite physical trials; teardown, repeated replug and ordinary pairing are not accepted.",
+          "layers": [
+            "Machine",
+            "Interaction"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 3,
+          "implementation": 3
+        },
+        {
+          "feature": "USB pairing & services",
+          "status": "Planned",
+          "evidence": "E54",
+          "note": "Later listener samples follow the host preflight; pairing, info, syslog and AFC remain pending at this committed snapshot.",
+          "layers": [
+            "Interaction",
+            "Method"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 0,
+          "implementation": 2
+        },
+        {
+          "feature": "GPU acceleration",
+          "status": "Planned",
+          "evidence": "E43",
+          "note": "The accepted compositor is stock software rendering. No native GPU/GLES driver or broad 3D-app coverage is established.",
+          "layers": [
+            "Graphics"
+          ],
+          "environment": "Physical PinePhone",
+          "functionality": 0,
+          "implementation": 0
         }
       ]
     }
@@ -353,24 +522,40 @@
       "chip": "S5L8900 · ARM11",
       "targets": "iPod touch 1G · iPhone (1,1)",
       "state": "done",
-      "note": "Boots natively to an interactive home screen on the PinePhone, with touch, camera, battery and screenshots."
+      "note": "Retained physical 4A102 acceptance; N45 and M68 remain separate profiles."
     },
     {
-      "stage": "Next",
-      "os": "iPhone OS 2.x",
+      "stage": "Running",
+      "os": "iPhone OS 3.1.3",
       "chip": "S5L8900 · ARM11",
-      "targets": "App Store era, same silicon family",
-      "state": "planned",
-      "note": "Later userspaces on the same processor generation, once 1.x coverage is broad."
+      "targets": "iPhone (1,1) / 7E18",
+      "state": "done",
+      "note": "Primary daily physical profile with accepted touch, stock Camera/Photos and clean cold-power-cycle persistence."
     },
     {
-      "stage": "Goal",
-      "os": "iPhone OS 3.x",
+      "stage": "Next study",
+      "os": "iOS 6.1.6",
       "chip": "S5L8920 · Cortex-A8",
-      "targets": "iPhone 3GS",
+      "targets": "iPhone 3GS / 10B500",
       "state": "planned",
-      "note": "The destination: a different, newer ARMv7 core — closer to what the PinePhone's A53 runs natively."
+      "note": "Conditionally ranked first. Diskless QEMU reaches CPUIdle and two-input dispatch, then function-clock_gate panic; normal boot/UI and physical execution remain pending."
+    },
+    {
+      "stage": "Offline study",
+      "os": "iOS 10.3.4",
+      "chip": "A6 · ARM32",
+      "targets": "iPhone 5 / 14G61",
+      "state": "planned",
+      "note": "Static renderer route and kernel inspection; new keybags, ABI bindings and physical display remain gates."
+    },
+    {
+      "stage": "Offline study",
+      "os": "iOS 12.5.7",
+      "chip": "A7/A8 · ARM64",
+      "targets": "iPhone 5s / 6 / 16H81",
+      "state": "planned",
+      "note": "Later target; AArch64 platform and SEP-dependent service contracts need original work. No accepted port."
     }
   ],
-  "sourceRevision": "ec07dd0fedd12c0e00bd1052388235cbfda18de4"
+  "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788"
 }

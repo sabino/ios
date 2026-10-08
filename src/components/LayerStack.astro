@@ -15,8 +15,8 @@ const scopeAnchors = [...[...sections.map(s => s.toLowerCase()), 'all'].flatMap(
 const architecture = [
   {id: 'context', name: 'Foundations', kind: 'Research context', detail: 'Methods, tools and sources.', domains: ['Foundations'], tiles: [['Documentation', 'document'], ['Source code', 'code'], ['Build environment', 'database'], ['Hardware notes', 'document']]},
   {id: 'hardware', name: 'PinePhone · A64', kind: 'Physical board', detail: 'The physical hardware target.', domains: ['Machine', 'Storage', 'Graphics', 'Interaction'], tiles: [['CPU', 'chip'], ['Memory', 'memory'], ['Display', 'display'], ['OV5640', 'camera']]},
-  {id: 'kernel', name: 'XNU kernel & drivers', kind: 'Kernel space', detail: 'Core OS, device drivers and low-level services.', domains: ['Machine', 'Storage', 'Graphics', 'Interaction'], tiles: [['Mach', 'gear'], ['BSD', 'document'], ['IOKit', 'chip']]},
-  {id: 'services', name: 'Services & frameworks', kind: 'User space', detail: 'System frameworks and services.', domains: ['Storage', 'Graphics', 'Interaction'], tiles: [['UIKit', 'cube'], ['CoreSurface', 'layers'], ['PhotoLibrary', 'database']]},
+  {id: 'kernel', name: 'XNU 933 / 1357', kind: 'Kernel space', detail: 'Build-bound kernel and native providers.', domains: ['Machine', 'Storage', 'Graphics', 'Interaction'], tiles: [['Mach', 'gear'], ['BSD', 'document'], ['IOKit', 'chip']]},
+  {id: 'services', name: 'Services & frameworks', kind: 'User space', detail: 'Stock services and media frameworks.', domains: ['Storage', 'Graphics', 'Interaction'], tiles: [['UIKit', 'cube'], ['CoreSurface', 'layers'], ['PhotoLibrary', 'database']]},
   {id: 'apps', name: 'Apps', kind: 'User space', detail: 'User applications and system apps.', domains: ['Graphics', 'Interaction'], tiles: [['SpringBoard', 'app'], ['Camera', 'camera'], ['Photos', 'photos']]},
 ];
 const topics: Record<string, string> = {
@@ -79,9 +79,9 @@ const architectureFocus: Record<string, string> = {
     {capabilities && <button class="layer-motion" type="button" data-layer-motion aria-pressed="false" hidden>Pause motion</button>}
     <details class="diagram-notes">
       <summary>Reading this wireframe</summary>
-      <p>The planes show the native route: physical board, adapted XNU kernel and drivers, services and frameworks, then SpringBoard and apps. The component tiles illustrate what belongs at each boundary. Plane colors match their linked research entries below; research domains can span several OS boundaries. Selecting a domain highlights the boundaries it studies.</p>
+      <p>The 4A102 and 7E18 profiles use independently verified bindings. The planes show the native route: physical board, adapted XNU kernel and drivers, services and frameworks, then SpringBoard and apps. The component tiles illustrate what belongs at each boundary. Plane colors match their linked research entries below; research domains can span several OS boundaries. Selecting a domain highlights the boundaries it studies.</p>
       <p>Foundations sits beneath the diagram as research context, not an operating-system component. Method spans every boundary. Connections are a reading guide; they do not establish runtime calls or certify that a feature works.</p>
-      <p>XNU includes Mach, BSD and I/O Kit in its kernel environment. Apple’s Foundation framework belongs to userspace and is distinct from the atlas’s Foundations section.</p>
+      <p>XNU includes Mach, BSD and I/O Kit in its kernel environment. The two builds use reviewed CoreSurface/IOSurface contracts and stock media consumers; the 7E18 Camera path includes Celestial/FigRecorder. Apple’s Foundation framework belongs to userspace and is distinct from the atlas’s Foundations section. <a href={url('paper/#5-implementation')}>Read the subsystem evidence ↗</a></p>
       <p>Architecture references: <a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html">Apple’s kernel overview</a> and <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html">iOS framework layers</a>. For the project’s distinct execution environments, read <a href={url('articles/three-machines/')}>the three machines</a>.</p>
     </details>
   </div>

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 2,
+  "publication": {
+    "title": "iPhone OS Research Atlas",
+    "edition": "2.0",
+    "date": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "scope": "iPhone OS 1.1.4 / 4A102 and 3.1.3 / 7E18; native PinePhone execution, distinct QEMU gates and offline next-target study",
+    "provenance": "Original editorial synthesis of private project notebooks and experiment reports, with reviewed capture images, selected source excerpts and their provenance. Firmware, storage images, complete run artifacts and the implementation repository are not included.",
+    "independentReproduction": false,
+    "license": "MIT",
+    "author": "Felipe Guilherme Sabino",
+    "paperVersion": "2.0",
+    "paper": "/ios/paper/"
+  },
+  "record": {
+    "id": "E41",
+    "title": "One adapter, two exact-build contracts",
+    "environment": "Static inspection",
+    "method": "Committed binding schema and isolated storage/AES gates",
+    "observation": "4A102 and 7E18 select separate measured bindings by original kernel SHA-256 while retaining shared hardware adapter code. Explicit-key AES and stock integrity policy remain distinct contracts.",
+    "limits": "This is a binding and software-gate result. It does not establish physical UI acceptance or a general ABI across releases.",
+    "records": [
+      {
+        "document": "pinephone-iphone313-storage-2026-10-02.json",
+        "sha256": "c94b3e08981d052457c4084905bdc22d65119c19e501994da1637d196970267f",
+        "access": "Private validation record; selected fields only"
+      },
+      {
+        "document": "103-iphone-3.1.3-and-boot-selector.md",
+        "sha256": "3b785b5f1900fb62dbe3d2a014ad142d96de977fa040061b4edcf57d570a4541",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "104-iphone-3.1.3-qemu-entry.md",
+        "sha256": "5d5ff30d7edd6534cd3b37b420a0f963a242c2c60ecc3a6d64a7e113227261ff",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "105-iphone313-native-storage.md",
+        "sha256": "72cfa948bbf3fd68ac6cbade4094299ba117ae08827c5749a13b76ddb880f596",
+        "access": "Private research chapter; original material is not distributed"
+      },
+      {
+        "document": "115-7e18-native-driver-regions.md",
+        "sha256": "8a99b9f138867fd5da991b93a1400621a0e86abefd1cbef13d56bbbb385415ed",
+        "access": "Private research chapter; original material is not distributed"
+      }
+    ],
+    "measurements": [],
+    "status": "Bounded reported observation",
+    "reviewedOn": "2026-10-07",
+    "sourceRevision": "15b3a954f6d81eb858d0c11f372a8ae1e29d0788",
+    "exhibits": [
+      {
+        "id": "selected-gates",
+        "kind": "table",
+        "title": "Reviewed acceptance boundaries",
+        "columns": [
+          "Question",
+          "Reported result"
+        ],
+        "rows": [
+          [
+            "Observation",
+            "4A102 and 7E18 select separate measured bindings by original kernel SHA-256 while retaining shared hardware adapter code. Explicit-key AES and stock integrity policy remain distinct contracts."
+          ],
+          [
+            "Acceptance limit",
+            "This is a binding and software-gate result. It does not establish physical UI acceptance or a general ABI across releases."
+          ]
+        ],
+        "interpretation": "Original editorial summary. The selected fields below retain the validation record’s scope.",
+        "sourceIds": [
+          "fields"
+        ]
+      }
+    ],
+    "excerpts": [
+      {
+        "id": "fields",
+        "document": "pinephone-iphone313-storage-2026-10-02.json",
+        "sha256": "c94b3e08981d052457c4084905bdc22d65119c19e501994da1637d196970267f",
+        "locator": "JSON pointers: /shared_abi/selection, /shared_abi/separate_os_driver_fork_added, /shared_abi/legacy_bootstrap_abi_preserved, /shared_abi/aes_explicit_keys_only, /shared_abi/uid_gid_selectors_rejected, /shared_abi/file_integrity_or_security_policy_checks_changed",
+        "format": "json",
+        "content": "{\n  \"/shared_abi/selection\": \"exact original kernel SHA-256, optional matching build name\",\n  \"/shared_abi/separate_os_driver_fork_added\": false,\n  \"/shared_abi/legacy_bootstrap_abi_preserved\": true,\n  \"/shared_abi/aes_explicit_keys_only\": true,\n  \"/shared_abi/uid_gid_selectors_rejected\": true,\n  \"/shared_abi/file_integrity_or_security_policy_checks_changed\": false\n}",
+        "note": "Exact selected JSON values. All other fields are omitted; this is not a complete experiment report."
+      }
+    ]
+  }
+}

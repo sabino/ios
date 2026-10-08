@@ -7,7 +7,11 @@
   "order": 16,
   "evidence": [
     "E19",
-    "E20"
+    "E20",
+    "E43",
+    "E51",
+    "E55",
+    "E56"
   ],
   "sources": [
     "S11"
@@ -17,9 +21,11 @@
     "buttons",
     "audio"
   ],
-  "updated": "2026-09-29"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 ## Follow the thread that signals readiness
 
@@ -50,3 +56,8 @@ The same discipline applies to audio, power functions and display enable service
 Reaching a CoreFoundation or Mach-message wait is evidence of startup progress. It does not establish that a physical event reaches the application or that the application responds. The later button work independently demonstrated the event path through original HID and a visible wake/blank sequence. [E20](/ios/evidence/E20/)
 
 This gives a useful two-stage acceptance pattern: first establish service readiness, then establish a controlled input and independently observable response. It keeps a quiet event loop from being mistaken for either a frozen application or a fully working user interface.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Synthetic 7E18 replay reaches original Home/Z2 consumers before the later human-touch acceptance. A finite raw accelerometer stream does not publish stock HID motion or qualify client lifetime. Parent cleanup on one shutdown route is inferred from frozen code and an observed unique continuation; it does not prove callback join, unload or automatic rotation. [E43](/ios/evidence/E43/) [E51](/ios/evidence/E51/) [E55](/ios/evidence/E55/) [E56](/ios/evidence/E56/)

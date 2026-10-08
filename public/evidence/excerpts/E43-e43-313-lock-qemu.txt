@@ -1,0 +1,6 @@
+E43 / before-slide.png
+Source SHA-256: 986046a3671d9873a76485ea8506648404fc59e8cd18c745344305698e033978
+Locator: Whole capture; no crop; pixel bounds [0, 0, 320, 480]
+Editorial provenance statement, not a quoted log. The source basename and SHA-256 identify the selected image.
+
+Original reviewed QEMU capture. Output bytes and pixels are unchanged. Full private capture directory is not included.

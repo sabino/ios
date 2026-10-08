@@ -1,8 +1,8 @@
 ---
 {
   "slug": "native-iphone",
-  "title": "A second userspace profile, a separate acceptance boundary",
-  "description": "The M68AP home screen, native screenshots and the limits of calling a port a phone.",
+  "title": "Separate iPhone profiles, separate acceptance",
+  "description": "The 1.1.4 and 3.1.3 iPhone userspaces share native hardware work while retaining their own service and acceptance contracts.",
   "section": "Foundations",
   "order": 25,
   "evidence": [
@@ -10,7 +10,18 @@
     "E29",
     "E32",
     "E33",
-    "E36"
+    "E36",
+    "E41",
+    "E43",
+    "E44",
+    "E45",
+    "E46",
+    "E48",
+    "E51",
+    "E52",
+    "E54",
+    "E57",
+    "E62"
   ],
   "sources": [
     "S03",
@@ -23,9 +34,11 @@
     "camera-capture",
     "camera-stills"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 ## The profile changes the questions
 
 The physical PinePhone now runs a separate M68AP iPhone OS 1.1.4 research profile as well as the N45AP iPod touch route. This matters because a shared kernel does not make the two userspaces interchangeable. The archive comparison found identical 4A102 kernelcache members alongside different board descriptions and root images. Product capabilities, application choices and service expectations remain profile-specific. [E01](/ios/evidence/E01/)
@@ -45,3 +58,8 @@ N45 also has its own accepted interaction result: stable finger identities let t
 The original PinePhone includes a Quectel EG25-G modem, as the [board documentation](/ios/sources/#S09) records. The native port has not established a working modem-to-telephony service path. “No Service” is a software state on the screen, not evidence that the board lacks cellular hardware. The status page now classifies telephony as planned integration.
 
 Audio playback, Wi-Fi, full suspend, broad app coverage and power-loss durability also remain open at this edition. A responsive home screen is a substantial milestone, but each of those behaviors needs its own device contract and acceptance record. Preserving two profiles is useful precisely because their successes and failures can be compared without collapsing them into a single claim that everything works.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+A separate 3.1.3 / 7E18 M68AP profile now runs natively on the same A64 through shared exact-build adapters. Owner acceptance covers touch, battery indication, stock Camera/Photos, complete Power-slider halt and a new photograph after cold power-on. The clean Camera route changes zero Apple userland instructions; its 1600 × 1200 output is resampled from VGA capture. SD-free boot and finite USB enumeration/mux are distinct results. Ordinary restart, pairing/AFC, networking, telephony, GPU acceleration, audio, suspend and stock rotation remain pending. The newer-target ranking is a static study, not another accepted port. Read the [full paper](/ios/paper/) for the design, cases and evaluation. [E41](/ios/evidence/E41/) [E43](/ios/evidence/E43/) [E44](/ios/evidence/E44/) [E45](/ios/evidence/E45/) [E46](/ios/evidence/E46/) [E48](/ios/evidence/E48/) [E51](/ios/evidence/E51/) [E52](/ios/evidence/E52/) [E54](/ios/evidence/E54/) [E57](/ios/evidence/E57/) [E62](/ios/evidence/E62/)

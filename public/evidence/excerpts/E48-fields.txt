@@ -1,0 +1,15 @@
+E48 / pinephone-emmc-boot-2026-10-06.json
+Source SHA-256: c54dad828f94124c105f6c1fe245e9f3b99139d19ff1b2c9ad5736ce7c890c02
+Locator: JSON pointers: /bootloader_written, /sd_free_recovery/regions, /sd_free_recovery/files, /sd_free_recovery/sd_present, /sd_free_recovery/protected_payloads_byte_identical, /rtc_only_trial/watchdog_reset_after_entry_seconds, /rtc_only_trial/jumpdrive_after_entry_seconds, /rtc_only_trial/xnu_started
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/bootloader_written": false,
+  "/sd_free_recovery/regions": 12,
+  "/sd_free_recovery/files": 218,
+  "/sd_free_recovery/sd_present": false,
+  "/sd_free_recovery/protected_payloads_byte_identical": true,
+  "/rtc_only_trial/watchdog_reset_after_entry_seconds": 14.336,
+  "/rtc_only_trial/jumpdrive_after_entry_seconds": 23.287,
+  "/rtc_only_trial/xnu_started": false
+}

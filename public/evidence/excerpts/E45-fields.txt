@@ -1,0 +1,13 @@
+E45 / pinephone-iphone313-halt-2026-10-04.json
+Source SHA-256: bdd087009030f99804136b0124144ee4dc70430f0acad0f893d7112215359b18
+Locator: JSON pointers: /physical/clean_poweroff_observed, /physical/owner_poweroff_acceptance, /physical/halt_sequences_observed, /physical/final_storage_drain_error, /physical/panic_count, /physical/cs_invalid_page_count
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/physical/clean_poweroff_observed": true,
+  "/physical/owner_poweroff_acceptance": true,
+  "/physical/halt_sequences_observed": 2,
+  "/physical/final_storage_drain_error": 0,
+  "/physical/panic_count": 0,
+  "/physical/cs_invalid_page_count": 0
+}

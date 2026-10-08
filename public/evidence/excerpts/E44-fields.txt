@@ -1,0 +1,31 @@
+E44 / pinephone-iphone313-camera-2026-10-04.json
+Source SHA-256: c157d61c0a6322b332b9fb56c274f3b369f499d6d319746f808e6c50d8d1eb6d
+Locator: JSON pointers: /clean_design/apple_userland_words_modified, /clean_design/signature_checks_modified, /clean_design/actual_capture, /clean_design/preview, /clean_design/still, /owner_acceptance/preview, /owner_acceptance/shutter, /owner_acceptance/thumbnail, /owner_acceptance/photo_opened_in_Photos, /owner_acceptance/photo_survives_reboot, /owner_acceptance/successful_test_UART_available, /persistence_test/pre_reboot_extracted_JPEG_hash_available
+Exact selected JSON values. All other fields are omitted; this is not a complete experiment report.
+
+{
+  "/clean_design/apple_userland_words_modified": 0,
+  "/clean_design/signature_checks_modified": false,
+  "/clean_design/actual_capture": [
+    640,
+    480,
+    "UYVY-full-range"
+  ],
+  "/clean_design/preview": [
+    400,
+    304,
+    "YUYV-video-range"
+  ],
+  "/clean_design/still": [
+    1600,
+    1200,
+    "YUYV-video-range-resampled"
+  ],
+  "/owner_acceptance/preview": true,
+  "/owner_acceptance/shutter": true,
+  "/owner_acceptance/thumbnail": true,
+  "/owner_acceptance/photo_opened_in_Photos": true,
+  "/owner_acceptance/photo_survives_reboot": true,
+  "/owner_acceptance/successful_test_UART_available": false,
+  "/persistence_test/pre_reboot_extracted_JPEG_hash_available": false
+}

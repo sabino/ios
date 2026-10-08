@@ -8,7 +8,11 @@
   "evidence": [
     "E03",
     "E06",
-    "E39"
+    "E39",
+    "E41",
+    "E42",
+    "E46",
+    "E58"
   ],
   "sources": [
     "S06",
@@ -21,9 +25,11 @@
     "observability",
     "measuring-performance"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -72,3 +78,8 @@ The successful receipt names PC `0x2fe25724`, address `0x2fe3c788`, width 4 and 
 A later physical OFF/ON replay sharply reduced the measured legacy atomic-trap rate: mean reductions across four interaction windows were 98.50–99.91%. Mean frame gaps improved in two windows and worsened in two. This establishes removal of a major local source of trap overhead without establishing consistent UI acceleration. [E39](/ios/evidence/E39/)
 
 The sample is one pair, with intentional pauses and some damaged UART gap rows. App-open latency, repeated order controls, forced contention and SMP acceptance remain unmeasured. The user-reported startup slowdown is unresolved. The earlier generic compatibility questions about faults, permissions and copy-on-write remain open; optimizing one measured hot path does not close them. The [performance chapter](/ios/articles/measuring-performance/) explains the units and limits.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+The 7E18 CPU policy accounts for physical HCR SWIO RES1 readback while retaining rejection of other unexpected bits. Relinking that correction exposed stale SWP helper branch destinations; linkage was rebuilt from the actual loaded objects. These are separate failures. Ordinary instructions execute natively, with selective compatibility handling. The later 10B500 QEMU frontier remains a real clock-gate dependency panic, without accepted normal banner, root or launchd. [E41](/ios/evidence/E41/) [E42](/ios/evidence/E42/) [E46](/ios/evidence/E46/) [E58](/ios/evidence/E58/)

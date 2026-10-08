@@ -11,7 +11,12 @@
     "E17",
     "E20",
     "E30",
-    "E31"
+    "E31",
+    "E45",
+    "E46",
+    "E48",
+    "E51",
+    "E62"
   ],
   "sources": [
     "S09",
@@ -24,9 +29,11 @@
     "hfs-integrity",
     "measuring-performance"
   ],
-  "updated": "2026-10-01"
+  "updated": "2026-10-07"
 }
 ---
+
+> **Current edition.** The dated baseline below is retained. The [October 7 systems paper](/ios/paper/) and the update at the end of this chapter describe the newer 3.1.3 frontier.
 
 > **Dated record.** The baseline below describes the 29 September edition. The dated October update later in this chapter records subsequent accepted findings.
 
@@ -69,3 +76,8 @@ The earlier recovery-bracketed observations now have a separate native measureme
 On the physical phone, the initial bright lock-screen window drew a median 55 mA from the battery at the recorded 500 mA nominal input limit. Blanked idle instead supplied a median 166 mA to the battery. Brief wake windows had a positive median balance. These are net battery-side currents, not measurements of total USB input or whole-board watts. [E31](/ios/evidence/E31/)
 
 The charging icon and USB attachment therefore cannot certify that a demanding workload is replenishing the battery. Native temperature was unavailable, and these trials changed neither PMIC configuration nor CPU clocks. Longer camera workloads, thermal supervision, suspend and higher-current charging policies need separate acceptance. The current record supports a workload-dependent budget, not a battery-life estimate.
+
+
+## Reviewed advance: 3.1.3 and the current frontier, 7 October 2026
+
+Battery indication, Power blank/wake and complete halt are accepted by the 7E18 daily hand test. Older current-balance values remain 4A102 measurements, not newer endurance results. The direct EL2→WDOG0 route has one physical reset confirmation; ordinary repeatability stays pending. RTC-only diagnostic recovery and normal profiles with runtime watchdogs off are separate. Time-zone configuration passes, while visible clock acceptance remains open. [E45](/ios/evidence/E45/) [E46](/ios/evidence/E46/) [E48](/ios/evidence/E48/) [E51](/ios/evidence/E51/) [E62](/ios/evidence/E62/)
