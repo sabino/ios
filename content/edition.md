@@ -33,6 +33,6 @@ Three selected 3.1.3 captures are added with source basenames, SHA-256 and full-
 
 The implementation, firmware, keys, private storage and full raw runs remain excluded. The public artifacts can rebuild the publication and inspect its curated claims, not reproduce the private native port independently. Third-party interface content retains its original rights.
 
-## Local preview and release state
+## Publication validation
 
-This edition is prepared for local preview and review. The repository’s build, content/provenance tests and browser checks apply to the website. They do not repeat the device experiments. Publication to the remote repository or live site requires the owner’s preview approval; the source snapshot and this edition date remain fixed.
+The repository’s build, content/provenance tests and browser checks apply to the website. They do not repeat the device experiments. The source snapshot and this edition date remain fixed when the publication is released. Later research findings require a new reviewed record or edition.

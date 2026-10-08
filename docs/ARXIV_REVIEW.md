@@ -1,7 +1,7 @@
 # Preprint artifact review — 7 October 2026
 
 Status: prepared for arXiv submission; not submitted or peer reviewed. Website
-changes are local pending publication. Research scope and source snapshot remain
+changes have completed owner review and are approved for publication. Research scope and source snapshot remain
 edition 2.0 / `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`.
 
 Formatting revision: two-column systems-paper typography; author identity

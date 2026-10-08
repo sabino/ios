@@ -4,7 +4,7 @@ title: "iPhone OS Research Atlas"
 type: software
 authors:
   - family-names: "Sabino"
-    given-names: "Felipe"
+    given-names: "Felipe Guilherme"
 version: "2.0.0"
 date-released: "2026-10-07"
 url: "https://sabino.pro/ios/paper/"
@@ -15,7 +15,7 @@ preferred-citation:
   title: "Rehosting early iPhone OS on open mobile hardware: Native execution, hardware contracts and bounded acceptance"
   authors:
     - family-names: "Sabino"
-      given-names: "Felipe"
+      given-names: "Felipe Guilherme"
   year: 2026
   date-published: "2026-10-07"
   url: "https://sabino.pro/ios/paper/"

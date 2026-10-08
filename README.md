@@ -15,9 +15,9 @@ The atlas preserves the discoveries, failed explanations and remaining questions
 
 The publication includes a long-form paper, accessible summary, edition note and 64-claim ledger, 63 evidence records with 98 exhibits and 85 inspectable source excerpts, and 34 public references, a glossary, a correction ledger and a downloadable [structured edition](https://sabino.pro/ios/atlas.json). Search runs locally in the browser. Fonts are served locally; there are no analytics, cookies or AI service calls.
 
-The paper page also offers a typeset preprint PDF, an arXiv source ZIP with
-curated ancillary data, submission metadata and an upload guide. The preprint is
-prepared for submission; it has not been submitted or peer reviewed. See
+The repository includes a typeset preprint PDF and an arXiv source ZIP with
+curated ancillary data under `public/downloads/`. The HTML paper omits submission
+controls. The preprint is prepared for submission; it has not been submitted or peer reviewed. See
 [preparation and rebuilding instructions](docs/ARXIV.md).
 
 ## What the evidence establishes

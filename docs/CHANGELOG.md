@@ -2,7 +2,7 @@
 
 ## 2.0 — 7 October 2026
 
-Source revision: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`. Local review edition; publication awaits preview approval.
+Source revision: `15b3a954f6d81eb858d0c11f372a8ae1e29d0788`. Owner-reviewed publication edition.
 
 - Add the systems paper by Felipe Guilherme Sabino, accessible summary, edition note, 64-claim ledger and seven figures, including the retained substrate plate. Ten tables separate measurement boundaries and trial origins.
 - Add E41–E63 for the two-build adaptation, physical 7E18 workflow, clean Camera path, halt/reset, eMMC/selector/recovery, handoff state, display timing, USB frontier, sensors, conditional next-target studies and historical MMC controls. Preserve E01–E40.
